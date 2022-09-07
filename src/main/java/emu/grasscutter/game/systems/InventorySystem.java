@@ -21,6 +21,7 @@ import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.props.ItemUseOp;
 import emu.grasscutter.game.props.ItemUseTarget;
+import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.game.shop.ShopChestTable;
 import emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam;
 import emu.grasscutter.net.proto.MaterialInfoOuterClass.MaterialInfo;
@@ -861,10 +862,13 @@ public class InventorySystem extends BaseGameSystem {
 
             // Remove item from inventory since we used it
             player.getInventory().removeItem(useItem, used);
+
+            player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_USE_ITEM, itemData.getId());
             return useItem;
         }
 
         if (useSuccess) {
+            player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_USE_ITEM, itemData.getId());
             return useItem;
         }
 

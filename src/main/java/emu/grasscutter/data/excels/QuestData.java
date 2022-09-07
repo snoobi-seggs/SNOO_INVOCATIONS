@@ -119,7 +119,7 @@ public class QuestData extends GameResource {
         @SerializedName("_param_str")
         private String paramStr;
         @SerializedName("_count")
-        private String count;
+        private int count;
 
     }
 

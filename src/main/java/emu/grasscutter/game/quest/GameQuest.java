@@ -121,7 +121,7 @@ public class GameQuest {
     }
 
     public void setConfig(QuestData config) {
-        if (getSubQuestId() != config.getId()) return;
+        if (config == null || getSubQuestId() != config.getId()) return;
         this.questData = config;
     }
 
@@ -146,6 +146,7 @@ public class GameQuest {
         //Some subQuests have conditions that subQuests are finished (even from different MainQuests)
         getOwner().getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_QUEST_STATE_EQUAL, this.subQuestId, this.state.getValue(),0,0,0);
         getOwner().getQuestManager().triggerEvent(QuestTrigger.QUEST_COND_STATE_EQUAL, this.subQuestId, this.state.getValue(),0,0,0);
+        getOwner().getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_FINISH_PLOT, this.subQuestId, 0);
 
         if (ChapterData.endQuestChapterMap.containsKey(subQuestId)) {
             mainQuest.getOwner().sendPacket(new PacketChapterStateNotify(

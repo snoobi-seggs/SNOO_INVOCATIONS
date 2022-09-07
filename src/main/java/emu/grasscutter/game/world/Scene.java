@@ -23,9 +23,11 @@ import emu.grasscutter.net.proto.SelectWorktopOptionReqOuterClass;
 import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
 import emu.grasscutter.scripts.SceneIndexManager;
 import emu.grasscutter.scripts.SceneScriptManager;
+import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.SceneBlock;
 import emu.grasscutter.scripts.data.SceneGadget;
 import emu.grasscutter.scripts.data.SceneGroup;
+import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
 import lombok.Getter;
@@ -601,8 +603,7 @@ public class Scene {
         }
 
         scriptManager.meetEntities(entities);
-        //scriptManager.callEvent(EventType.EVENT_GROUP_LOAD, null);
-        //groups.forEach(g -> scriptManager.callEvent(EventType.EVENT_GROUP_LOAD, null));
+        groups.forEach(g -> scriptManager.callEvent(EventType.EVENT_GROUP_LOAD, new ScriptArgs(g.id)));
         Grasscutter.getLogger().info("Scene {} loaded {} group(s)", this.getId(), groups.size());
     }
 

@@ -15,6 +15,7 @@ import emu.grasscutter.game.props.EntityIdType;
 import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.props.WatcherTriggerType;
+import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.net.proto.VisionTypeOuterClass;
 import emu.grasscutter.net.proto.AbilitySyncStateInfoOuterClass.AbilitySyncStateInfo;
@@ -184,6 +185,8 @@ public class EntityMonster extends GameEntity {
         }
         // Battle Pass trigger
         getScene().getPlayers().forEach(p -> p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_MONSTER_DIE, this.getMonsterId(), 1));
+        getScene().getPlayers().forEach(p -> p.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_MONSTER_DIE, this.getMonsterId()));
+        getScene().getPlayers().forEach(p -> p.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_KILL_MONSTER, this.getMonsterId()));
     }
 
     public void recalcStats() {

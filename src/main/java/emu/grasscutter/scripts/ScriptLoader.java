@@ -4,6 +4,7 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.scripts.constants.EventType;
+import emu.grasscutter.scripts.constants.GroupKillPolicy;
 import emu.grasscutter.scripts.constants.ScriptGadgetState;
 import emu.grasscutter.scripts.constants.ScriptRegionShape;
 import emu.grasscutter.scripts.data.SceneMeta;
@@ -68,9 +69,13 @@ public class ScriptLoader {
 		Arrays.stream(EntityType.values()).forEach(e -> table.set(e.name().toUpperCase(), e.getValue()));
 		ctx.globals.set("EntityType", table);
 
-        LuaTable table1 = new LuaTable();
-        Arrays.stream(QuestState.values()).forEach(e -> table1.set(e.name().toUpperCase(), e.getValue()));
-        ctx.globals.set("QuestState", table1);
+        LuaTable table2 = new LuaTable();
+        Arrays.stream(QuestState.values()).forEach(e -> table2.set(e.name().toUpperCase(), e.getValue()));
+        ctx.globals.set("QuestState", table2);
+
+        LuaTable table3 = new LuaTable();
+        Arrays.stream(GroupKillPolicy.values()).forEach(e -> table3.set(e.name().toUpperCase(), e.ordinal()));
+        ctx.globals.set("GroupKillPolicy", table3);
 
 		ctx.globals.set("EventType", CoerceJavaToLua.coerce(new EventType())); // TODO - make static class to avoid instantiating a new class every scene
 		ctx.globals.set("GadgetState", CoerceJavaToLua.coerce(new ScriptGadgetState()));

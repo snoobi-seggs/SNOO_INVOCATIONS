@@ -22,6 +22,7 @@ import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.props.WatcherTriggerType;
+import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam;
 import emu.grasscutter.server.packet.send.PacketAvatarEquipChangeNotify;
 import emu.grasscutter.server.packet.send.PacketItemAddHintNotify;
@@ -97,6 +98,7 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
 
         if (result != null) {
             getPlayer().getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_OBTAIN_MATERIAL_NUM, result.getItemId(), result.getCount());
+            getPlayer().getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_OBTAIN_ITEM, result.getItemId(), result.getCount());
             getPlayer().sendPacket(new PacketStoreItemChangeNotify(result));
             return true;
         }
@@ -145,6 +147,7 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
 
             if (result != null) {
                 getPlayer().getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_OBTAIN_MATERIAL_NUM, result.getItemId(), result.getCount());
+                getPlayer().getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_OBTAIN_ITEM, result.getItemId(), result.getCount());
                 changedItems.add(result);
             }
         }
@@ -448,6 +451,7 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
         // Battle pass trigger
         int removeCount = Math.min(count, item.getCount());
         getPlayer().getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_COST_MATERIAL, item.getItemId(), removeCount);
+        getPlayer().getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_ITEM_LESS_THAN, item.getItemId(), item.getCount());
 
         // Update in db
         item.save();

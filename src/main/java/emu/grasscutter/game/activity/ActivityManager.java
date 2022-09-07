@@ -110,6 +110,31 @@ public class ActivityManager extends BasePlayerManager {
             params));
     }
 
+    public boolean isActivityActive(int activityId) {
+        var activityConfig = activityConfigItemMap.get(activityId);
+        if (activityConfig == null) {
+            return false;
+        }
+        var now = new Date();
+        return now.after(activityConfig.getBeginTime()) && now.before(activityConfig.getEndTime());
+    }
+
+    public boolean hasActivityEnded(int activityId) {
+        var activityConfig = activityConfigItemMap.get(activityId);
+        if (activityConfig == null) {
+            return true;
+        }
+        return new Date().after(activityConfig.getEndTime());
+    }
+
+    public boolean meetsCondition(int conditionId) {
+        var activityId = conditionId / 1000; // todo some only have 2 numbers for the condition
+        var activityConfig = activityConfigItemMap.get(activityId);
+
+        // TODO add condition handling based on ExcelBinOutput/NewActivityCondExcelConfigData.json
+        return activityConfig.getMeetCondList().contains(conditionId);
+    }
+
     public ActivityInfoOuterClass.ActivityInfo getInfoProtoByActivityId(int activityId) {
         var activityHandler = activityConfigItemMap.get(activityId).getActivityHandler();
         var activityData = playerActivityDataMap.get(activityId);

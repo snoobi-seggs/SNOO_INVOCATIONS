@@ -1,5 +1,6 @@
 package emu.grasscutter.game.quest.exec;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.game.quest.GameQuest;
 import emu.grasscutter.game.quest.QuestGroupSuite;
@@ -29,7 +30,12 @@ public class ExecRefreshGroupSuite extends QuestExecHandler {
 
         // refresh immediately if player is in this scene
         if(quest.getOwner().getScene().getId() == sceneId){
-            scriptManager.refreshGroup(scriptManager.getGroupById(groupId), suiteId);
+            var targetGroup = scriptManager.getGroupById(groupId);
+            if(targetGroup == null) {
+                Grasscutter.getLogger().warn("trying to load unknown group {} in scene {}", groupId, sceneId);
+            } else {
+                scriptManager.refreshGroup(targetGroup, suiteId);
+            }
             quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
         }
 

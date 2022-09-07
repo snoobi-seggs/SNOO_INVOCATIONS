@@ -211,6 +211,8 @@ public class QuestManager extends BasePlayerManager {
             .filter(p -> p.getState() != QuestState.QUEST_STATE_UNSTARTED)
             .toList()));
 
+        checkQuestAlreadyFullfilled(quest);
+
         return quest;
     }
     public void startMainQuest(int mainQuestId) {
@@ -224,6 +226,10 @@ public class QuestManager extends BasePlayerManager {
             .min(Comparator.comparingInt(MainQuestData.SubQuestData::getOrder))
             .map(MainQuestData.SubQuestData::getSubId)
             .ifPresent(this::addQuest);
+        //TODO find a better way then hardcoding to detect needed required quests
+        if(mainQuestId == 355){
+            startMainQuest(361);
+        }
     }
     public void triggerEvent(QuestTrigger condType, int... params) {
         triggerEvent(condType, "", params);
@@ -248,6 +254,11 @@ public class QuestManager extends BasePlayerManager {
             case QUEST_COND_QUEST_GLOBAL_VAR_EQUAL:
             case QUEST_COND_QUEST_GLOBAL_VAR_GREATER:
             case QUEST_COND_QUEST_GLOBAL_VAR_LESS:
+            case QUEST_COND_PACK_HAVE_ITEM:
+            case QUEST_COND_ITEM_NUM_LESS_THAN:
+            case QUEST_COND_ACTIVITY_OPEN:
+            case QUEST_COND_ACTIVITY_END:
+            case QUEST_COND_ACTIVITY_COND:
                 for (GameMainQuest mainquest : checkMainQuests) {
                     mainquest.tryAcceptSubQuests(condType, paramStr, params);
                 }
@@ -255,6 +266,7 @@ public class QuestManager extends BasePlayerManager {
 
             //fail Conds
             case QUEST_CONTENT_NOT_FINISH_PLOT:
+            case QUEST_CONTENT_ANY_MANUAL_TRANSPORT:
                 for (GameMainQuest mainquest : checkMainQuests) {
                     mainquest.tryFailSubQuests(condType, paramStr, params);
                 }
@@ -272,6 +284,14 @@ public class QuestManager extends BasePlayerManager {
             case QUEST_CONTENT_INTERACT_GADGET:
             case QUEST_CONTENT_TRIGGER_FIRE:
             case QUEST_CONTENT_UNLOCK_TRANS_POINT:
+            case QUEST_CONTENT_UNLOCK_AREA:
+            case QUEST_CONTENT_SKILL:
+            case QUEST_CONTENT_OBTAIN_ITEM:
+            case QUEST_CONTENT_MONSTER_DIE:
+            case QUEST_CONTENT_DESTROY_GADGET:
+            case QUEST_CONTENT_PLAYER_LEVEL_UP:
+            case QUEST_CONTENT_USE_ITEM:
+            case QUEST_CONTENT_ENTER_VEHICLE:
                 for (GameMainQuest mainQuest : checkMainQuests) {
                     mainQuest.tryFinishSubQuests(condType, paramStr, params);
                 }
@@ -282,6 +302,7 @@ public class QuestManager extends BasePlayerManager {
             case QUEST_CONTENT_QUEST_STATE_EQUAL:
             case QUEST_CONTENT_ADD_QUEST_PROGRESS:
             case QUEST_CONTENT_LEAVE_SCENE:
+            case QUEST_CONTENT_ITEM_LESS_THAN:
                 for (GameMainQuest mainQuest : checkMainQuests) {
                     mainQuest.tryFailSubQuests(condType, paramStr, params);
                     mainQuest.tryFinishSubQuests(condType, paramStr, params);
@@ -300,6 +321,38 @@ public class QuestManager extends BasePlayerManager {
             this.addToQuestListUpdateNotify.clear();
         }
 
+    }
+
+    /**
+     * TODO maybe trigger them delayed to allow basic communication finish first
+     * @param quest
+     */
+    public void checkQuestAlreadyFullfilled(GameQuest quest){
+        for(var condition : quest.getQuestData().getFinishCond()){
+            switch (condition.getType()){
+                case QUEST_CONTENT_OBTAIN_ITEM:
+                case QUEST_CONTENT_ITEM_LESS_THAN:{
+                    //check if we already own enough of the item
+                    var item = getPlayer().getInventory().getItemByGuid(condition.getParam()[0]);
+                    getPlayer().getQuestManager().triggerEvent(condition.getType(), item.getItemId(), item.getCount());
+                    break;
+                }
+                case QUEST_CONTENT_UNLOCK_TRANS_POINT: {
+                    var scenePoints = getPlayer().getUnlockedScenePoints().get(condition.getParam()[0]);
+                    if(scenePoints!=null && scenePoints.contains(condition.getParam()[1])){
+                        getPlayer().getQuestManager().triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
+                    }
+                    break;
+                }
+                case QUEST_CONTENT_UNLOCK_AREA: {
+                    var sceneAreas = getPlayer().getUnlockedScenePoints().get(condition.getParam()[0]);
+                    if(sceneAreas!=null && sceneAreas.contains(condition.getParam()[1])) {
+                        this.player.getQuestManager().triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     public List<QuestGroupSuite> getSceneGroupSuite(int sceneId) {

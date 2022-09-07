@@ -2,6 +2,7 @@ package emu.grasscutter.game.entity;
 
 import emu.grasscutter.data.binout.ConfigGadget;
 import emu.grasscutter.game.props.FightProperty;
+import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.game.world.Scene;
 
 public abstract class EntityBaseGadget extends GameEntity {
@@ -15,6 +16,8 @@ public abstract class EntityBaseGadget extends GameEntity {
     @Override
     public void onDeath(int killerId) {
         super.onDeath(killerId); // Invoke super class's onDeath() method.
+
+        getScene().getPlayers().forEach(p -> p.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_DESTROY_GADGET, this.getGadgetId()));
     }
 
     protected void fillFightProps(ConfigGadget configGadget) {

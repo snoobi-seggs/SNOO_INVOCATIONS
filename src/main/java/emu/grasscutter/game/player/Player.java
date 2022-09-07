@@ -414,6 +414,7 @@ public class Player {
 
             // Handle open state unlocks from level-up.
             this.getProgressManager().tryUnlockOpenStates();
+            this.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_PLAYER_LEVEL_UP, level);
 
             return true;
         }

@@ -1,34 +1,42 @@
 package emu.grasscutter.scripts;
 
 import emu.grasscutter.game.dungeons.challenge.DungeonChallenge;
-import emu.grasscutter.game.entity.EntityGadget;
-import emu.grasscutter.game.entity.EntityMonster;
-import emu.grasscutter.game.entity.GameEntity;
-import emu.grasscutter.game.entity.gadget.GadgetWorktop;
 import emu.grasscutter.game.dungeons.challenge.factory.ChallengeFactory;
+import emu.grasscutter.game.entity.*;
+import emu.grasscutter.game.entity.gadget.GadgetWorktop;
+import emu.grasscutter.game.props.ClimateType;
 import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
+import emu.grasscutter.scripts.constants.GroupKillPolicy;
 import emu.grasscutter.scripts.data.SceneGroup;
-import emu.grasscutter.scripts.data.SceneRegion;
+import emu.grasscutter.scripts.data.SceneObject;
+import emu.grasscutter.scripts.data.ScriptArgs;
+import emu.grasscutter.server.event.player.PlayerTeleportEvent;
 import emu.grasscutter.server.packet.send.PacketCanUseSkillNotify;
 import emu.grasscutter.server.packet.send.PacketDungeonShowReminderNotify;
 import emu.grasscutter.server.packet.send.PacketWorktopOptionNotify;
+import emu.grasscutter.utils.Position;
 import io.netty.util.concurrent.FastThreadLocal;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
+import java.util.*;
 
+import static emu.grasscutter.scripts.constants.GroupKillPolicy.*;
+
+@SuppressWarnings("unused")
 public class ScriptLib {
 	public static final Logger logger = LoggerFactory.getLogger(ScriptLib.class);
 	private final FastThreadLocal<SceneScriptManager> sceneScriptManager;
 	private final FastThreadLocal<SceneGroup> currentGroup;
+	private final FastThreadLocal<ScriptArgs> callParams;
 	public ScriptLib() {
 		this.sceneScriptManager = new FastThreadLocal<>();
 		this.currentGroup = new FastThreadLocal<>();
+		this.callParams = new FastThreadLocal<>();
 	}
 
 	public void setSceneScriptManager(SceneScriptManager sceneScriptManager){
@@ -55,6 +63,9 @@ public class ScriptLib {
 	}
 	public void setCurrentGroup(SceneGroup currentGroup){
 		this.currentGroup.set(currentGroup);
+	}
+	public void setCurrentCallParams(ScriptArgs callArgs){
+		this.callParams.set(callArgs);
 	}
 	public Optional<SceneGroup> getCurrentGroup(){
 		return Optional.of(this.currentGroup.get());
@@ -89,14 +100,14 @@ public class ScriptLib {
 				.filter(e -> e instanceof EntityGadget)
 				.map(e -> (EntityGadget)e)
 				.forEach(e -> e.updateState(gadgetState));
-		
+
 		return 0;
 	}
-	
+
 	public int SetWorktopOptionsByGroupId(int groupId, int configId, int[] options) {
 		logger.debug("[LUA] Call SetWorktopOptionsByGroupId with {},{},{}",
 				groupId,configId,options);
-		
+
 		Optional<GameEntity> entity = getSceneScriptManager().getScene().getEntities().values().stream()
 				.filter(e -> e.getConfigId() == configId && e.getGroupId() == groupId).findFirst();
 
@@ -108,18 +119,42 @@ public class ScriptLib {
 		if (!(gadget.getContent() instanceof GadgetWorktop worktop)) {
 			return 1;
 		}
-		
+
 		worktop.addWorktopOptions(options);
 		getSceneScriptManager().getScene().broadcastPacket(new PacketWorktopOptionNotify(gadget));
-		
+
 		return 0;
 	}
 
 	public int SetWorktopOptions(LuaTable table){
 		logger.debug("[LUA] Call SetWorktopOptions with {}", printTable(table));
-		// TODO
+        // TODO check
+        var callParams = this.callParams.getIfExists();
+        var group = this.currentGroup.getIfExists();
+        if(callParams == null || group == null){
+            return 1;
+        }
+        var configId = callParams.param1;
+        var entity = getSceneScriptManager().getScene().getEntityByConfigId(configId);
+
+
+        int[] worktopOptions = new int[table.length()];
+        for(int i = 1 ;i<=table.length() ;i++){
+            worktopOptions[i-1] = table.get(i).optint(-1);
+        }
+        if(!(entity instanceof EntityGadget gadget)|| worktopOptions.length == 0){
+            return 2;
+        }
+
+        if (!(gadget.getContent() instanceof GadgetWorktop worktop)) {
+            return 3;
+        }
+
+        worktop.addWorktopOptions(worktopOptions);
+        getSceneScriptManager().getScene().broadcastPacket(new PacketWorktopOptionNotify(gadget));
 		return 0;
 	}
+
 	public int DelWorktopOptionByGroupId(int groupId, int configId, int option) {
 		logger.debug("[LUA] Call DelWorktopOptionByGroupId with {},{},{}",groupId,configId,option);
 
@@ -133,13 +168,18 @@ public class ScriptLib {
 		if (!(gadget.getContent() instanceof GadgetWorktop worktop)) {
 			return 1;
 		}
-		
+
 		worktop.removeWorktopOption(option);
 		getSceneScriptManager().getScene().broadcastPacket(new PacketWorktopOptionNotify(gadget));
-		
+
 		return 0;
 	}
-	
+    public int DelWorktopOption(int var1){
+        logger.warn("[LUA] Call unimplemented DelWorktopOption with {}", var1);
+        // TODO implement
+        return 0;
+    }
+
 	// Some fields are guessed
 	public int AutoMonsterTide(int challengeIndex, int groupId, Integer[] ordersConfigId, int tideCount, int sceneLimit, int param6) {
 		logger.debug("[LUA] Call AutoMonsterTide with {},{},{},{},{},{}",
@@ -152,15 +192,15 @@ public class ScriptLib {
 		}
 
 		this.getSceneScriptManager().startMonsterTideInGroup(group, ordersConfigId, tideCount, sceneLimit);
-		
+
 		return 0;
 	}
-	
+
 	public int AddExtraGroupSuite(int groupId, int suite) {
 		logger.debug("[LUA] Call AddExtraGroupSuite with {},{}",
 				groupId,suite);
 		SceneGroup group = getSceneScriptManager().getGroupById(groupId);
-		
+
 		if (group == null || group.monsters == null) {
 			return 1;
 		}
@@ -263,7 +303,7 @@ public class ScriptLib {
 		challenge.start();
 		return 0;
 	}
-	
+
 	public int GetGroupMonsterCountByGroupId(int groupId) {
 		logger.debug("[LUA] Call GetGroupMonsterCountByGroupId with {}",
 				groupId);
@@ -271,20 +311,42 @@ public class ScriptLib {
 								.filter(e -> e instanceof EntityMonster && e.getGroupId() == groupId)
 								.count();
 	}
-	
+
+	public int CreateVariable(String type, Object value) {
+		logger.warn("[LUA] Call unimplemented CreateVariable with {} {}",
+            type, value);
+        switch (type){
+            case "int":
+            default:
+                logger.warn("[LUA] Call CreateVariable with unsupported type {} and value {}", type, value);
+        }
+		return 0;
+	}
+	public int SetVariableValue(int var1) {
+		logger.warn("[LUA] Call unimplemented SetVariableValue with {}",
+				var1);
+        //TODO var1 type
+		return 0;
+	}
+	public int GetVariableValue(int var1) {
+		logger.warn("[LUA] Call unimplemented GetVariableValue with {}",
+				var1);
+        //TODO var1 type
+		return 0;
+	}
 	public int GetGroupVariableValue(String var) {
 		logger.debug("[LUA] Call GetGroupVariableValue with {}",
 				var);
 		return getSceneScriptManager().getVariables().getOrDefault(var, 0);
 	}
-	
+
 	public int SetGroupVariableValue(String var, int value) {
 		logger.debug("[LUA] Call SetGroupVariableValue with {},{}",
 				var, value);
 		getSceneScriptManager().getVariables().put(var, value);
 		return 0;
 	}
-	
+
 	public LuaValue ChangeGroupVariableValue(String var, int value) {
 		logger.debug("[LUA] Call ChangeGroupVariableValue with {},{}",
 				var, value);
@@ -302,15 +364,16 @@ public class ScriptLib {
 		// Kill and Respawn?
 		int groupId = table.get("group_id").toint();
 		int suite = table.get("suite").toint();
-		
+
 		SceneGroup group = getSceneScriptManager().getGroupById(groupId);
-		
-		if (group == null || group.monsters == null) {
+
+		if (group == null) {
+            logger.warn("[LUA] trying to refresh unloaded group {}", groupId);
 			return 1;
 		}
-		
+
 		getSceneScriptManager().refreshGroup(group, suite);
-		
+
 		return 0;
 	}
 
@@ -329,8 +392,20 @@ public class ScriptLib {
 		return (int) region.getEntities().stream().filter(e -> e >> 24 == entityType).count();
 	}
 
+    private void printLog(String source, String msg){
+        var currentGroup = getCurrentGroup().orElseGet(null);
+        if(currentGroup!=null) {
+            logger.info("[LUA] {} {} {}", source, currentGroup.id, msg);
+        } else {
+            logger.info("[LUA] {} {}", source, msg);
+        }
+    }
+
 	public void PrintContextLog(String msg) {
-		logger.info("[LUA] " + msg);
+        printLog("PrintContextLog", msg);
+	}
+	public void PrintLog(String msg) {
+        printLog("PrintLog", msg);
 	}
 
 	public int TowerCountTimeStatus(int isDone, int var2){
@@ -366,6 +441,13 @@ public class ScriptLib {
 				name,groupId);
 
 		return getSceneScriptManager().getVariables().getOrDefault(name, 0);
+	}
+	public int ChangeGroupVariableValueByGroup(String name, int value, int groupId){
+		logger.debug("[LUA] Call ChangeGroupVariableValueByGroup with {},{}",
+				name,groupId);
+        //TODO test
+        getSceneScriptManager().getVariables().put(name, value);
+		return 0;
 	}
 
 	public int SetIsAllowUseSkill(int canUse, int var2){
@@ -430,14 +512,14 @@ public class ScriptLib {
 		var configId = table.get("config_id").toint();
 
 		var group = getCurrentGroup();
-		
+
 		if (group.isEmpty()) {
 			return 1;
 		}
-		
+
 		var gadget = group.get().gadgets.get(configId);
 		var entity = getSceneScriptManager().createGadget(group.get().id, group.get().block_id, gadget);
-		
+
 		getSceneScriptManager().addEntity(entity);
 
 		return 0;
@@ -553,5 +635,488 @@ public class ScriptLib {
         getSceneScriptManager().getScene().removeEntity(entity.get());
 
         return 0;
+    }
+
+    public int CreateGroupTimerEvent(int groupID, String source, double time) {
+        return sceneScriptManager.get().createGroupTimerEvent(groupID, source, time);
+    }
+
+    public int CancelGroupTimerEvent(int groupID, String source) {
+        return sceneScriptManager.get().cancelGroupTimerEvent(groupID, source);
+    }
+
+    public int GetGroupSuite(int var1) {
+        logger.warn("[LUA] Call unimplemented GetGroupSuite with {}", var1);
+        //TODO implement
+        return 0;
+    }
+    public int SetGroupReplaceable(int groupId, boolean var2) {
+        logger.warn("[LUA] Call unimplemented SetGroupReplaceable with {} {}", groupId, var2);
+        //TODO implement
+        return 0;
+    }
+
+    public int[] GetSceneUidList(){
+        logger.warn("[LUA] Call unimplemented GetSceneUidList");
+        //TODO implement
+        return new int[]{};
+    }
+    public int GetSeaLampActivityPhase(){
+        logger.warn("[LUA] Call unimplemented GetSeaLampActivityPhase");
+        //TODO implement
+        return 0;
+    }
+    public int GadgetPlayUidOp(int groupId, int gadget_crucible, int var3, int var4, String var5, int var6 ){
+        logger.warn("[LUA] Call unimplemented GadgetPlayUidOp with {}, {}, {}, {}, {}, {}", groupId, gadget_crucible, var3, var4, var5, var6);
+        //TODO implement
+        return 0;
+    }
+    public long GetServerTime(){
+        logger.debug("[LUA] Call GetServerTime");
+        //TODO check
+        return new Date().getTime();
+    }
+    public long GetServerTimeByWeek(){
+        logger.debug("[LUA] Call GetServerTimeByWeek");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+
+        // get start of this week in milliseconds
+        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+        //TODO check
+        return cal.getTimeInMillis();
+    }
+    public int GetCurTriggerCount(){
+        logger.debug("[LUA] Call GetCurTriggerCount");
+        //TODO check
+        return getSceneScriptManager().getTriggerCount();
+    }
+    public int GetChannellerSlabLoopDungeonLimitTime(){
+        logger.warn("[LUA] Call unimplemented GetChannellerSlabLoopDungeonLimitTime");
+        //TODO implement
+        return 0;
+    }
+    public int IsPlayerAllAvatarDie(int sceneUid){
+        logger.warn("[LUA] Call unimplemented IsPlayerAllAvatarDie {}", sceneUid);
+        var playerEntities = getSceneScriptManager().getScene().getEntities().values().stream().filter(e -> e.getEntityType() == EntityType.Avatar.getValue()).toList();
+        for (GameEntity p : playerEntities){
+            var player = (EntityAvatar)p;
+            if(player.isAlive()){
+                return 0;
+            }
+        }
+        //TODO check
+        return 1;
+    }
+    public int sendCloseCommonTipsToClient(){
+        logger.warn("[LUA] Call unimplemented sendCloseCommonTipsToClient");
+        //TODO implement
+        return 0;
+    }
+    public int CreateFatherChallenge(int var1, int var2, int var3, LuaTable var4){
+        logger.warn("[LUA] Call unimplemented CreateFatherChallenge with {} {} {} {}", var1, var2, var3, var4);
+        //TODO implement var4 object has int success, int fail, bool fail_on_wipe
+        return 0;
+    }
+    public int StartFatherChallenge(int var1){
+        logger.warn("[LUA] Call unimplemented StartFatherChallenge with {}", var1);
+        //TODO implement
+        return 0;
+    }
+    public int AttachChildChallenge(int var1, int var2, int var3, int[] var4, LuaTable var5, LuaTable var6){
+        logger.warn("[LUA] Call unimplemented AttachChildChallenge with {} {} {} {} {} {}", var1, var2, var3, var4, var5, var6);
+        //TODO implement var6 object has int success, int fail, bool fail_on_wipe
+        return 0;
+    }
+    public int CreateEffigyChallengeMonster(int var1, int[] var2){
+        logger.warn("[LUA] Call unimplemented CreateEffigyChallengeMonster with {} {}", var1, var2);
+        //TODO implement
+        return 0;
+    }
+    public int GetEffigyChallengeMonsterLevel(){
+        logger.warn("[LUA] Call unimplemented CreateEffigyChallengeMonster");
+        //TODO implement
+        return 0;
+    }
+    public int AddTeamEntityGlobalFloatValue(int[] sceneUidList, String var2, int var3){
+        logger.warn("[LUA] Call unimplemented AddTeamEntityGlobalFloatValue with {} {} {}", sceneUidList, var2, var3);
+        //TODO implement
+        return 0;
+    }
+    public int CreateBlossomChestByGroupId(int groupId, int var2){
+        logger.warn("[LUA] Call unimplemented SetBlossomScheduleStateByGroupId with {} {}", groupId, var2);
+        //TODO implement
+        return 0;
+    }
+    public int SetBlossomScheduleStateByGroupId(int groupId, int scene){
+        logger.warn("[LUA] Call unimplemented SetBlossomScheduleStateByGroupId with {} {}", groupId, scene);
+        //TODO implement scene is guessed
+        return 0;
+    }
+    public int RefreshBlossomGroup(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented RefreshBlossomGroup with {}", printTable(var1));
+        //TODO implement var3 has int group_id, int suite, bool exclude_prev
+        return 0;
+    }
+    public int RefreshBlossomDropRewardByGroupId(int groupId){
+        logger.warn("[LUA] Call unimplemented RefreshBlossomDropRewardByGroupId with {}", groupId);
+        //TODO implement
+        return 0;
+    }
+    public int AddBlossomScheduleProgressByGroupId(int groupId){
+        logger.warn("[LUA] Call unimplemented AddBlossomScheduleProgressByGroupId with {}", groupId);
+        //TODO implement
+        return 0;
+    }
+    public int RefreshHuntingClueGroup(){
+        logger.warn("[LUA] Call unimplemented RefreshHuntingClueGroup");
+        //TODO implement
+        return 0;
+    }
+    public int GetHuntingMonsterExtraSuiteIndexVec(){
+        logger.warn("[LUA] Call unimplemented GetHuntingMonsterExtraSuiteIndexVec");
+        //TODO implement
+        return 0;
+    }
+    public int SetGroupTempValue(String name, int value, LuaTable var3){
+        logger.warn("[LUA] Call unimplemented SetGroupTempValue with {} {} {}", name, value, printTable(var3));
+        //TODO implement var3 has int group_id
+        return 0;
+    }
+    public int GetGroupTempValue(String name, LuaTable var2){
+        logger.warn("[LUA] Call unimplemented GetGroupTempValue with {} {}", name, printTable(var2));
+        //TODO implement var3 has int group_id
+        return 0;
+    }
+    public int SetPlatformPointArray(int var1, int var2, int[] var3, LuaTable var4){
+        logger.warn("[LUA] Call unimplemented SetPlatformPointArray with {} {} {} {}", var1, var2, var3, printTable(var4));
+        //TODO implement var4 has int route_type, bool turn_mode
+        return 0;
+    }
+
+    public int FinishExpeditionChallenge(){
+        logger.warn("[LUA] unimplemented Call FinishExpeditionChallenge");
+        //TODO implement
+        return 0;
+    }
+    public int ExpeditionChallengeEnterRegion(boolean var1){
+        logger.warn("[LUA] unimplemented Call ExpeditionChallengeEnterRegion with {}", var1);
+        //TODO implement
+        return 0;
+    }
+
+    public int InitTimeAxis(String var1, int[] var2, boolean var3){
+        logger.warn("[LUA] Call unimplemented InitTimeAxis with {} {} {}", var1, var2, var3);
+        //TODO implement
+        return 0;
+    }
+
+    public int SetTeamEntityGlobalFloatValue(int[] sceneUidList, String var2, int var3){
+        logger.warn("[LUA] Call unimplemented SetTeamEntityGlobalFloatValue with {} {} {}", sceneUidList, var2, var3);
+        //TODO implement
+        return 0;
+    }
+
+    public int SetTeamServerGlobalValue(int sceneUid, String var2, int var3){
+        logger.warn("[LUA] Call unimplemented SetTeamServerGlobalValue with {} {} {}", sceneUid, var2, var3);
+        //TODO implement
+        return 0;
+    }
+
+    public int GetLanternRiteValue(){
+        logger.warn("[LUA] Call unimplemented GetLanternRiteValue");
+        //TODO implement
+        return 0;
+    }
+
+    public int CreateMonsterFaceAvatar(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented CreateMonsterFaceAvatar with {}", printTable(var1));
+        //TODO implement var1 contains int entity_id, int[] monsters, int[] ranges, int angle
+        return 0;
+    }
+
+    public int ChangeToTargetLevelTag(int var1){
+        logger.warn("[LUA] Call unimplemented ChangeToTargetLevelTag with {}", var1);
+        //TODO implement
+        return 0;
+    }
+
+    public int StartHomeGallery(int galleryId, int uid){
+        logger.warn("[LUA] Call unimplemented StartHomeGallery with {} {}", galleryId, uid);
+        //TODO implement
+        return 0;
+    }
+
+    public int StopGallery(int galleryId, boolean var2){
+        logger.warn("[LUA] Call unimplemented StopGallery with {} {}", galleryId, var2);
+        //TODO implement
+        return 0;
+    }
+    public int StartGallery(int galleryId){
+        logger.warn("[LUA] Call unimplemented StartGallery with {}", galleryId);
+        //TODO implement
+        return 0;
+    }
+
+    public int UpdatePlayerGalleryScore(int galleryId, LuaTable var2){
+        logger.warn("[LUA] Call unimplemented UpdatePlayerGalleryScore with {} {}", galleryId, printTable(var2));
+        //TODO implement var2 contains int uid
+        return 0;
+    }
+    public int SetHandballGalleryBallPosAndRot(int galleryId, LuaTable position, LuaTable rotation){
+        logger.warn("[LUA] Call unimplemented SetHandballGalleryBallPosAndRot with {} {} {}", galleryId, printTable(position), printTable(rotation));
+        //TODO implement
+        return 0;
+    }
+
+    public int UnlockFloatSignal(int groupId, int gadgetSignalId){
+        logger.warn("[LUA] Call unimplemented UnlockFloatSignal with {} {}", groupId, gadgetSignalId);
+        //TODO implement
+        return 0;
+    }
+
+    public int SendServerMessageByLuaKey(String var1, int[] var2){
+        logger.warn("[LUA] Call unimplemented SendServerMessageByLuaKey with {} {}", var1, var2);
+        //TODO implement
+        return 0;
+    }
+
+    public int TryReallocateEntityAuthority(int uid, int endConfig, int var3){
+        logger.warn("[LUA] Call unimplemented TryReallocateEntityAuthority with {} {} {}", uid, endConfig, var3);
+        //TODO implement check var3 type
+        return 0;
+    }
+
+    public int ForceRefreshAuthorityByConfigId(int var1, int uid){
+        logger.warn("[LUA] Call unimplemented ForceRefreshAuthorityByConfigId with {} {}", var1, uid);
+        //TODO implement check var3 type
+        return 0;
+    }
+
+    public int AddPlayerGroupVisionType(int[] uids, int[] var2){
+        logger.warn("[LUA] Call unimplemented AddPlayerGroupVisionType with {} {}", uids, var2);
+        //TODO implement
+        return 0;
+    }
+
+    public int DelPlayerGroupVisionType(int[] uids, int[] var2){
+        logger.warn("[LUA] Call unimplemented DelPlayerGroupVisionType with {} {}", uids, var2);
+        //TODO implement
+        return 0;
+    }
+
+    public int MoveAvatarByPointArray(int uid, int targetId, LuaTable var3, String var4){
+        logger.warn("[LUA] Call unimplemented MoveAvatarByPointArray with {} {} {} {}", uid, targetId, printTable(var3), var4);
+        //TODO implement var3 contains int speed, var4 is a json string
+        return 0;
+    }
+
+    public int MovePlayerToPos(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented MovePlayerToPos with {}", printTable(var1));
+        //TODO implement var1 contains int[] uid_list, Position pos, int radius, Position rot
+        return TransPlayerToPos(var1); // todo this is probably not a full scene reload
+    }
+
+    public int TransPlayerToPos(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented TransPlayerToPos with {}", printTable(var1));
+        //TODO implement var1 contains int[] uid_list, Position pos, int radius, Position rot
+        var targetsTable = var1.get("uid_list");
+        var pos = var1.get("pos");
+        var rot = var1.get("rot");
+        var radius = var1.get("radius");
+        if(targetsTable.isnil() || !targetsTable.istable() || targetsTable.length()==0 || pos.isnil()){
+            return 1;
+        }
+        ArrayList<Integer> targets = new ArrayList<>(targetsTable.length());
+        for (int i = 1; i <= targetsTable.length(); i++) {
+            targets.add(targetsTable.get(i).optint(-1));
+        }
+
+        var x = pos.get("x");
+        var y = pos.get("y");
+        var z = pos.get("z");
+
+        var scriptManager = sceneScriptManager.getIfExists();
+        if(scriptManager==null || !x.isnumber() || !y.isnumber() || !z.isnumber()){
+            return 2;
+        }
+
+        var targetPos = new Position(x.toint(), y.toint(), z.toint());
+
+        var scene = scriptManager.getScene();
+        scene.getPlayers().stream().filter(p -> targets.contains(p.getUid())).forEach(p -> {
+            scene.getWorld().transferPlayerToScene(p, scene.getId(), PlayerTeleportEvent.TeleportType.INTERNAL, targetPos);
+        });
+        return 0;
+    }
+
+    public int PlayCutScene(int var1, int var2){
+        logger.warn("[LUA] Call unimplemented PlayCutScene with {} {}", var1, var2);
+        //TODO implement
+        return 0;
+    }
+
+    public int ScenePlaySound(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented ScenePlaySound with {}", printTable(var1));
+        //TODO implement var1 contains Position play_pos, string sound_name, int play_type, bool is_broadcast
+        return 0;
+    }
+
+    public int BeginCameraSceneLook(LuaTable var1){
+        logger.warn("[LUA] Call unimplemented BeginCameraSceneLook with {}", printTable(var1));
+        //TODO implement var1 contains Position look_pos, int duration, bool is_force, bool is_broadcast,
+        // bool is_allow_input, bool is_set_follow_pos Position follow_pos, bool is_force_walk, bool is_change_play_mode
+        // bool is_set_screen_XY, int screen_x, int screen_y
+        return 0;
+    }
+
+    public int ShowReminderRadius(int var1, LuaTable var2, int var3){
+        logger.warn("[LUA] Call unimplemented ShowReminderRadius with {} {} {}", var1, printTable(var2), var3);
+        //TODO implement var2 is a postion
+        return 0;
+    }
+    public int ShowClientGuide(String var1){
+        logger.warn("[LUA] Call unimplemented ShowClientGuide with {}", var1);
+        //TODO implement
+        return 0;
+    }
+
+    public int ActivateDungeonCheckPoint(int var1){
+        logger.warn("[LUA] Call unimplemented ActivateDungeonCheckPoint with {}", var1);
+        //TODO implement
+        return 0;
+    }
+
+    public int SetWeatherAreaState(int var1, int var2){
+        logger.warn("[LUA] Call unimplemented SetWeatherAreaState with {} {}", var1, var2);
+        //TODO check
+        getSceneScriptManager().getScene().getPlayers().forEach(p -> p.setWeather(var1, ClimateType.getTypeByValue(var2)));
+        return 0;
+    }
+
+    public boolean CheckIsInMpMode(){
+        logger.debug("[LUA] Call CheckIsInMpMode");
+        //TODO check
+        return getSceneScriptManager().getScene().getWorld().isMultiplayer();
+    }
+
+    public int SetPlatformRouteId(int var2, int routeId){
+        logger.warn("[LUA] Call unimplemented SetPlatformRouteId {} {}", var2, routeId);
+        //TODO implement
+        // var2 == seelie ID?
+        // e.g. scene3_group133003381.lua action_EVENT_ENTER_REGION_381007 line 387
+        // or scene3_group133001159.lua action_EVENT_ENTER_REGION_159007 line 387
+        return 0;
+    }
+
+    public int KillGroupEntity(LuaTable var1){
+        logger.debug("[LUA] Call KillGroupEntity with {}", printTable(var1));
+        //TODO check
+        var sceneManager = sceneScriptManager.getIfExists();
+        var groupId = var1.get("group_id").optint(-1);
+        var killPolicyId = var1.get("kill_policy").optint(-1);
+        var gadgetList = var1.get("gadgets");
+        if(groupId == -1 || sceneManager == null){
+            return 1;
+        }
+
+
+        var group = sceneManager.getGroupById(groupId);
+        if (group == null) {
+            return 2;
+        }
+
+        if(killPolicyId!=-1 ){
+            var killPolicy = GroupKillPolicy.values()[killPolicyId];
+            return killGroupEntityWithPolicy(sceneManager, group, killPolicy);
+        }
+
+        return killGroupEntityWithTable(sceneManager, group, var1);
+    }
+
+    private int killGroupEntityWithTable(SceneScriptManager sceneScriptManager, SceneGroup group, LuaTable lists){
+        // get targets
+        var monsterList = lists.get("monsters");
+        var gadgetList = lists.get("gadgets");
+
+        int[] targets = new int[monsterList.length()+gadgetList.length()];
+        int targetsIndex = 0;
+        for (int i = 1; i<monsterList.length(); i++, targetsIndex++){
+            targets[targetsIndex] = monsterList.get(i).optint(-1);
+        }
+        for (int i = 1; i<gadgetList.length(); i++, targetsIndex++){
+            targets[targetsIndex] = gadgetList.get(i).optint(-1);
+        }
+
+        // kill targets if exists
+        for(int cfgId : targets){
+            var entity = getSceneScriptManager().getScene().getEntityByConfigId(cfgId);
+            if (entity == null || cfgId == 0) {
+                continue;
+            }
+            getSceneScriptManager().getScene().killEntity(entity, 0);
+        }
+        return 0;
+    }
+
+    private int killGroupEntityWithPolicy(SceneScriptManager sceneScriptManager,SceneGroup group, GroupKillPolicy killPolicy){
+        // get targets
+        var targets = new ArrayList<SceneObject>();
+        if(killPolicy==GROUP_KILL_MONSTER || killPolicy == GROUP_KILL_ALL){
+            targets.addAll(group.monsters.values());
+        }
+        if(killPolicy == GROUP_KILL_GADGET || killPolicy == GROUP_KILL_ALL) {
+            targets.addAll(group.gadgets.values());
+        }
+
+        // kill targets if exists
+        targets.forEach(o -> {
+            var entity = getSceneScriptManager().getScene().getEntityByConfigId(o.config_id);
+            if (entity == null) {
+                return;
+            }
+            getSceneScriptManager().getScene().killEntity(entity, 0);
+        });
+        return 0;
+    }
+
+    public int GetGadgetIdByEntityId(int entityId){
+        var entity = getSceneScriptManager().getScene().getEntityById(entityId);
+        if(!(entity instanceof EntityBaseGadget)){
+            return 0;
+        }
+        return ((EntityBaseGadget) entity).getGadgetId();
+    }
+    public int GetMonsterIdByEntityId(int entityId){
+        var entity = getSceneScriptManager().getScene().getEntityById(entityId);
+        if(!(entity instanceof EntityMonster)){
+            return 0;
+        }
+        return ((EntityMonster) entity).getMonsterData().getId();
+    }
+    public int GetMonsterID(int var1){
+        //TODO implement var1 type
+        return 0;
+    }
+    public int GetEntityIdByConfigId(int configId){
+        logger.warn("[LUA] Call GetEntityIdByConfigId with {}", configId);
+        //TODO check
+        var entity = getSceneScriptManager().getScene().getEntityByConfigId(configId);
+        return entity != null ? entity.getId() : 0;
+    }
+    public Position GetPosByEntityId(int entityId){
+        logger.warn("[LUA] Call GetPosByEntityId with {}", entityId);
+        //TODO check
+        var entity = getSceneScriptManager().getScene().getEntityById(entityId);
+        return entity != null? entity.getPosition() : new Position();
+    }
+    public Position GetRotationByEntityId(int entityId){
+        logger.debug("[LUA] Call GetRotationByEntityId with {}", entityId);
+        //TODO check
+        var entity = getSceneScriptManager().getScene().getEntityById(entityId);
+        return entity != null? entity.getRotation() : new Position();
     }
 }

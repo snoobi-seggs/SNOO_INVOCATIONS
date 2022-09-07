@@ -1,5 +1,6 @@
 package emu.grasscutter.game.quest.exec;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.game.quest.GameQuest;
 import emu.grasscutter.game.quest.QuestGroupSuite;
@@ -22,11 +23,16 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
         var scriptManager = quest.getOwner().getScene().getScriptManager();
 
         if(quest.getOwner().getScene().getId() == sceneId){
+            var group = scriptManager.getGroupById(groupId);
+            // workaround to make sure the triggers are still there todo find better way of trigger handling
+            scriptManager.refreshGroup(group);
+            Grasscutter.getLogger().warn("group: {} \ncondition: {} \nparamStr {}", group, condition, paramStr);
             scriptManager.callEvent(
                 quest.getState() == QuestState.QUEST_STATE_FINISHED ?
                     EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START
-                , new ScriptArgs());
+                , new ScriptArgs(quest.getSubQuestId()));
         }
+        else return false;
 
         return true;
     }

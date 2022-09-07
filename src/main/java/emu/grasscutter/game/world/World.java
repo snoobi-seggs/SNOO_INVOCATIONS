@@ -14,6 +14,7 @@ import emu.grasscutter.game.props.SceneType;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.DungeonData;
 import emu.grasscutter.data.excels.SceneData;
+import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.proto.EnterTypeOuterClass.EnterType;
 import emu.grasscutter.scripts.data.SceneConfig;
@@ -293,6 +294,10 @@ public class World implements Iterable<Player> {
 
         // Teleport packet
         player.sendPacket(new PacketPlayerEnterSceneNotify(player, enterType, enterReason, sceneId, teleportTo));
+
+        if(teleportType != TeleportType.INTERNAL) {
+            player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_ANY_MANUAL_TRANSPORT);
+        }
         return true;
     }
 

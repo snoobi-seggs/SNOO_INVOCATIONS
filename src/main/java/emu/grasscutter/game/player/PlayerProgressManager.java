@@ -228,5 +228,6 @@ public class PlayerProgressManager extends BasePlayerDataManager {
 
         // Send packet.
         this.player.sendPacket(new PacketSceneAreaUnlockNotify(sceneId, areaId));
+        this.player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_UNLOCK_AREA, sceneId, areaId);
     }
 }
