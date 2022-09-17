@@ -4,23 +4,40 @@ import com.esotericsoftware.reflectasm.ConstructorAccess;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.DataLoader;
 import emu.grasscutter.data.GameData;
+import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
+import emu.grasscutter.data.excels.QuestData;
+import emu.grasscutter.game.activity.condition.ActivityConditions;
+import emu.grasscutter.game.activity.condition.AllActivityConditionBuilder;
+import emu.grasscutter.game.activity.condition.ActivityConditionBaseHandler;
+import emu.grasscutter.game.activity.condition.all.UnknownActivityConditionHandler;
 import emu.grasscutter.game.player.BasePlayerManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActivityType;
 import emu.grasscutter.game.props.WatcherTriggerType;
+import emu.grasscutter.game.quest.GameQuest;
+import emu.grasscutter.game.quest.enums.LogicType;
 import emu.grasscutter.net.proto.ActivityInfoOuterClass;
 import emu.grasscutter.server.packet.send.PacketActivityScheduleInfoNotify;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lombok.Getter;
 import org.reflections.Reflections;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BooleanSupplier;
+import java.util.stream.Collectors;
+
+import static emu.grasscutter.Grasscutter.getLogger;
 
 @Getter
 public class ActivityManager extends BasePlayerManager {
     private static final Map<Integer, ActivityConfigItem> activityConfigItemMap;
-    @Getter private static final Map<Integer, ActivityConfigItem> scheduleActivityConfigMap;
+    @Getter
+    private static final Map<Integer, ActivityConfigItem> scheduleActivityConfigMap;
     private final Map<Integer, PlayerActivityData> playerActivityDataMap;
+    private final Int2ObjectMap<ActivityCondExcelConfigData> activityConditions;
+    private final Map<ActivityConditions, ActivityConditionBaseHandler> activityConditionsHandlers;
+    private static final UnknownActivityConditionHandler UNKNOWN_CONDITION_HANDLER = new UnknownActivityConditionHandler();
 
     static {
         activityConfigItemMap = new HashMap<>();
@@ -47,7 +64,7 @@ public class ActivityManager extends BasePlayerManager {
             DataLoader.loadList("ActivityConfig.json", ActivityConfigItem.class).forEach(item -> {
                 var activityData = GameData.getActivityDataMap().get(item.getActivityId());
                 if (activityData == null) {
-                    Grasscutter.getLogger().warn("activity {} not exist.", item.getActivityId());
+                    getLogger().warn("activity {} not exist.", item.getActivityId());
                     return;
                 }
                 var activityHandlerType = activityHandlerTypeMap.get(ActivityType.getTypeByName(activityData.getActivityType()));
@@ -55,7 +72,7 @@ public class ActivityManager extends BasePlayerManager {
 
                 if (activityHandlerType != null) {
                     activityHandler = (ActivityHandler) activityHandlerType.newInstance();
-                }else {
+                } else {
                     activityHandler = new DefaultActivityHandler();
                 }
                 activityHandler.setActivityConfigItem(item);
@@ -68,7 +85,7 @@ public class ActivityManager extends BasePlayerManager {
 
             Grasscutter.getLogger().info("Enable {} activities.", activityConfigItemMap.size());
         } catch (Exception e) {
-            Grasscutter.getLogger().error("Unable to load activities config.", e);
+            getLogger().error("Unable to load activities config.", e);
         }
 
     }
@@ -90,6 +107,9 @@ public class ActivityManager extends BasePlayerManager {
         });
 
         player.sendPacket(new PacketActivityScheduleInfoNotify(activityConfigItemMap.values()));
+        activityConditions = GameData.getActivityCondExcelConfigDataMap();
+
+        activityConditionsHandlers = AllActivityConditionBuilder.buildActivityConditions();
     }
 
     /**
@@ -127,15 +147,23 @@ public class ActivityManager extends BasePlayerManager {
         return new Date().after(activityConfig.getEndTime());
     }
 
-    public boolean meetsCondition(int conditionId) {
-        var activityId = conditionId / 1000; // todo some only have 2 numbers for the condition
-        var activityConfig = activityConfigItemMap.get(activityId);
-        if(activityConfig==null){
+    public boolean meetsCondition(GameQuest quest, int activityCondId) {
+        //TODO is it really params[0]?
+        ActivityCondExcelConfigData condData = activityConditions.get(activityCondId);
+
+        if (condData == null) {
+            getLogger().error("Could not find condition for activity with id = {}", activityCondId);
             return false;
         }
 
-        // TODO add condition handling based on ExcelBinOutput/NewActivityCondExcelConfigData.json
-        return activityConfig.getMeetCondList().contains(conditionId);
+        List<BooleanSupplier> predicates = condData.getCond()
+            .stream()
+            .map(c -> (BooleanSupplier) () ->
+                activityConditionsHandlers
+                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(quest, c.paramArray()))
+            .collect(Collectors.toList());
+
+        return LogicType.calculate(condData.getCondComb(), predicates);
     }
 
     public ActivityInfoOuterClass.ActivityInfo getInfoProtoByActivityId(int activityId) {
