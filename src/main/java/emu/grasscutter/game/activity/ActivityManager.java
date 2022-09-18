@@ -8,6 +8,7 @@ import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
 import emu.grasscutter.game.activity.condition.ActivityConditions;
 import emu.grasscutter.game.activity.condition.AllActivityConditionBuilder;
 import emu.grasscutter.game.activity.condition.ActivityConditionBaseHandler;
+import emu.grasscutter.game.activity.condition.PlayerActivityDataMappingBuilder;
 import emu.grasscutter.game.activity.condition.all.UnknownActivityConditionHandler;
 import emu.grasscutter.game.player.BasePlayerManager;
 import emu.grasscutter.game.player.Player;
@@ -35,6 +36,9 @@ public class ActivityManager extends BasePlayerManager {
     private final Map<Integer, PlayerActivityData> playerActivityDataMap;
     private final Int2ObjectMap<ActivityCondExcelConfigData> activityConditions;
     private final Map<ActivityConditions, ActivityConditionBaseHandler> activityConditionsHandlers;
+
+    private final Int2ObjectMap<PlayerActivityData> playerActivityDataByActivityCondId;
+
     private static final UnknownActivityConditionHandler UNKNOWN_CONDITION_HANDLER = new UnknownActivityConditionHandler();
 
     static {
@@ -108,6 +112,7 @@ public class ActivityManager extends BasePlayerManager {
         activityConditions = GameData.getActivityCondExcelConfigDataMap();
 
         activityConditionsHandlers = AllActivityConditionBuilder.buildActivityConditions();
+        playerActivityDataByActivityCondId = PlayerActivityDataMappingBuilder.buildPlayerActivityDataByActivityCondId(playerActivityDataMap);
     }
 
     /**
@@ -154,8 +159,7 @@ public class ActivityManager extends BasePlayerManager {
             return false;
         }
 
-        //TODO fill this up
-        PlayerActivityData activity = null;
+        PlayerActivityData activity = playerActivityDataByActivityCondId.get(activityCondId);
 
         List<BooleanSupplier> predicates = condData.getCond()
             .stream()

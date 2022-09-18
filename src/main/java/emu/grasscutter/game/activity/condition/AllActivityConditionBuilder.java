@@ -1,6 +1,7 @@
 package emu.grasscutter.game.activity.condition;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
 import emu.grasscutter.game.quest.handlers.QuestBaseHandler;
 import org.reflections.Reflections;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Class that used for scanning classpath, picking up all activity conditions (for NewActivityCondExcelConfigData.json)
+ * Class that used for scanning classpath, picking up all activity conditions (for NewActivityCondExcelConfigData.json {@link ActivityCondExcelConfigData})
  * and saving them to map. Check for more info {@link ActivityCondition}
  */
 public class AllActivityConditionBuilder {
