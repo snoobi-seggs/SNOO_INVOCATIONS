@@ -5,10 +5,7 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.DataLoader;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
-import emu.grasscutter.game.activity.condition.ActivityConditions;
-import emu.grasscutter.game.activity.condition.AllActivityConditionBuilder;
-import emu.grasscutter.game.activity.condition.ActivityConditionBaseHandler;
-import emu.grasscutter.game.activity.condition.PlayerActivityDataMappingBuilder;
+import emu.grasscutter.game.activity.condition.*;
 import emu.grasscutter.game.activity.condition.all.UnknownActivityConditionHandler;
 import emu.grasscutter.game.player.BasePlayerManager;
 import emu.grasscutter.game.player.Player;
@@ -34,12 +31,7 @@ public class ActivityManager extends BasePlayerManager {
     @Getter
     private static final Map<Integer, ActivityConfigItem> scheduleActivityConfigMap;
     private final Map<Integer, PlayerActivityData> playerActivityDataMap;
-    private final Int2ObjectMap<ActivityCondExcelConfigData> activityConditions;
-    private final Map<ActivityConditions, ActivityConditionBaseHandler> activityConditionsHandlers;
-
-    private final Int2ObjectMap<PlayerActivityData> playerActivityDataByActivityCondId;
-
-    private static final UnknownActivityConditionHandler UNKNOWN_CONDITION_HANDLER = new UnknownActivityConditionHandler();
+    private final ActivityConditionExecutor conditionExecutor;
 
     static {
         activityConfigItemMap = new HashMap<>();
@@ -109,10 +101,11 @@ public class ActivityManager extends BasePlayerManager {
         });
 
         player.sendPacket(new PacketActivityScheduleInfoNotify(activityConfigItemMap.values()));
-        activityConditions = GameData.getActivityCondExcelConfigDataMap();
 
-        activityConditionsHandlers = AllActivityConditionBuilder.buildActivityConditions();
-        playerActivityDataByActivityCondId = PlayerActivityDataMappingBuilder.buildPlayerActivityDataByActivityCondId(playerActivityDataMap);
+        conditionExecutor = new BasicActivityConditionExecutor(activityConfigItemMap,
+            GameData.getActivityCondExcelConfigDataMap(),
+            PlayerActivityDataMappingBuilder.buildPlayerActivityDataByActivityCondId(playerActivityDataMap),
+            AllActivityConditionBuilder.buildActivityConditions());
     }
 
     /**
@@ -151,33 +144,14 @@ public class ActivityManager extends BasePlayerManager {
     }
 
     public boolean meetsCondition(int activityCondId) {
-        Grasscutter.getLogger().debug("Calculating condition for activityCondId = {}", activityCondId);
-
-        //TODO is it really params[0]?
-        ActivityCondExcelConfigData condData = activityConditions.get(activityCondId);
-
-        if (condData == null) {
-            getLogger().error("Could not find condition for activity with id = {}", activityCondId);
-            return false;
-        }
-
-        PlayerActivityData activity = playerActivityDataByActivityCondId.get(activityCondId);
-        ActivityConfigItem activityConfig = activityConfigItemMap.get(activity.getActivityId());
-        List<BooleanSupplier> predicates = condData.getCond()
-            .stream()
-            .map(c -> (BooleanSupplier) () ->
-                activityConditionsHandlers
-                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(activity, activityConfig, c.paramArray()))
-            .collect(Collectors.toList());
-
-        return LogicType.calculate(condData.getCondComb(), predicates);
+        return conditionExecutor.meetsCondition(activityCondId);
     }
 
     public ActivityInfoOuterClass.ActivityInfo getInfoProtoByActivityId(int activityId) {
         var activityHandler = activityConfigItemMap.get(activityId).getActivityHandler();
         var activityData = playerActivityDataMap.get(activityId);
 
-        return activityHandler.toProto(activityData);
+        return activityHandler.toProto(activityData, conditionExecutor);
     }
 
     public Optional<ActivityHandler> getActivityHandler(ActivityType type) {

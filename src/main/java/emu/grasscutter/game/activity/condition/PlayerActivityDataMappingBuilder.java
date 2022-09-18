@@ -73,10 +73,8 @@ public class PlayerActivityDataMappingBuilder {
             return key / 10;
         } else if (key / 100 == 5001) {
             return key / 100;
-        } else if (key / 1000 >= 5003) {
-            return key / 1000;
         } else {
-            return -1;
+            return key / 1000;
         }
     }
 }
