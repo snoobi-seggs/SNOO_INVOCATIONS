@@ -31,15 +31,13 @@ public class PlayerActivityDataMappingBuilder {
 
     public PlayerActivityDataMappingBuilder(Map<Integer, PlayerActivityData> playerActivityDataMap) {
         this.playerActivityDataMap = playerActivityDataMap;
-        activityCondMap = GameData.getActivityCondExcelConfigDataMap()
-        ;
+        activityCondMap = GameData.getActivityCondExcelConfigDataMap();
     }
 
     private Int2ObjectMap<PlayerActivityData> buildMappings() {
         Int2ObjectMap<PlayerActivityData> result = new Int2ObjectRBTreeMap<>();
 
-        GameData
-            .getActivityCondExcelConfigDataMap()
+        activityCondMap
             .int2ObjectEntrySet()
             .stream()
             .map(entry -> new BasicEntry<>(entry.getIntKey(), getPlayerActivityDataByCondId(entry.getIntKey())))
