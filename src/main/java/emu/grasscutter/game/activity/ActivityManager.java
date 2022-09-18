@@ -151,6 +151,8 @@ public class ActivityManager extends BasePlayerManager {
     }
 
     public boolean meetsCondition(int activityCondId) {
+        Grasscutter.getLogger().debug("Calculating condition for activityCondId = {}", activityCondId);
+
         //TODO is it really params[0]?
         ActivityCondExcelConfigData condData = activityConditions.get(activityCondId);
 
@@ -160,12 +162,12 @@ public class ActivityManager extends BasePlayerManager {
         }
 
         PlayerActivityData activity = playerActivityDataByActivityCondId.get(activityCondId);
-
+        ActivityConfigItem activityConfig = activityConfigItemMap.get(activity.getActivityId());
         List<BooleanSupplier> predicates = condData.getCond()
             .stream()
             .map(c -> (BooleanSupplier) () ->
                 activityConditionsHandlers
-                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(activity, c.paramArray()))
+                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(activity, activityConfig, c.paramArray()))
             .collect(Collectors.toList());
 
         return LogicType.calculate(condData.getCondComb(), predicates);
