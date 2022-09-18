@@ -12,6 +12,7 @@ import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.net.proto.PropChangeReasonOuterClass.PropChangeReason;
 import emu.grasscutter.net.proto.RetcodeOuterClass.Retcode;
+import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.PacketOpenStateChangeNotify;
 import emu.grasscutter.server.packet.send.PacketOpenStateUpdateNotify;
 import emu.grasscutter.server.packet.send.PacketSceneAreaUnlockNotify;
@@ -21,6 +22,8 @@ import emu.grasscutter.server.packet.send.PacketUnlockTransPointRsp;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static emu.grasscutter.scripts.constants.EventType.EVENT_UNLOCK_TRANS_POINT;
 
 // @Entity
 public class PlayerProgressManager extends BasePlayerDataManager {
@@ -214,8 +217,9 @@ public class PlayerProgressManager extends BasePlayerDataManager {
 
         // this.player.sendPacket(new PacketPlayerPropChangeReasonNotify(this.player.getProperty(PlayerProperty.PROP_PLAYER_EXP), PlayerProperty.PROP_PLAYER_EXP, PropChangeReason.PROP_CHANGE_REASON_PLAYER_ADD_EXP));
 
-        // Fire quest trigger for trans point unlock.
+        // Fire quest and script trigger for trans point unlock.
         this.player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_UNLOCK_TRANS_POINT, sceneId, pointId);
+        this.player.getScene().getScriptManager().callEvent(EVENT_UNLOCK_TRANS_POINT, new ScriptArgs(sceneId, pointId));
 
         // Send packet.
         this.player.sendPacket(new PacketScenePointUnlockNotify(sceneId, pointId));

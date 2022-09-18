@@ -130,6 +130,9 @@ public class ActivityManager extends BasePlayerManager {
     public boolean meetsCondition(int conditionId) {
         var activityId = conditionId / 1000; // todo some only have 2 numbers for the condition
         var activityConfig = activityConfigItemMap.get(activityId);
+        if(activityConfig==null){
+            return false;
+        }
 
         // TODO add condition handling based on ExcelBinOutput/NewActivityCondExcelConfigData.json
         return activityConfig.getMeetCondList().contains(conditionId);

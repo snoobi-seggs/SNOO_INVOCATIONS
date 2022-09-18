@@ -91,7 +91,6 @@ public final class GameServer extends KcpServer {
 
         this.init(GameSessionManager.getListener(),channelConfig,address);
 
-        DungeonChallenge.initialize();
         EnergyManager.initialize();
         StaminaManager.initialize();
         CookingManager.initialize();

@@ -6,6 +6,7 @@ public class ScriptArgs {
 	public int param3;
 	public int source_eid; // Source entity
     public int target_eid;
+    public String source;
 	public ScriptArgs() {
 
 	}
@@ -61,6 +62,15 @@ public class ScriptArgs {
 
     public ScriptArgs setTargetEntityId(int target_eid) {
         this.target_eid = target_eid;
+        return this;
+    }
+
+    public String getEventSource() {
+        return source;
+    }
+
+    public ScriptArgs setEventSource(String source) {
+        this.source = source;
         return this;
     }
 }

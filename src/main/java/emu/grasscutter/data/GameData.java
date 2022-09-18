@@ -8,6 +8,7 @@ import java.util.Map;
 
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.binout.*;
+import emu.grasscutter.game.dungeons.DungeonDropEntry;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
 import emu.grasscutter.utils.Utils;
 import emu.grasscutter.data.excels.*;
@@ -85,7 +86,8 @@ public class GameData {
     private static final Int2ObjectMap<DailyDungeonData> dailyDungeonDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<DungeonEntryData> dungeonEntryDataMap = new Int2ObjectOpenHashMap<>();
 
-    private static final Int2ObjectMap<DungeonData> dungeonDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<DungeonData> dungeonDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<DungeonPassConfigData> dungeonPassConfigDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<QuestData> questDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<ShopGoodsData> shopGoodsDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<CombineData> combineDataMap = new Int2ObjectOpenHashMap<>();
@@ -118,6 +120,8 @@ public class GameData {
     @Getter private static final Int2ObjectMap<BlossomRefreshExcelConfigData> blossomRefreshExcelConfigDataMap = new Int2ObjectOpenHashMap<>();
 
     @Getter private static final Int2ObjectMap<OpenStateData> openStateDataMap = new Int2ObjectOpenHashMap<>();
+
+    @Getter private static final Int2ObjectMap<List<DungeonDropEntry>> dungeonDropDataMap = new Int2ObjectOpenHashMap<>();
 
     // Cache
     private static Map<Integer, List<Integer>> fetters = new HashMap<>();
@@ -372,10 +376,6 @@ public class GameData {
 
     public static Int2ObjectMap<WorldLevelData> getWorldLevelDataMap() {
         return worldLevelDataMap;
-    }
-
-    public static Int2ObjectMap<DungeonData> getDungeonDataMap() {
-        return dungeonDataMap;
     }
 
     public static Int2ObjectMap<DailyDungeonData> getDailyDungeonDataMap() {

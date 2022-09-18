@@ -4,6 +4,9 @@ import emu.grasscutter.data.binout.ConfigGadget;
 import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.game.world.Scene;
+import emu.grasscutter.scripts.data.ScriptArgs;
+
+import static emu.grasscutter.scripts.constants.EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE;
 
 public abstract class EntityBaseGadget extends GameEntity {
 
@@ -18,6 +21,21 @@ public abstract class EntityBaseGadget extends GameEntity {
         super.onDeath(killerId); // Invoke super class's onDeath() method.
 
         getScene().getPlayers().forEach(p -> p.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_DESTROY_GADGET, this.getGadgetId()));
+    }
+
+    @Override
+    public void damage(float amount, int killerId) {
+        super.damage(amount, killerId);
+
+        if(this.getFightProperties() == null){
+            return;
+        }
+        float hpAfterDamage = this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP);
+        // param2 unused for now
+        getScene().getScriptManager().callEvent(EVENT_SPECIFIC_GADGET_HP_CHANGE, new ScriptArgs(getConfigId(), getGadgetId())
+            .setSourceEntityId(getId())
+            .setParam3((int)hpAfterDamage)
+            .setEventSource(Integer.toString(getConfigId())));
     }
 
     protected void fillFightProps(ConfigGadget configGadget) {

@@ -1,5 +1,6 @@
 package emu.grasscutter.game.entity;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.binout.ConfigGadget;
 import emu.grasscutter.data.excels.GadgetData;
@@ -143,7 +144,7 @@ public class EntityGadget extends EntityBaseGadget {
         GadgetContent content = switch (type) {
             case GatherPoint -> new GadgetGatherPoint(this);
             case GatherObject -> new GadgetGatherObject(this);
-            case Worktop -> new GadgetWorktop(this);
+            case Worktop, SealGadget -> new GadgetWorktop(this);
             case RewardStatue -> new GadgetRewardStatue(this);
             case Chest -> new GadgetChest(this);
             case Gadget -> new GadgetObject(this);

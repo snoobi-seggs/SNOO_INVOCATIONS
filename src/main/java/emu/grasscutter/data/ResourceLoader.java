@@ -9,6 +9,7 @@ import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierActionType;
 import emu.grasscutter.data.common.PointData;
 import emu.grasscutter.data.common.ScenePointConfig;
+import emu.grasscutter.game.dungeons.DungeonDrop;
 import emu.grasscutter.game.managers.blossom.BlossomConfig;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
 import emu.grasscutter.game.world.SpawnDataEntry;
@@ -72,6 +73,7 @@ public class ResourceLoader {
         loadSpawnData();
         loadQuests();
         loadScriptSceneData();
+        loadDungeonDrops();
         // Load scene points - must be done AFTER resources are loaded
         loadScenePoints();
         // Load default home layout
@@ -339,6 +341,18 @@ public class ResourceLoader {
             );
         }
         GameDepot.addSpawnListById(areaSort);
+    }
+
+    private static void loadDungeonDrops(){
+        try {
+            DataLoader.loadList("DungeonDrop.json", DungeonDrop.class).forEach(entry -> {
+                GameData.getDungeonDropDataMap().put(entry.getDungeonId(), entry.getDrops());
+            });
+            Grasscutter.getLogger().debug("Loaded {} dungeon drop data entries.", GameData.getDungeonDropDataMap().size());
+        }
+        catch (Exception ex) {
+            Grasscutter.getLogger().error("Unable to load dungeon drop data.", ex);
+        }
     }
 
     private static void loadOpenConfig() {

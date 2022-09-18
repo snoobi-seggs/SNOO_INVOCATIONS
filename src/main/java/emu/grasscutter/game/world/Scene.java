@@ -6,6 +6,8 @@ import emu.grasscutter.data.GameDepot;
 import emu.grasscutter.data.binout.SceneNpcBornEntry;
 import emu.grasscutter.data.excels.*;
 import emu.grasscutter.game.avatar.Avatar;
+import emu.grasscutter.game.dungeons.DungeonManager;
+import emu.grasscutter.game.dungeons.DungeonPassConditionType;
 import emu.grasscutter.game.dungeons.DungeonSettleListener;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.GadgetWorktop;
@@ -50,15 +52,15 @@ public class Scene {
     private Set<SpawnDataEntry.GridBlockId> loadedGridBlocks;
     @Getter @Setter private boolean dontDestroyWhenEmpty;
 
-    @Getter @Setter private int autoCloseTime;
     @Getter private int time;
 
     @Getter private SceneScriptManager scriptManager;
     @Getter @Setter private WorldChallenge challenge;
     @Getter private List<DungeonSettleListener> dungeonSettleListeners;
-    @Getter private DungeonData dungeonData;
+    @Getter @Setter DungeonManager dungeonManager;
     @Getter @Setter private int prevScene; // Id of the previous scene
     @Getter @Setter private int prevScenePoint;
+    @Getter @Setter private int killedMonsterCount;
     private Set<SceneNpcBornEntry> npcBornEntrySet;
     public Scene(World world, SceneData sceneData) {
         this.world = world;
@@ -105,18 +107,18 @@ public class Scene {
         this.time = time % 1440;
     }
 
-    public void setDungeonData(DungeonData dungeonData) {
-        if (dungeonData == null || this.dungeonData != null || this.getSceneType() != SceneType.SCENE_DUNGEON || dungeonData.getSceneId() != this.getId()) {
-            return;
-        }
-        this.dungeonData = dungeonData;
-    }
-
     public void addDungeonSettleObserver(DungeonSettleListener dungeonSettleListener) {
         if (dungeonSettleListeners == null) {
             dungeonSettleListeners = new ArrayList<>();
         }
         dungeonSettleListeners.add(dungeonSettleListener);
+    }
+
+    public void triggerDungeonEvent(DungeonPassConditionType conditionType, int... params){
+        if(dungeonManager==null){
+            return;
+        }
+        dungeonManager.triggerEvent(conditionType, params);
     }
 
     public boolean isInScene(GameEntity entity) {
@@ -334,6 +336,7 @@ public class Scene {
 
         // Death event
         target.onDeath(attackerId);
+        triggerDungeonEvent(DungeonPassConditionType.DUNGEON_COND_KILL_MONSTER_COUNT, ++killedMonsterCount);
     }
 
     public void onTick() {

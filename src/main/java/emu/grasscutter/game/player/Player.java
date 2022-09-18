@@ -1160,6 +1160,9 @@ public class Player {
         // Execute daily reset logic if this is a new day.
         this.doDailyReset();
 
+        // Activity needed for some quests
+        activityManager = new ActivityManager(this);
+
         // Rewind active quests, and put the player to a rewind position it finds (if any) of an active quest
         getQuestManager().onLogin();
 
@@ -1192,8 +1195,6 @@ public class Player {
         // Home
         home = GameHome.getByUid(getUid());
         home.onOwnerLogin(this);
-        // Activity
-        activityManager = new ActivityManager(this);
 
         session.send(new PacketPlayerEnterSceneNotify(this)); // Enter game world
         session.send(new PacketPlayerLevelRewardUpdateNotify(rewardedLevels));

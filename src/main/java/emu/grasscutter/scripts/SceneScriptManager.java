@@ -138,7 +138,8 @@ public class SceneScriptManager {
         if (!suite.sceneTriggers.isEmpty()) {
             groupSceneTriggers.addAll(suite.sceneTriggers);
             for (var trigger : groupSceneTriggers) {
-                this.currentTriggers.get(trigger.event).add(trigger);
+                this.currentTriggers.computeIfAbsent(trigger.event, k -> new HashSet<>())
+                    .add(trigger);
             }
         }
         triggersByGroupScene.put(group.id+"_"+suiteIndex, groupSceneTriggers);
@@ -323,7 +324,15 @@ public class SceneScriptManager {
         if (suite == null || group.monsters == null || suite.sceneMonsters.size() <= 0) {
             return;
         }
-        this.addEntities(suite.sceneMonsters.stream()
+        var monstersToSpawn = suite.sceneMonsters.stream()
+            .filter(m -> {
+                var entity = scene.getEntityByConfigId(m.config_id);
+                return entity == null || entity.getGroupId()!=group.id;
+            });//TODO check if it interferes with bigworld or anything else
+        if(monstersToSpawn.findAny().isEmpty()){
+            return;
+        }
+        this.addEntities(monstersToSpawn
                 .map(mob -> createMonster(group.id, group.block_id, mob)).toList());
     }
 
@@ -340,7 +349,12 @@ public class SceneScriptManager {
     }
     public void spawnMonstersByConfigId(SceneGroup group, int configId, int delayTime) {
         // TODO delay
-        var entity = createMonster(group.id, group.block_id, group.monsters.get(configId));
+        var entity = scene.getEntityByConfigId(configId);
+        if(entity!=null && entity.getGroupId() == group.id){
+            Grasscutter.getLogger().info("entity already exists failed in group {} with config {}", group.id, configId);
+            return;
+        }
+        entity = createMonster(group.id, group.block_id, group.monsters.get(configId));
         if(entity!=null){
             getScene().addEntity(entity);
         } else {
@@ -364,7 +378,8 @@ public class SceneScriptManager {
             Set<SceneTrigger> relevantTriggers = new HashSet<>();
             if (eventType == EventType.EVENT_ENTER_REGION || eventType == EventType.EVENT_LEAVE_REGION) {
                 List<SceneTrigger> relevantTriggersList = this.getTriggersByEvent(eventType).stream()
-                    .filter(p -> p.condition.contains(String.valueOf(params.param1))).toList();
+                    .filter(p -> p.condition.contains(String.valueOf(params.param1)) &&
+                        (p.source.isEmpty() || p.source.equals(params.getEventSource()))).toList();
                 relevantTriggers = new HashSet<>(relevantTriggersList);
             } else {relevantTriggers =new HashSet<>(this.getTriggersByEvent(eventType));}
             for (SceneTrigger trigger : relevantTriggers) {
@@ -399,6 +414,9 @@ public class SceneScriptManager {
                     deregisterRegion(region.getMetaRegion());
                 }
                 if(ret.isboolean() && ret.checkboolean() || ret.isint() && ret.checkint()==0) {
+                    if(eventType == EVENT_TIMER_EVENT){
+                        cancelGroupTimerEvent(trigger.currentGroup.id, trigger.source);
+                    }
                     deregisterTrigger(trigger);
                 }
                 return true;
@@ -498,8 +516,8 @@ public class SceneScriptManager {
         // Calculate level
         int level = monster.level;
 
-        if (getScene().getDungeonData() != null) {
-            level = getScene().getDungeonData().getShowLevel();
+        if (getScene().getDungeonManager() != null) {
+            level = getScene().getDungeonManager().getLevelForMonster(monster.config_id);
         } else if (getScene().getWorld().getWorldLevel() > 0) {
             WorldLevelData worldLevelData = GameData.getWorldLevelDataMap().get(getScene().getWorld().getWorldLevel());
 
@@ -575,7 +593,9 @@ public class SceneScriptManager {
             if(trigger.event == EVENT_TIMER_EVENT &&trigger.source.equals(source)){
                 Grasscutter.getLogger().warn("[LUA] Found timer trigger with source {} for group {} : {}",
                     source, groupID, trigger.name);
-                var taskIdentifier = Grasscutter.getGameServer().getScheduler().scheduleDelayedRepeatingTask(() -> callEvent(EVENT_TIMER_EVENT, new ScriptArgs()), (int)time, (int)time);
+                var taskIdentifier = Grasscutter.getGameServer().getScheduler().scheduleDelayedRepeatingTask(() ->
+                    callEvent(EVENT_TIMER_EVENT, new ScriptArgs()
+                        .setEventSource(source)), (int)time, (int)time);
                 var groupTasks = activeGroupTimers.computeIfAbsent(groupID, k -> new HashSet<>());
                 groupTasks.add(new Pair<>(source, taskIdentifier));
 

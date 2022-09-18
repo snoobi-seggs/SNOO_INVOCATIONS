@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import emu.grasscutter.game.dungeons.DungeonManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.player.Player.SceneLoadState;
 import emu.grasscutter.game.props.EnterReason;
@@ -32,6 +33,8 @@ import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+
+import static emu.grasscutter.server.event.player.PlayerTeleportEvent.TeleportType.SCRIPT;
 
 public class World implements Iterable<Player> {
     private final GameServer server;
@@ -250,10 +253,13 @@ public class World implements Iterable<Player> {
         }
 
         Scene newScene = this.getSceneById(sceneId);
-        newScene.setDungeonData(dungeonData);
         newScene.addPlayer(player);
 
         // Dungeon
+        if(dungeonData!=null){
+            var dungeonManager = new DungeonManager(newScene, dungeonData);
+            dungeonManager.startDungeon();
+        }
         SceneConfig config = newScene.getScriptManager().getConfig();
         if (teleportTo == null && config != null) {
             if (config.born_pos != null) {
@@ -271,14 +277,14 @@ public class World implements Iterable<Player> {
 
         player.getPosition().set(teleportTo);
 
-        if (oldScene != null) {
+        if (oldScene != null && newScene != oldScene) {
             newScene.setPrevScene(oldScene.getId());
             oldScene.setDontDestroyWhenEmpty(false);
         }
 
         // Get enter types
         EnterType enterType = EnterType.ENTER_TYPE_JUMP;
-        EnterReason enterReason = EnterReason.TransPoint;
+        EnterReason enterReason = teleportType == SCRIPT? EnterReason.Lua : EnterReason.TransPoint;
 
         if (dungeonData != null) {
             enterType = EnterType.ENTER_TYPE_DUNGEON;
@@ -295,7 +301,7 @@ public class World implements Iterable<Player> {
         // Teleport packet
         player.sendPacket(new PacketPlayerEnterSceneNotify(player, enterType, enterReason, sceneId, teleportTo));
 
-        if(teleportType != TeleportType.INTERNAL) {
+        if(teleportType != TeleportType.INTERNAL && teleportType != SCRIPT) {
             player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_ANY_MANUAL_TRANSPORT);
         }
         return true;

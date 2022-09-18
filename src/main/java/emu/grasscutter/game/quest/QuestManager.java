@@ -62,7 +62,7 @@ public class QuestManager extends BasePlayerManager {
 
     */
 
-        public static long getQuestKey(int mainQuestId) {
+    public static long getQuestKey(int mainQuestId) {
         QuestEncryptionKey questEncryptionKey = GameData.getMainQuestEncryptionMap().get(mainQuestId);
         return questEncryptionKey != null ? questEncryptionKey.getEncryptionKey() : 0L;
     }
