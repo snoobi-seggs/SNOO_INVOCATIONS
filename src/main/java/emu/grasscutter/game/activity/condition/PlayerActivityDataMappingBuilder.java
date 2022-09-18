@@ -3,6 +3,7 @@ package emu.grasscutter.game.activity.condition;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
 import emu.grasscutter.game.activity.PlayerActivityData;
+import it.unimi.dsi.fastutil.ints.AbstractInt2ObjectMap.BasicEntry;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectRBTreeMap;
 
@@ -16,6 +17,8 @@ public class PlayerActivityDataMappingBuilder {
 
     private final Map<Integer, PlayerActivityData> playerActivityDataMap;
 
+    private final Int2ObjectMap<ActivityCondExcelConfigData> activityCondMap;
+
     /**
      * Build mapping for PlayerActivityData.
      *
@@ -28,6 +31,8 @@ public class PlayerActivityDataMappingBuilder {
 
     public PlayerActivityDataMappingBuilder(Map<Integer, PlayerActivityData> playerActivityDataMap) {
         this.playerActivityDataMap = playerActivityDataMap;
+        activityCondMap = GameData.getActivityCondExcelConfigDataMap()
+        ;
     }
 
     private Int2ObjectMap<PlayerActivityData> buildMappings() {
@@ -36,7 +41,10 @@ public class PlayerActivityDataMappingBuilder {
         GameData
             .getActivityCondExcelConfigDataMap()
             .int2ObjectEntrySet()
-            .forEach(entry -> result.put(entry.getIntKey(), getPlayerActivityDataByCondId(entry.getIntKey())));
+            .stream()
+            .map(entry -> new BasicEntry<>(entry.getIntKey(), getPlayerActivityDataByCondId(entry.getIntKey())))
+            .filter(entry -> entry.getValue() != null)
+            .forEach(entry -> result.put(entry.getIntKey(), entry.getValue()));
 
         return result;
     }
