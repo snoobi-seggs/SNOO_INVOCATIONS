@@ -1,8 +1,8 @@
 package emu.grasscutter.game.activity.condition.all;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.game.activity.PlayerActivityData;
 import emu.grasscutter.game.activity.condition.ActivityConditionBaseHandler;
-import emu.grasscutter.game.player.Player;
 
 /**
  * This class is used when condition was not found
@@ -10,7 +10,7 @@ import emu.grasscutter.game.player.Player;
 public class UnknownActivityConditionHandler extends ActivityConditionBaseHandler {
 
     @Override
-    public boolean execute(Player player, int... params) {
+    public boolean execute(PlayerActivityData activityData, int... params) {
         Grasscutter.getLogger().error("Called unknown condition handler");
         return false;
     }

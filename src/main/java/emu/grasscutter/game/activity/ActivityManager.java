@@ -5,7 +5,6 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.DataLoader;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.ActivityCondExcelConfigData;
-import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.game.activity.condition.ActivityConditions;
 import emu.grasscutter.game.activity.condition.AllActivityConditionBuilder;
 import emu.grasscutter.game.activity.condition.ActivityConditionBaseHandler;
@@ -14,7 +13,6 @@ import emu.grasscutter.game.player.BasePlayerManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActivityType;
 import emu.grasscutter.game.props.WatcherTriggerType;
-import emu.grasscutter.game.quest.GameQuest;
 import emu.grasscutter.game.quest.enums.LogicType;
 import emu.grasscutter.net.proto.ActivityInfoOuterClass;
 import emu.grasscutter.server.packet.send.PacketActivityScheduleInfoNotify;
@@ -147,7 +145,7 @@ public class ActivityManager extends BasePlayerManager {
         return new Date().after(activityConfig.getEndTime());
     }
 
-    public boolean meetsCondition(GameQuest quest, int activityCondId) {
+    public boolean meetsCondition(int activityCondId) {
         //TODO is it really params[0]?
         ActivityCondExcelConfigData condData = activityConditions.get(activityCondId);
 
@@ -156,11 +154,14 @@ public class ActivityManager extends BasePlayerManager {
             return false;
         }
 
+        //TODO fill this up
+        PlayerActivityData activity = null;
+
         List<BooleanSupplier> predicates = condData.getCond()
             .stream()
             .map(c -> (BooleanSupplier) () ->
                 activityConditionsHandlers
-                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(getPlayer(), c.paramArray()))
+                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(activity, c.paramArray()))
             .collect(Collectors.toList());
 
         return LogicType.calculate(condData.getCondComb(), predicates);
