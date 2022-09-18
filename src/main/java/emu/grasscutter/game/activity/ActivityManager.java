@@ -160,7 +160,7 @@ public class ActivityManager extends BasePlayerManager {
             .stream()
             .map(c -> (BooleanSupplier) () ->
                 activityConditionsHandlers
-                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(quest, c.paramArray()))
+                    .getOrDefault(c.getType(), UNKNOWN_CONDITION_HANDLER).execute(getPlayer(), c.paramArray()))
             .collect(Collectors.toList());
 
         return LogicType.calculate(condData.getCondComb(), predicates);
