@@ -61,8 +61,8 @@ public class PlayerActivityDataMappingBuilder {
      *     For example: activity data id = 5087, cond id = 5087xxx (x - any digit)</li>
      *     <li>Activity data id = 5001. Then cond id will be activity data id plus 2 additional digits.
      *     For example: activity data id = 5001, cond id = 5001xx (x - any digit)</li>
-     *     <li>Activity data id one of [1001, 1002]. Then cond id will be activity data id plus 2 additional digits.
-     *     For example: activity data id = 1001, cond id = 1001x (x - any digit></li>
+     *     <li>Activity data id one of [1001]. Then cond id will be activity data id plus 2 additional digits.
+     *     This also applied to activity data id = 1002. For example: activity data id = 1001, cond id = 1001x (x - any digit></li>
      * </ol>
      *
      * @param key cond id for which activity data id should be defined
@@ -70,7 +70,7 @@ public class PlayerActivityDataMappingBuilder {
      */
     private Integer detectActivityDataIdByCondId(Integer key) {
         if (key / 10 == 1001 || key / 10 == 1002) {
-            return key / 10;
+            return 1001;
         } else if (key / 100 == 5001) {
             return key / 100;
         } else {
