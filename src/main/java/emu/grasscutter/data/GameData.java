@@ -90,6 +90,7 @@ public class GameData {
 
     @Getter private static final Int2ObjectMap<DungeonData> dungeonDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<DungeonPassConfigData> dungeonPassConfigDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<DungeonChallengeConfigData> dungeonChallengeConfigDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<QuestData> questDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<ShopGoodsData> shopGoodsDataMap = new Int2ObjectOpenHashMap<>();
     private static final Int2ObjectMap<CombineData> combineDataMap = new Int2ObjectOpenHashMap<>();

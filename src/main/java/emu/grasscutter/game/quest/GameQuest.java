@@ -105,6 +105,8 @@ public class GameQuest {
         this.getOwner().getQuestManager().triggerEvent(QuestTrigger.QUEST_COND_STATE_EQUAL, this.getSubQuestId(), this.getState().getValue(),0,0,0);
         this.getOwner().getScene().triggerDungeonEvent(DungeonPassConditionType.DUNGEON_COND_FINISH_QUEST, this.getSubQuestId());
 
+        mainQuest.getQuestManager().checkQuestAlreadyFullfilled(this);
+
         Grasscutter.getLogger().debug("Quest {} is started", subQuestId);
     }
 

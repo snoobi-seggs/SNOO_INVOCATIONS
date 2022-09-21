@@ -92,6 +92,7 @@ public class QuestManager extends BasePlayerManager {
                 getPlayer().getPosition().set(rewindPos.get(0));
                 getPlayer().getRotation().set(rewindPos.get(1));
             }
+            quest.checkProgress();
         }
     }
 
@@ -303,6 +304,7 @@ public class QuestManager extends BasePlayerManager {
             case QUEST_CONTENT_ADD_QUEST_PROGRESS:
             case QUEST_CONTENT_LEAVE_SCENE:
             case QUEST_CONTENT_ITEM_LESS_THAN:
+            case QUEST_CONTENT_KILL_MONSTER:
                 for (GameMainQuest mainQuest : checkMainQuests) {
                     mainQuest.tryFailSubQuests(condType, paramStr, params);
                     mainQuest.tryFinishSubQuests(condType, paramStr, params);
@@ -334,20 +336,20 @@ public class QuestManager extends BasePlayerManager {
                 case QUEST_CONTENT_ITEM_LESS_THAN:{
                     //check if we already own enough of the item
                     var item = getPlayer().getInventory().getItemByGuid(condition.getParam()[0]);
-                    getPlayer().getQuestManager().triggerEvent(condition.getType(), item.getItemId(), item.getCount());
+                    triggerEvent(condition.getType(), item.getItemId(), item.getCount());
                     break;
                 }
                 case QUEST_CONTENT_UNLOCK_TRANS_POINT: {
                     var scenePoints = getPlayer().getUnlockedScenePoints().get(condition.getParam()[0]);
                     if(scenePoints!=null && scenePoints.contains(condition.getParam()[1])){
-                        getPlayer().getQuestManager().triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
+                        triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
                     }
                     break;
                 }
                 case QUEST_CONTENT_UNLOCK_AREA: {
-                    var sceneAreas = getPlayer().getUnlockedScenePoints().get(condition.getParam()[0]);
+                    var sceneAreas = getPlayer().getUnlockedSceneAreas().get(condition.getParam()[0]);
                     if(sceneAreas!=null && sceneAreas.contains(condition.getParam()[1])) {
-                        this.player.getQuestManager().triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
+                        triggerEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
                     }
                     break;
                 }

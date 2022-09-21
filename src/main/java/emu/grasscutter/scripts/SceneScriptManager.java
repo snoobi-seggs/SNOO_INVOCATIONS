@@ -328,12 +328,10 @@ public class SceneScriptManager {
             .filter(m -> {
                 var entity = scene.getEntityByConfigId(m.config_id);
                 return entity == null || entity.getGroupId()!=group.id;
-            });//TODO check if it interferes with bigworld or anything else
-        if(monstersToSpawn.findAny().isEmpty()){
-            return;
-        }
-        this.addEntities(monstersToSpawn
-                .map(mob -> createMonster(group.id, group.block_id, mob)).toList());
+            })
+            .map(mob -> createMonster(group.id, group.block_id, mob))
+            .toList();//TODO check if it interferes with bigworld or anything else
+        this.addEntities(monstersToSpawn);
     }
 
     public void startMonsterTideInGroup(SceneGroup group, Integer[] ordersConfigId, int tideCount, int sceneLimit) {

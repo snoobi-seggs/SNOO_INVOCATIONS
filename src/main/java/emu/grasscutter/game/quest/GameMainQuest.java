@@ -247,6 +247,14 @@ public class GameMainQuest {
         }
     }
 
+    public void checkProgress(){
+        for (var quest : getChildQuests().values()){
+            if(quest.getState() == QuestState.QUEST_STATE_UNFINISHED) {
+                questManager.checkQuestAlreadyFullfilled(quest);
+            }
+        }
+    }
+
     public void tryAcceptSubQuests(QuestTrigger condType, String paramStr, int... params) {
         try {
             List<GameQuest> subQuestsWithCond = getChildQuests().values().stream()
