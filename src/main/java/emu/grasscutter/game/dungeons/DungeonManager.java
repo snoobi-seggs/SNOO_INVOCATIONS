@@ -41,7 +41,7 @@ public class DungeonManager {
 
     @Getter private final int[] finishedConditions;
     private final IntSet rewardedPlayers = new IntOpenHashSet();
-    private boolean isended = false;
+    private boolean ended = false;
     private Set<Integer> activeDungeonWayPoints = new HashSet<>();
 
     public DungeonManager(@NonNull Scene scene, @NonNull DungeonData dungeonData) {
@@ -53,7 +53,7 @@ public class DungeonManager {
     }
 
     public void triggerEvent(DungeonPassConditionType conditionType, int... params) {
-        if(isended){
+        if(ended){
             return;
         }
         for (int i = 0; i < passConfigData.getConds().size(); i++) {
@@ -233,14 +233,14 @@ public class DungeonManager {
         if(scene.getDungeonSettleListeners()!=null) {
             scene.getDungeonSettleListeners().forEach(o -> o.onDungeonSettle(this, endReason));
         }
-        isended = true;
+        ended = true;
     }
 
     public void restartDungeon() {
         this.scene.setKilledMonsterCount(0);
         this.rewardedPlayers.clear();
         Arrays.fill(finishedConditions, 0);
-        this.isended = false;
+        this.ended = false;
         this.activeDungeonWayPoints.clear();
     }
 
