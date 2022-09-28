@@ -9,52 +9,59 @@ import java.util.List;
 
 import static emu.grasscutter.utils.Language.translate;
 
-@Command(label = "quest", usage = {"(add|finish) [<questId>]"}, permission = "player.quest", permissionTargeted = "player.quest.others")
+@Command(label = "quest", usage = {"(add|finish) [<questId>]", "enable"}, permission = "player.quest", permissionTargeted = "player.quest.others")
 public final class QuestCommand implements CommandHandler {
 
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
-        if (args.size() != 2) {
+        if (args.size() == 0) {
             sendUsageMessage(sender);
             return;
         }
 
-        String cmd = args.get(0).toLowerCase();
-        int questId;
-
-        try {
-            questId = Integer.parseInt(args.get(1));
-        } catch (Exception e) {
-            CommandHandler.sendMessage(sender, translate(sender, "commands.quest.invalid_id"));
-            return;
-        }
-
+        String cmd = args.remove(0).toLowerCase();
         switch (cmd) {
-            case "add" -> {
-                GameQuest quest = targetPlayer.getQuestManager().addQuest(questId);
-
-                if (quest != null) {
-                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.added", questId));
+            case "enable":
+                targetPlayer.getQuestManager().enableQuests();
+                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.enabled"));
+                break;
+            case "add":
+            case "finish":
+                int questId;
+                try {
+                    questId = Integer.parseInt(args.get(0));
+                }
+                catch (Exception e) {
+                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.invalid_id"));
                     return;
                 }
 
-                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
-            }
-            case "finish" -> {
-                GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
+                if (cmd.equals("add")) {
+                    GameQuest quest = targetPlayer.getQuestManager().addQuest(questId);
 
-                if (quest == null) {
+                    if (quest != null) {
+                        CommandHandler.sendMessage(sender, translate(sender, "commands.quest.added", questId));
+                        return;
+                    }
+
                     CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
-                    return;
                 }
+                else if (cmd.equals("finish")) {
+                    GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
 
-                quest.finish();
+                    if (quest == null) {
+                        CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
+                        return;
+                    }
 
-                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
-            }
-            default -> {
-                sendUsageMessage(sender);
-            }
+                    quest.finish();
+
+                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
+                }
+                else sendUsageMessage(sender);
+                break;
+            default:
+                sendUsageMessage(sender);      
         }
     }
 }

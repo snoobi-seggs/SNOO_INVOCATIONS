@@ -1134,6 +1134,10 @@ public class Player {
         this.loadBattlePassManager();
     }
 
+    public void onPlayerBorn() {
+        if (Grasscutter.getConfig().server.game.gameOptions.questing) getQuestManager().onPlayerBorn();
+    }
+
     public void onLogin() {
         // Quest - Commented out because a problem is caused if you log out while this quest is active
         /*

@@ -74,13 +74,18 @@ public class QuestManager extends BasePlayerManager {
         this.addToQuestListUpdateNotify = new ArrayList<>();
     }
 
-    public void onNewPlayerCreate() {
+    public void onPlayerBorn() {
+        // TODO scan the quest and start the quest with acceptCond fulfilled
+        // The off send 3 request in that order: 1. FinishedParentQuestNotify, 2. QuestListNotify, 3. ServerCondMeetQuestListUpdateNotify
 
         List<GameMainQuest> newQuests = this.addMultMainQuests(newPlayerMainQuests);
-        //getPlayer().sendPacket(new PacketServerCondMeetQuestListUpdateNotify(newPlayerServerCondMeetQuestListUpdateNotify));
+        for (GameMainQuest mainQuest : newQuests) {
+            startMainQuest(mainQuest.getParentQuestId());
+        }
+
         //getPlayer().sendPacket(new PacketFinishedParentQuestUpdateNotify(newQuests));
-
-
+        //getPlayer().sendPacket(new PacketQuestListNotify(subQuests));
+        //getPlayer().sendPacket(new PacketServerCondMeetQuestListUpdateNotify(newPlayerServerCondMeetQuestListUpdateNotify));
     }
 
     public void onLogin() {
@@ -104,6 +109,10 @@ public class QuestManager extends BasePlayerManager {
             newQuests.add(getMainQuestById(id));
         }
         return newQuests;
+    }
+
+    public void enableQuests() {
+        onPlayerBorn();
     }
 
     /*
