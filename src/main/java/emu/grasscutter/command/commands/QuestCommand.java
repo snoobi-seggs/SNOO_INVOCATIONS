@@ -20,7 +20,7 @@ public final class QuestCommand implements CommandHandler {
         }
         String cmd = args.remove(0).toLowerCase();
 
-        int questId;
+        int questId = 0;
         if (args.size() == 1) {
             try {
                 questId = Integer.parseInt(args.get(0));
@@ -32,11 +32,11 @@ public final class QuestCommand implements CommandHandler {
         }
 
         switch (cmd) {
-            case "enable":
+            case "enable" -> {
                 targetPlayer.getQuestManager().enableQuests();
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.enabled"));
-                break;
-            case "add":
+            }
+            case "add" -> {
                 GameQuest quest = targetPlayer.getQuestManager().addQuest(questId);
 
                 if (quest != null) {
@@ -45,8 +45,8 @@ public final class QuestCommand implements CommandHandler {
                 }
 
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
-                break;
-            case "finish":              
+            }
+            case "finish" -> {            
                 GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
 
                 if (quest == null) {
@@ -57,9 +57,10 @@ public final class QuestCommand implements CommandHandler {
                 quest.finish();
 
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
-                break;
-            default:
-                sendUsageMessage(sender);      
+            }
+            default -> {
+                sendUsageMessage(sender); 
+            }    
         }
     }
 }
