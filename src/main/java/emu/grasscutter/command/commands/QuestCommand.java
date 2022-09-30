@@ -18,47 +18,45 @@ public final class QuestCommand implements CommandHandler {
             sendUsageMessage(sender);
             return;
         }
-
         String cmd = args.remove(0).toLowerCase();
+
+        int questId;
+        if (args.size() == 1) {
+            try {
+                questId = Integer.parseInt(args.get(0));
+            }
+            catch (Exception e) {
+                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.invalid_id"));
+                return;
+            }
+        }
+
         switch (cmd) {
             case "enable":
                 targetPlayer.getQuestManager().enableQuests();
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.enabled"));
                 break;
             case "add":
-            case "finish":
-                int questId;
-                try {
-                    questId = Integer.parseInt(args.get(0));
-                }
-                catch (Exception e) {
-                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.invalid_id"));
+                GameQuest quest = targetPlayer.getQuestManager().addQuest(questId);
+
+                if (quest != null) {
+                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.added", questId));
                     return;
                 }
 
-                if (cmd.equals("add")) {
-                    GameQuest quest = targetPlayer.getQuestManager().addQuest(questId);
+                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
+                break;
+            case "finish":              
+                GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
 
-                    if (quest != null) {
-                        CommandHandler.sendMessage(sender, translate(sender, "commands.quest.added", questId));
-                        return;
-                    }
-
+                if (quest == null) {
                     CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
+                    return;
                 }
-                else if (cmd.equals("finish")) {
-                    GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
 
-                    if (quest == null) {
-                        CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
-                        return;
-                    }
+                quest.finish();
 
-                    quest.finish();
-
-                    CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
-                }
-                else sendUsageMessage(sender);
+                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
                 break;
             default:
                 sendUsageMessage(sender);      

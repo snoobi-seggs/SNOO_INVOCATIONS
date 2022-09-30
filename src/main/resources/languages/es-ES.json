@@ -215,7 +215,8 @@
       "finished": "Misión %s finalizada.",
       "not_found": "Misión no encontrada.",
       "invalid_id": "ID de misión inválido.",
-      "description": "Añade o finaliza misiones"
+      "description": "Añade o finaliza misiones",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "Recargando configuración.",

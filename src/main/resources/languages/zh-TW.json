@@ -215,7 +215,8 @@
       "finished": "已完成任務 %s",
       "not_found": "未找到任務",
       "invalid_id": "無效的任務ID",
-      "description": "添加或完成任務"
+      "description": "添加或完成任務",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "正在重新加載設定檔。",
