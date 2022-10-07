@@ -215,7 +215,8 @@
       "finished": "Ați terminat misiunea %s.",
       "not_found": "Misiunea nu a fost găsită.",
       "invalid_id": "ID-ul misiunii nu a fost găsit.",
-      "description": "Adaugă sau termină misiuni"
+      "description": "Adaugă sau termină misiuni",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "Se reîncarcă configurația.",

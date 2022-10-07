@@ -215,7 +215,8 @@
       "finished": "Quête terminée : %s.",
       "not_found": "Quête introuvable.",
       "invalid_id": "ID de la quête invalide.",
-      "description": "Ajoute ou termine une quête"
+      "description": "Ajoute ou termine une quête",
+      "enabled": "Quêtes activées."
     },
     "reload": {
       "reload_start": "Rechargement de la configuration.",

@@ -215,7 +215,8 @@
       "finished": "Квест %s был завершен.",
       "not_found": "Квест не найден.",
       "invalid_id": "Некорректный ID квеста.",
-      "description": "Добавляет (add) или завершает (finish) квесты"
+      "description": "Добавляет (add) или завершает (finish) квесты",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "Перезагружаем файл конфигурации.",

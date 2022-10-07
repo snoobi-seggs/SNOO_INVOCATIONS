@@ -215,7 +215,8 @@
       "finished": "Zadanie %s zostało zakończone.",
       "not_found": "Nie ma zadania o podanym ID.",
       "invalid_id": "Błędny format ID zadania.",
-      "description": "Dodaj lub wykonaj wskazane zadanie."
+      "description": "Dodaj lub wykonaj wskazane zadanie.",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "Ponowne ładowanie konfiguracji...",

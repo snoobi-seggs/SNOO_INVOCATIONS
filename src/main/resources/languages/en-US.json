@@ -215,7 +215,8 @@
       "finished": "Finished quest %s.",
       "not_found": "Quest not found.",
       "invalid_id": "Invalid quest ID.",
-      "description": "Add or finish quests"
+      "description": "Add or finish quests",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "Reloading config.",

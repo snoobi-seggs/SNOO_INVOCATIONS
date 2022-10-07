@@ -215,7 +215,8 @@
       "finished": "已完成任务 %s。",
       "not_found": "任务不存在。",
       "invalid_id": "无效的任务ID。",
-      "description": "添加或完成任务"
+      "description": "添加或完成任务",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "正在重载配置文件和数据...",

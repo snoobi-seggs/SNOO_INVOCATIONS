@@ -215,7 +215,8 @@
       "finished": "クエスト %s を終了しました。",
       "not_found": "クエストが見つかりません｡",
       "invalid_id": "クエストIDが無効です｡",
-      "description": "クエストを追加または終了する｡"
+      "description": "クエストを追加または終了する｡",
+      "enabled": "Questing enabled."
     },
     "reload": {
       "reload_start": "設定を再読み込みしています。",
