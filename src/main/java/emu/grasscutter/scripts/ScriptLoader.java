@@ -7,6 +7,9 @@ import emu.grasscutter.scripts.constants.*;
 import emu.grasscutter.scripts.data.SceneMeta;
 import emu.grasscutter.scripts.serializer.LuaSerializer;
 import emu.grasscutter.scripts.serializer.Serializer;
+import emu.grasscutter.utils.FileUtils;
+import lombok.Getter;
+
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
@@ -17,6 +20,8 @@ import javax.script.*;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.ref.SoftReference;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -24,12 +29,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ScriptLoader {
 	private static ScriptEngineManager sm;
-	private static ScriptEngine engine;
+    @Getter private static ScriptEngine engine;
 	private static ScriptEngineFactory factory;
-	private static String fileType;
-	private static Serializer serializer;
-	private static ScriptLib scriptLib;
-	private static LuaValue scriptLibLua;
+    @Getter private static Serializer serializer;
+    @Getter private static ScriptLib scriptLib;
+    @Getter private static LuaValue scriptLibLua;
 	/**
 	 * suggest GC to remove it if the memory is less
 	 */
@@ -50,7 +54,6 @@ public class ScriptLoader {
         factory = getEngine().getFactory();
 
         // Lua stuff
-        fileType = "lua";
         serializer = new LuaSerializer();
 
         // Set engine to replace require as a temporary fix to missing scripts
@@ -88,27 +91,7 @@ public class ScriptLoader {
         Arrays.stream(enumArray).forEach(e -> table.set(e.name().toUpperCase(), e.getValue()));
         ctx.globals.set(name, table);
     }
-
-	public static ScriptEngine getEngine() {
-		return engine;
-	}
-
-	public static String getScriptType() {
-		return fileType;
-	}
-
-	public static Serializer getSerializer() {
-		return serializer;
-	}
-
-	public static ScriptLib getScriptLib() {
-		return scriptLib;
-	}
-
-	public static LuaValue getScriptLibLua() {
-		return scriptLibLua;
-	}
-
+    
 	public static <T> Optional<T> tryGet(SoftReference<T> softReference){
 		try{
 			return Optional.ofNullable(softReference.get());
@@ -116,6 +99,8 @@ public class ScriptLoader {
 			return Optional.empty();
 		}
 	}
+
+	@Deprecated(forRemoval = true)
 	public static CompiledScript getScriptByPath(String path) {
 		var sc = tryGet(scriptsCache.get(path));
 		if (sc.isPresent()) {
@@ -138,6 +123,26 @@ public class ScriptLoader {
 		}
 
 	}
+
+    public static CompiledScript getScript(String path) {
+        var sc = tryGet(scriptsCache.get(path));
+        if (sc.isPresent()) {
+            return sc.get();
+        }
+
+        Grasscutter.getLogger().debug("Loading script " + path);
+        final Path scriptPath = FileUtils.getScriptPath(path);
+        if (!Files.exists(scriptPath)) return null;
+
+        try {
+            var script = ((Compilable) getEngine()).compile(Files.newBufferedReader(scriptPath));
+            scriptsCache.put(path, new SoftReference<>(script));
+            return script;
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Loading script {} failed! - {}", path, e.getLocalizedMessage());
+            return null;
+        }
+    }
 
 	public static SceneMeta getSceneMeta(int sceneId) {
 		return tryGet(sceneMetaCache.get(sceneId)).orElseGet(() -> {
