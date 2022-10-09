@@ -793,7 +793,7 @@ public class InventorySystem extends BaseGameSystem {
         // Use
         var actions = itemData.getItemUseActions();
         Grasscutter.getLogger().info("Using - actions - {}", actions);
-        params.player.getQuestManager().triggerEvent(QuestTrigger.QUEST_CONTENT_USE_ITEM, itemData.getId());
+        params.player.getQuestManager().queueEvent(QuestTrigger.QUEST_CONTENT_USE_ITEM, itemData.getId());
         if (actions == null) return true;  // Maybe returning false would be more appropriate?
         return actions.stream()
                 .map(use -> use.useItem(params))
