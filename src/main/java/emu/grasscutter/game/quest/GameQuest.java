@@ -190,17 +190,14 @@ public class GameQuest {
         getQuestData().getFailExec().forEach(e -> getOwner().getServer().getQuestSystem().triggerExec(this, e, e.getParam()));
 
     }
-    // Return true if ParentQuest should rewind to this childQuest
+    // Return true if it did the rewind
     public boolean rewind(boolean notifyDelete) {
-        if (questData.isRewind()) {
-            getMainQuest().getChildQuests().values().stream().filter(p -> p.getQuestData().getOrder() > this.getQuestData().getOrder()).forEach(q -> {
-                q.clearProgress(notifyDelete);
-            });
-            clearProgress(notifyDelete);
-            this.start();
-            return true;
-        }
-        return false;
+        getMainQuest().getChildQuests().values().stream().filter(p -> p.getQuestData().getOrder() > this.getQuestData().getOrder()).forEach(q -> {
+            q.clearProgress(notifyDelete);
+        });
+        clearProgress(notifyDelete);
+        this.start();
+        return true;
     }
 
     public void save() {

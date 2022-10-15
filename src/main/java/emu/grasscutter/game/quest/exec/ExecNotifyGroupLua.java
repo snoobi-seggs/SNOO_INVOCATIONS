@@ -11,6 +11,7 @@ import emu.grasscutter.game.quest.handlers.QuestExecHandler;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.PacketGroupSuiteNotify;
+import lombok.val;
 
 @QuestValue(QuestTrigger.QUEST_EXEC_NOTIFY_GROUP_LUA)
 public class ExecNotifyGroupLua extends QuestExecHandler {
@@ -20,9 +21,13 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
         var sceneId = Integer.parseInt(paramStr[0]);
         var groupId = Integer.parseInt(paramStr[1]);
 
-        var scriptManager = quest.getOwner().getScene().getScriptManager();
+        val scene = quest.getOwner().getScene();
+        var scriptManager = scene.getScriptManager();
 
-        if(quest.getOwner().getScene().getId() == sceneId){
+        if(scene.getId() != sceneId) {
+            return false;
+        }
+        scene.runWhenFinished(() -> {
             var group = scriptManager.getGroupById(groupId);
             // workaround to make sure the triggers are still there todo find better way of trigger handling
             scriptManager.refreshGroup(group);
@@ -31,8 +36,7 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
                 quest.getState() == QuestState.QUEST_STATE_FINISHED ?
                     EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START
                 , new ScriptArgs(quest.getSubQuestId()));
-        }
-        else return false;
+        });
 
         return true;
     }

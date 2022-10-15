@@ -221,7 +221,7 @@ public class GameMainQuest {
             .max(Comparator.comparingInt(a -> a.getQuestData().getOrder()))
             .orElse(null);
 
-        return rewindTo(rewindTarget, false);
+        return rewindTo(rewindTarget!=null? rewindTarget : highestActiveQuest, false);
     }
     public void addRewindPoints() {
         Bindings bindings = ScriptLoader.getEngine().createBindings();

@@ -1080,6 +1080,16 @@ public class ScriptLib {
         return 0;
     }
 
+    public int StartPlatform(int configId){
+        logger.warn("[LUA] Call unimplemented StartPlatform {} ", configId);
+        return 1;
+    }
+
+    public int StopPlatform(int configId){
+        logger.warn("[LUA] Call unimplemented StopPlatform {} ", configId);
+        return 1;
+    }
+
     public int CreateChannellerSlabCampRewardGadget(int configId){
         logger.warn("[LUA] Call unimplemented CreateChannellerSlabCampRewardGadget {}", configId);
         var group = currentGroup.getIfExists();

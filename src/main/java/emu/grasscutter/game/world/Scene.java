@@ -4,6 +4,7 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.GameDepot;
 import emu.grasscutter.data.binout.SceneNpcBornEntry;
+import emu.grasscutter.data.binout.routes.Route;
 import emu.grasscutter.data.excels.*;
 import emu.grasscutter.game.avatar.Avatar;
 import emu.grasscutter.game.dungeons.DungeonManager;
@@ -32,13 +33,16 @@ import emu.grasscutter.scripts.data.SceneGroup;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+
 
 public class Scene {
     @Getter private final World world;
@@ -62,7 +66,11 @@ public class Scene {
     @Getter @Setter private int prevScene; // Id of the previous scene
     @Getter @Setter private int prevScenePoint;
     @Getter @Setter private int killedMonsterCount;
+    @Getter Int2ObjectMap<Route> sceneRoutes;
     private Set<SceneNpcBornEntry> npcBornEntrySet;
+    @Getter private boolean finishedLoading = false;
+    private final List<Runnable> afterLoadedCallbacks = new ArrayList<>();
+
     public Scene(World world, SceneData sceneData) {
         this.world = world;
         this.sceneData = sceneData;
@@ -72,6 +80,7 @@ public class Scene {
         this.time = 8 * 60;
         this.startTime = System.currentTimeMillis();
         this.prevScene = 3;
+        this.sceneRoutes = GameData.getSceneRoutes(getId());
 
         this.spawnedEntities = ConcurrentHashMap.newKeySet();
         this.deadSpawnedEntities = ConcurrentHashMap.newKeySet();
@@ -103,6 +112,11 @@ public class Scene {
                 .filter(x -> x.getConfigId() == configId)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Nullable
+    public Route getSceneRouteById(int routeId){
+        return sceneRoutes.get(routeId);
     }
 
     public void changeTime(int time) {
@@ -352,6 +366,7 @@ public class Scene {
     public void onTick() {
         // disable script for home
         if (this.getSceneType() == SceneType.SCENE_HOME_WORLD || this.getSceneType() == SceneType.SCENE_HOME_ROOM) {
+            finishLoading();
             return;
         }
         if (this.getScriptManager().isInit()) {
@@ -370,6 +385,24 @@ public class Scene {
         blossomManager.onTick();
 
         checkNpcGroup();
+        finishLoading();
+    }
+
+    public void finishLoading(){
+        if(finishedLoading){
+            return;
+        }
+        this.finishedLoading = true;
+        afterLoadedCallbacks.forEach(Runnable::run);
+        afterLoadedCallbacks.clear();
+    }
+
+    public void runWhenFinished(Runnable runnable){
+        if(isFinishedLoading()){
+            runnable.run();
+            return;
+        }
+        afterLoadedCallbacks.add(runnable);
     }
 
     public int getEntityLevel(int baseLevel, int worldLevelOverride) {
