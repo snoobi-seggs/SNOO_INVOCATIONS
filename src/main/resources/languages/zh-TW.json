@@ -84,6 +84,7 @@
         "artifactId": "無效的聖遺物ID。",
         "avatarId": "無效的角色ID。",
         "avatarLevel": "無效的角色等級。",
+        "cfgId": "🇺🇸Invalid cfg ID.",
         "entityId": "無效的實體ID。",
         "itemId": "無效的物品ID。",
         "itemLevel": "無效的物品等級。",
@@ -150,6 +151,10 @@
       "not_found_error": "此祕境不存在。",
       "in_dungeon_error": "你已經在祕境中了。",
       "description": "進入指定祕境。"
+    },
+    "entity": {
+      "description": "🇺🇸Modify an existing entity's properties",
+      "not_found_error": "🇺🇸Entity does not exist"
     },
     "give": {
       "usage_relic": "用法： give <artifactID> [mainPropID] [<appendPropID>[,<times>]]... [lv<level 0-20>]",

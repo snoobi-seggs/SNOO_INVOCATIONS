@@ -84,6 +84,7 @@
         "artifactId": "Invalid artifact ID.",
         "avatarId": "Invalid avatar ID.",
         "avatarLevel": "Invalid avatarLevel.",
+        "cfgId": "Invalid cfg ID.",
         "entityId": "Invalid entity ID.",
         "itemId": "Invalid item ID.",
         "itemLevel": "Invalid itemLevel.",
@@ -150,6 +151,10 @@
       "not_found_error": "Dungeon does not exist.",
       "in_dungeon_error": "You are already in that dungeon.",
       "description": "Enter a dungeon"
+    },
+    "entity": {
+      "description": "Modify an existing entity's properties",
+      "not_found_error": "Entity does not exist"
     },
     "give": {
       "usage_relic": "Usage: give <artifactID> [mainPropID] [<appendPropID>[,<times>]]... [lv<level 0-20>]",

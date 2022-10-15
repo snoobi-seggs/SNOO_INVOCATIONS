@@ -151,6 +151,9 @@ public class DungeonSystem extends BaseGameSystem {
             if (entry != null) {
                 prevPos.set(entry.getPointData().getTranPos());
             }
+            if(!dungeonManager.isFinishedSuccessfully()){
+                dungeonManager.quitDungeon();
+            }
         }
         // clean temp team if it has
         player.getTeamManager().cleanTemporaryTeam();
