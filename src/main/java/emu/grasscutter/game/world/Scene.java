@@ -53,6 +53,7 @@ public class Scene {
     @Getter @Setter private boolean dontDestroyWhenEmpty;
 
     @Getter private int time;
+    private long startTime;
 
     @Getter private SceneScriptManager scriptManager;
     @Getter @Setter private WorldChallenge challenge;
@@ -69,6 +70,7 @@ public class Scene {
         this.entities = new ConcurrentHashMap<>();
 
         this.time = 8 * 60;
+        this.startTime = System.currentTimeMillis();
         this.prevScene = 3;
 
         this.spawnedEntities = ConcurrentHashMap.newKeySet();
@@ -105,6 +107,10 @@ public class Scene {
 
     public void changeTime(int time) {
         this.time = time % 1440;
+    }
+
+    public int getSceneTime() {
+        return (int) (System.currentTimeMillis() - this.startTime);
     }
 
     public void addDungeonSettleObserver(DungeonSettleListener dungeonSettleListener) {
@@ -239,7 +245,11 @@ public class Scene {
     }
 
     private GameEntity removeEntityDirectly(GameEntity entity) {
-        return getEntities().remove(entity.getId());
+        var removed = getEntities().remove(entity.getId());
+        if (removed != null) {
+            removed.onRemoved();//Call entity remove event
+        }
+        return removed;
     }
 
     public void removeEntity(GameEntity entity) {

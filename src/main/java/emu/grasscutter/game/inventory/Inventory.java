@@ -23,6 +23,7 @@ import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
+import emu.grasscutter.game.props.ItemUseAction.UseItemParams;
 import emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam;
 import emu.grasscutter.server.packet.send.PacketAvatarEquipChangeNotify;
 import emu.grasscutter.server.packet.send.PacketItemAddHintNotify;
@@ -177,7 +178,12 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
 
     private synchronized GameItem putItem(GameItem item) {
         // Dont add items that dont have a valid item definition.
-        if (item.getItemData() == null) {
+        var data = item.getItemData();
+        if (data == null) return null;
+
+        if (data.isUseOnGain()) {
+            var params = new UseItemParams(this.player, data.getUseTarget());
+            this.player.getServer().getInventorySystem().useItemDirect(data, params);
             return null;
         }
 
@@ -205,9 +211,6 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
                 return item;
             default:
                 switch (item.getItemData().getMaterialType()) {
-                    case MATERIAL_ADSORBATE:
-                        this.player.getEnergyManager().handlePickupElemBall(item);
-                        return null;
                     case MATERIAL_AVATAR:
                         // Get avatar id
                         int avatarId = (item.getItemId() % 1000) + 10000000;

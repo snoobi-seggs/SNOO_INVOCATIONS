@@ -654,7 +654,8 @@ public class Player {
         return (int) ((theLastDay.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)); // By copilot
     }
 
-    public void rechargeMoonCard() {
+    public boolean rechargeMoonCard() {
+        if (this.moonCardDuration > 150) return false;  // Can only stack up to 180 days
         inventory.addItem(new GameItem(203, 300));
         if (!moonCard) {
             moonCard = true;
@@ -667,6 +668,7 @@ public class Player {
         if (!moonCardGetTimes.contains(moonCardStartTime)) {
             moonCardGetTimes.add(moonCardStartTime);
         }
+        return true;
     }
 
     public void getTodayMoonCard() {
