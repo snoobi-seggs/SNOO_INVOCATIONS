@@ -6,9 +6,10 @@ import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.world.Scene;
-import emu.grasscutter.utils.Position;
+import emu.grasscutter.server.packet.send.PacketEntityFightPropUpdateNotify;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -19,9 +20,9 @@ import static emu.grasscutter.utils.Language.translate;
 
 @Command(
     label = "entity",
-    aliases = {"gadget"},
     usage = {
-        "<configId> [state]"},
+        "<configId gadget> [state<state>] [maxhp<maxhp>] [hp<hp>(0 for infinite)] [atk<atk>] [def<def>]",
+        "<configId monster> [ai<aiId>] [maxhp<maxhp>] [hp<hp>(0 for infinite)] [atk<atk>] [def<def>]"},
     permission = "server.entity")
 public final class EntityCommand implements CommandHandler {
     private static final Map<Pattern, BiConsumer<EntityParameters, Integer>> intCommandHandlers = Map.ofEntries(
@@ -48,48 +49,69 @@ public final class EntityCommand implements CommandHandler {
         try {
             param.configId = Integer.parseInt(args.get(0));
         } catch (NumberFormatException ignored) {
-            CommandHandler.sendMessage(sender, translate(sender, "commands.generic.invalid.entityId"));
+            CommandHandler.sendMessage(sender, translate(sender, "commands.generic.invalid.cfgId"));
         }
 
         param.scene = targetPlayer.getScene();
         var entity = param.scene.getEntityByConfigId(param.configId);
 
         if(entity == null){
-            CommandHandler.sendMessage(sender, "failure");
+            CommandHandler.sendMessage(sender, translate(sender, "commands.entity.not_found_error"));
             return;
         }
-        applyCommonParameters(entity, param);
-        if(param.state != -1 && entity instanceof EntityGadget){
+        applyFightProps(entity, param);
+        applyGadgetParams(entity, param);
+        applyMonsterParams(entity, param);
+
+        CommandHandler.sendMessage(sender, translate(sender, "commands.status.success"));
+    }
+
+
+
+    private void applyGadgetParams(GameEntity entity, EntityParameters param) {
+        if(!(entity instanceof EntityGadget)){
+            return;
+        }
+        if(param.state != -1 ){
             ((EntityGadget) entity).updateState(param.state);
         }
 
-        CommandHandler.sendMessage(sender, "command success");
+    }
+    private void applyMonsterParams(GameEntity entity, EntityParameters param) {
+        if(!(entity instanceof EntityMonster)){
+            return;
+        }
+
+        if(param.ai != -1 ){
+            ((EntityMonster) entity).setAiId(param.ai);
+            //TODO notify
+        }
     }
 
-    private void applyCommonParameters(GameEntity entity, EntityParameters param) {
+    private void applyFightProps(GameEntity entity, EntityParameters param) {
+        var changedFields = new ArrayList<FightProperty>();
         if (param.maxHP != -1) {
-            entity.setFightProperty(FightProperty.FIGHT_PROP_MAX_HP, param.maxHP);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_MAX_HP, param.maxHP, changedFields);
         }
         if (param.hp != -1) {
-            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_HP, param.hp == 0 ? Float.MAX_VALUE : param.hp);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_CUR_HP, param.hp == 0 ? Float.MAX_VALUE : param.hp, changedFields);
         }
         if (param.atk != -1) {
-            entity.setFightProperty(FightProperty.FIGHT_PROP_ATTACK, param.atk);
-            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_ATTACK, param.atk);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_ATTACK, param.atk, changedFields);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_CUR_ATTACK, param.atk, changedFields);
         }
         if (param.def != -1) {
-            entity.setFightProperty(FightProperty.FIGHT_PROP_DEFENSE, param.def);
-            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_DEFENSE, param.def);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_DEFENSE, param.def, changedFields);
+            setFightProperty(entity, FightProperty.FIGHT_PROP_CUR_DEFENSE, param.def, changedFields);
         }
-        //TODO update entity
+        if(!changedFields.isEmpty()) {
+            entity.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(entity, changedFields));
+        }
     }
 
-    private Position GetRandomPositionInCircle(Position origin, double radius) {
-        Position target = origin.clone();
-        double angle = Math.random() * 360;
-        double r = Math.sqrt(Math.random() * radius * radius);
-        target.addX((float) (r * Math.cos(angle))).addZ((float) (r * Math.sin(angle)));
-        return target;
+    private void setFightProperty(GameEntity entity, FightProperty property, float value, List<FightProperty> modifiedProps){
+        entity.setFightProperty(property, value);
+        modifiedProps.add(property);
     }
 
     private static class EntityParameters {

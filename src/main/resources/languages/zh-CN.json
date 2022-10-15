@@ -84,6 +84,7 @@
         "artifactId": "无效的圣遗物ID。",
         "avatarId": "无效的角色ID。",
         "avatarLevel": "无效的角色等级。",
+        "cfgId": "🇺🇸Invalid cfg ID.",
         "entityId": "无效的实体ID。",
         "itemId": "无效的物品ID。",
         "itemLevel": "无效的物品等级。",
@@ -150,6 +151,10 @@
       "not_found_error": "秘境不存在。",
       "in_dungeon_error": "你已经在这个秘境中了。",
       "description": "进入指定秘境"
+    },
+    "entity": {
+      "description": "🇺🇸Modify an existing entity's properties",
+      "not_found_error": "🇺🇸Entity does not exist"
     },
     "give": {
       "usage_relic": "用法：give <圣遗物ID> [主词条ID] [<副词条ID>[,<强化次数>]]... [lv<等级 0-20>]",

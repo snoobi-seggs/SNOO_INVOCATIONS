@@ -84,6 +84,7 @@
         "artifactId": "성유물ID가 잘못되었습니다.",
         "avatarId": "캐릭터ID가 잘못되었습니다.",
         "avatarLevel": "캐릭터 레벨이 잘못되었습니다.",
+        "cfgId": "🇺🇸Invalid cfg ID.",
         "entityId": "엔티티ID가 잘못되었습니다.",
         "itemId": "아이템ID가 잘못되었습니다.",
         "itemLevel": "아이템 레벨이 잘못되었습니다.",
@@ -150,6 +151,10 @@
       "not_found_error": "던전이 존재하지 않습니다.",
       "in_dungeon_error": "이미 당신은 그 던전에 있습니다.",
       "description": "던전에 진입합니다."
+    },
+    "entity": {
+      "description": "🇺🇸Modify an existing entity's properties",
+      "not_found_error": "🇺🇸Entity does not exist"
     },
     "give": {
       "usage_relic": "사용법: give <성유물ID> [mainPropID] [<appendPropID>[,<times>]]... [lv<레벨 0-20>]",

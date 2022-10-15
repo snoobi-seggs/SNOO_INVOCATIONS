@@ -84,6 +84,7 @@
         "artifactId": "ID de artefact invalid.",
         "avatarId": "ID de avatar invalid.",
         "avatarLevel": "avatarLevel invalid.",
+        "cfgId": "🇺🇸Invalid cfg ID.",
         "entityId": "ID de entitate invalid.",
         "itemId": "ID-ul articolului invalid.",
         "itemLevel": "itemLevel invalid.",
@@ -150,6 +151,10 @@
       "not_found_error": "Temnița nu există.",
       "in_dungeon_error": "Ești deja în acea temniță.",
       "description": "Intră într-o temniță."
+    },
+    "entity": {
+      "description": "🇺🇸Modify an existing entity's properties",
+      "not_found_error": "🇺🇸Entity does not exist"
     },
     "give": {
       "usage_relic": "Utilizare: give <artifactID> [mainPropID] [<appendPropID>[,<t>]]... [lv<nivel 0-20>]",
