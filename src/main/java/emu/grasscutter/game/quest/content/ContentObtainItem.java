@@ -10,6 +10,10 @@ import emu.grasscutter.game.quest.handlers.QuestBaseHandler;
 public class ContentObtainItem extends QuestBaseHandler {
     @Override
     public boolean execute(GameQuest quest, QuestData.QuestCondition condition, String paramStr, int... params) {
-        return condition.getParam()[0] == params[0] && condition.getCount() <= params[1];
+        var targetCount = condition.getCount();
+        if(targetCount == 0){
+            targetCount = 1;
+        }
+        return condition.getParam()[0] == params[0] && targetCount <= params[1];
     }
 }
