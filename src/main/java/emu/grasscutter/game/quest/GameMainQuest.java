@@ -125,8 +125,35 @@ public class GameMainQuest {
     }
 
     public void finish() {
+        // Avoid recursion from child finish() in GameQuest
+        // when auto finishing all child quests with QUEST_STATE_UNFINISHED (below)
+        if (this.isFinished) {
+            Grasscutter.getLogger().debug("Skip main quest finishing because it's already finished");
+            return;
+        }
+
         this.isFinished = true;
         this.state = ParentQuestState.PARENT_QUEST_STATE_FINISHED;
+
+         /*
+            We also need to check for unfinished childQuests in this MainQuest
+            force them to complete and send a packet about this to the user,
+            because at some points there are special "invisible" child quests that control
+            some situations.
+
+            For example, subQuest 35312 is responsible for the event of leaving the territory
+            of the island with a statue and automatically returns the character back,
+            quest 35311 completes the main quest line 353 and starts 35501 from
+            new MainQuest 355 but if 35312 is not completed after the completion
+            of the main quest 353 - the character will not be able to leave place
+            (return again and again)
+            */
+        this
+            .getChildQuests()
+            .values()
+            .stream()
+            .filter(p -> p.state != QuestState.QUEST_STATE_FINISHED)
+            .forEach(GameQuest::finish);
 
         this.getOwner().getSession().send(new PacketFinishedParentQuestUpdateNotify(this));
         this.getOwner().getSession().send(new PacketCodexDataUpdateNotify(this));
@@ -304,11 +331,8 @@ public class GameMainQuest {
 
                 boolean shouldAccept = LogicType.calculate(subQuestWithCond.getQuestData().getAcceptCondComb(), accept);
 
-                if (shouldAccept) {
+                if (shouldAccept)
                     subQuestWithCond.start();
-                    getQuestManager().getAddToQuestListUpdateNotify().add(subQuestWithCond);
-                }
-
             }
             this.save();
         } catch (Exception e) {
@@ -340,10 +364,8 @@ public class GameMainQuest {
 
                 boolean shouldFail = LogicType.calculate(subQuestWithCond.getQuestData().getFailCondComb(), subQuestWithCond.getFailProgressList());
 
-                if (shouldFail) {
+                if (shouldFail)
                     subQuestWithCond.fail();
-                    getQuestManager().getAddToQuestListUpdateNotify().add(subQuestWithCond);
-                }
             }
 
         } catch (Exception e) {
@@ -375,10 +397,8 @@ public class GameMainQuest {
 
                 boolean shouldFinish = LogicType.calculate(subQuestWithCond.getQuestData().getFinishCondComb(), subQuestWithCond.getFinishProgressList());
 
-                if (shouldFinish) {
+                if (shouldFinish)
                     subQuestWithCond.finish();
-                    getQuestManager().getAddToQuestListUpdateNotify().add(subQuestWithCond);
-                }
             }
         } catch (Exception e) {
             Grasscutter.getLogger().debug("An error occurred while trying to finish quest.", e);

@@ -27,7 +27,6 @@ public class QuestManager extends BasePlayerManager {
 
     @Getter private final Player player;
     @Getter private final Int2ObjectMap<GameMainQuest> mainQuests;
-    @Getter private List<GameQuest> addToQuestListUpdateNotify;
     public static final ExecutorService eventExecutor;
     static {
         eventExecutor = new ThreadPoolExecutor(4, 4,
@@ -78,7 +77,6 @@ public class QuestManager extends BasePlayerManager {
         super(player);
         this.player = player;
         this.mainQuests = new Int2ObjectOpenHashMap<>();
-        this.addToQuestListUpdateNotify = new ArrayList<>();
     }
 
     public void onPlayerBorn() {
@@ -208,6 +206,7 @@ public class QuestManager extends BasePlayerManager {
 
     public GameQuest addQuest(int questId) {
         QuestData questConfig = GameData.getQuestDataMap().get(questId);
+
         if (questConfig == null) {
             return null;
         }
@@ -225,19 +224,11 @@ public class QuestManager extends BasePlayerManager {
 
         // Forcefully start
         quest.start();
-
-        // Save main quest
-        mainQuest.save();
-
-        // Send packet
-        getPlayer().sendPacket(new PacketQuestListUpdateNotify(mainQuest.getChildQuests().values().stream()
-            .filter(p -> p.getState() != QuestState.QUEST_STATE_UNSTARTED)
-            .toList()));
-
         checkQuestAlreadyFullfilled(quest);
 
         return quest;
     }
+
     public void startMainQuest(int mainQuestId) {
         var mainQuestData = GameData.getMainQuestDataMap().get(mainQuestId);
 
@@ -351,11 +342,6 @@ public class QuestManager extends BasePlayerManager {
             default:
                 Grasscutter.getLogger().error("Unhandled QuestTrigger {}", condType);
         }
-        if (this.addToQuestListUpdateNotify.size() != 0) {
-            this.getPlayer().getSession().send(new PacketQuestListUpdateNotify(this.addToQuestListUpdateNotify));
-            this.addToQuestListUpdateNotify.clear();
-        }
-
     }
 
     /**
