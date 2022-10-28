@@ -817,7 +817,7 @@ public class InventorySystem extends BaseGameSystem {
         }
         // Constellation
         int constLevel = avatar.getCoreProudSkillLevel();
-        GameItem constItem = player.getInventory().getInventoryTab(ItemType.ITEM_MATERIAL).getItemById((itemId % 1000) + 100);
+        GameItem constItem = player.getInventory().getInventoryTab(ItemType.ITEM_MATERIAL).getItemById((itemId % 1000) + 1100);
         constLevel += Optional.ofNullable(constItem).map(GameItem::getCount).orElse(0);
         return constLevel;
     }
