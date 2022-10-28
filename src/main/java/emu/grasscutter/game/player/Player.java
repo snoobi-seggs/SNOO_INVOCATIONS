@@ -781,17 +781,18 @@ public class Player {
         addAvatar(avatar, true);
     }
 
-    public boolean changeAvatarElement(int elementTypeId){
+    public boolean changeAvatarElement(ElementType elementTypeToChange){
         EntityAvatar mainCharacterEntity = getTeamManager().getCurrentAvatarEntity();
         Avatar mainCharacter = mainCharacterEntity.getAvatar();
-        // if no candidate skill to change
-        if (mainCharacter.getData().getCandSkillDepotIds() == null){
+        List<Integer> candSkillDepotIdsList = mainCharacter.getData().getCandSkillDepotIds();
+        int candSkillDepotIndex = elementTypeToChange.getDepotValue();
+
+        // if no candidate skill to change or index out of bound
+        if (candSkillDepotIdsList == null || candSkillDepotIndex > candSkillDepotIdsList.size()){
             return false;
         }
 
-        ElementType elementTypeToChange = ElementType.getTypeByValue(elementTypeId);
-        int candSkillDepotIndex = elementTypeToChange.getDepotValue();
-        int candSkillDepotId = mainCharacter.getData().getCandSkillDepotIds().get(candSkillDepotIndex-1);
+        int candSkillDepotId = candSkillDepotIdsList.get(candSkillDepotIndex-1);
 
         // Sanity checks for skill depots
         AvatarSkillDepotData skillDepot = GameData.getAvatarSkillDepotDataMap().get(candSkillDepotId);
@@ -802,10 +803,20 @@ public class Player {
         // Set skill depot
         mainCharacter.setSkillDepotData(skillDepot);
 
+        // map of max and cur energy value
+        Map<Integer, Float> fightPropUpdateList = new HashMap<>(); 
+        fightPropUpdateList.put(elementTypeToChange.getMaxEnergyProp().getId(), skillDepot.getEnergySkillData().getCostElemVal());
+        fightPropUpdateList.put(elementTypeToChange.getCurEnergyProp().getId(), 0f);
+
         // Ability change packet
         sendPacket(new PacketAvatarSkillDepotChangeNotify(mainCharacter));
         sendPacket(new PacketAbilityChangeNotify(mainCharacterEntity));
+        sendPacket(new PacketAvatarFightPropUpdateNotify(mainCharacter, fightPropUpdateList));
         return true;
+    }
+
+    public boolean changeAvatarElement(int elementTypeId){
+        return changeAvatarElement(ElementType.getTypeByValue(elementTypeId));
     }
 
     public void addFlycloak(int flycloakId) {
