@@ -4,6 +4,7 @@ import dev.morphia.annotations.*;
 import emu.grasscutter.GameConstants;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
+import emu.grasscutter.data.excels.AvatarSkillDepotData;
 import emu.grasscutter.data.excels.PlayerLevelData;
 import emu.grasscutter.data.excels.WeatherData;
 import emu.grasscutter.database.DatabaseHelper;
@@ -36,6 +37,7 @@ import emu.grasscutter.game.managers.stamina.StaminaManager;
 import emu.grasscutter.game.managers.SotSManager;
 import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.props.ClimateType;
+import emu.grasscutter.game.props.ElementType;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.quest.QuestManager;
@@ -777,6 +779,33 @@ public class Player {
 
     public void addAvatar(Avatar avatar) {
         addAvatar(avatar, true);
+    }
+
+    public boolean changeAvatarElement(int elementTypeId){
+        EntityAvatar mainCharacterEntity = getTeamManager().getCurrentAvatarEntity();
+        Avatar mainCharacter = mainCharacterEntity.getAvatar();
+        // if no candidate skill to change
+        if (mainCharacter.getData().getCandSkillDepotIds() == null){
+            return false;
+        }
+
+        ElementType elementTypeToChange = ElementType.getTypeByValue(elementTypeId);
+        int candSkillDepotIndex = elementTypeToChange.getDepotValue();
+        int candSkillDepotId = mainCharacter.getData().getCandSkillDepotIds().get(candSkillDepotIndex-1);
+
+        // Sanity checks for skill depots
+        AvatarSkillDepotData skillDepot = GameData.getAvatarSkillDepotDataMap().get(candSkillDepotId);
+        if (skillDepot == null || skillDepot.getId() == mainCharacter.getSkillDepotId()) {
+            return false;
+        }
+
+        // Set skill depot
+        mainCharacter.setSkillDepotData(skillDepot);
+
+        // Ability change packet
+        sendPacket(new PacketAvatarSkillDepotChangeNotify(mainCharacter));
+        sendPacket(new PacketAbilityChangeNotify(mainCharacterEntity));
+        return true;
     }
 
     public void addFlycloak(int flycloakId) {

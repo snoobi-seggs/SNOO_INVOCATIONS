@@ -30,14 +30,6 @@ public class HandlerSetPlayerBornDataReq extends PacketHandler {
 
         // Sanity checks
         int avatarId = req.getAvatarId();
-        int startingSkillDepot;
-        if (avatarId == GameConstants.MAIN_CHARACTER_MALE) {
-            startingSkillDepot = 504;
-        } else if (avatarId == GameConstants.MAIN_CHARACTER_FEMALE) {
-            startingSkillDepot = 704;
-        } else {
-            return;
-        }
 
         // Make sure resources folder is set
         if (!GameData.getAvatarDataMap().containsKey(avatarId)) {
@@ -53,6 +45,7 @@ public class HandlerSetPlayerBornDataReq extends PacketHandler {
         // Create avatar
         if (player.getAvatars().getAvatarCount() == 0) {
             Avatar mainCharacter = new Avatar(avatarId);
+            int startingSkillDepot = mainCharacter.getData().getSkillDepotId();
             mainCharacter.setSkillDepotData(GameData.getAvatarSkillDepotDataMap().get(startingSkillDepot));
             // Manually handle adding to team
             player.addAvatar(mainCharacter, false);
