@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.GameConstants;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.common.ItemParamData;
@@ -25,6 +26,7 @@ import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.game.props.ItemUseAction.UseItemParams;
 import emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam;
+import emu.grasscutter.server.packet.send.PacketAddNoGachaAvatarCardNotify;
 import emu.grasscutter.server.packet.send.PacketAvatarEquipChangeNotify;
 import emu.grasscutter.server.packet.send.PacketItemAddHintNotify;
 import emu.grasscutter.server.packet.send.PacketStoreItemChangeNotify;
@@ -112,6 +114,10 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
 
     public boolean addItem(GameItem item, ActionReason reason, boolean forceNotify) {
         boolean result = addItem(item);
+
+        if (item.getItemData().getMaterialType() == MaterialType.MATERIAL_AVATAR){
+            getPlayer().sendPacket(new PacketAddNoGachaAvatarCardNotify((item.getItemId() % 1000) + 10000000, reason, item));
+        }
 
         if (reason != null && (forceNotify || result)) {
             getPlayer().sendPacket(new PacketItemAddHintNotify(item, reason));

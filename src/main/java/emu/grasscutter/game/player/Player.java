@@ -780,6 +780,11 @@ public class Player {
         addAvatar(avatar, true);
     }
 
+    public void addAvatar(int avatarId) {
+        // I dont see why we cant do this lolz
+        addAvatar(new Avatar(avatarId), true);
+    }
+
     public void addFlycloak(int flycloakId) {
         this.getFlyCloakList().add(flycloakId);
         this.sendPacket(new PacketAvatarGainFlycloakNotify(flycloakId));

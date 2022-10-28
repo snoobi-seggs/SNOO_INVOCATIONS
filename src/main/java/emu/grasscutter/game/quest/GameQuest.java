@@ -9,6 +9,7 @@ import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.data.excels.TriggerExcelConfigData;
 import emu.grasscutter.game.dungeons.DungeonPassConditionType;
 import emu.grasscutter.game.player.Player;
+import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.game.quest.enums.QuestTrigger;
 import emu.grasscutter.net.proto.ChapterStateOuterClass;
@@ -175,6 +176,10 @@ public class GameQuest {
             ));
         }
 
+        // hard coding to give amber
+        if(getQuestData().getSubId() == 35402){
+            getOwner().getInventory().addItem(1021, 1, ActionReason.QuestItem); // amber item id
+        }
         Grasscutter.getLogger().debug("Quest {} is finished", subQuestId);
     }
 
