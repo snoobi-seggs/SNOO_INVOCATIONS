@@ -9,7 +9,11 @@ import java.util.List;
 
 import static emu.grasscutter.utils.Language.translate;
 
-@Command(label = "quest", usage = {"(add|finish) [<questId>]", "enable"}, permission = "player.quest", permissionTargeted = "player.quest.others")
+@Command(label = "quest",
+         aliases = {"q"},
+         usage = {"(add|finish) [<questId>]", "enable"},
+         permission = "player.quest",
+         permissionTargeted = "player.quest.others")
 public final class QuestCommand implements CommandHandler {
 
     @Override
@@ -46,7 +50,7 @@ public final class QuestCommand implements CommandHandler {
 
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.not_found"));
             }
-            case "finish" -> {            
+            case "finish" -> {
                 GameQuest quest = targetPlayer.getQuestManager().getQuestById(questId);
 
                 if (quest == null) {
@@ -59,8 +63,8 @@ public final class QuestCommand implements CommandHandler {
                 CommandHandler.sendMessage(sender, translate(sender, "commands.quest.finished", questId));
             }
             default -> {
-                sendUsageMessage(sender); 
-            }    
+                sendUsageMessage(sender);
+            }
         }
     }
 }
