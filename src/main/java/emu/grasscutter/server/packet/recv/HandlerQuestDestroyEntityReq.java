@@ -6,7 +6,7 @@ import emu.grasscutter.net.packet.PacketHandler;
 import emu.grasscutter.server.game.GameSession;
 import emu.grasscutter.server.packet.send.PacketQuestDestroyEntityRsp;
 import lombok.val;
-import org.sorapointa.proto.QuestDestroyEntityReqOuterClass.QuestDestroyEntityReq;
+import emu.grasscutter.net.proto.QuestDestroyEntityReqOuterClass.QuestDestroyEntityReq;
 
 @Opcodes(PacketOpcodes.QuestDestroyEntityReq)
 public class HandlerQuestDestroyEntityReq extends PacketHandler {

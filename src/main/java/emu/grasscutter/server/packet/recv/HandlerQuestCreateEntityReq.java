@@ -12,7 +12,7 @@ import emu.grasscutter.server.game.GameSession;
 import emu.grasscutter.server.packet.send.PacketQuestCreateEntityRsp;
 import emu.grasscutter.utils.Position;
 import lombok.val;
-import org.sorapointa.proto.QuestCreateEntityReqOuterClass.QuestCreateEntityReq;
+import emu.grasscutter.net.proto.QuestCreateEntityReqOuterClass.QuestCreateEntityReq;
 
 @Opcodes(PacketOpcodes.QuestCreateEntityReq)
 public class HandlerQuestCreateEntityReq extends PacketHandler {

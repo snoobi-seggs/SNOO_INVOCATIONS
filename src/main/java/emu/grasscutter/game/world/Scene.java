@@ -68,6 +68,7 @@ public class Scene {
     @Getter @Setter private int killedMonsterCount;
     @Getter Int2ObjectMap<Route> sceneRoutes;
     private Set<SceneNpcBornEntry> npcBornEntrySet;
+    private final HashSet<Integer> unlockedForces;
     @Getter private boolean finishedLoading = false;
     private final List<Runnable> afterLoadedCallbacks = new ArrayList<>();
 
@@ -89,6 +90,7 @@ public class Scene {
         this.npcBornEntrySet = ConcurrentHashMap.newKeySet();
         this.scriptManager = new SceneScriptManager(this);
         this.blossomManager = new BlossomManager(this);
+        this.unlockedForces = new HashSet<>();
     }
 
     public int getId() {
@@ -793,6 +795,16 @@ public class Scene {
             }
             scriptManager.addGroupSuite(group, suite);
         });
+    }
+
+    public void unlockForce(int force){
+        unlockedForces.add(force);
+        broadcastPacket(new PacketSceneForceUnlockNotify(force, true));
+    }
+
+    public void lockForce(int force){
+        unlockedForces.remove(force);
+        broadcastPacket(new PacketSceneForceLockNotify(force));
     }
 
     public void selectWorktopOptionWith(SelectWorktopOptionReqOuterClass.SelectWorktopOptionReq req) {

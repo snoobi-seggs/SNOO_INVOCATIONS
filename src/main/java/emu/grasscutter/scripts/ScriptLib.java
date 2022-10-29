@@ -1107,6 +1107,18 @@ public class ScriptLib {
         return 0;
     }
 
+    public int UnlockForce(int force){
+        logger.info("[LUA] Call UnlockForce {}", force);
+        getSceneScriptManager().getScene().unlockForce(force);
+        return 0;
+    }
+
+    public int LockForce(int force){
+        logger.info("[LUA] Call LockForce {}", force);
+        getSceneScriptManager().getScene().lockForce(force);
+        return 0;
+    }
+
     public int KillGroupEntity(LuaTable var1){
         logger.debug("[LUA] Call KillGroupEntity with {}", printTable(var1));
         //TODO check
