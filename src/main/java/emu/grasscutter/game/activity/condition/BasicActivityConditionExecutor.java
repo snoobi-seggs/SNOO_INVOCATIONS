@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
-import static emu.grasscutter.Grasscutter.getLogger;
-
 public class BasicActivityConditionExecutor implements ActivityConditionExecutor {
 
     private final Map<Integer, ActivityConfigItem> activityConfigItemMap;
@@ -47,7 +45,7 @@ public class BasicActivityConditionExecutor implements ActivityConditionExecutor
         ActivityCondExcelConfigData condData = activityConditions.get(activityCondId);
 
         if (condData == null) {
-            getLogger().error("Could not find condition for activity with id = {}", activityCondId);
+            Grasscutter.getLogger().error("Could not find condition for activity with id = {}", activityCondId);
             return false;
         }
 

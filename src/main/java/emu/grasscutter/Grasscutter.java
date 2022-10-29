@@ -48,7 +48,7 @@ import static emu.grasscutter.config.Configuration.SERVER;
 import static emu.grasscutter.utils.Language.translate;
 
 public final class Grasscutter {
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(Grasscutter.class);
+    @Getter private static final Logger logger = (Logger) LoggerFactory.getLogger(Grasscutter.class);
     private static LineReader consoleLineReader = null;
 
     @Getter @Setter private static Language language;
@@ -256,10 +256,6 @@ public final class Grasscutter {
                 .build();
         }
         return consoleLineReader;
-    }
-
-    public static Logger getLogger() {
-        return logger;
     }
 
     /*

@@ -23,8 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
-import static emu.grasscutter.Grasscutter.getLogger;
-
 @Getter
 public class ActivityManager extends BasePlayerManager {
     private static final Map<Integer, ActivityConfigItem> activityConfigItemMap;
@@ -58,7 +56,7 @@ public class ActivityManager extends BasePlayerManager {
             DataLoader.loadList("ActivityConfig.json", ActivityConfigItem.class).forEach(item -> {
                 var activityData = GameData.getActivityDataMap().get(item.getActivityId());
                 if (activityData == null) {
-                    getLogger().warn("activity {} not exist.", item.getActivityId());
+                    Grasscutter.getLogger().warn("activity {} not exist.", item.getActivityId());
                     return;
                 }
                 var activityHandlerType = activityHandlerTypeMap.get(ActivityType.getTypeByName(activityData.getActivityType()));
@@ -79,7 +77,7 @@ public class ActivityManager extends BasePlayerManager {
 
             Grasscutter.getLogger().info("Enable {} activities.", activityConfigItemMap.size());
         } catch (Exception e) {
-            getLogger().error("Unable to load activities config.", e);
+            Grasscutter.getLogger().error("Unable to load activities config.", e);
         }
 
     }
