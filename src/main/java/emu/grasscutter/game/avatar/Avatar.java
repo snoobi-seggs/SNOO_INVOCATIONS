@@ -1,42 +1,11 @@
 package emu.grasscutter.game.avatar;
 
-import static emu.grasscutter.config.Configuration.GAME_OPTIONS;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
-import java.util.Set;
-
-import org.bson.types.ObjectId;
-
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Indexed;
-import dev.morphia.annotations.PostLoad;
-import dev.morphia.annotations.PrePersist;
-import dev.morphia.annotations.Transient;
-import emu.grasscutter.GameConstants;
+import dev.morphia.annotations.*;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.binout.OpenConfigEntry;
 import emu.grasscutter.data.binout.OpenConfigEntry.SkillPointModifier;
 import emu.grasscutter.data.common.FightPropData;
-import emu.grasscutter.data.excels.AvatarData;
-import emu.grasscutter.data.excels.AvatarPromoteData;
-import emu.grasscutter.data.excels.AvatarSkillData;
-import emu.grasscutter.data.excels.AvatarSkillDepotData;
-import emu.grasscutter.data.excels.AvatarTalentData;
-import emu.grasscutter.data.excels.EquipAffixData;
-import emu.grasscutter.data.excels.ProudSkillData;
-import emu.grasscutter.data.excels.ReliquaryAffixData;
-import emu.grasscutter.data.excels.ReliquaryLevelData;
-import emu.grasscutter.data.excels.ReliquaryMainPropData;
-import emu.grasscutter.data.excels.ReliquarySetData;
-import emu.grasscutter.data.excels.WeaponCurveData;
-import emu.grasscutter.data.excels.WeaponPromoteData;
+import emu.grasscutter.data.excels.*;
 import emu.grasscutter.data.excels.AvatarSkillDepotData.InherentProudSkillOpens;
 import emu.grasscutter.data.excels.ItemData.WeaponProperty;
 import emu.grasscutter.database.DatabaseHelper;
@@ -45,11 +14,7 @@ import emu.grasscutter.game.inventory.EquipType;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.inventory.ItemType;
 import emu.grasscutter.game.player.Player;
-import emu.grasscutter.game.props.ElementType;
-import emu.grasscutter.game.props.EntityIdType;
-import emu.grasscutter.game.props.FetterState;
-import emu.grasscutter.game.props.FightProperty;
-import emu.grasscutter.game.props.PlayerProperty;
+import emu.grasscutter.game.props.*;
 import emu.grasscutter.net.proto.AvatarFetterInfoOuterClass.AvatarFetterInfo;
 import emu.grasscutter.net.proto.AvatarInfoOuterClass.AvatarInfo;
 import emu.grasscutter.net.proto.AvatarSkillInfoOuterClass.AvatarSkillInfo;
@@ -59,15 +24,17 @@ import emu.grasscutter.net.proto.ShowAvatarInfoOuterClass.ShowAvatarInfo;
 import emu.grasscutter.net.proto.ShowEquipOuterClass.ShowEquip;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.ProtoHelper;
-import it.unimi.dsi.fastutil.ints.Int2FloatOpenHashMap;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
+import it.unimi.dsi.fastutil.ints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
+import org.bson.types.ObjectId;
+
+import javax.annotation.Nonnull;
+import java.util.*;
+import java.util.stream.Stream;
+
+import static emu.grasscutter.config.Configuration.GAME_OPTIONS;
 
 @Entity(value = "avatars", useDiscriminator = false)
 public class Avatar {
@@ -148,14 +115,7 @@ public class Avatar {
             .forEach(id -> this.setFightProperty(id, 0f));
 
         // Skill depot
-        this.setSkillDepotData(switch (this.avatarId) {
-            case GameConstants.MAIN_CHARACTER_MALE ->
-                GameData.getAvatarSkillDepotDataMap().get(504);  // Hack to start with anemo skills
-            case GameConstants.MAIN_CHARACTER_FEMALE ->
-                GameData.getAvatarSkillDepotDataMap().get(704);
-            default ->
-                data.getSkillDepot();
-        });
+        this.setSkillDepotData(data.getSkillDepot(), false);
 
         // Set stats
         this.recalcStats();
@@ -229,7 +189,7 @@ public class Avatar {
         this.skillDepot = skillDepot; // Used while loading this from the database
     }
 
-    public void setSkillDepotData(AvatarSkillDepotData skillDepot) {
+    public void setSkillDepotData(AvatarSkillDepotData skillDepot, boolean notifyChange) {
         // Set id and depot
         this.skillDepotId = skillDepot.getId();
         this.skillDepot = skillDepot;
@@ -244,7 +204,11 @@ public class Avatar {
             .mapToInt(openData -> (openData.getProudSkillGroupId() * 100) + 1)
             .filter(proudSkillId -> GameData.getProudSkillDataMap().containsKey(proudSkillId))
             .forEach(proudSkillId -> this.proudSkillList.add(proudSkillId));
-        this.recalcStats();
+        this.recalcStats(notifyChange);
+
+        if(notifyChange){
+            owner.sendPacket(new PacketAvatarSkillDepotChangeNotify(this));
+        }
     }
 
     private Map<Integer, Integer> getSkillExtraChargeMap() {
@@ -252,6 +216,34 @@ public class Avatar {
             skillExtraChargeMap = new HashMap<>();
         }
         return skillExtraChargeMap;
+    }
+
+    /**
+     * Changes the avatar's element to the target element, if the character has values for it set in the candSkillDepot
+     *
+     * @param elementTypeToChange element to change to
+     * @return false if failed or already using that element, true if it actually changed
+     */
+    public boolean changeElement(@Nonnull ElementType elementTypeToChange) {
+        val candSkillDepotIdsList = data.getCandSkillDepotIds();
+        val candSkillDepotIndex = elementTypeToChange.getDepotIndex();
+
+        // if no candidate skill to change or index out of bound
+        if (candSkillDepotIdsList == null || candSkillDepotIndex >= candSkillDepotIdsList.size()) {
+            return false;
+        }
+
+        int candSkillDepotId = candSkillDepotIdsList.get(candSkillDepotIndex);
+
+        // Sanity checks for skill depots
+        val skillDepot = GameData.getAvatarSkillDepotDataMap().get(candSkillDepotId);
+        if (skillDepot == null || skillDepot.getId() == skillDepotId) {
+            return false;
+        }
+
+        // Set skill depot
+        setSkillDepotData(skillDepot, true);
+        return true;
     }
 
     public void setFetterList(List<Integer> fetterList) {
