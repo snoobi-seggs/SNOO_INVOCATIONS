@@ -18,6 +18,7 @@ import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
 import io.netty.util.concurrent.FastThreadLocal;
+import lombok.val;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.slf4j.Logger;
@@ -1031,11 +1032,50 @@ public class ScriptLib {
         return 0;
     }
 
-    public int BeginCameraSceneLook(LuaTable var1){
-        logger.warn("[LUA] Call unimplemented BeginCameraSceneLook with {}", printTable(var1));
-        //TODO implement var1 contains Position look_pos, int duration, bool is_force, bool is_broadcast,
-        // bool is_allow_input, bool is_set_follow_pos Position follow_pos, bool is_force_walk, bool is_change_play_mode
-        // bool is_set_screen_XY, int screen_x, int screen_y
+    public int BeginCameraSceneLook(LuaTable sceneLookParams){
+        logger.debug("[LUA] Call BeginCameraSceneLook with {}", printTable(sceneLookParams));
+        val luaLookPos = sceneLookParams.get("look_pos");
+        val luaFollowPos = sceneLookParams.get("follow_pos");
+        val luaDuration = sceneLookParams.get("duration");
+        val luaIsForce = sceneLookParams.get("is_force");
+        val luaIsBroadcast = sceneLookParams.get("is_broadcast");
+        val luaAllowInput = sceneLookParams.get("is_allow_input");
+        val luaSetFollowPos = sceneLookParams.get("is_set_follow_pos");
+        val luaIsForceWalk = sceneLookParams.get("is_force_walk");
+        val luaIsChangePlayMode = sceneLookParams.get("is_change_play_mode");
+        val luaScreenX = sceneLookParams.get("screen_x");
+        val luaScreenY = sceneLookParams.get("screen_y");
+
+        val cameraParams = new PacketBeginCameraSceneLookNotify.CameraSceneLookNotify();
+        cameraParams.setLookPos(luaToPos(luaLookPos));
+        cameraParams.setFollowPos(luaToPos(luaFollowPos));
+        if(luaDuration.isnumber()) {
+            cameraParams.setDuration(luaDuration.tofloat());
+        }
+        if(luaScreenX.isnumber()) {
+            cameraParams.setScreenX(luaScreenX.tofloat());
+        }
+        if(luaScreenY.isnumber()) {
+            cameraParams.setScreenY(luaScreenY.tofloat());
+        }
+        if(luaIsForce.isboolean()) {
+            cameraParams.setForce(luaIsForce.toboolean());
+        }
+        if(luaAllowInput.isboolean()) {
+            cameraParams.setAllowInput(luaAllowInput.toboolean());
+        }
+        if(luaSetFollowPos.isboolean()) {
+            cameraParams.setSetFollowPos(luaSetFollowPos.toboolean());
+        }
+        if(luaIsForceWalk.isboolean()) {
+            cameraParams.setForceWalk(luaIsForceWalk.toboolean());
+        }
+        if(luaIsChangePlayMode.isboolean()) {
+            cameraParams.setChangePlayMode(luaIsChangePlayMode.toboolean());
+        }
+        if(luaIsBroadcast.isboolean()) { } // TODO
+
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketBeginCameraSceneLookNotify(cameraParams));
         return 0;
     }
 
@@ -1233,6 +1273,17 @@ public class ScriptLib {
             result.set("x", 0);
             result.set("y", 0);
             result.set("z", 0);
+        }
+
+        return result;
+    }
+
+    private Position luaToPos(LuaValue position){
+        val result = new Position();
+        if(position != null && !position.isnil()){
+            result.setX(position.get("x").optint(0));
+            result.setY(position.get("y").optint(0));
+            result.setZ(position.get("z").optint(0));
         }
 
         return result;
