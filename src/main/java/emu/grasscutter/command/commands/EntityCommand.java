@@ -94,7 +94,9 @@ public final class EntityCommand implements CommandHandler {
             setFightProperty(entity, FightProperty.FIGHT_PROP_MAX_HP, param.maxHP, changedFields);
         }
         if (param.hp != -1) {
-            setFightProperty(entity, FightProperty.FIGHT_PROP_CUR_HP, param.hp == 0 ? Float.MAX_VALUE : param.hp, changedFields);
+            float targetHp = param.hp == 0 ? Float.MAX_VALUE : param.hp;
+            setFightProperty(entity, FightProperty.FIGHT_PROP_CUR_HP, targetHp, changedFields);
+            callHPEvents(entity);
         }
         if (param.atk != -1) {
             setFightProperty(entity, FightProperty.FIGHT_PROP_ATTACK, param.atk, changedFields);
@@ -107,6 +109,10 @@ public final class EntityCommand implements CommandHandler {
         if(!changedFields.isEmpty()) {
             entity.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(entity, changedFields));
         }
+    }
+
+    private void callHPEvents(GameEntity entity){
+        entity.callLuaHPEvent();
     }
 
     private void setFightProperty(GameEntity entity, FightProperty property, float value, List<FightProperty> modifiedProps){

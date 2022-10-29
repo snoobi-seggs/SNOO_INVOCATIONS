@@ -139,7 +139,7 @@ public class EntityMonster extends GameEntity {
     @Override
     public void onCreate() {
         // Lua event
-        getScene().getScriptManager().callEvent(EventType.EVENT_ANY_MONSTER_LIVE, new ScriptArgs(this.getConfigId()));
+        getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_LIVE, this.getConfigId()));
     }
 
     @Override
@@ -157,11 +157,13 @@ public class EntityMonster extends GameEntity {
         for (Player player : this.getScene().getPlayers()) {
             player.getEnergyManager().handleMonsterEnergyDrop(this, hpBeforeDamage, hpAfterDamage);
         }
+    }
 
-        // param2 unused for now
-        getScene().getScriptManager().callEvent(EVENT_SPECIFIC_MONSTER_HP_CHANGE, new ScriptArgs(getConfigId(), monsterData.getId())
+    @Override
+    public void callLuaHPEvent() {
+        getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_SPECIFIC_MONSTER_HP_CHANGE, getConfigId(), monsterData.getId())
             .setSourceEntityId(getId())
-            .setParam3((int)hpAfterDamage)
+            .setParam3((int) this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP))
             .setEventSource(Integer.toString(getConfigId())));
     }
 
@@ -182,9 +184,9 @@ public class EntityMonster extends GameEntity {
             }
             // prevent spawn monster after success
             if (getScene().getChallenge() != null && getScene().getChallenge().inProgress()) {
-                getScene().getScriptManager().callEvent(EventType.EVENT_ANY_MONSTER_DIE, new ScriptArgs().setParam1(this.getConfigId()));
+                getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()));
             }else if (getScene().getChallenge() == null) {
-                getScene().getScriptManager().callEvent(EventType.EVENT_ANY_MONSTER_DIE, new ScriptArgs().setParam1(this.getConfigId()));
+                getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()));
             }
         }
         // Battle Pass trigger

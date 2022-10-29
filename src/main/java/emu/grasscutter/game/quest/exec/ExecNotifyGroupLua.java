@@ -32,10 +32,10 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
             // workaround to make sure the triggers are still there todo find better way of trigger handling
             scriptManager.refreshGroup(group);
             Grasscutter.getLogger().warn("group: {} \ncondition: {} \nparamStr {}", group, condition, paramStr);
+            val eventType = quest.getState() == QuestState.QUEST_STATE_FINISHED ?
+                EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START;
             scriptManager.callEvent(
-                quest.getState() == QuestState.QUEST_STATE_FINISHED ?
-                    EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START
-                , new ScriptArgs(quest.getSubQuestId()));
+                new ScriptArgs(eventType, quest.getSubQuestId()));
         });
 
         return true;

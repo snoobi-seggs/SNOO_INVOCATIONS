@@ -649,7 +649,7 @@ public class Scene {
         }
 
         scriptManager.meetEntities(entities);
-        groups.forEach(g -> scriptManager.callEvent(EventType.EVENT_GROUP_LOAD, new ScriptArgs(g.id)));
+        groups.forEach(g -> scriptManager.callEvent(new ScriptArgs(EventType.EVENT_GROUP_LOAD, g.id)));
         Grasscutter.getLogger().info("Scene {} loaded {} group(s)", this.getId(), groups.size());
     }
 

@@ -20,6 +20,7 @@ import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -251,7 +252,7 @@ public class SceneScriptManager {
 
             if (region.hasNewEntities()) {
                 Grasscutter.getLogger().trace("Call EVENT_ENTER_REGION_{}",region.getMetaRegion().config_id);
-                callEvent(EventType.EVENT_ENTER_REGION, new ScriptArgs(region.getConfigId())
+                callEvent(new ScriptArgs(EventType.EVENT_ENTER_REGION, region.getConfigId())
                     .setSourceEntityId(region.getId())
                     .setTargetEntityId(targetID)
                 );
@@ -266,7 +267,7 @@ public class SceneScriptManager {
                 }
             }
             if (region.entityLeave()) {
-                callEvent(EventType.EVENT_LEAVE_REGION, new ScriptArgs(region.getConfigId())
+                callEvent(new ScriptArgs(EventType.EVENT_LEAVE_REGION, region.getConfigId())
                     .setSourceEntityId(region.getId())
                     .setTargetEntityId(region.getFirstEntityId())
                 );
@@ -361,19 +362,23 @@ public class SceneScriptManager {
         }
     }
     // Events
-    public void callEvent(int eventType, ScriptArgs params) {
+    public void callEvent(int eventType) {
+        callEvent(new ScriptArgs(eventType));
+    }
+    public void callEvent(@Nonnull ScriptArgs params) {
         /**
          * We use ThreadLocal to trans SceneScriptManager context to ScriptLib, to avoid eval script for every groups' trigger in every scene instances.
          * But when callEvent is called in a ScriptLib func, it may cause NPE because the inner call cleans the ThreadLocal so that outer call could not get it.
          * e.g. CallEvent -> set -> ScriptLib.xxx -> CallEvent -> set -> remove -> NPE -> (remove)
          * So we use thread pool to clean the stack to avoid this new issue.
          */
-        eventExecutor.submit(() -> this.realCallEvent(eventType, params));
+        eventExecutor.submit(() -> this.realCallEvent(params));
     }
 
-    private void realCallEvent(int eventType, ScriptArgs params) {
+    private void realCallEvent(@Nonnull ScriptArgs params) {
         try {
             ScriptLoader.getScriptLib().setSceneScriptManager(this);
+            int eventType = params.type;
             Set<SceneTrigger> relevantTriggers = new HashSet<>();
             if (eventType == EventType.EVENT_ENTER_REGION || eventType == EventType.EVENT_LEAVE_REGION) {
                 List<SceneTrigger> relevantTriggersList = this.getTriggersByEvent(eventType).stream()
@@ -385,7 +390,7 @@ public class SceneScriptManager {
                 handleEventForTrigger(eventType, params, trigger);
             }
         } catch (Throwable throwable){
-            Grasscutter.getLogger().error("Condition Trigger "+Integer.toString(eventType)+" triggered exception", throwable);
+            Grasscutter.getLogger().error("Condition Trigger "+ params.type +" triggered exception", throwable);
         } finally {
             // make sure it is removed
             ScriptLoader.getScriptLib().removeSceneScriptManager();
@@ -593,7 +598,7 @@ public class SceneScriptManager {
                 Grasscutter.getLogger().warn("[LUA] Found timer trigger with source {} for group {} : {}",
                     source, groupID, trigger.name);
                 var taskIdentifier = Grasscutter.getGameServer().getScheduler().scheduleDelayedRepeatingTask(() ->
-                    callEvent(EVENT_TIMER_EVENT, new ScriptArgs()
+                    callEvent(new ScriptArgs(EVENT_TIMER_EVENT)
                         .setEventSource(source)), (int)time, (int)time);
                 var groupTasks = activeGroupTimers.computeIfAbsent(groupID, k -> new HashSet<>());
                 groupTasks.add(new Pair<>(source, taskIdentifier));

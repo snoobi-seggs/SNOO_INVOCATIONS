@@ -182,6 +182,7 @@ public abstract class GameEntity {
             this.setFightProperty(FightProperty.FIGHT_PROP_CUR_HP, 0f);
             isDead = true;
         }
+        callLuaHPEvent();
 
         // Packets
         this.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(this, FightProperty.FIGHT_PROP_CUR_HP));
@@ -191,6 +192,8 @@ public abstract class GameEntity {
             this.getScene().killEntity(this, killerId);
         }
     }
+
+    public void callLuaHPEvent(){ }
 
     /**
      * Move this entity to a new position.

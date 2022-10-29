@@ -106,7 +106,7 @@ public class EntityGadget extends EntityBaseGadget {
     public void updateState(int state) {
         this.setState(state);
         this.getScene().broadcastPacket(new PacketGadgetStateNotify(this, state));
-        getScene().getScriptManager().callEvent(EventType.EVENT_GADGET_STATE_CHANGE, new ScriptArgs(state, this.getConfigId()));
+        getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_GADGET_STATE_CHANGE, state, this.getConfigId()));
     }
 
     public int getPointType() {
@@ -176,7 +176,7 @@ public class EntityGadget extends EntityBaseGadget {
     @Override
     public void onCreate() {
         // Lua event
-        getScene().getScriptManager().callEvent(EventType.EVENT_GADGET_CREATE, new ScriptArgs(this.getConfigId()));
+        getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_GADGET_CREATE, this.getConfigId()));
     }
 
     @Override
@@ -189,7 +189,7 @@ public class EntityGadget extends EntityBaseGadget {
         if (getScene().getChallenge() != null) {
             getScene().getChallenge().onGadgetDeath(this);
         }
-        getScene().getScriptManager().callEvent(EventType.EVENT_ANY_GADGET_DIE, new ScriptArgs(this.getConfigId()));
+        getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_GADGET_DIE, this.getConfigId()));
     }
 
     @Override

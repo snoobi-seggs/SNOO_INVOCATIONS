@@ -213,7 +213,7 @@ public class PlayerProgressManager extends BasePlayerDataManager {
 
         // Fire quest and script trigger for trans point unlock.
         this.player.getQuestManager().queueEvent(QuestTrigger.QUEST_CONTENT_UNLOCK_TRANS_POINT, sceneId, pointId);
-        this.player.getScene().getScriptManager().callEvent(EVENT_UNLOCK_TRANS_POINT, new ScriptArgs(sceneId, pointId));
+        this.player.getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_UNLOCK_TRANS_POINT, sceneId, pointId));
 
         // Send packet.
         this.player.sendPacket(new PacketScenePointUnlockNotify(sceneId, pointId));

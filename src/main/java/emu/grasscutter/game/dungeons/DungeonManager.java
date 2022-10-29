@@ -112,8 +112,7 @@ public class DungeonManager {
 
         rewardedPlayers.add(player.getUid());
 
-        scene.getScriptManager().callEvent(EventType.EVENT_DUNGEON_REWARD_GET,
-            new ScriptArgs());
+        scene.getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_DUNGEON_REWARD_GET));
         return true;
     }
 
@@ -215,8 +214,7 @@ public class DungeonManager {
                 p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_FINISH_DUNGEON);
             }
         });
-        scene.getScriptManager().callEvent(EventType.EVENT_DUNGEON_SETTLE,
-            new ScriptArgs(successfully ? 1 : 0));
+        scene.getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_DUNGEON_SETTLE, successfully ? 1 : 0));
     }
 
     public void quitDungeon() {

@@ -24,17 +24,10 @@ public abstract class EntityBaseGadget extends GameEntity {
     }
 
     @Override
-    public void damage(float amount, int killerId) {
-        super.damage(amount, killerId);
-
-        if(this.getFightProperties() == null){
-            return;
-        }
-        float hpAfterDamage = this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP);
-        // param2 unused for now
-        getScene().getScriptManager().callEvent(EVENT_SPECIFIC_GADGET_HP_CHANGE, new ScriptArgs(getConfigId(), getGadgetId())
+    public void callLuaHPEvent() {
+        getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_SPECIFIC_GADGET_HP_CHANGE, getConfigId(), getGadgetId())
             .setSourceEntityId(getId())
-            .setParam3((int)hpAfterDamage)
+            .setParam3((int) this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP))
             .setEventSource(Integer.toString(getConfigId())));
     }
 
