@@ -22,6 +22,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.val;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ public class DungeonManager {
     private final IntSet rewardedPlayers = new IntOpenHashSet();
     private boolean ended = false;
     private Set<Integer> activeDungeonWayPoints = new HashSet<>();
+    private int newestWayPoint = 0;
 
     public DungeonManager(@NonNull Scene scene, @NonNull DungeonData dungeonData) {
         this.scene = scene;
@@ -82,10 +84,17 @@ public class DungeonManager {
     }
 
     public boolean activateRespawnPoint(int pointId){
-        //TODO implement
-        scene.broadcastPacket(new PacketDungeonWayPointNotify(activeDungeonWayPoints.add(pointId), activeDungeonWayPoints));
+        val respawnPoint = GameData.getScenePointEntryById(scene.getId(), pointId);
 
-        Grasscutter.getLogger().warn("[unimplemented] trying to activate respawn point {}", pointId);
+        if(respawnPoint == null){
+            Grasscutter.getLogger().warn("trying to activate unknown respawn point {}", pointId);
+            return false;
+        }
+
+        scene.broadcastPacket(new PacketDungeonWayPointNotify(activeDungeonWayPoints.add(pointId), activeDungeonWayPoints));
+        newestWayPoint = pointId;
+
+        Grasscutter.getLogger().debug("[unimplemented respawn] activated respawn point {}", pointId);
         return true;
     }
 
