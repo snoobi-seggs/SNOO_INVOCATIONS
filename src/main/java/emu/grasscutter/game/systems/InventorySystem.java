@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.common.ItemParamData;
+import emu.grasscutter.data.excels.AvatarData;
 import emu.grasscutter.data.excels.AvatarPromoteData;
 import emu.grasscutter.data.excels.AvatarSkillDepotData;
 import emu.grasscutter.data.excels.ItemData;
@@ -801,17 +802,22 @@ public class InventorySystem extends BaseGameSystem {
     }
 
     public static synchronized int checkPlayerAvatarConstellationLevel(Player player, int itemId) {
-        ItemData itemData = GameData.getItemDataMap().get(itemId);
-        if ((itemData == null) || (itemData.getMaterialType() != MaterialType.MATERIAL_AVATAR)) {
-            return -2;  // Not an Avatar
+        ItemData itemData = GameData.getItemDataMap().get(itemId);// could be a constellation item
+        AvatarData avatarData = GameData.getAvatarDataMap().get(itemId); // or an avatar item
+
+        if (avatarData == null){
+            if (itemData == null || itemData.getMaterialType() != MaterialType.MATERIAL_AVATAR){
+                return -2;
+            }
         }
+
         Avatar avatar = player.getAvatars().getAvatarById((itemId % 1000) + 10000000);
         if (avatar == null) {
             return -1;  // Doesn't have
         }
         // Constellation
         int constLevel = avatar.getCoreProudSkillLevel();
-        GameItem constItem = player.getInventory().getInventoryTab(ItemType.ITEM_MATERIAL).getItemById(itemId + 100);
+        GameItem constItem = player.getInventory().getInventoryTab(ItemType.ITEM_MATERIAL).getItemById((itemId % 1000) + 1100);
         constLevel += Optional.ofNullable(constItem).map(GameItem::getCount).orElse(0);
         return constLevel;
     }
