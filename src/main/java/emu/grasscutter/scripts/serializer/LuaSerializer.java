@@ -11,6 +11,10 @@ import lombok.experimental.FieldDefaults;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,7 +31,7 @@ public class LuaSerializer implements Serializer {
 
     @Override
     public <T> T toObject(Class<T> type, Object obj) {
-        return serialize(type, (LuaTable) obj);
+        return serialize(type, null, (LuaTable) obj);
     }
 
     @Override
@@ -51,7 +55,7 @@ public class LuaSerializer implements Serializer {
                     T object = null;
 
                     if (keyValue.istable()) {
-                        object = serialize(type, keyValue.checktable());
+                        object = serialize(type, null, keyValue.checktable());
                     } else if (keyValue.isint()) {
                         object = (T) (Integer) keyValue.toint();
                     } else if (keyValue.isnumber()) {
@@ -94,7 +98,7 @@ public class LuaSerializer implements Serializer {
                     T object = null;
 
                     if (keyValue.istable()) {
-                        object = serialize(type, keyValue.checktable());
+                        object = serialize(type, null, keyValue.checktable());
                     } else if (keyValue.isint()) {
                         object = (T) (Integer) keyValue.toint();
                     } else if (keyValue.isnumber()) {
@@ -121,12 +125,24 @@ public class LuaSerializer implements Serializer {
         return list;
     }
 
-    public <T> T serialize(Class<T> type, LuaTable table) {
+    private Class<?> getListType(Class<?> type, @Nullable Field field){
+        if(field == null){
+            return type.getTypeParameters()[0].getClass();
+        }
+        Type fieldType = field.getGenericType();
+        if(fieldType instanceof ParameterizedType){
+            return (Class<?>) ((ParameterizedType) fieldType).getActualTypeArguments()[0];
+        }
+
+        return null;
+    }
+
+    public <T> T serialize(Class<T> type, @Nullable Field field, LuaTable table) {
         T object = null;
 
         if (type == List.class) {
             try {
-                Class<T> listType = (Class<T>) type.getTypeParameters()[0].getClass();
+                Class<?> listType = getListType(type, field);
                 return (T) serializeList(listType, table);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -158,7 +174,7 @@ public class LuaSerializer implements Serializer {
                     LuaValue keyValue = table.get(k);
 
                     if (keyValue.istable()) {
-                        methodAccess.invoke(object, fieldMeta.index, serialize(fieldMeta.getType(), keyValue.checktable()));
+                        methodAccess.invoke(object, fieldMeta.index, serialize(fieldMeta.getType(), fieldMeta.getField(), keyValue.checktable()));
                     } else if (fieldMeta.getType().equals(float.class)) {
                         methodAccess.invoke(object, fieldMeta.index, keyValue.tofloat());
                     } else if (fieldMeta.getType().equals(int.class)) {
@@ -201,7 +217,7 @@ public class LuaSerializer implements Serializer {
                 .forEach(field -> {
                     var setter = getSetterName(field.getName());
                     var index = methodAccess.getIndex(setter);
-                    fieldMetaMap.put(field.getName(), new FieldMeta(field.getName(), setter, index, field.getType()));
+                    fieldMetaMap.put(field.getName(), new FieldMeta(field.getName(), setter, index, field.getType(), field));
                 });
 
         Arrays.stream(type.getFields())
@@ -210,7 +226,7 @@ public class LuaSerializer implements Serializer {
                 .forEach(field -> {
                     var setter = getSetterName(field.getName());
                     var index = methodAccess.getIndex(setter);
-                    fieldMetaMap.put(field.getName(), new FieldMeta(field.getName(), setter, index, field.getType()));
+                    fieldMetaMap.put(field.getName(), new FieldMeta(field.getName(), setter, index, field.getType(), field));
                 });
 
         fieldMetaCache.put(type, fieldMetaMap);
@@ -235,5 +251,6 @@ public class LuaSerializer implements Serializer {
         String setter;
         int index;
         Class<?> type;
+        @Nullable Field field;
     }
 }
