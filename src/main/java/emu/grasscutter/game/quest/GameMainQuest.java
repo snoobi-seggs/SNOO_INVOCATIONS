@@ -52,9 +52,6 @@ public class GameMainQuest {
 
     @Getter int[] suggestTrackMainQuestList;
     @Getter private Map<Integer,TalkData> talks;
-    //key is subId
-    private Map<Integer,Position> rewindPositions;
-    private Map<Integer,Position> rewindRotations;
 
     @Deprecated // Morphia only. Do not use.
     public GameMainQuest() {}
@@ -70,10 +67,7 @@ public class GameMainQuest {
         this.questVars = new int[] {0,0,0,0,0};
         this.state = ParentQuestState.PARENT_QUEST_STATE_NONE;
         this.questGroupSuites = new ArrayList<>();
-        this.rewindPositions = new HashMap<>();
-        this.rewindRotations = new HashMap<>();
         addAllChildQuests();
-        addRewindPoints();
     }
 
     private void addAllChildQuests() {
@@ -194,10 +188,8 @@ public class GameMainQuest {
             addRewindPoints();
         }*/
 
-        if(rewindPositions.containsKey(targetQuest.getSubQuestId())){
-            List<Position> posAndRot = new ArrayList<>();
-            posAndRot.add(0,rewindPositions.get(targetQuest.getSubQuestId()));
-            posAndRot.add(1,rewindRotations.get(targetQuest.getSubQuestId()));
+        List<Position> posAndRot = new ArrayList<>();
+        if(hasRewindPosition(targetQuest.getSubQuestId(), posAndRot)){
             return posAndRot;
         }
 
@@ -206,10 +198,7 @@ public class GameMainQuest {
                 p.getQuestData() != null && p.getQuestData().isRewind()).toList();
 
         for (GameQuest quest : rewindQuests) {
-            if (rewindPositions.containsKey(quest.getSubQuestId())) {
-                List<Position> posAndRot = new ArrayList<>();
-                posAndRot.add(0,rewindPositions.get(quest.getSubQuestId()));
-                posAndRot.add(1,rewindRotations.get(quest.getSubQuestId()));
+            if (hasRewindPosition(quest.getSubQuestId(), posAndRot)) {
                 return posAndRot;
             }
 
@@ -250,58 +239,64 @@ public class GameMainQuest {
 
         return rewindTo(rewindTarget!=null? rewindTarget : highestActiveQuest, false);
     }
-    public void addRewindPoints() {
-        Bindings bindings = ScriptLoader.getEngine().createBindings();
-        String script = "Quest/Share/Q" + getParentQuestId() + "ShareConfig.lua";
-        CompiledScript cs = ScriptLoader.getScript(script);
 
-        //mainQuest 303 doesn't have a ShareConfig
-        if (cs == null) {
-            Grasscutter.getLogger().debug("Couldn't find " + script);
-            return;
-        }
+    public boolean hasRewindPosition(int subId, List<Position> posAndRot){
+        RewindData questRewind = GameData.getRewindDataMap().get(subId);
+        if (questRewind == null) return false; 
 
+        RewindData.AvatarData avatarData = questRewind.getAvatar();
+        if (avatarData == null) return false;
 
-        // Eval script
-        try {
-            cs.eval(bindings);
+        String avatarPos = avatarData.getPos();
+        QuestData.Guide guide = GameData.getQuestDataMap().get(subId).getGuide();
+        if (guide == null) return false;
 
-            var rewindDataMap = ScriptLoader.getSerializer().toMap(RewindData.class, bindings.get("rewind_data"));
-            for (String subId : rewindDataMap.keySet()) {
-                RewindData questRewind = rewindDataMap.get(subId);
-                if (questRewind != null) {
-                    RewindData.AvatarData avatarData = questRewind.getAvatar();
-                    if (avatarData != null) {
-                        String avatarPos = avatarData.getPos();
-                        QuestData.Guide guide = GameData.getQuestDataMap().get(Integer.valueOf(subId)).getGuide();
-                        if (guide != null) {
-                            int sceneId = guide.getGuideScene();
-                            ScriptSceneData fullGlobals = GameData.getScriptSceneDataMap().get("flat.luas.scenes.full_globals.lua.json");
-                            if (fullGlobals != null) {
-                                ScriptSceneData.ScriptObject dummyPointScript = fullGlobals.getScriptObjectList().get(sceneId + "/scene" + sceneId + "_dummy_points.lua");
-                                if (dummyPointScript != null) {
-                                    Map<String, List<Float>> dummyPointMap = dummyPointScript.getDummyPoints();
-                                    if (dummyPointMap != null) {
-                                        List<Float> avatarPosPos = dummyPointMap.get(avatarPos + ".pos");
-                                        if (avatarPosPos != null) {
-                                            Position pos = new Position(avatarPosPos.get(0),avatarPosPos.get(1),avatarPosPos.get(2));
-                                            List<Float> avatarPosRot = dummyPointMap.get(avatarPos + ".rot");
-                                            Position rot =  new Position(avatarPosRot.get(0),avatarPosRot.get(1),avatarPosRot.get(2));
-                                            rewindPositions.put(Integer.valueOf(subId),pos);
-                                            rewindRotations.put(Integer.valueOf(subId),rot);
-                                            Grasscutter.getLogger().debug("Succesfully loaded rewind position for subQuest {}",subId);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        int sceneId = guide.getGuideScene();
+        ScriptSceneData fullGlobals = GameData.getScriptSceneDataMap().get("flat.luas.scenes.full_globals.lua.json");
+        if (fullGlobals == null) return false;
 
-        } catch (Throwable e) {
-            Grasscutter.getLogger().error("An error occurred while loading rewind positions for {}", getParentQuestId());
-        }
+        ScriptSceneData.ScriptObject dummyPointScript = fullGlobals.getScriptObjectList().get(sceneId + "/scene" + sceneId + "_dummy_points.lua");
+        if (dummyPointScript == null) return false;
+
+        Map<String, List<Float>> dummyPointMap = dummyPointScript.getDummyPoints();
+        if (dummyPointMap == null) return false;
+
+        List<Float> avatarPosPos = dummyPointMap.get(avatarPos + ".pos");
+        List<Float> avatarPosRot = dummyPointMap.get(avatarPos + ".rot");
+        if (avatarPosPos == null) return false;
+
+        posAndRot.add(0, new Position(avatarPosPos.get(0),avatarPosPos.get(1),avatarPosPos.get(2))); // position
+        posAndRot.add(1, new Position(avatarPosRot.get(0),avatarPosRot.get(1),avatarPosRot.get(2))); //rotation
+        Grasscutter.getLogger().info("Succesfully loaded rewind data for subQuest {}", subId);
+        return true;
+    }
+
+    public boolean hasTeleportPostion(int subId, List<Position> posAndRot){
+        TeleportData questTransmit = GameData.getTeleportDataMap().get(subId);
+        if (questTransmit == null) return false;
+
+        TeleportData.TransmitPoint transmitPoint = questTransmit.getTransmit_points().size() > 0 ? questTransmit.getTransmit_points().get(0) : null;
+        if (transmitPoint == null) return false;
+
+        String transmitPos = transmitPoint.getPos();
+        int sceneId = transmitPoint.getScene_id();
+        ScriptSceneData fullGlobals = GameData.getScriptSceneDataMap().get("flat.luas.scenes.full_globals.lua.json");
+        if (fullGlobals == null) return false;
+
+        ScriptSceneData.ScriptObject dummyPointScript = fullGlobals.getScriptObjectList().get(sceneId + "/scene" + sceneId + "_dummy_points.lua");
+        if (dummyPointScript == null) return false;
+
+        Map<String, List<Float>> dummyPointMap = dummyPointScript.getDummyPoints();
+        if (dummyPointMap == null) return false;
+
+        List<Float> transmitPosPos = dummyPointMap.get(transmitPos + ".pos");
+        List<Float> transmitPosRot = dummyPointMap.get(transmitPos + ".rot");                 
+        if (transmitPosPos == null) return false;
+
+        posAndRot.add(0, new Position(transmitPosPos.get(0), transmitPosPos.get(1), transmitPosPos.get(2))); // position
+        posAndRot.add(1, new Position(transmitPosRot.get(0), transmitPosRot.get(1), transmitPosRot.get(2))); // rotation
+        Grasscutter.getLogger().info("Succesfully loaded teleport data for subQuest {}", subId);
+        return true;
     }
 
     public void checkProgress(){
