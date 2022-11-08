@@ -254,7 +254,7 @@ public class World implements Iterable<Player> {
 
         Scene newScene = this.getSceneById(sceneId);
         newScene.addPlayer(player);
-
+        player.setAvatarsAbilityForScene(newScene);
         // Dungeon
         if(dungeonData!=null){
             var dungeonManager = new DungeonManager(newScene, dungeonData);
@@ -284,7 +284,17 @@ public class World implements Iterable<Player> {
 
         // Get enter types
         EnterType enterType = EnterType.ENTER_TYPE_JUMP;
-        EnterReason enterReason = teleportType == SCRIPT? EnterReason.Lua : EnterReason.TransPoint;
+        EnterReason enterReason = switch (teleportType) { 
+            // shouldn't affect the teleportation, but its clearer when inspecting the packets
+            // TODO add more conditions for different reason.
+            case INTERNAL -> EnterReason.TransPoint;
+            case WAYPOINT -> EnterReason.TransPoint;
+            case MAP -> EnterReason.TransPoint;
+            case COMMAND -> EnterReason.Gm;
+            case SCRIPT -> EnterReason.Lua;
+            case CLIENT -> EnterReason.ClientTransmit;
+            default -> EnterReason.None;
+        };
 
         if (dungeonData != null) {
             enterType = EnterType.ENTER_TYPE_DUNGEON;
@@ -295,7 +305,6 @@ public class World implements Iterable<Player> {
             // Home
             enterReason = EnterReason.EnterHome;
             enterType = EnterType.ENTER_TYPE_SELF_HOME;
-
         }
 
         // Teleport packet

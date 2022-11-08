@@ -1,15 +1,21 @@
 package emu.grasscutter.data.excels;
 
 import java.util.List;
+import java.util.Map.Entry;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.GameResource;
 import emu.grasscutter.data.ResourceType;
 import emu.grasscutter.data.ResourceType.LoadPriority;
 import emu.grasscutter.data.common.PropGrowCurve;
 import emu.grasscutter.game.props.MonsterType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @ResourceType(name = "MonsterExcelConfigData.json", loadPriority = LoadPriority.LOW)
+@EqualsAndHashCode(callSuper=false)
+@Data
 public class MonsterData extends GameResource {
 	private int id;
 	
@@ -46,70 +52,11 @@ public class MonsterData extends GameResource {
     // Transient
     private int weaponId;
     private MonsterDescribeData describeData;
+	private int specialNameId; // will only be set if describe data is available
     
 	@Override
 	public int getId() {
 		return this.id;
-	}
-	
-	public String getMonsterName() {
-		return monsterName;
-	}
-
-	public MonsterType getType() {
-		return type;
-	}
-
-	public String getServerScript() {
-		return serverScript;
-	}
-
-	public List<Integer> getAffix() {
-		return affix;
-	}
-
-	public String getAi() {
-		return ai;
-	}
-
-	public int[] getEquips() {
-		return equips;
-	}
-
-	public List<HpDrops> getHpDrops() {
-		return hpDrops;
-	}
-
-	public int getKillDropId() {
-		return killDropId;
-	}
-
-	public String getExcludeWeathers() {
-		return excludeWeathers;
-	}
-
-	public int getFeatureTagGroupID() {
-		return featureTagGroupID;
-	}
-
-	public int getMpPropID() {
-		return mpPropID;
-	}
-
-	public String getSkin() {
-		return skin;
-	}
-
-	public int getDescribeId() {
-		return describeId;
-	}
-
-	public int getCombatBGMLevel() {
-		return combatBGMLevel;
-	}
-
-	public int getEntityBudgetLevel() {
-		return entityBudgetLevel;
 	}
 
 	public float getBaseHp() {
@@ -124,54 +71,8 @@ public class MonsterData extends GameResource {
 		return defenseBase;
 	}
 
-	public float getElecSubHurt() {
-		return elecSubHurt;
-	}
-
-	public float getGrassSubHurt() {
-		return grassSubHurt;
-	}
-
-	public float getWaterSubHurt() {
-		return waterSubHurt;
-	}
-
-	public float getWindSubHurt() {
-		return windSubHurt;
-	}
-
-	public float getIceSubHurt() {
-		return iceSubHurt;
-	}
-
-	public float getPhysicalSubHurt() {
-		return physicalSubHurt;
-	}
-
-	public List<PropGrowCurve> getPropGrowCurves() {
-		return propGrowCurves;
-	}
-
-	public long getNameTextMapHash() {
-		return nameTextMapHash;
-	}
-
-	public int getCampID() {
-		return campID;
-	}
-
-	public MonsterDescribeData getDescribeData() {
-		return describeData;
-	}
-
-	public int getWeaponId() {
-		return weaponId;
-	}
-
 	@Override
 	public void onLoad() {
-		this.describeData = GameData.getMonsterDescribeDataMap().get(this.getDescribeId());
-		
 		for (int id : this.equips) {
 			if (id == 0) {
 				continue;
@@ -182,6 +83,18 @@ public class MonsterData extends GameResource {
 			}
 			if (gadget.getItemJsonName().equals("Default_MonsterWeapon")) {
 				this.weaponId = id;
+			}
+		}
+
+		this.describeData = GameData.getMonsterDescribeDataMap().get(this.getDescribeId());
+
+		if (this.describeData == null){
+			return;
+		}
+		for(Entry<Integer, MonsterSpecialNameData> entry: GameData.getMonsterSpecialNameDataMap().entrySet()) {
+			if (entry.getValue().getSpecialNameLabId() == this.getDescribeData().getSpecialNameLabId()){
+				this.specialNameId = entry.getKey();
+				break;
 			}
 		}
 	}
