@@ -13,7 +13,7 @@ import emu.grasscutter.game.props.EntityIdType;
 import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.props.WatcherTriggerType;
-import emu.grasscutter.game.quest.enums.QuestTrigger;
+import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.net.proto.AbilitySyncStateInfoOuterClass.AbilitySyncStateInfo;
 import emu.grasscutter.net.proto.AnimatorParameterValueInfoPairOuterClass.AnimatorParameterValueInfoPair;
@@ -192,8 +192,8 @@ public class EntityMonster extends GameEntity {
         }
         // Battle Pass trigger
         getScene().getPlayers().forEach(p -> p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_MONSTER_DIE, this.getMonsterId(), 1));
-        getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestTrigger.QUEST_CONTENT_MONSTER_DIE, this.getMonsterId()));
-        getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestTrigger.QUEST_CONTENT_KILL_MONSTER, this.getMonsterId()));
+        getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_MONSTER_DIE, this.getMonsterId()));
+        getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_KILL_MONSTER, this.getMonsterId()));
 
         getScene().triggerDungeonEvent(DungeonPassConditionType.DUNGEON_COND_KILL_GROUP_MONSTER, this.getGroupId());
         getScene().triggerDungeonEvent(DungeonPassConditionType.DUNGEON_COND_KILL_TYPE_MONSTER, this.getMonsterData().getType().getValue());
