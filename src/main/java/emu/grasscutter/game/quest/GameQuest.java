@@ -87,7 +87,7 @@ public class GameQuest {
         getOwner().sendPacket(new PacketQuestListUpdateNotify(this));
 
         if (ChapterData.beginQuestChapterMap.containsKey(subQuestId)) {
-            mainQuest.getOwner().sendPacket(new PacketChapterStateNotify(
+            getOwner().sendPacket(new PacketChapterStateNotify(
                 ChapterData.beginQuestChapterMap.get(subQuestId).getId(),
                 ChapterStateOuterClass.ChapterState.CHAPTER_STATE_BEGIN
             ));
@@ -98,7 +98,7 @@ public class GameQuest {
         getOwner().getQuestManager().queueEvent(QuestCond.QUEST_COND_STATE_EQUAL, getSubQuestId(), getState().getValue(),0,0,0);
 
         getQuestData().getBeginExec().forEach(e -> getOwner().getServer().getQuestSystem().triggerExec(this, e, e.getParam()));
-        mainQuest.getQuestManager().checkQuestAlreadyFullfilled(this);
+        getOwner().getQuestManager().checkQuestAlreadyFullfilled(this);
 
         Grasscutter.getLogger().debug("Quest {} is started", subQuestId);
     }
