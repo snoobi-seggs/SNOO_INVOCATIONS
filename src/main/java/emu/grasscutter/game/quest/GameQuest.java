@@ -199,6 +199,13 @@ public class GameQuest {
 
         getQuestData().getFailExec().forEach(e -> getOwner().getServer().getQuestSystem().triggerExec(this, e, e.getParam()));
 
+        // TODO, QUEST_EXEC_REMOVE_TRIAL_AVATAR only triggers when quest is finished, 
+        // so the following code must also be placed somewhere on quest fails,
+        // not sure if this is the right placed though
+        if (getQuestData().getTrialAvatarList() != null) {
+            getOwner().removeTrialAvatar();
+        }
+
         Grasscutter.getLogger().debug("Quest {} is failed", subQuestId);
     }
 
