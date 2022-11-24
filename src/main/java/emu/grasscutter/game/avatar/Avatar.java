@@ -165,6 +165,12 @@ public class Avatar {
         this.guid = player.getNextGameGuid();
     }
 
+    public void removeOwner() {
+        this.owner = null;
+        this.ownerId = 0;
+        this.guid = 0;
+    }
+
     static public int getMinPromoteLevel(int level) {
         if (level > 80) {
             return 6;
@@ -852,6 +858,7 @@ public class Avatar {
     }
 
     public void save() {
+        if (getTrialAvatarId() > 0) return; // dont save trial avatar
         DatabaseHelper.saveAvatar(this);
     }
 
@@ -872,10 +879,6 @@ public class Avatar {
                     .setFetterState(FetterState.FINISH.getValue())));
         }
 
-        int cardId = this.getNameCardId();
-        // if (this.getPlayer().getNameCardList().contains(cardId)) {
-        //     avatarFetter.addRewardedFetterLevelList(10);
-        // }
         AvatarInfo.Builder avatarInfo = AvatarInfo.newBuilder()
                 .setAvatarId(this.getAvatarId())
                 .setGuid(this.getGuid())
@@ -895,6 +898,9 @@ public class Avatar {
 
         if (this.getAvatarType() == 1){
             avatarInfo.setFetterInfo(avatarFetter);
+            if (this.getPlayer().getNameCardList().contains(this.getNameCardId())) {
+                avatarFetter.addRewardedFetterLevelList(10);
+            }
         }
 
         this.getSkillExtraChargeMap().forEach((skillId, count) ->
@@ -1015,6 +1021,14 @@ public class Avatar {
                 getPlayer().sendPacket(new PacketAvatarEquipChangeNotify(this, item));
             }  
         });
+    }
+
+    public void removeTrialItems(){
+        getEquips().forEach((itemEquipTypeValues, item) -> {
+            item.setEquipCharacter(0);
+            item.removeOwner();
+        });
+        getEquips().clear();
     }
 
     public TrialAvatarInfo trialAvatarInfoProto(){

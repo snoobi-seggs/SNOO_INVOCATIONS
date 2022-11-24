@@ -800,17 +800,21 @@ public class Player {
         addAvatar(new Avatar(avatarId), true);
     }
 
-    public boolean addTrialAvatarForQuest(int trialAvatarId, int questMainId){
+    public boolean addTrialAvatarForQuest(int trialAvatarId, GrantReason reason, int questMainId){
         // TODO, other trial avatar like activity and element trial dungeon might have 
         // completely different scenario, this function is currently used for Quest Exec only
         TrialAvatarData trialAvatar = GameData.getTrialAvatarDataMap().get(trialAvatarId);
-        Avatar avatar = new Avatar(trialAvatar.getTrialAvatarParamList().get(0));
-        if (avatar.getAvatarData() == null || !hasSentLoginPackets()) {
-            return false;
-        }
+        if (trialAvatar == null) return false;
+
+        List<Integer> trialParams = trialAvatar.getTrialAvatarParamList();
+        if (trialParams == null || trialParams.size() < 2) return false;
+
+        Avatar avatar = new Avatar(trialParams.get(0));
+        if (avatar.getAvatarData() == null || !hasSentLoginPackets()) return false;
+
         avatar.setOwner(this);
         // Add trial weapons and relics
-        avatar.setTrialAvatarInfo(trialAvatar, GrantReason.GRANT_REASON_BY_QUEST, questMainId);
+        avatar.setTrialAvatarInfo(trialAvatar, reason, questMainId);
         avatar.equipTrialItems();
         // Recalc stats
         avatar.recalcStats();
@@ -824,14 +828,18 @@ public class Player {
         return true;
     }
 
-    public boolean removeTrialAvatar(){
-        if (getTeamManager().getTrialTeamGuid() == null || getTeamManager().getTrialTeamGuid().size() == 0) {
-            return false;
-        }
+    public boolean removeTrialAvatar(int trialAvatarId){
+        EntityAvatar trialEntityAvatar = getTeamManager().trialAvatarInTeam(trialAvatarId);
+        if (trialEntityAvatar == null) return false;
+
+        Avatar trialAvatar = trialEntityAvatar.getAvatar();
         // Packet, mimic official server behaviour
-        sendPacket(new PacketAvatarDelNotify(getTeamManager().getTrialTeamGuid().values().stream().toList()));
+        sendPacket(new PacketAvatarDelNotify(Arrays.asList(trialAvatar.getGuid())));
         // Reset temporary trial team
-        getTeamManager().getTrialTeamGuid().clear();
+        getTeamManager().removeAvatarFromTrialTeam(trialEntityAvatar);
+
+        trialAvatar.removeTrialItems();
+        trialAvatar.removeOwner();
         // Packet, mimic official server behaviour, necessary to unlock team modifying
         sendPacket(new PacketAvatarTeamUpdateNotify());
         return true;
