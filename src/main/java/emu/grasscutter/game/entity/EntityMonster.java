@@ -5,7 +5,6 @@ import emu.grasscutter.data.common.PropGrowCurve;
 import emu.grasscutter.data.excels.EnvAnimalGatherConfigData;
 import emu.grasscutter.data.excels.MonsterCurveData;
 import emu.grasscutter.data.excels.MonsterData;
-import emu.grasscutter.data.excels.MonsterSpecialNameData;
 import emu.grasscutter.game.dungeons.DungeonPassConditionType;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
@@ -20,7 +19,6 @@ import emu.grasscutter.net.proto.AnimatorParameterValueInfoPairOuterClass.Animat
 import emu.grasscutter.net.proto.EntityAuthorityInfoOuterClass.EntityAuthorityInfo;
 import emu.grasscutter.net.proto.EntityClientDataOuterClass.EntityClientData;
 import emu.grasscutter.net.proto.EntityRendererChangedInfoOuterClass.EntityRendererChangedInfo;
-import emu.grasscutter.net.proto.FightPropPairOuterClass.FightPropPair;
 import emu.grasscutter.net.proto.GadgetInteractReqOuterClass.GadgetInteractReq;
 import emu.grasscutter.net.proto.MonsterBornTypeOuterClass.MonsterBornType;
 import emu.grasscutter.net.proto.PropPairOuterClass.PropPair;
@@ -33,7 +31,6 @@ import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.ProtoHelper;
-import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatOpenHashMap;
 import lombok.Getter;
 import lombok.Setter;
@@ -292,7 +289,7 @@ public class EntityMonster extends GameEntity {
                 .setSpecialNameId(getMonsterData().getSpecialNameId());
 
         }
-        
+
         if (this.getMonsterWeaponId() > 0) {
             SceneWeaponInfo weaponInfo = SceneWeaponInfo.newBuilder()
                     .setEntityId(this.weaponEntityId)

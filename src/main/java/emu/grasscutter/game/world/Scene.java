@@ -116,6 +116,13 @@ public class Scene {
                 .orElse(null);
     }
 
+    public GameEntity getEntityByConfigId(int configId, int groupId) {
+        return this.entities.values().stream()
+                .filter(x -> x.getConfigId() == configId && x.getGroupId() == groupId)
+                .findFirst()
+                .orElse(null);
+    }
+
     @Nullable
     public Route getSceneRouteById(int routeId){
         return sceneRoutes.get(routeId);
