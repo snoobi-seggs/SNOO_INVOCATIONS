@@ -1030,11 +1030,16 @@ public class ScriptLib {
 
     public int ScenePlaySound(LuaTable soundInfo){
         logger.debug("[LUA] Call unimplemented ScenePlaySound with {}", printTable(soundInfo));
-        
-        val soundName = soundInfo.get("sound_name").isstring() ? soundInfo.get("sound_name").tojstring() : null;
-        val isBroadcast = soundInfo.get("is_broadcast").isboolean() ? soundInfo.get("is_broadcast").toboolean() : null;
-        val playPosition = luaToPos(soundInfo.get("play_pos"));
-        val playType = soundInfo.get("play_type").isint() ? soundInfo.get("play_type").toint() : null; // TODO
+
+        val luaSoundName = soundInfo.get("sound_name");
+        val luaIsBroadcast = soundInfo.get("is_broadcast");
+        val luaPlayPosition = soundInfo.get("play_pos");
+        val luaPlayType = soundInfo.get("play_type");
+
+        val soundName = luaSoundName.optjstring(null);
+        val isBroadcast = luaIsBroadcast.optboolean(true);
+        val playPosition = luaToPos(luaPlayPosition);
+        val playType = luaPlayType.optint(0); // TODO
         sceneScriptManager.get().getScene().broadcastPacket(new PacketScenePlayerSoundNotify(playPosition, soundName, playType));
         return 0;
     }

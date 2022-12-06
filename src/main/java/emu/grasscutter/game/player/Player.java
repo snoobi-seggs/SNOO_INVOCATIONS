@@ -76,7 +76,7 @@ import emu.grasscutter.utils.DateHelper;
 import emu.grasscutter.utils.MessageHandler;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.Utils;
-import org.sorapointa.proto.AvatarDelNotifyOuterClass.AvatarDelNotify;
+import emu.grasscutter.net.proto.AvatarDelNotifyOuterClass.AvatarDelNotify;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
