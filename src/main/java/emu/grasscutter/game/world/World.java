@@ -256,10 +256,11 @@ public class World implements Iterable<Player> {
         newScene.addPlayer(player);
         player.setAvatarsAbilityForScene(newScene);
         // Dungeon
-        if(dungeonData!=null){
-            var dungeonManager = new DungeonManager(newScene, dungeonData);
-            dungeonManager.startDungeon();
-        }
+        // Dungeon system is handling this already
+        // if(dungeonData!=null){
+        //     var dungeonManager = new DungeonManager(newScene, dungeonData);
+        //     dungeonManager.startDungeon();
+        // }
         SceneConfig config = newScene.getScriptManager().getConfig();
         if (teleportTo == null && config != null) {
             if (config.born_pos != null) {

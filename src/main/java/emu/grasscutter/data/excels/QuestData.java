@@ -35,6 +35,7 @@ public class QuestData extends GameResource {
     private List<QuestExecParam> finishExec;
     private List<QuestExecParam> failExec;
     private Guide guide;
+    private List<Integer> trialAvatarList;
 
     //ResourceLoader not happy if you remove getId() ~~
     public int getId() {

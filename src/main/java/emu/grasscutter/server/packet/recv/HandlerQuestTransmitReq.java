@@ -5,11 +5,10 @@ import emu.grasscutter.game.quest.GameMainQuest;
 import emu.grasscutter.net.packet.Opcodes;
 import emu.grasscutter.net.packet.PacketHandler;
 import emu.grasscutter.net.packet.PacketOpcodes;
-import emu.grasscutter.server.event.player.PlayerTeleportEvent.TeleportType;
 import emu.grasscutter.server.game.GameSession;
 import emu.grasscutter.server.packet.send.PacketQuestTransmitRsp;
 import emu.grasscutter.utils.Position;
-import org.sorapointa.proto.QuestTransmitReqOuterClass.QuestTransmitReq;
+import emu.grasscutter.net.proto.QuestTransmitReqOuterClass.QuestTransmitReq;
 
 import java.util.List;
 import java.util.ArrayList;

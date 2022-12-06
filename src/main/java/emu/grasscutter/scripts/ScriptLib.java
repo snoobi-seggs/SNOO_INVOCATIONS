@@ -1,6 +1,7 @@
 package emu.grasscutter.scripts;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.data.GameData;
 import emu.grasscutter.game.activity.ActivityManager;
 import emu.grasscutter.game.dungeons.challenge.DungeonChallenge;
 import emu.grasscutter.game.dungeons.challenge.factory.ChallengeFactory;
@@ -1027,9 +1028,19 @@ public class ScriptLib {
         return 0;
     }
 
-    public int ScenePlaySound(LuaTable var1){
-        logger.warn("[LUA] Call unimplemented ScenePlaySound with {}", printTable(var1));
-        //TODO implement var1 contains Position play_pos, string sound_name, int play_type, bool is_broadcast
+    public int ScenePlaySound(LuaTable soundInfo){
+        logger.debug("[LUA] Call unimplemented ScenePlaySound with {}", printTable(soundInfo));
+
+        val luaSoundName = soundInfo.get("sound_name");
+        val luaIsBroadcast = soundInfo.get("is_broadcast");
+        val luaPlayPosition = soundInfo.get("play_pos");
+        val luaPlayType = soundInfo.get("play_type");
+
+        val soundName = luaSoundName.optjstring(null);
+        val isBroadcast = luaIsBroadcast.optboolean(true);
+        val playPosition = luaToPos(luaPlayPosition);
+        val playType = luaPlayType.optint(0); // TODO
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketScenePlayerSoundNotify(playPosition, soundName, playType));
         return 0;
     }
 
@@ -1085,9 +1096,16 @@ public class ScriptLib {
         //TODO implement var2 is a postion
         return 0;
     }
-    public int ShowClientGuide(String var1){
-        logger.warn("[LUA] Call unimplemented ShowClientGuide with {}", var1);
-        //TODO implement
+    public int ShowClientGuide(String guideName){
+        logger.debug("[LUA] Call unimplemented ShowClientGuide with {}", guideName);
+        if (GameData.getGuideTriggerDataStringMap().get(guideName) != null) {
+            // if should handle by open state, dont send packet here
+            // not entirely sure what return value is about
+            // probably not needing this check statement here since the value comes from 
+            // the lua script
+            return 1;
+        }
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketShowClientGuideNotify(guideName));
         return 0;
     }
 

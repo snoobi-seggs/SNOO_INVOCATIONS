@@ -7,6 +7,7 @@ import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.binout.ConfigLevelEntity;
 import emu.grasscutter.data.excels.AvatarData;
 import emu.grasscutter.data.excels.PlayerLevelData;
+import emu.grasscutter.data.excels.TrialAvatarData;
 import emu.grasscutter.data.excels.WeatherData;
 import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.Account;
@@ -63,6 +64,7 @@ import emu.grasscutter.net.proto.PropChangeReasonOuterClass.PropChangeReason;
 import emu.grasscutter.net.proto.ShowAvatarInfoOuterClass;
 import emu.grasscutter.net.proto.SocialDetailOuterClass.SocialDetail;
 import emu.grasscutter.net.proto.SocialShowAvatarInfoOuterClass;
+import emu.grasscutter.net.proto.TrialAvatarGrantRecordOuterClass.TrialAvatarGrantRecord.GrantReason;
 import emu.grasscutter.scripts.data.SceneRegion;
 import emu.grasscutter.server.event.player.PlayerJoinEvent;
 import emu.grasscutter.server.event.player.PlayerQuitEvent;
@@ -74,6 +76,7 @@ import emu.grasscutter.utils.DateHelper;
 import emu.grasscutter.utils.MessageHandler;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.Utils;
+import emu.grasscutter.net.proto.AvatarDelNotifyOuterClass.AvatarDelNotify;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
@@ -795,6 +798,51 @@ public class Player {
     public void addAvatar(int avatarId) {
         // I dont see why we cant do this lolz
         addAvatar(new Avatar(avatarId), true);
+    }
+
+    public boolean addTrialAvatarForQuest(int trialAvatarId, GrantReason reason, int questMainId){
+        // TODO, other trial avatar like activity and element trial dungeon might have 
+        // completely different scenario, this function is currently used for Quest Exec only
+        TrialAvatarData trialAvatar = GameData.getTrialAvatarDataMap().get(trialAvatarId);
+        if (trialAvatar == null) return false;
+
+        List<Integer> trialParams = trialAvatar.getTrialAvatarParamList();
+        if (trialParams == null || trialParams.size() < 2) return false;
+
+        Avatar avatar = new Avatar(trialParams.get(0));
+        if (avatar.getAvatarData() == null || !hasSentLoginPackets()) return false;
+
+        avatar.setOwner(this);
+        // Add trial weapons and relics
+        avatar.setTrialAvatarInfo(trialAvatar, reason, questMainId);
+        avatar.equipTrialItems();
+        // Recalc stats
+        avatar.recalcStats();
+
+        // Packet, mimic official server behaviour, add to player's bag but not saving to db
+        sendPacket(new PacketAvatarAddNotify(avatar, false));
+        // add to avatar to temporary trial team
+        getTeamManager().addAvatarToTrialTeam(avatar);
+        // Packet, mimic official server behaviour, neccessary to stop player from modifying team 
+        sendPacket(new PacketAvatarTeamUpdateNotify(this));
+        return true;
+    }
+
+    public boolean removeTrialAvatar(int trialAvatarId){
+        EntityAvatar trialEntityAvatar = getTeamManager().trialAvatarInTeam(trialAvatarId);
+        if (trialEntityAvatar == null) return false;
+
+        Avatar trialAvatar = trialEntityAvatar.getAvatar();
+        // Packet, mimic official server behaviour
+        sendPacket(new PacketAvatarDelNotify(Arrays.asList(trialAvatar.getGuid())));
+        // Reset temporary trial team
+        getTeamManager().removeAvatarFromTrialTeam(trialEntityAvatar);
+
+        trialAvatar.removeTrialItems();
+        trialAvatar.removeOwner();
+        // Packet, mimic official server behaviour, necessary to unlock team modifying
+        sendPacket(new PacketAvatarTeamUpdateNotify());
+        return true;
     }
 
     public void addFlycloak(int flycloakId) {

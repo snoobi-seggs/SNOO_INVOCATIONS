@@ -88,6 +88,7 @@ public class GameData {
     @Getter private static final Int2ObjectMap<FurnitureMakeConfigData> furnitureMakeConfigDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<GadgetData> gadgetDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<GatherData> gatherDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<GuideTriggerData> guideTriggerDataMap = new Int2ObjectOpenHashMap<>(); // Don't use, just to prevent resource loader from crashing
     @Getter private static final Int2ObjectMap<HomeWorldBgmData> homeWorldBgmDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<HomeWorldLevelData> homeWorldLevelDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<InvestigationMonsterData> investigationMonsterDataMap = new Int2ObjectOpenHashMap<>();
@@ -112,6 +113,9 @@ public class GameData {
     @Getter private static final Int2ObjectMap<TowerFloorData> towerFloorDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<TowerLevelData> towerLevelDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<TowerScheduleData> towerScheduleDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<TrialAvatarData> trialAvatarDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<TrialAvatarTemplateData> trialAvatarTemplateDataMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<TrialReliquaryData> trialReliquaryDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<TriggerExcelConfigData> triggerExcelConfigDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<WeaponCurveData> weaponCurveDataMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<WeaponLevelData> weaponLevelDataMap = new Int2ObjectOpenHashMap<>();
@@ -139,6 +143,7 @@ public class GameData {
     @Getter private static final Map<Integer, List<Integer>> scenePointsPerScene = new HashMap<>();
     @Getter private static final Map<String, ScriptSceneData> scriptSceneDataMap = new HashMap<>();
     @Getter private static final Map<String, ConfigLevelEntity> configLevelEntityDataMap = new HashMap<>();
+    @Getter private static final Map<String, GuideTriggerData> guideTriggerDataStringMap = new HashMap<>();
     private static Map<Integer, List<Integer>> fetters = new HashMap<>();
     private static Map<Integer, List<ShopGoodsData>> shopGoods = new HashMap<>();
     protected static Int2ObjectMap<IntSet> proudSkillGroupLevels = new Int2ObjectOpenHashMap<>();

@@ -63,6 +63,9 @@ public class TeamManager extends BasePlayerDataManager {
 
     @Transient private int useTemporarilyTeamIndex = -1;
     @Transient private List<TeamInfo> temporaryTeam; // Temporary Team for tower
+    // Trial Teams, using hashmap not list since only one unique trial avatar can be in a single team
+    @Transient @Getter private Map<Integer, Long> trialTeamGuid;
+    @Transient @Getter @Setter private int previousIndex = -1; // index of character selection in team before adding trial avatar
 
     public TeamManager() {
         this.mpTeam = new TeamInfo();
@@ -70,6 +73,7 @@ public class TeamManager extends BasePlayerDataManager {
         this.gadgets = new HashSet<>();
         this.teamResonances = new IntOpenHashSet();
         this.teamResonancesConfig = new IntOpenHashSet();
+        this.trialTeamGuid = new HashMap<>();
     }
 
     public TeamManager(Player player) {
@@ -288,6 +292,17 @@ public class TeamManager extends BasePlayerDataManager {
         }
     }
 
+    public void updateTeamProperties(){
+        // Update team resonances
+        updateTeamResonances();
+
+        // Packets
+        getPlayer().sendPacket(new PacketSceneTeamUpdateNotify(getPlayer()));
+
+        // Skill charges packet - Yes, this is official server behavior as of 2.6.0
+        getActiveTeam().stream().map(EntityAvatar::getAvatar).forEach(Avatar::sendSkillExtraChargeMap);
+    }
+
     public void updateTeamEntities(BasePacket responsePacket) {
         // Sanity check - Should never happen
         if (this.getCurrentTeamInfo().getAvatars().size() <= 0) {
@@ -336,15 +351,8 @@ public class TeamManager extends BasePlayerDataManager {
             prevSelectedAvatarIndex = Math.min(this.currentCharacterIndex, this.getActiveTeam().size() - 1);
         }
         this.currentCharacterIndex = prevSelectedAvatarIndex;
-
-        // Update team resonances
-        this.updateTeamResonances();
-
-        // Packets
-        this.getPlayer().getWorld().broadcastPacket(new PacketSceneTeamUpdateNotify(this.getPlayer()));
-
-        // Skill charges packet - Yes, this is official server behavior as of 2.6.0
-        this.getActiveTeam().stream().map(EntityAvatar::getAvatar).forEach(Avatar::sendSkillExtraChargeMap);
+        
+        updateTeamProperties();
 
         // Run callback
         if (responsePacket != null) {
@@ -408,6 +416,56 @@ public class TeamManager extends BasePlayerDataManager {
         // Clear current team info and add avatars from our new team
         teamInfo.getAvatars().clear();
         this.addAvatarsToTeam(teamInfo, newTeam);
+    }
+
+    public void addAvatarToTrialTeam(Avatar avatar){
+        // add to trial team
+        getTrialTeamGuid().put(avatar.getAvatarId(), avatar.getGuid());
+        setPreviousIndex(getCurrentCharacterIndex());
+        EntityAvatar newEntity = new EntityAvatar(getPlayer().getScene(), avatar);
+        boolean inTeam = false;
+        int index;
+        // replace avatar with trial avatar if in team already
+        // Note: index increments to the size of active team before exiting loop
+        for (index = 0; index < getActiveTeam().size(); index++){
+            EntityAvatar activeEntity = getActiveTeam().get(index);
+            if (activeEntity.getAvatar().getAvatarId() == avatar.getAvatarId()){
+                inTeam = true;
+                getActiveTeam().set(index, newEntity);
+                break;
+            }
+            
+        }
+        if (!inTeam) getActiveTeam().add(newEntity);
+
+        // select the newly added trial avatar
+        // Limit character index in case it's out of bounds
+        setCurrentCharacterIndex(index >= getActiveTeam().size() ? index-1 : index);
+        updateTeamProperties(); // is necessary to update team at scene
+    }
+
+    public EntityAvatar trialAvatarInTeam(int trialAvatarId) {
+        return getActiveTeam().stream()
+            .filter(entityAvatar -> entityAvatar.getAvatar().getTrialAvatarId() == trialAvatarId)
+            .findFirst()
+            .orElse(null);
+    }
+
+    public void removeAvatarFromTrialTeam(EntityAvatar trialAvatar) {
+        getTrialTeamGuid().remove(trialAvatar.getAvatar().getAvatarId());
+        getActiveTeam().remove(trialAvatar);
+
+        if (getPreviousIndex() > -1) { // restore character selection before adding trial avatar
+            setCurrentCharacterIndex(getPreviousIndex());
+            setPreviousIndex(-1);
+        }
+
+        // Limit character index in case its out of bounds
+        if (getCurrentCharacterIndex() >= getActiveTeam().size() || getCurrentCharacterIndex() < 0) {
+            setCurrentCharacterIndex(getCurrentCharacterIndex() - 1);
+        }
+
+        updateTeamProperties();        
     }
 
     public void setupTemporaryTeam(List<List<Long>> guidList) {
