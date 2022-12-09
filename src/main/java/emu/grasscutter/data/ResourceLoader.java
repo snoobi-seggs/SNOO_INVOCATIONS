@@ -402,6 +402,9 @@ public class ResourceLoader {
                 try {
                     val mainQuest = JsonUtils.loadToClass(path, MainQuestData.class);
                     GameData.getMainQuestDataMap().put(mainQuest.getId(), mainQuest);
+                    if(mainQuest.getTalks() != null) {
+                        mainQuest.getTalks().forEach(talkData -> GameData.getQuestTalkMap().put(talkData.getId(), mainQuest.getId()));
+                    }
                 } catch (IOException e) {
 
                 }

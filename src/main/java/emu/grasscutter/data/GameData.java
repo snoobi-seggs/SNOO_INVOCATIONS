@@ -150,6 +150,7 @@ public class GameData {
     protected static Int2IntMap proudSkillGroupMaxLevels = new Int2IntOpenHashMap();
     protected static Int2ObjectMap<IntSet> avatarSkillLevels = new Int2ObjectOpenHashMap<>();
     @Getter private static final Map<String, List<QuestData>> beginCondQuestMap = new HashMap<>();
+    @Getter private static final Map<Integer, Integer> questTalkMap = new HashMap<>();
 
     // Getters with wrong names, remove later
     @Deprecated(forRemoval = true) public static Int2ObjectMap<CodexReliquaryData> getcodexReliquaryIdMap() {return codexReliquaryDataIdMap;}
