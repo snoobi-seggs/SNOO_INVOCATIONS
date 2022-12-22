@@ -6,6 +6,7 @@ import emu.grasscutter.data.common.ItemParamData;
 import emu.grasscutter.data.excels.DungeonData;
 import emu.grasscutter.data.excels.DungeonPassConfigData;
 import emu.grasscutter.game.dungeons.dungeon_results.BaseDungeonResult;
+import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;

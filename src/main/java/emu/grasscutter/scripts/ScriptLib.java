@@ -4,6 +4,7 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.game.activity.ActivityManager;
 import emu.grasscutter.game.dungeons.challenge.DungeonChallenge;
+import emu.grasscutter.game.dungeons.challenge.enums.FatherChallengeProperty;
 import emu.grasscutter.game.dungeons.challenge.factory.ChallengeFactory;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.GadgetWorktop;
@@ -773,6 +774,12 @@ public class ScriptLib {
     }
     public int StartFatherChallenge(int var1){
         logger.warn("[LUA] Call unimplemented StartFatherChallenge with {}", var1);
+        //TODO implement
+        return 0;
+    }
+    public int ModifyFatherChallengeProperty(int challengeId, int propertyTypeIndex, int value){
+        val propertyType = FatherChallengeProperty.values()[propertyTypeIndex];
+        logger.warn("[LUA] Call unimplemented ModifyFatherChallengeProperty with {} {} {}", challengeId, propertyType.name(), value);
         //TODO implement
         return 0;
     }
