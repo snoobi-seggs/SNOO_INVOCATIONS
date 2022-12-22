@@ -92,7 +92,6 @@ public class ResourceLoader {
         // Load special ability in certain scene/dungeon
         loadConfigLevelEntityData();
         loadQuestShareConfig();
-        cacheQuestCondition();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
     }
@@ -429,30 +428,6 @@ public class ResourceLoader {
         }
 
         Grasscutter.getLogger().debug("Loaded " + GameData.getMainQuestDataMap().size() + " MainQuestDatas.");
-    }
-
-    private static void cacheQuestCondition() {
-        val cacheMap = GameData.getBeginCondQuestMap();
-        GameData.getQuestDataMap().forEach((id, quest) -> {
-            if(quest.getAcceptCond() == null){
-                Grasscutter.getLogger().warn("missing AcceptConditions for quest {}", quest.getSubId());
-                return;
-            }
-            if(quest.getAcceptCond().isEmpty()){
-                val list = cacheMap.computeIfAbsent(QuestData.questConditionKey(QuestCond.QUEST_COND_NONE, 0, null), e -> new ArrayList<>());
-                list.add(quest);
-            } else {
-                quest.getAcceptCond().forEach(questCondition -> {
-                    if (questCondition.getType() == null) {
-                        return;
-                    }
-                    val key = questCondition.asKey();
-                    val list = cacheMap.computeIfAbsent(key, e -> new ArrayList<>());
-                    list.add(quest);
-                });
-            }
-        });
-        Grasscutter.getLogger().debug("cached " + GameData.getBeginCondQuestMap().size() + " quest accept conditions.");
     }
 
     public static void loadScriptSceneData() {

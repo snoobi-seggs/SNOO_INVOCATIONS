@@ -160,7 +160,7 @@ public class GameQuest {
 
         getOwner().sendPacket(new PacketQuestListUpdateNotify(this));
 
-        if (getQuestData().finishParent()) {
+        if (getQuestData().isFinishParent()) {
             // This quest finishes the questline - the main quest will also save the quest to db, so we don't have to call save() here
             getMainQuest().finish();
         }
