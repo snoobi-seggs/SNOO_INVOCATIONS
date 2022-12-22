@@ -146,6 +146,13 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         this.player.sendPacket(new PacketSetOpenStateRsp(openState, value));
     }
 
+    /**
+     * This force sets an open state, ignoring all conditions and permissions
+     */
+    public void forceSetOpenState(int openState, int value){
+        setOpenState(openState, value);
+    }
+
     /**********
         Triggered unlocking of open states (unlock states whose conditions have been met.)
     **********/
