@@ -24,6 +24,7 @@ import emu.grasscutter.net.proto.SceneEntityAiInfoOuterClass.SceneEntityAiInfo;
 import emu.grasscutter.net.proto.SceneEntityInfoOuterClass.SceneEntityInfo;
 import emu.grasscutter.net.proto.SceneGadgetInfoOuterClass.SceneGadgetInfo;
 import emu.grasscutter.net.proto.VectorOuterClass.Vector;
+import emu.grasscutter.scripts.EntityControllerScriptManager;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.SceneGadget;
 import emu.grasscutter.scripts.data.ScriptArgs;
@@ -45,8 +46,8 @@ public class EntityGadget extends EntityBaseGadget {
     private final GadgetData data;
     private final Position pos;
     private final Position rot;
-    private final Position bornPos;
-    private final Position bornRot;
+    @Getter private final Position bornPos;
+    @Getter private final Position bornRot;
     private int gadgetId;
     @Getter @Setter private GameEntity owner = null;
 
@@ -58,6 +59,10 @@ public class EntityGadget extends EntityBaseGadget {
     @Nullable @Getter
     private ConfigGadget configGadget;
     @Getter @Setter private BaseRoute routeConfig;
+
+    @Getter @Setter private int stopValue = 0; //Controller related, inited to zero
+    @Getter @Setter private int startValue = 0; //Controller related, inited to zero
+    @Getter @Setter private int ticksSinceChange;
 
     public EntityGadget(Scene scene, int gadgetId, Position pos, Position rot) {
         super(scene);
@@ -72,6 +77,10 @@ public class EntityGadget extends EntityBaseGadget {
         this.rot = rot != null ? rot.clone() : new Position();
         this.bornRot = this.rot.clone();
         fillFightProps(configGadget);
+        if(GameData.getGadgetMappingMap().containsKey(gadgetId)) {
+            String controllerName = GameData.getGadgetMappingMap().get(gadgetId).getServerController();
+            setEntityController(EntityControllerScriptManager.getGadgetController(controllerName));
+        }
     }
 
     public EntityGadget(Scene scene, int gadgetId, Position pos) {
@@ -114,7 +123,10 @@ public class EntityGadget extends EntityBaseGadget {
     }
 
     public void updateState(int state) {
+        if(state == this.getState()) return; //Don't triggers events
+
         this.setState(state);
+        ticksSinceChange = getScene().getSceneTimeSeconds();
         this.getScene().broadcastPacket(new PacketGadgetStateNotify(this, state));
         getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_GADGET_STATE_CHANGE, state, this.getConfigId()));
     }

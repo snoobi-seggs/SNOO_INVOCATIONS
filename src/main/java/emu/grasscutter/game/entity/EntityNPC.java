@@ -28,6 +28,11 @@ public class EntityNPC extends GameEntity{
     }
 
     @Override
+    public int getEntityTypeId() {
+        return metaNpc.npc_id;
+    }
+
+    @Override
     public Int2FloatOpenHashMap getFightProperties() {
         return null;
     }

@@ -38,6 +38,11 @@ public class EntityRegion extends GameEntity{
         this.hasNewEntities = true;
     }
 
+    @Override
+    public int getEntityTypeId() {
+        return metaRegion.config_id;
+    }
+
     public boolean hasNewEntities() {
         return hasNewEntities;
     }

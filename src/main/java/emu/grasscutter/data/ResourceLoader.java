@@ -7,6 +7,7 @@ import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.routes.SceneRoutes;
 import emu.grasscutter.data.common.PointData;
 import emu.grasscutter.data.excels.QuestData;
+import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDrop;
 import emu.grasscutter.game.managers.blossom.BlossomConfig;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
@@ -16,6 +17,7 @@ import emu.grasscutter.game.quest.enums.QuestCond;
 import emu.grasscutter.game.world.SpawnDataEntry;
 import emu.grasscutter.game.world.SpawnDataEntry.GridBlockId;
 import emu.grasscutter.game.world.SpawnDataEntry.SpawnGroupEntry;
+import emu.grasscutter.scripts.EntityControllerScriptManager;
 import emu.grasscutter.scripts.SceneIndexManager;
 import emu.grasscutter.scripts.ScriptLoader;
 import emu.grasscutter.utils.JsonUtils;
@@ -92,6 +94,8 @@ public class ResourceLoader {
         // Load special ability in certain scene/dungeon
         loadConfigLevelEntityData();
         loadQuestShareConfig();
+        loadGadgetMappings();
+        EntityControllerScriptManager.load();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
     }
@@ -597,6 +601,19 @@ public class ResourceLoader {
             return;
         }
     }
+
+    private static void loadGadgetMappings() {
+        try {
+            val gadgetMap = GameData.getGadgetMappingMap();
+            try {
+                JsonUtils.loadToList(getResourcePath("Server/GadgetMapping.json"), GadgetMapping.class).forEach(entry -> gadgetMap.put(entry.getGadgetId(), entry));;
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded {} gadget mappings.", gadgetMap.size());
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Unable to load gadget mappings.", e);
+        }
+    }
+
     // BinOutput configs
 
     public static class AvatarConfig {

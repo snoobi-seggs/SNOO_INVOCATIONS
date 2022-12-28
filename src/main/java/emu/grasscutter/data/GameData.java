@@ -10,6 +10,7 @@ import java.util.Optional;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.binout.*;
 import emu.grasscutter.data.binout.routes.Route;
+import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDropEntry;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
 import emu.grasscutter.game.quest.RewindData;
@@ -137,6 +138,9 @@ public class GameData {
     private static final Int2ObjectMap<CodexWeaponData> codexWeaponDataMap = new Int2ObjectOpenHashMap<>();
 
     @Getter private static final Int2ObjectMap<List<DungeonDropEntry>> dungeonDropDataMap = new Int2ObjectOpenHashMap<>();
+
+    // Custom community server resources
+    @Getter private static final Int2ObjectMap<GadgetMapping> gadgetMappingMap = new Int2ObjectOpenHashMap<>();
 
     // Cache
     @Getter private static final IntList scenePointIdList = new IntArrayList();

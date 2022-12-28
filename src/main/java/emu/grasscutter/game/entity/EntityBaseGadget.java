@@ -5,6 +5,7 @@ import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.scripts.data.ScriptArgs;
+import emu.grasscutter.server.event.entity.EntityDamageEvent;
 
 import static emu.grasscutter.scripts.constants.EventType.EVENT_SPECIFIC_GADGET_HP_CHANGE;
 
@@ -17,6 +18,11 @@ public abstract class EntityBaseGadget extends GameEntity {
     public abstract int getGadgetId();
 
     @Override
+    public int getEntityTypeId() {
+        return getGadgetId();
+    }
+
+    @Override
     public void onDeath(int killerId) {
         super.onDeath(killerId); // Invoke super class's onDeath() method.
 
@@ -24,7 +30,8 @@ public abstract class EntityBaseGadget extends GameEntity {
     }
 
     @Override
-    public void callLuaHPEvent() {
+    public void callLuaHPEvent(EntityDamageEvent event) {
+        super.callLuaHPEvent(event);
         getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_SPECIFIC_GADGET_HP_CHANGE, getConfigId(), getGadgetId())
             .setSourceEntityId(getId())
             .setParam3((int) this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP))

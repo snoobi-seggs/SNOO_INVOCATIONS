@@ -15,9 +15,7 @@ import emu.grasscutter.game.entity.gadget.GadgetWorktop;
 import emu.grasscutter.game.managers.blossom.BlossomManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.player.TeamInfo;
-import emu.grasscutter.game.props.FightProperty;
-import emu.grasscutter.game.props.LifeState;
-import emu.grasscutter.game.props.SceneType;
+import emu.grasscutter.game.props.*;
 import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
 import emu.grasscutter.net.packet.BasePacket;
@@ -36,6 +34,7 @@ import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -134,6 +133,10 @@ public class Scene {
 
     public int getSceneTime() {
         return (int) (System.currentTimeMillis() - this.startTime);
+    }
+
+    public int getSceneTimeSeconds() {
+        return getSceneTime()/1000;
     }
 
     public void addDungeonSettleObserver(DungeonSettleListener dungeonSettleListener) {
@@ -317,6 +320,7 @@ public class Scene {
     public void handleAttack(AttackResult result) {
         //GameEntity attacker = getEntityById(result.getAttackerId());
         GameEntity target = getEntityById(result.getDefenseId());
+        ElementType attackType = ElementType.getTypeByValue(result.getElementType());
 
         if (target == null) {
             return;
@@ -330,7 +334,7 @@ public class Scene {
         }
 
         // Sanity check
-        target.damage(result.getDamage(), result.getAttackerId());
+        target.damage(result.getDamage(), result.getAttackerId(), attackType);
     }
 
     public void killEntity(GameEntity target) {
@@ -390,6 +394,9 @@ public class Scene {
         if (challenge != null) {
             challenge.onCheckTimeOut();
         }
+
+        val sceneTime = getSceneTimeSeconds();
+        getEntities().forEach((eid, e) -> e.onTick(sceneTime));
 
         blossomManager.onTick();
 

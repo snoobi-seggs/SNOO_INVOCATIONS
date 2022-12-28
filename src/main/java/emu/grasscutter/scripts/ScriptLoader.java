@@ -3,6 +3,7 @@ package emu.grasscutter.scripts;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.game.dungeons.challenge.enums.ChallengeEventMarkType;
 import emu.grasscutter.game.dungeons.challenge.enums.FatherChallengeProperty;
+import emu.grasscutter.game.props.ElementType;
 import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.scripts.constants.*;
@@ -69,6 +70,7 @@ public class ScriptLoader {
 
         addEnumByIntValue(ctx, EntityType.values(), "EntityType");
         addEnumByIntValue(ctx, QuestState.values(), "QuestState");
+        addEnumByIntValue(ctx, ElementType.values(), "ElementType");
 
         addEnumByOrdinal(ctx, GroupKillPolicy.values(), "GroupKillPolicy");
         addEnumByOrdinal(ctx, SealBattleType.values(), "SealBattleType");
@@ -86,13 +88,19 @@ public class ScriptLoader {
 
     private static <T extends Enum<T>> void addEnumByOrdinal(LuajContext ctx, T[] enumArray, String name){
         LuaTable table = new LuaTable();
-        Arrays.stream(enumArray).forEach(e -> table.set(e.name().toUpperCase(), e.ordinal()));
+        Arrays.stream(enumArray).forEach(e -> {
+            table.set(e.name(), e.ordinal());
+            table.set(e.name().toUpperCase(), e.ordinal());
+        });
         ctx.globals.set(name, table);
     }
 
     private static <T extends Enum<T> & IntValueEnum> void addEnumByIntValue(LuajContext ctx, T[] enumArray, String name){
         LuaTable table = new LuaTable();
-        Arrays.stream(enumArray).forEach(e -> table.set(e.name().toUpperCase(), e.getValue()));
+        Arrays.stream(enumArray).forEach(e -> {
+            table.set(e.name(), e.getValue());
+            table.set(e.name().toUpperCase(), e.getValue());
+        });
         ctx.globals.set(name, table);
     }
 
