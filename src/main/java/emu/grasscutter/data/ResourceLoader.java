@@ -512,7 +512,7 @@ public class ResourceLoader {
                     val sceneRoutes = JsonUtils.loadToClass(path, SceneRoutes.class);
                     val sceneRoutesMap = GameData.getSceneRoutes(sceneRoutes.getSceneId());
                     if(sceneRoutes.getRoutes() == null){
-                        Grasscutter.getLogger().info("No routes found for scene {}", sceneRoutes.getSceneId());
+                        //Grasscutter.getLogger().info("No routes found for scene {}", sceneRoutes.getSceneId());
                         return;
                     }
                     Arrays.stream(sceneRoutes.getRoutes()).forEach(r -> sceneRoutesMap.put(r.getLocalId(), r));

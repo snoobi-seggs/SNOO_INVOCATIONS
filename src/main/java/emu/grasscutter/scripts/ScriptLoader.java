@@ -119,7 +119,7 @@ public class ScriptLoader {
             return sc.get();
         }
 
-        Grasscutter.getLogger().debug("Loading script " + path);
+        //Grasscutter.getLogger().debug("Loading script " + path);
 
         File file = new File(path);
 
@@ -142,7 +142,7 @@ public class ScriptLoader {
             return sc.get();
         }
 
-        Grasscutter.getLogger().debug("Loading script " + path);
+        //Grasscutter.getLogger().debug("Loading script " + path);
         final Path scriptPath = FileUtils.getScriptPath(path);
         if (!Files.exists(scriptPath)) return null;
 
