@@ -46,6 +46,7 @@ public class DungeonManager {
     private boolean ended = false;
     private Set<Integer> activeDungeonWayPoints = new HashSet<>();
     private int newestWayPoint = 0;
+    private int startSceneTime = 0;
 
     public DungeonManager(@NonNull Scene scene, @NonNull DungeonData dungeonData) {
         this.scene = scene;
@@ -204,6 +205,7 @@ public class DungeonManager {
     }
 
     public void startDungeon() {
+        this.startSceneTime = scene.getSceneTimeSeconds();
         scene.getPlayers().forEach(p-> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ENTER_DUNGEON, dungeonData.getId()));
     }
 

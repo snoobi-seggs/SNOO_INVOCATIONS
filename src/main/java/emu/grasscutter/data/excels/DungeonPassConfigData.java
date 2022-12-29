@@ -19,4 +19,10 @@ public class DungeonPassConfigData extends GameResource {
         @Getter private DungeonPassConditionType condType;
         @Getter int[] param;
     }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        conds = conds.stream().filter(condition -> condition.getCondType()!=null).toList();
+    }
 }
