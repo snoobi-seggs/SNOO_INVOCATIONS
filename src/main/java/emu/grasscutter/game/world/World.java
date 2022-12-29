@@ -22,17 +22,13 @@ import emu.grasscutter.scripts.data.SceneConfig;
 import emu.grasscutter.server.event.player.PlayerTeleportEvent;
 import emu.grasscutter.server.event.player.PlayerTeleportEvent.TeleportType;
 import emu.grasscutter.server.game.GameServer;
-import emu.grasscutter.server.packet.send.PacketDelTeamEntityNotify;
-import emu.grasscutter.server.packet.send.PacketPlayerEnterSceneNotify;
-import emu.grasscutter.server.packet.send.PacketScenePlayerInfoNotify;
-import emu.grasscutter.server.packet.send.PacketSyncScenePlayTeamEntityNotify;
-import emu.grasscutter.server.packet.send.PacketSyncTeamEntityNotify;
-import emu.grasscutter.server.packet.send.PacketWorldPlayerInfoNotify;
-import emu.grasscutter.server.packet.send.PacketWorldPlayerRTTNotify;
+import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import lombok.Getter;
+import lombok.val;
 
 import static emu.grasscutter.server.event.player.PlayerTeleportEvent.TeleportType.SCRIPT;
 
@@ -48,6 +44,13 @@ public class World implements Iterable<Player> {
     private int worldLevel;
 
     private boolean isMultiplayer;
+
+
+    @Getter
+    private int tickCount = 0;
+    @Getter private boolean isPaused = false;
+    private long lastUpdateTime;
+    @Getter private int currentWorldTime = 0;
 
     public World(Player player) {
         this(player, false);
@@ -355,11 +358,62 @@ public class World implements Iterable<Player> {
     public boolean onTick() {
         if (this.getPlayerCount() == 0) return true;
         this.scenes.forEach((k, scene) -> scene.onTick());
+
+        // trigger game time tick for quests TODO maybe move it to onTick for QuestManager?
+        players.forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
+            getGameTimeHours() , // hours
+            0)); //days
+
+
+        //update time every 10 seconds
+        if(tickCount%10 == 0){
+            players.forEach(p -> p.sendPacket(new PacketPlayerGameTimeNotify(p)));
+        }
+        tickCount++;
         return false;
     }
 
     public void close() {
 
+    }
+
+    public void changeTime(int time, int days) {
+        val currentTime = getGameTime();
+        this.currentWorldTime+=days*1440*1000 + (time-currentTime)*1000;
+        players.forEach(player -> player.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
+            getGameTimeHours() , // hours
+            days)); //days
+    }
+
+    public int getGameTime() {
+        return getWorldTimeSeconds() % 1440;
+    }
+
+    public int getGameTimeHours() {
+        return getGameTime() / 60 ;
+    }
+
+    public void setPaused(boolean paused) {
+        getWorldTime();
+        if(this.isPaused != paused && !paused){
+            this.lastUpdateTime = System.currentTimeMillis();
+        }
+        isPaused = paused;
+        players.forEach(player -> player.setPaused(paused));
+        scenes.forEach((key, scene) -> scene.setPaused(paused));
+    }
+
+    public int getWorldTime() {
+        if(!isPaused) {
+            long newUpdateTime = System.currentTimeMillis();
+            this.currentWorldTime += newUpdateTime - lastUpdateTime;
+            this.lastUpdateTime = newUpdateTime;
+        }
+        return currentWorldTime;
+    }
+
+    public int getWorldTimeSeconds() {
+        return getWorldTime()/1000;
     }
 
     @Override

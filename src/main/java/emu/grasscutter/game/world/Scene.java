@@ -55,9 +55,6 @@ public class Scene {
     private Set<SpawnDataEntry.GridBlockId> loadedGridBlocks;
     @Getter @Setter private boolean dontDestroyWhenEmpty;
 
-    @Getter private int time;
-    private long startTime;
-
     @Getter private SceneScriptManager scriptManager;
     @Getter @Setter private WorldChallenge challenge;
     @Getter private List<DungeonSettleListener> dungeonSettleListeners;
@@ -70,6 +67,9 @@ public class Scene {
     private final HashSet<Integer> unlockedForces;
     @Getter private boolean finishedLoading = false;
     private final List<Runnable> afterLoadedCallbacks = new ArrayList<>();
+    @Getter private int tickCount = 0;
+    @Getter private boolean isPaused = false;
+    private int startWorldTime;
 
     public Scene(World world, SceneData sceneData) {
         this.world = world;
@@ -77,11 +77,10 @@ public class Scene {
         this.players = new CopyOnWriteArrayList<>();
         this.entities = new ConcurrentHashMap<>();
 
-        this.time = 8 * 60;
-        this.startTime = System.currentTimeMillis();
         this.prevScene = 3;
         this.sceneRoutes = GameData.getSceneRoutes(getId());
 
+        startWorldTime = world.getWorldTime();
         this.spawnedEntities = ConcurrentHashMap.newKeySet();
         this.deadSpawnedEntities = ConcurrentHashMap.newKeySet();
         this.loadedBlocks = ConcurrentHashMap.newKeySet();
@@ -127,12 +126,15 @@ public class Scene {
         return sceneRoutes.get(routeId);
     }
 
-    public void changeTime(int time) {
-        this.time = time % 1440;
+    public void setPaused(boolean paused) {
+        if(isPaused != paused) {
+            isPaused = paused;
+            broadcastPacket(new PacketSceneTimeNotify(this));
+        }
     }
 
     public int getSceneTime() {
-        return (int) (System.currentTimeMillis() - this.startTime);
+        return getWorld().getWorldTime() - startWorldTime;
     }
 
     public int getSceneTimeSeconds() {
@@ -402,6 +404,10 @@ public class Scene {
 
         checkNpcGroup();
         finishLoading();
+        if(tickCount%10 == 0){
+            broadcastPacket(new PacketSceneTimeNotify(this));
+        }
+        tickCount++;
     }
 
     public void finishLoading(){

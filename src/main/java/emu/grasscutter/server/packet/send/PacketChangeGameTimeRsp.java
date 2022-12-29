@@ -7,14 +7,14 @@ import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.net.proto.ChangeGameTimeRspOuterClass.ChangeGameTimeRsp;
 
 public class PacketChangeGameTimeRsp extends BasePacket {
-	
+
 	public PacketChangeGameTimeRsp(Player player) {
 		super(PacketOpcodes.ChangeGameTimeRsp);
-		
+
 		ChangeGameTimeRsp proto = ChangeGameTimeRsp.newBuilder()
-				.setCurGameTime(player.getScene().getTime())
+				.setCurGameTime(player.getWorld().getGameTime())
 				.build();
-		
+
 		this.setData(proto);
 	}
 }
