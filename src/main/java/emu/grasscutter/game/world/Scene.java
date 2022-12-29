@@ -622,7 +622,7 @@ public class Scene {
     }
     public void loadTriggerFromGroup(SceneGroup group, String triggerName) {
         //Load triggers and regions
-        getScriptManager().registerTrigger(group.triggers.values().stream().filter(p -> p.name.contains(triggerName)).toList());
+        getScriptManager().registerTrigger(group.triggers.values().stream().filter(p -> p.getName().contains(triggerName)).toList());
         group.regions.values().stream().filter(q -> q.config_id == Integer.parseInt(triggerName.substring(13))).map(region -> new EntityRegion(this, region))
             .forEach(getScriptManager()::registerRegion);
     }
