@@ -50,7 +50,7 @@ public class World implements Iterable<Player> {
     private int tickCount = 0;
     @Getter private boolean isPaused = false;
     private long lastUpdateTime;
-    @Getter private int currentWorldTime = 0;
+    @Getter private long currentWorldTime = 0;
 
     public World(Player player) {
         this(player, false);
@@ -65,6 +65,8 @@ public class World implements Iterable<Player> {
         this.levelEntityId = this.getNextEntityId(EntityIdType.MPLEVEL);
         this.worldLevel = player.getWorldLevel();
         this.isMultiplayer = isMultiplayer;
+        this.lastUpdateTime = System.currentTimeMillis();
+        this.currentWorldTime = owner.getPlayerGameTime();
 
         this.owner.getServer().registerWorld(this);
     }
@@ -365,9 +367,13 @@ public class World implements Iterable<Player> {
             0)); //days
 
 
-        //update time every 10 seconds
+        // sync time every 10 seconds
         if(tickCount%10 == 0){
             players.forEach(p -> p.sendPacket(new PacketPlayerGameTimeNotify(p)));
+        }
+        // store updated world time every 60 seconds (ingame hour)
+        if(tickCount%60 == 0){
+            this.owner.updatePlayerGameTime(currentWorldTime);
         }
         tickCount++;
         return false;
@@ -379,18 +385,27 @@ public class World implements Iterable<Player> {
 
     public void changeTime(int time, int days) {
         val currentTime = getGameTime();
-        this.currentWorldTime+=days*1440*1000 + (time-currentTime)*1000;
-        players.forEach(player -> player.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
-            getGameTimeHours() , // hours
+        var diff = time - currentTime;
+        if(diff < 0){
+            diff = 1440 + diff;
+        }
+        this.currentWorldTime += days * 1440 * 1000L + diff * 1000L;
+        this.owner.updatePlayerGameTime(currentWorldTime);
+        this.players.forEach(player -> player.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
+            getGameTimeHours(), // hours
             days)); //days
     }
 
     public int getGameTime() {
-        return getWorldTimeSeconds() % 1440;
+        return (int)(getWorldTimeSeconds() % 1440);
     }
 
     public int getGameTimeHours() {
         return getGameTime() / 60 ;
+    }
+
+    public long getGameTimeDays() {
+        return getWorldTimeSeconds() / 1440 ;
     }
 
     public void setPaused(boolean paused) {
@@ -403,16 +418,16 @@ public class World implements Iterable<Player> {
         scenes.forEach((key, scene) -> scene.setPaused(paused));
     }
 
-    public int getWorldTime() {
+    public long getWorldTime() {
         if(!isPaused) {
             long newUpdateTime = System.currentTimeMillis();
-            this.currentWorldTime += newUpdateTime - lastUpdateTime;
+            this.currentWorldTime += (newUpdateTime - lastUpdateTime);
             this.lastUpdateTime = newUpdateTime;
         }
         return currentWorldTime;
     }
 
-    public int getWorldTimeSeconds() {
+    public long getWorldTimeSeconds() {
         return getWorldTime()/1000;
     }
 

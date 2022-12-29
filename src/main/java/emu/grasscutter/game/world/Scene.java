@@ -69,7 +69,7 @@ public class Scene {
     private final List<Runnable> afterLoadedCallbacks = new ArrayList<>();
     @Getter private int tickCount = 0;
     @Getter private boolean isPaused = false;
-    private int startWorldTime;
+    private final long startWorldTime;
 
     public Scene(World world, SceneData sceneData) {
         this.world = world;
@@ -81,6 +81,7 @@ public class Scene {
         this.sceneRoutes = GameData.getSceneRoutes(getId());
 
         startWorldTime = world.getWorldTime();
+
         this.spawnedEntities = ConcurrentHashMap.newKeySet();
         this.deadSpawnedEntities = ConcurrentHashMap.newKeySet();
         this.loadedBlocks = ConcurrentHashMap.newKeySet();
@@ -134,7 +135,7 @@ public class Scene {
     }
 
     public int getSceneTime() {
-        return getWorld().getWorldTime() - startWorldTime;
+        return (int) (getWorld().getWorldTime() - startWorldTime);
     }
 
     public int getSceneTimeSeconds() {

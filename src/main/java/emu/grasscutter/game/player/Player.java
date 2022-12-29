@@ -200,6 +200,7 @@ public class Player {
     @Getter @Setter private int nextResinRefresh;
     @Getter @Setter private int lastDailyReset;
     @Getter private transient MpSettingType mpSetting = MpSettingType.MP_SETTING_TYPE_ENTER_AFTER_APPLY;  // TODO
+    @Getter private long playerGameTime = 0;
 
     @Deprecated
     @SuppressWarnings({"rawtypes", "unchecked"}) // Morphia only!
@@ -304,6 +305,13 @@ public class Player {
         this.furnitureManager = new FurnitureManager(this);
         this.cookingManager = new CookingManager(this);
         this.cookingCompoundManager=new CookingCompoundManager(this);
+    }
+
+    public void updatePlayerGameTime(long gameTime){
+        if(playerGameTime == gameTime) return;
+
+        this.playerGameTime = gameTime;
+        this.save();
     }
 
     public int getUid() {
