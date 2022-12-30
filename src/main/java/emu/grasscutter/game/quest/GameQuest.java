@@ -43,6 +43,8 @@ public class GameQuest {
     @Getter @Setter private int acceptTime;
     @Getter @Setter private int finishTime;
 
+    @Getter @Setter private long startGameDay;
+
     @Getter private int[] finishProgressList;
     @Getter private int[] failProgressList;
     @Transient @Getter private Map<String, TriggerExcelConfigData> triggerData;
@@ -66,6 +68,7 @@ public class GameQuest {
         clearProgress(false);
         this.acceptTime = Utils.getCurrentSeconds();
         this.startTime = this.acceptTime;
+        this.startGameDay = getOwner().getWorld().getGameTimeDays();
         this.state = QuestState.QUEST_STATE_UNFINISHED;
         val triggerCond = questData.getFinishCond().stream()
             .filter(p -> p.getType() == QuestContent.QUEST_CONTENT_TRIGGER_FIRE).toList();
