@@ -18,8 +18,10 @@ import emu.grasscutter.game.player.TeamInfo;
 import emu.grasscutter.game.props.*;
 import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
+import emu.grasscutter.game.world.data.TeleportProperties;
 import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.proto.AttackResultOuterClass.AttackResult;
+import emu.grasscutter.net.proto.EnterTypeOuterClass;
 import emu.grasscutter.net.proto.SelectWorktopOptionReqOuterClass;
 import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
 import emu.grasscutter.scripts.SceneIndexManager;
@@ -29,6 +31,7 @@ import emu.grasscutter.scripts.data.SceneBlock;
 import emu.grasscutter.scripts.data.SceneGadget;
 import emu.grasscutter.scripts.data.SceneGroup;
 import emu.grasscutter.scripts.data.ScriptArgs;
+import emu.grasscutter.server.event.player.PlayerTeleportEvent;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -405,10 +408,62 @@ public class Scene {
 
         checkNpcGroup();
         finishLoading();
+        checkPlayerRespawn();
         if(tickCount%10 == 0){
             broadcastPacket(new PacketSceneTimeNotify(this));
         }
         tickCount++;
+    }
+
+    private void checkPlayerRespawn(){
+        players.forEach(player -> {
+            //Check if we need a respawn
+            if(getScriptManager().getConfig() != null ) {
+                if(getScriptManager().getConfig().die_y >= player.getPosition().getY()) {
+                    //Respawn the player
+                    respawnPlayer(player);
+                }
+            }
+        });
+    }
+
+    public Position getDefaultLocation(Player player){
+        val defaultPosition = getScriptManager().getConfig().born_pos;
+        return defaultPosition!=null ? defaultPosition : player.getPosition();
+    }
+
+    private Position getDefaultRot(Player player){
+        val defaultRotation = getScriptManager().getConfig().born_rot;
+        return defaultRotation!=null ? defaultRotation : player.getRotation();
+    }
+
+    private Position getRespawnLocation(Player player){
+        //TODO get last valid location the player stood on
+        val lastCheckpointPos = dungeonManager!=null? dungeonManager.getRespawnLocation() : null;
+        return lastCheckpointPos!=null ? lastCheckpointPos : getDefaultLocation(player);
+    }
+    private Position getRespawnRotation(Player player){
+        val lastCheckpointRot = dungeonManager!=null? dungeonManager.getRespawnRotation() : null;
+        return lastCheckpointRot!=null ? lastCheckpointRot : getDefaultRot(player);
+
+    }
+
+    public boolean respawnPlayer(Player player){
+        player.getTeamManager().onAvatarDieDamage();
+
+        // todo should probably respawn the player at the last valid location
+        val targetPos = getRespawnLocation(player);
+        val targetRot = getRespawnRotation(player);
+        val teleportProps = TeleportProperties.builder()
+            .sceneId(getId())
+            .teleportTo(targetPos)
+            .teleportRot(targetRot)
+            .teleportType(PlayerTeleportEvent.TeleportType.INTERNAL)
+            .enterType(EnterTypeOuterClass.EnterType.ENTER_TYPE_GOTO)
+            .enterReason(dungeonManager!=null ? EnterReason.DungeonReviveOnWaypoint: EnterReason.Revival);
+
+
+        return getWorld().transferPlayerToScene(player, teleportProps.build());
     }
 
     public void finishLoading(){

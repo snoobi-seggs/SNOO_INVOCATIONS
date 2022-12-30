@@ -18,6 +18,7 @@ import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.PacketDungeonWayPointNotify;
 import emu.grasscutter.server.packet.send.PacketGadgetAutoPickDropInfoNotify;
+import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.Utils;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
@@ -25,6 +26,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,10 +45,10 @@ public class DungeonManager {
 
     @Getter private final int[] finishedConditions;
     private final IntSet rewardedPlayers = new IntOpenHashSet();
+    private final Set<Integer> activeDungeonWayPoints = new HashSet<>();
     private boolean ended = false;
-    private Set<Integer> activeDungeonWayPoints = new HashSet<>();
     private int newestWayPoint = 0;
-    private int startSceneTime = 0;
+    @Getter private int startSceneTime = 0;
 
     public DungeonManager(@NonNull Scene scene, @NonNull DungeonData dungeonData) {
         this.scene = scene;
@@ -57,7 +59,7 @@ public class DungeonManager {
     }
 
     public void triggerEvent(DungeonPassConditionType conditionType, int... params) {
-        if(ended){
+        if (ended) {
             return;
         }
         for (int i = 0; i < passConfigData.getConds().size(); i++) {
@@ -76,19 +78,19 @@ public class DungeonManager {
 
     }
 
-    public boolean isFinishedSuccessfully(){
+    public boolean isFinishedSuccessfully() {
         return LogicType.calculate(passConfigData.getLogicType(), finishedConditions);
     }
 
-    public int getLevelForMonster(int id){
+    public int getLevelForMonster(int id) {
         //TODO should use levelConfigMap? and how?
         return dungeonData.getShowLevel();
     }
 
-    public boolean activateRespawnPoint(int pointId){
+    public boolean activateRespawnPoint(int pointId) {
         val respawnPoint = GameData.getScenePointEntryById(scene.getId(), pointId);
 
-        if(respawnPoint == null){
+        if (respawnPoint == null) {
             Grasscutter.getLogger().warn("trying to activate unknown respawn point {}", pointId);
             return false;
         }
@@ -98,6 +100,23 @@ public class DungeonManager {
 
         Grasscutter.getLogger().debug("[unimplemented respawn] activated respawn point {}", pointId);
         return true;
+    }
+
+    @Nullable
+    public Position getRespawnLocation() {
+        if (newestWayPoint == 0) { // validity is checked before setting it, so if != 0 its always valid
+            return null;
+        }
+        val pointData = GameData.getScenePointEntryById(scene.getId(), newestWayPoint).getPointData();
+        return pointData.getTranPos() != null ? pointData.getTranPos() : pointData.getPos();
+    }
+
+    public Position getRespawnRotation() {
+        if (newestWayPoint == 0) { // validity is checked before setting it, so if != 0 its always valid
+            return null;
+        }
+        val pointData = GameData.getScenePointEntryById(scene.getId(), newestWayPoint).getPointData();
+        return pointData.getRot() != null ? pointData.getRot() : null;
     }
 
     public boolean getStatueDrops(Player player, boolean useCondensed) {
@@ -111,7 +130,7 @@ public class DungeonManager {
         }
 
 
-        if(!handleCost(player, useCondensed)){
+        if (!handleCost(player, useCondensed)) {
             return false;
         }
 
@@ -127,9 +146,9 @@ public class DungeonManager {
         return true;
     }
 
-    public boolean handleCost(Player player, boolean useCondensed){
+    public boolean handleCost(Player player, boolean useCondensed) {
         int resinCost = dungeonData.getStatueCostCount() != 0 ? dungeonData.getStatueCostCount() : 20;
-        if(resinCost == 0){
+        if (resinCost == 0) {
             return true;
         }
         if (useCondensed) {
@@ -142,8 +161,7 @@ public class DungeonManager {
 
             // Spend the condensed resin and only proceed if the transaction succeeds.
             return player.getResinManager().useCondensedResin(1);
-        }
-        else if(dungeonData.getStatueCostID() == 106){
+        } else if (dungeonData.getStatueCostID() == 106) {
             // Spend the resin and only proceed if the transaction succeeds.
             return player.getResinManager().useResin(resinCost);
         }
@@ -182,8 +200,7 @@ public class DungeonManager {
                 // for the currently existing set of dungeons.
                 if (entry.getItems().size() == 1) {
                     rewards.add(new GameItem(entry.getItems().get(0), amount));
-                }
-                else {
+                } else {
                     for (int i = 0; i < amount; i++) {
                         // int itemIndex = ThreadLocalRandom.current().nextInt(0, entry.getItems().size());
                         // int itemId = entry.getItems().get(itemIndex);
@@ -206,7 +223,7 @@ public class DungeonManager {
 
     public void startDungeon() {
         this.startSceneTime = scene.getSceneTimeSeconds();
-        scene.getPlayers().forEach(p-> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ENTER_DUNGEON, dungeonData.getId()));
+        scene.getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ENTER_DUNGEON, dungeonData.getId()));
     }
 
     public void finishDungeon() {
@@ -214,15 +231,15 @@ public class DungeonManager {
         endDungeon(BaseDungeonResult.DungeonEndReason.COMPLETED);
     }
 
-    public void notifyEndDungeon(boolean successfully){
+    public void notifyEndDungeon(boolean successfully) {
         scene.getPlayers().forEach(p -> {
             // Quest trigger
-            p.getQuestManager().queueEvent(successfully?
+            p.getQuestManager().queueEvent(successfully ?
                     QuestContent.QUEST_CONTENT_FINISH_DUNGEON : QuestContent.QUEST_CONTENT_FAIL_DUNGEON,
                 dungeonData.getId());
 
             // Battle pass trigger
-            if(dungeonData.getType().isCountsToBattlepass() && successfully) {
+            if (dungeonData.getType().isCountsToBattlepass() && successfully) {
                 p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_FINISH_DUNGEON);
             }
         });
@@ -240,7 +257,7 @@ public class DungeonManager {
     }
 
     public void endDungeon(BaseDungeonResult.DungeonEndReason endReason) {
-        if(scene.getDungeonSettleListeners()!=null) {
+        if (scene.getDungeonSettleListeners() != null) {
             scene.getDungeonSettleListeners().forEach(o -> o.onDungeonSettle(this, endReason));
         }
         ended = true;
@@ -254,7 +271,7 @@ public class DungeonManager {
         this.activeDungeonWayPoints.clear();
     }
 
-    public void cleanUpScene(){
+    public void cleanUpScene() {
         this.scene.setDungeonManager(null);
         this.scene.setKilledMonsterCount(0);
     }
