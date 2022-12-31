@@ -8,20 +8,20 @@ import emu.grasscutter.data.binout.routes.Route;
 import emu.grasscutter.data.excels.*;
 import emu.grasscutter.game.avatar.Avatar;
 import emu.grasscutter.game.dungeons.DungeonManager;
-import emu.grasscutter.game.dungeons.DungeonPassConditionType;
+import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.dungeons.DungeonSettleListener;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.GadgetWorktop;
 import emu.grasscutter.game.managers.blossom.BlossomManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.player.TeamInfo;
-import emu.grasscutter.game.props.FightProperty;
-import emu.grasscutter.game.props.LifeState;
-import emu.grasscutter.game.props.SceneType;
+import emu.grasscutter.game.props.*;
 import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
+import emu.grasscutter.game.world.data.TeleportProperties;
 import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.proto.AttackResultOuterClass.AttackResult;
+import emu.grasscutter.net.proto.EnterTypeOuterClass;
 import emu.grasscutter.net.proto.SelectWorktopOptionReqOuterClass;
 import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
 import emu.grasscutter.scripts.SceneIndexManager;
@@ -31,11 +31,13 @@ import emu.grasscutter.scripts.data.SceneBlock;
 import emu.grasscutter.scripts.data.SceneGadget;
 import emu.grasscutter.scripts.data.SceneGroup;
 import emu.grasscutter.scripts.data.ScriptArgs;
+import emu.grasscutter.server.event.player.PlayerTeleportEvent;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -56,9 +58,6 @@ public class Scene {
     private Set<SpawnDataEntry.GridBlockId> loadedGridBlocks;
     @Getter @Setter private boolean dontDestroyWhenEmpty;
 
-    @Getter private int time;
-    private long startTime;
-
     @Getter private SceneScriptManager scriptManager;
     @Getter @Setter private WorldChallenge challenge;
     @Getter private List<DungeonSettleListener> dungeonSettleListeners;
@@ -71,6 +70,9 @@ public class Scene {
     private final HashSet<Integer> unlockedForces;
     @Getter private boolean finishedLoading = false;
     private final List<Runnable> afterLoadedCallbacks = new ArrayList<>();
+    @Getter private int tickCount = 0;
+    @Getter private boolean isPaused = false;
+    private final long startWorldTime;
 
     public Scene(World world, SceneData sceneData) {
         this.world = world;
@@ -78,10 +80,10 @@ public class Scene {
         this.players = new CopyOnWriteArrayList<>();
         this.entities = new ConcurrentHashMap<>();
 
-        this.time = 8 * 60;
-        this.startTime = System.currentTimeMillis();
         this.prevScene = 3;
         this.sceneRoutes = GameData.getSceneRoutes(getId());
+
+        startWorldTime = world.getWorldTime();
 
         this.spawnedEntities = ConcurrentHashMap.newKeySet();
         this.deadSpawnedEntities = ConcurrentHashMap.newKeySet();
@@ -128,12 +130,19 @@ public class Scene {
         return sceneRoutes.get(routeId);
     }
 
-    public void changeTime(int time) {
-        this.time = time % 1440;
+    public void setPaused(boolean paused) {
+        if(isPaused != paused) {
+            isPaused = paused;
+            broadcastPacket(new PacketSceneTimeNotify(this));
+        }
     }
 
     public int getSceneTime() {
-        return (int) (System.currentTimeMillis() - this.startTime);
+        return (int) (getWorld().getWorldTime() - startWorldTime);
+    }
+
+    public int getSceneTimeSeconds() {
+        return getSceneTime()/1000;
     }
 
     public void addDungeonSettleObserver(DungeonSettleListener dungeonSettleListener) {
@@ -317,6 +326,7 @@ public class Scene {
     public void handleAttack(AttackResult result) {
         //GameEntity attacker = getEntityById(result.getAttackerId());
         GameEntity target = getEntityById(result.getDefenseId());
+        ElementType attackType = ElementType.getTypeByValue(result.getElementType());
 
         if (target == null) {
             return;
@@ -330,7 +340,7 @@ public class Scene {
         }
 
         // Sanity check
-        target.damage(result.getDamage(), result.getAttackerId());
+        target.damage(result.getDamage(), result.getAttackerId(), attackType);
     }
 
     public void killEntity(GameEntity target) {
@@ -391,10 +401,69 @@ public class Scene {
             challenge.onCheckTimeOut();
         }
 
+        val sceneTime = getSceneTimeSeconds();
+        getEntities().forEach((eid, e) -> e.onTick(sceneTime));
+
         blossomManager.onTick();
 
         checkNpcGroup();
         finishLoading();
+        checkPlayerRespawn();
+        if(tickCount%10 == 0){
+            broadcastPacket(new PacketSceneTimeNotify(this));
+        }
+        tickCount++;
+    }
+
+    private void checkPlayerRespawn(){
+        players.forEach(player -> {
+            //Check if we need a respawn
+            if(getScriptManager().getConfig() != null ) {
+                if(getScriptManager().getConfig().die_y >= player.getPosition().getY()) {
+                    //Respawn the player
+                    respawnPlayer(player);
+                }
+            }
+        });
+    }
+
+    public Position getDefaultLocation(Player player){
+        val defaultPosition = getScriptManager().getConfig().born_pos;
+        return defaultPosition!=null ? defaultPosition : player.getPosition();
+    }
+
+    private Position getDefaultRot(Player player){
+        val defaultRotation = getScriptManager().getConfig().born_rot;
+        return defaultRotation!=null ? defaultRotation : player.getRotation();
+    }
+
+    private Position getRespawnLocation(Player player){
+        //TODO get last valid location the player stood on
+        val lastCheckpointPos = dungeonManager!=null? dungeonManager.getRespawnLocation() : null;
+        return lastCheckpointPos!=null ? lastCheckpointPos : getDefaultLocation(player);
+    }
+    private Position getRespawnRotation(Player player){
+        val lastCheckpointRot = dungeonManager!=null? dungeonManager.getRespawnRotation() : null;
+        return lastCheckpointRot!=null ? lastCheckpointRot : getDefaultRot(player);
+
+    }
+
+    public boolean respawnPlayer(Player player){
+        player.getTeamManager().onAvatarDieDamage();
+
+        // todo should probably respawn the player at the last valid location
+        val targetPos = getRespawnLocation(player);
+        val targetRot = getRespawnRotation(player);
+        val teleportProps = TeleportProperties.builder()
+            .sceneId(getId())
+            .teleportTo(targetPos)
+            .teleportRot(targetRot)
+            .teleportType(PlayerTeleportEvent.TeleportType.INTERNAL)
+            .enterType(EnterTypeOuterClass.EnterType.ENTER_TYPE_GOTO)
+            .enterReason(dungeonManager!=null ? EnterReason.DungeonReviveOnWaypoint: EnterReason.Revival);
+
+
+        return getWorld().transferPlayerToScene(player, teleportProps.build());
     }
 
     public void finishLoading(){
@@ -609,7 +678,7 @@ public class Scene {
     }
     public void loadTriggerFromGroup(SceneGroup group, String triggerName) {
         //Load triggers and regions
-        getScriptManager().registerTrigger(group.triggers.values().stream().filter(p -> p.name.contains(triggerName)).toList());
+        getScriptManager().registerTrigger(group.triggers.values().stream().filter(p -> p.getName().contains(triggerName)).toList());
         group.regions.values().stream().filter(q -> q.config_id == Integer.parseInt(triggerName.substring(13))).map(region -> new EntityRegion(this, region))
             .forEach(getScriptManager()::registerRegion);
     }

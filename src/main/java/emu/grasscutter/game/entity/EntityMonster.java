@@ -5,13 +5,9 @@ import emu.grasscutter.data.common.PropGrowCurve;
 import emu.grasscutter.data.excels.EnvAnimalGatherConfigData;
 import emu.grasscutter.data.excels.MonsterCurveData;
 import emu.grasscutter.data.excels.MonsterData;
-import emu.grasscutter.game.dungeons.DungeonPassConditionType;
+import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.player.Player;
-import emu.grasscutter.game.props.ActionReason;
-import emu.grasscutter.game.props.EntityIdType;
-import emu.grasscutter.game.props.FightProperty;
-import emu.grasscutter.game.props.PlayerProperty;
-import emu.grasscutter.game.props.WatcherTriggerType;
+import emu.grasscutter.game.props.*;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.net.proto.AbilitySyncStateInfoOuterClass.AbilitySyncStateInfo;
@@ -29,6 +25,7 @@ import emu.grasscutter.net.proto.SceneMonsterInfoOuterClass.SceneMonsterInfo;
 import emu.grasscutter.net.proto.SceneWeaponInfoOuterClass.SceneWeaponInfo;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.ScriptArgs;
+import emu.grasscutter.server.event.entity.EntityDamageEvent;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.ProtoHelper;
 import it.unimi.dsi.fastutil.ints.Int2FloatOpenHashMap;
@@ -71,6 +68,11 @@ public class EntityMonster extends GameEntity {
     @Override
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public int getEntityTypeId() {
+        return getMonsterId();
     }
 
     public MonsterData getMonsterData() {
@@ -141,12 +143,12 @@ public class EntityMonster extends GameEntity {
     }
 
     @Override
-    public void damage(float amount, int killerId) {
+    public void damage(float amount, int killerId, ElementType attackType) {
         // Get HP before damage.
         float hpBeforeDamage = this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP);
 
         // Apply damage.
-        super.damage(amount, killerId);
+        super.damage(amount, killerId, attackType);
 
         // Get HP after damage.
         float hpAfterDamage = this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP);
@@ -158,7 +160,8 @@ public class EntityMonster extends GameEntity {
     }
 
     @Override
-    public void callLuaHPEvent() {
+    public void callLuaHPEvent(EntityDamageEvent event) {
+        super.callLuaHPEvent(event);
         getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_SPECIFIC_MONSTER_HP_CHANGE, getConfigId(), monsterData.getId())
             .setSourceEntityId(getId())
             .setParam3((int) this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP))
@@ -189,6 +192,7 @@ public class EntityMonster extends GameEntity {
         }
         // Battle Pass trigger
         getScene().getPlayers().forEach(p -> p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_MONSTER_DIE, this.getMonsterId(), 1));
+
         getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_MONSTER_DIE, this.getMonsterId()));
         getScene().getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_KILL_MONSTER, this.getMonsterId()));
 

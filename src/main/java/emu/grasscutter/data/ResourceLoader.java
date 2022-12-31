@@ -7,6 +7,7 @@ import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.routes.SceneRoutes;
 import emu.grasscutter.data.common.PointData;
 import emu.grasscutter.data.excels.QuestData;
+import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDrop;
 import emu.grasscutter.game.managers.blossom.BlossomConfig;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
@@ -16,6 +17,7 @@ import emu.grasscutter.game.quest.enums.QuestCond;
 import emu.grasscutter.game.world.SpawnDataEntry;
 import emu.grasscutter.game.world.SpawnDataEntry.GridBlockId;
 import emu.grasscutter.game.world.SpawnDataEntry.SpawnGroupEntry;
+import emu.grasscutter.scripts.EntityControllerScriptManager;
 import emu.grasscutter.scripts.SceneIndexManager;
 import emu.grasscutter.scripts.ScriptLoader;
 import emu.grasscutter.utils.JsonUtils;
@@ -92,7 +94,8 @@ public class ResourceLoader {
         // Load special ability in certain scene/dungeon
         loadConfigLevelEntityData();
         loadQuestShareConfig();
-        cacheQuestCondition();
+        loadGadgetMappings();
+        EntityControllerScriptManager.load();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
     }
@@ -402,6 +405,9 @@ public class ResourceLoader {
                 try {
                     val mainQuest = JsonUtils.loadToClass(path, MainQuestData.class);
                     GameData.getMainQuestDataMap().put(mainQuest.getId(), mainQuest);
+                    if(mainQuest.getTalks() != null) {
+                        mainQuest.getTalks().forEach(talkData -> GameData.getQuestTalkMap().put(talkData.getId(), mainQuest.getId()));
+                    }
                 } catch (IOException e) {
 
                 }
@@ -426,30 +432,6 @@ public class ResourceLoader {
         }
 
         Grasscutter.getLogger().debug("Loaded " + GameData.getMainQuestDataMap().size() + " MainQuestDatas.");
-    }
-
-    private static void cacheQuestCondition() {
-        val cacheMap = GameData.getBeginCondQuestMap();
-        GameData.getQuestDataMap().forEach((id, quest) -> {
-            if(quest.getAcceptCond() == null){
-                Grasscutter.getLogger().warn("missing AcceptConditions for quest {}", quest.getSubId());
-                return;
-            }
-            if(quest.getAcceptCond().isEmpty()){
-                val list = cacheMap.computeIfAbsent(QuestData.questConditionKey(QuestCond.QUEST_COND_NONE, 0, null), e -> new ArrayList<>());
-                list.add(quest);
-            } else {
-                quest.getAcceptCond().forEach(questCondition -> {
-                    if (questCondition.getType() == null) {
-                        return;
-                    }
-                    val key = questCondition.asKey();
-                    val list = cacheMap.computeIfAbsent(key, e -> new ArrayList<>());
-                    list.add(quest);
-                });
-            }
-        });
-        Grasscutter.getLogger().debug("cached " + GameData.getBeginCondQuestMap().size() + " quest accept conditions.");
     }
 
     public static void loadScriptSceneData() {
@@ -530,7 +512,7 @@ public class ResourceLoader {
                     val sceneRoutes = JsonUtils.loadToClass(path, SceneRoutes.class);
                     val sceneRoutesMap = GameData.getSceneRoutes(sceneRoutes.getSceneId());
                     if(sceneRoutes.getRoutes() == null){
-                        Grasscutter.getLogger().info("No routes found for scene {}", sceneRoutes.getSceneId());
+                        //Grasscutter.getLogger().info("No routes found for scene {}", sceneRoutes.getSceneId());
                         return;
                     }
                     Arrays.stream(sceneRoutes.getRoutes()).forEach(r -> sceneRoutesMap.put(r.getLocalId(), r));
@@ -619,6 +601,19 @@ public class ResourceLoader {
             return;
         }
     }
+
+    private static void loadGadgetMappings() {
+        try {
+            val gadgetMap = GameData.getGadgetMappingMap();
+            try {
+                JsonUtils.loadToList(getResourcePath("Server/GadgetMapping.json"), GadgetMapping.class).forEach(entry -> gadgetMap.put(entry.getGadgetId(), entry));;
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded {} gadget mappings.", gadgetMap.size());
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Unable to load gadget mappings.", e);
+        }
+    }
+
     // BinOutput configs
 
     public static class AvatarConfig {

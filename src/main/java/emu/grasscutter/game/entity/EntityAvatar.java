@@ -65,6 +65,11 @@ public class EntityAvatar extends GameEntity {
         this.avatar.setCurrentEnergy();
     }
 
+    @Override
+    public int getEntityTypeId() {
+        return getAvatar().getAvatarId();
+    }
+
     public Player getPlayer() {
         return avatar.getPlayer();
     }

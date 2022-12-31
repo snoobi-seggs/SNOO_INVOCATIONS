@@ -253,6 +253,7 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
         this.player.getCodex().checkAddedItem(item);
         // Set owner and guid FIRST!
         item.setOwner(this.player);
+        item.checkIsNew(this);
         // Put in item store
         getItems().put(item.getGuid(), item);
         if (tab != null) {

@@ -14,6 +14,7 @@ import emu.grasscutter.server.packet.send.PacketOpenStateUpdateNotify;
 import emu.grasscutter.server.packet.send.PacketSceneAreaUnlockNotify;
 import emu.grasscutter.server.packet.send.PacketScenePointUnlockNotify;
 import emu.grasscutter.server.packet.send.PacketSetOpenStateRsp;
+import lombok.val;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,6 +45,9 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         // that particular statue interactable.
         this.player.getUnlockedScenePoints(3).add(7);
         this.player.getUnlockedSceneAreas(3).add(1);
+
+        // add replacement costumes if necessary
+        this.addReplaceCostumes();
 
     }
 
@@ -146,6 +150,13 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         this.player.sendPacket(new PacketSetOpenStateRsp(openState, value));
     }
 
+    /**
+     * This force sets an open state, ignoring all conditions and permissions
+     */
+    public void forceSetOpenState(int openState, int value){
+        setOpenState(openState, value);
+    }
+
     /**********
         Triggered unlocking of open states (unlock states whose conditions have been met.)
     **********/
@@ -227,5 +238,18 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         // Send packet.
         this.player.sendPacket(new PacketSceneAreaUnlockNotify(sceneId, areaId));
         this.player.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_UNLOCK_AREA, sceneId, areaId);
+    }
+
+    /**
+     * Give replace costume to player (Ambor, Jean, Mona, Rosaria)
+     */
+    public void addReplaceCostumes(){
+        val currentPlayerCostumes = player.getCostumeList();
+        GameData.getAvatarReplaceCostumeDataMap().keySet().forEach(costumeId -> {
+            if (GameData.getAvatarCostumeDataMap().get(costumeId) == null || currentPlayerCostumes.contains(costumeId)){
+                return;
+            }
+            this.player.addCostume(costumeId);
+        });
     }
 }
