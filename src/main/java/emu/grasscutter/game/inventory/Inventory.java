@@ -189,6 +189,8 @@ public class Inventory extends BasePlayerManager implements Iterable<GameItem> {
         var data = item.getItemData();
         if (data == null) return null;
 
+        this.player.getProgressManager().addItemObtainedHistory(item.getItemId(), item.getCount());
+
         if (data.isUseOnGain()) {
             var params = new UseItemParams(this.player, data.getUseTarget());
             this.player.getServer().getInventorySystem().useItemDirect(data, params);

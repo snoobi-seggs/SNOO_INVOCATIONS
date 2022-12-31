@@ -5,6 +5,7 @@ import emu.grasscutter.data.binout.ScenePointEntry;
 import emu.grasscutter.data.excels.OpenStateData;
 import emu.grasscutter.data.excels.OpenStateData.OpenStateCondType;
 import emu.grasscutter.game.props.ActionReason;
+import emu.grasscutter.game.quest.enums.QuestCond;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.quest.enums.QuestState;
 import emu.grasscutter.net.proto.RetcodeOuterClass.Retcode;
@@ -251,5 +252,24 @@ public class PlayerProgressManager extends BasePlayerDataManager {
             }
             this.player.addCostume(costumeId);
         });
+    }
+
+    /**
+     * Quest progress
+     */
+
+    public void addQuestProgress(int id, int count){
+        val newCount = player.getPlayerProgress().addToCurrentProgress(id, count);
+        player.save();
+        player.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ADD_QUEST_PROGRESS, id, newCount);
+    }
+
+    /**
+     * Item history
+     */
+    public void addItemObtainedHistory(int id, int count){
+        val newCount = player.getPlayerProgress().addToItemHistory(id, count);
+        player.save();
+        player.getQuestManager().queueEvent(QuestCond.QUEST_COND_HISTORY_GOT_ANY_ITEM, id, newCount);
     }
 }
