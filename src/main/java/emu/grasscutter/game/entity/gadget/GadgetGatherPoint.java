@@ -34,6 +34,7 @@ public class GadgetGatherPoint extends GadgetContent {
         gatherObjectChild.setMetaGadget(gadget.getMetaGadget());
         gatherObjectChild.buildContent();
 
+        gadget.getChildren().add(gatherObjectChild);
         scene.addEntity(gatherObjectChild);
     }
 

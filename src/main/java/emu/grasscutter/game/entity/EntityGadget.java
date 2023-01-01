@@ -24,6 +24,7 @@ import emu.grasscutter.net.proto.SceneEntityAiInfoOuterClass.SceneEntityAiInfo;
 import emu.grasscutter.net.proto.SceneEntityInfoOuterClass.SceneEntityInfo;
 import emu.grasscutter.net.proto.SceneGadgetInfoOuterClass.SceneGadgetInfo;
 import emu.grasscutter.net.proto.VectorOuterClass.Vector;
+import emu.grasscutter.net.proto.VisionTypeOuterClass;
 import emu.grasscutter.scripts.EntityControllerScriptManager;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.SceneGadget;
@@ -40,6 +41,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString(callSuper = true)
 public class EntityGadget extends EntityBaseGadget {
@@ -50,6 +53,7 @@ public class EntityGadget extends EntityBaseGadget {
     @Getter private final Position bornRot;
     private int gadgetId;
     @Getter @Setter private GameEntity owner = null;
+    @Getter @Setter private List<GameEntity> children = new ArrayList<>();
 
     private int state;
     private int pointType;
@@ -199,6 +203,15 @@ public class EntityGadget extends EntityBaseGadget {
     public void onCreate() {
         // Lua event
         getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_GADGET_CREATE, this.getConfigId()));
+    }
+
+    @Override
+    public void onRemoved() {
+        super.onRemoved();
+        if(!children.isEmpty()) {
+            getScene().removeEntities(children, VisionTypeOuterClass.VisionType.VISION_TYPE_REMOVE);
+            children.clear();
+        }
     }
 
     @Override
