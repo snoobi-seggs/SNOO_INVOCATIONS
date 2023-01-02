@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ActivityType {
     NONE(0),
+    NEW_ACTIVITY_TRIAL_AVATAR(4),
+    NEW_ACTIVITY_PERSONAL_LIINE(8),
     NEW_ACTIVITY_MUSIC_GAME(2202),
 
     ;
