@@ -1415,6 +1415,10 @@ public class ScriptLib {
         return result;
     }
 
+    public int GetGameHour(){
+        return getSceneScriptManager().getScene().getWorld().getGameTimeHours();
+    }
+
     /**
      * Methods used in EntityControllers
       */
