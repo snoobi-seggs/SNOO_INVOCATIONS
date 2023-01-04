@@ -6,6 +6,7 @@ import emu.grasscutter.data.binout.*;
 import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.routes.SceneRoutes;
 import emu.grasscutter.data.common.PointData;
+import emu.grasscutter.data.custom.*;
 import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDrop;
@@ -95,6 +96,7 @@ public class ResourceLoader {
         loadConfigLevelEntityData();
         loadQuestShareConfig();
         loadGadgetMappings();
+        loadTrialAvatarCustomData();
         EntityControllerScriptManager.load();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
@@ -611,6 +613,42 @@ public class ResourceLoader {
             Grasscutter.getLogger().debug("Loaded {} gadget mappings.", gadgetMap.size());
         } catch (Exception e) {
             Grasscutter.getLogger().error("Unable to load gadget mappings.", e);
+        }
+    }
+
+    private static void loadTrialAvatarCustomData() {
+        try {
+            String pathName = "CustomResources/TrialAvatarExcels/";
+            try {
+                JsonUtils.loadToList(
+                    getResourcePath(pathName + "TrialAvatarActivityDataExcelConfigData.json"),
+                    TrialAvatarActivityDataCustomData.class).forEach(instance -> {
+                        instance.onLoad();
+                        GameData.getTrialAvatarActivityDataCustomData()
+                            .put(instance.getTrialAvatarIndexId(), instance);
+                    });
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded trial activity custom data.");
+            try {
+                JsonUtils.loadToList(
+                    getResourcePath(pathName + "TrialAvatarActivityExcelConfigData.json"),
+                    TrialAvatarActivityCustomData.class).forEach(instance -> {
+                        GameData.getTrialAvatarActivityCustomData()
+                            .put(instance.getScheduleId(), instance);
+                    });
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded trial activity schedule custom data.");
+            try {
+                JsonUtils.loadToList(
+                    getResourcePath(pathName + "TrialAvatarData.json"),
+                    TrialAvatarCustomData.class).forEach(instance -> {
+                        GameData.getTrialAvatarCustomData()
+                            .put(instance.getTrialAvatarId(), instance);
+                    });
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded trial avatar custom data.");
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Unable to load trial avatar custom data.", e);
         }
     }
 
