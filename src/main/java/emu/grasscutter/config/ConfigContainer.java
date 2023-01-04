@@ -144,7 +144,7 @@ public class ConfigContainer {
         public int accessPort = 0;
 
         /* Entities within a certain range will be loaded for the player */
-        public int loadEntitiesForPlayerRange = 100;
+        public int loadEntitiesForPlayerRange = 400;
         public boolean enableScriptInBigWorld = false;
         public boolean enableConsole = true;
 

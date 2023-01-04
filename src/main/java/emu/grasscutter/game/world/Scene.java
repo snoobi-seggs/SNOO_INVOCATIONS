@@ -646,7 +646,7 @@ public class Scene {
                 // dynamic load the groups for players in a loaded block
                 var toLoad = this.players.stream()
                     .filter(p -> block.contains(p.getPosition()))
-                    .map(p -> this.playerMeetGroups(p, block))
+                    .map(p -> this.playerMeetGroups(p, block).stream().filter(group -> !group.dynamic_load).toList())
                     .flatMap(Collection::stream)
                     .toList();
                 this.onLoadGroup(toLoad);
@@ -655,9 +655,9 @@ public class Scene {
     }
 
     public List<SceneGroup> playerMeetGroups(Player player, SceneBlock block) {
-        //List<SceneGroup> sceneGroups = SceneIndexManager.queryNeighbors(block.sceneGroupIndex, player.getPosition().toDoubleArray(),
-        //        Grasscutter.getConfig().server.game.loadEntitiesForPlayerRange);
-        List<SceneGroup> sceneGroups = block.groups.values().stream().toList(); //We are trying to load all possible groups
+        List<SceneGroup> sceneGroups = SceneIndexManager.queryNeighbors(block.sceneGroupIndex, player.getPosition().toDoubleArray(),
+                Grasscutter.getConfig().server.game.loadEntitiesForPlayerRange);
+        //List<SceneGroup> sceneGroups = block.groups.values().stream().toList(); //We are trying to load all possible groups
 
         List<SceneGroup> groups = sceneGroups.stream()
                 .filter(group -> !scriptManager.getLoadedGroupSetPerBlock().get(block.id).contains(group))
