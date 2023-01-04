@@ -13,27 +13,18 @@ import java.util.List;
 
 @ResourceType(name = "DungeonEntryExcelConfigData.json")
 @Getter
-@Setter
+@Setter  // TODO: remove this next API break
 public class DungeonEntryData extends GameResource {
+    @Getter(onMethod = @__(@Override))
+    private int id;
     private int dungeonEntryId;
     private int sceneId;
-    private int id;
     private DungunEntryType type;
     private LogicType condComb;
     private List<SatisfiedCond> satisfiedCond;
     private int rewardDataId;
     private boolean isShowInAdvHandbook;
     private boolean isDailyRefresh;
-
-    @Override
-    public int getId() {
-        return this.id;
-    }
-
-    @Override
-    public void onLoad() {
-
-    }
 
     @Data
     public static class SatisfiedCond{
