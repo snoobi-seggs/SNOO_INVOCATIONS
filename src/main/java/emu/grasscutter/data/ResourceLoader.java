@@ -633,6 +633,7 @@ public class ResourceLoader {
                 JsonUtils.loadToList(
                     getResourcePath(pathName + "TrialAvatarActivityExcelConfigData.json"),
                     TrialAvatarActivityCustomData.class).forEach(instance -> {
+                        instance.onLoad();
                         GameData.getTrialAvatarActivityCustomData()
                             .put(instance.getScheduleId(), instance);
                     });
@@ -642,6 +643,8 @@ public class ResourceLoader {
                 JsonUtils.loadToList(
                     getResourcePath(pathName + "TrialAvatarData.json"),
                     TrialAvatarCustomData.class).forEach(instance -> {
+                        instance.onLoad();
+                        Grasscutter.getLogger().info("{}", instance);
                         GameData.getTrialAvatarCustomData()
                             .put(instance.getTrialAvatarId(), instance);
                     });

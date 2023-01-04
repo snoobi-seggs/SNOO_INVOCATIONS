@@ -7,6 +7,10 @@ import java.util.List;
 public class TrialAvatarCustomData {
     private int trialAvatarId;
     private List<String> trialAvatarParamList;
-    private Integer coreProudSkillLevel;
-    private Integer skillDepotId;
+    private int coreProudSkillLevel;
+    private int skillDepotId;
+
+    public void onLoad() {
+        this.trialAvatarParamList = trialAvatarParamList.stream().filter(x -> !x.isBlank()).toList();
+    }
 }
