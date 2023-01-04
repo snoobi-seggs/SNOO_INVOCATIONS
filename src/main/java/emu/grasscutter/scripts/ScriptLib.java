@@ -442,9 +442,9 @@ public class ScriptLib {
     private void printLog(String source, String msg){
         var currentGroup = this.currentGroup.getIfExists();
         if(currentGroup!=null) {
-            logger.info("[LUA] {} {} {}", source, currentGroup.id, msg);
+            logger.debug("[LUA] {} {} {}", source, currentGroup.id, msg);
         } else {
-            logger.info("[LUA] {} {}", source, msg);
+            logger.debug("[LUA] {} {}", source, msg);
         }
     }
 
@@ -844,7 +844,7 @@ public class ScriptLib {
         return 0;
     }
     public int RefreshHuntingClueGroup(){
-        logger.warn("[LUA] Call unimplemented RefreshHuntingClueGroup");
+        //logger.warn("[LUA] Call unimplemented RefreshHuntingClueGroup"); //TODO: Much many calls o this garbages the log
         //TODO implement
         return 0;
     }
@@ -1111,7 +1111,7 @@ public class ScriptLib {
         if (GameData.getGuideTriggerDataStringMap().get(guideName) != null) {
             // if should handle by open state, dont send packet here
             // not entirely sure what return value is about
-            // probably not needing this check statement here since the value comes from 
+            // probably not needing this check statement here since the value comes from
             // the lua script
             return 1;
         }

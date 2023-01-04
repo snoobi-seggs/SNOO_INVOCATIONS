@@ -36,7 +36,9 @@ public class SceneGroup {
     public SceneBusiness business;
     public SceneGarbage garbages;
     public SceneInitConfig init_config;
-    @Getter public boolean dynamic_load;
+    @Getter public boolean dynamic_load = false;
+
+    public SceneReplaceable is_replaceable;
 
     private transient boolean loaded; // Not an actual variable in the scripts either
     private transient CompiledScript script;

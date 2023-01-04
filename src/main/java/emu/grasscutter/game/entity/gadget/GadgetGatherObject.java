@@ -27,8 +27,10 @@ public class GadgetGatherObject extends GadgetContent {
             this.itemId = gadget.getSpawnEntry().getGatherItemId();
         } else {
             GatherData gatherData = GameData.getGatherDataMap().get(gadget.getPointType());
-            this.itemId = gatherData.getItemId();
-            this.isForbidGuest = gatherData.isForbidGuest();
+            if(gatherData != null) {
+                this.itemId = gatherData.getItemId();
+                this.isForbidGuest = gatherData.isForbidGuest();
+            }
         }
     }
 

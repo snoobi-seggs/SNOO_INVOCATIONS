@@ -53,7 +53,7 @@ public class SceneScriptManager {
     public static final ExecutorService eventExecutor;
     static {
         eventExecutor = new ThreadPoolExecutor(4, 4,
-                60, TimeUnit.SECONDS, new LinkedBlockingDeque<>(1000),
+                60, TimeUnit.SECONDS, new LinkedBlockingDeque<>(10000),
                 FastThreadLocalThread::new, new ThreadPoolExecutor.AbortPolicy());
     }
     public SceneScriptManager(Scene scene) {

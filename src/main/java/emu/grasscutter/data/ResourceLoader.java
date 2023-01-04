@@ -14,6 +14,7 @@ import emu.grasscutter.game.quest.QuestEncryptionKey;
 import emu.grasscutter.game.quest.RewindData;
 import emu.grasscutter.game.quest.TeleportData;
 import emu.grasscutter.game.quest.enums.QuestCond;
+import emu.grasscutter.game.world.GroupReplacementData;
 import emu.grasscutter.game.world.SpawnDataEntry;
 import emu.grasscutter.game.world.SpawnDataEntry.GridBlockId;
 import emu.grasscutter.game.world.SpawnDataEntry.SpawnGroupEntry;
@@ -95,6 +96,7 @@ public class ResourceLoader {
         loadConfigLevelEntityData();
         loadQuestShareConfig();
         loadGadgetMappings();
+        loadGroupReplacements();
         EntityControllerScriptManager.load();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
@@ -611,6 +613,37 @@ public class ResourceLoader {
             Grasscutter.getLogger().debug("Loaded {} gadget mappings.", gadgetMap.size());
         } catch (Exception e) {
             Grasscutter.getLogger().error("Unable to load gadget mappings.", e);
+        }
+    }
+
+    private static void loadGroupReplacements(){
+        Bindings bindings = ScriptLoader.getEngine().createBindings();
+
+        CompiledScript cs = ScriptLoader.getScript("Scene/groups_replacement.lua");
+        if (cs == null) {
+            Grasscutter.getLogger().error("Error while loading Group Replacements: file not found");
+            return;
+        }
+
+        try{
+            cs.eval(bindings);
+            // these are Map<String, class>
+            var replacementsMap = ScriptLoader.getSerializer().toMap(GroupReplacementData.class, bindings.get("replacements"));
+            // convert them to Map<Integer, class> and cache
+            GameData.getGroupReplacements().putAll(replacementsMap.entrySet().stream().collect(Collectors.toMap(entry -> Integer.valueOf(entry.getValue().getId()), Entry::getValue)));
+
+        } catch (Throwable e){
+            Grasscutter.getLogger().error("Error while loading Group Replacements");
+        }
+
+        if (GameData.getGroupReplacements() == null || GameData.getGroupReplacements().isEmpty()) {
+            Grasscutter.getLogger().error("No Group Replacements loaded!");
+            return;
+        } else {
+            Grasscutter.getLogger().debug("Loaded {} group replacements.", GameData.getGroupReplacements().size());
+            GameData.getGroupReplacements().forEach((group, groups) -> {
+                Grasscutter.getLogger().debug("{} -> {}", group, groups.getReplace_groups().stream().map(String::valueOf).collect(Collectors.joining(",")));
+            });
         }
     }
 
