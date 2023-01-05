@@ -213,8 +213,14 @@ public class Scene {
         // Add new entities for player
         TeamInfo teamInfo = player.getTeamManager().getCurrentTeamInfo();
         for (int avatarId : teamInfo.getAvatars()) {
-            EntityAvatar entity = new EntityAvatar(player.getScene(), player.getAvatars().getAvatarById(avatarId));
-            player.getTeamManager().getActiveTeam().add(entity);
+            Avatar avatar = player.getAvatars().getAvatarById(avatarId);
+            if (avatar == null) {
+                if (player.getTeamManager().isUseTrialTeam()) {
+                    avatar = player.getTeamManager().getTrialAvatars().get(avatarId);
+                }
+                if (avatar == null) continue;
+            }
+            player.getTeamManager().getActiveTeam().add(new EntityAvatar(player.getScene(), avatar));
         }
 
         // Limit character index in case its out of bounds

@@ -13,7 +13,8 @@ public class PacketDungeonChallengeBeginNotify extends BasePacket {
 		DungeonChallengeBeginNotify proto = DungeonChallengeBeginNotify.newBuilder()
 				.setChallengeId(challenge.getChallengeId())
 				.setChallengeIndex(challenge.getChallengeIndex())
-				.setGroupId(challenge.getGroup().id)
+				// it will cause bug for trial avatar activity, will fix it in the next commit
+				// .setGroupId(challenge.getGroup().id) 
 				.addAllParamList(challenge.getParamList())
 				.build();
 

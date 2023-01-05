@@ -98,12 +98,11 @@ public class DungeonSystem extends BaseGameSystem {
         if (player.getWorld().transferPlayerToScene(player, sceneId, data)) {
             scene = player.getScene();
             var dungeonManager = new DungeonManager(scene, data);
-            dungeonManager.startDungeon();
             scene.addDungeonSettleObserver(basicDungeonSettleObserver);
         }
 
         scene.setPrevScenePoint(pointId);
-        player.sendPacket(new PacketPlayerEnterDungeonRsp(pointId, dungeonId));
+        player.sendPacket(new PacketPlayerEnterDungeonRsp(pointId, dungeonId)); // todo, dont have to send packet for trial avatar activity dungeon
         return true;
     }
 
@@ -154,7 +153,10 @@ public class DungeonSystem extends BaseGameSystem {
         player.getTowerManager().clearEntry();
 
         // Transfer player back to world
-        player.getWorld().transferPlayerToScene(player, prevScene, prevPos);
+        Grasscutter.getGameServer().getScheduler().scheduleDelayedTask(() -> {
+            player.getWorld().transferPlayerToScene(player, prevScene, prevPos);
+        }, dungeonManager.isFinishedSuccessfully() ? 0 : 3);
+        
         player.sendPacket(new BasePacket(PacketOpcodes.PlayerQuitDungeonRsp));
     }
 

@@ -19,16 +19,36 @@ import java.util.stream.*;
 public class TrialAvatarPlayerData {
     List<RewardInfoItem> rewardInfoList;
 
+    private static List<Integer> getAvatarIdList(int scheduleId) {
+        if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
+            if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
+
+            return GameData.getTrialAvatarActivityDataMap().get(scheduleId).getAvatarIndexIdList();
+        }
+        if (GameData.getTrialAvatarActivityCustomData().get(scheduleId) == null) return List.of();
+        return GameData.getTrialAvatarActivityCustomData().get(scheduleId).getAvatarIndexIdList();
+    }
+
+    private static List<Integer> getRewardIdList(int scheduleId) {
+        if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
+            if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
+
+            return GameData.getTrialAvatarActivityDataMap().get(scheduleId).getRewardIdList();
+        }
+        if (GameData.getTrialAvatarActivityCustomData().get(scheduleId) == null) return List.of();
+        return GameData.getTrialAvatarActivityCustomData().get(scheduleId).getRewardIdList();
+    }
+
     public static TrialAvatarPlayerData create(int scheduleId) {
-        TrialAvatarActivityData activityData = GameData.getTrialAvatarActivityDataMap().get(scheduleId);
+        List<Integer> avatarIds = getAvatarIdList(scheduleId);
+        List<Integer> rewardIds = getRewardIdList(scheduleId);
         return TrialAvatarPlayerData.of()
-            .rewardInfoList(activityData == null ? List.of() : 
-                IntStream.range(0, activityData.getAvatarIndexIdList().size())
-                    .filter(i -> activityData.getAvatarIndexIdList().get(i) > 0 && activityData.getRewardIdList().get(i) > 0)
-                    .mapToObj(i -> RewardInfoItem.create(
-                        activityData.getAvatarIndexIdList().get(i), 
-                        activityData.getRewardIdList().get(i)))
-                    .collect(Collectors.toList()))
+            .rewardInfoList(IntStream.range(0, avatarIds.size())
+                .filter(i -> avatarIds.get(i) > 0 && rewardIds.get(i) > 0)
+                .mapToObj(i -> RewardInfoItem.create(
+                    avatarIds.get(i), 
+                    rewardIds.get(i)))
+                .collect(Collectors.toList()))
             .build();
     }
 
@@ -37,6 +57,11 @@ public class TrialAvatarPlayerData {
             .addAllRewardInfoList(getRewardInfoList().stream()
                 .map(RewardInfoItem::toProto).toList())
             .build();
+    }
+
+    public RewardInfoItem getRewardInfo(int trialAvatarIndexId) {
+        return getRewardInfoList().stream().filter(x -> x.getTrialAvatarIndexId() == trialAvatarIndexId)
+            .findFirst().orElse(null);
     }
 
     @Data
@@ -52,7 +77,7 @@ public class TrialAvatarPlayerData {
             return RewardInfoItem.of()
                 .trialAvatarIndexId(trialAvatarIndexId)
                 .rewardId(rewardId)
-                .passedDungeon(false)
+                .passedDungeon(true)
                 .receivedReward(false)
                 .build();
         }

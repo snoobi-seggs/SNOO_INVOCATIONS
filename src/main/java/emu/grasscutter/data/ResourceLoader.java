@@ -644,7 +644,6 @@ public class ResourceLoader {
                     getResourcePath(pathName + "TrialAvatarData.json"),
                     TrialAvatarCustomData.class).forEach(instance -> {
                         instance.onLoad();
-                        Grasscutter.getLogger().info("{}", instance);
                         GameData.getTrialAvatarCustomData()
                             .put(instance.getTrialAvatarId(), instance);
                     });

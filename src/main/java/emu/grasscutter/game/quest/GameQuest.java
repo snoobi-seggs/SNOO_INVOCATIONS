@@ -202,7 +202,12 @@ public class GameQuest {
 
         getQuestData().getFailExec().forEach(e -> getOwner().getServer().getQuestSystem().triggerExec(this, e, e.getParam()));
 
+        if (getQuestData().getTrialAvatarList() != null) {
+            getQuestData().getTrialAvatarList().forEach(t -> getOwner().removeTrialAvatarForQuest(t));
+        }
         Grasscutter.getLogger().debug("Quest {} is failed", subQuestId);
+
+ 
     }
 
     // Return true if it did the rewind
