@@ -692,13 +692,23 @@ public class Scene {
         Grasscutter.getLogger().info("Scene {} Block {} loaded.", this.getId(), block.id);
     }
 
+    public int loadDynamicGroup(int group_id) {
+        SceneGroup group = getScriptManager().getGroupById(group_id);
+        if(group == null) return -1;
+
+        if(GameData.getGroupReplacements().containsKey(group_id)) onRegisterGroups(getScriptManager().getBlocks().get(group.block_id));
+
+        if (group.init_config == null) return -1;
+        return group.init_config.suite;
+    }
+
     public void onRegisterGroups(SceneBlock block) {
         Set<SceneGroup> sceneGroups = scriptManager.getLoadedGroupSetPerBlock().get(block.id);
         Map<Integer, SceneGroup> sceneGroupMap = sceneGroups.stream().collect(Collectors.toMap(item -> item.id, item -> item));
         List<Integer> sceneGroupsIds = sceneGroups.stream()
             .map(group -> group.id)
             .toList();
-        List<Integer> dynamicGroups = block.groups.values().stream()
+        List<Integer> dynamicGroups = sceneGroups.stream()
                 .filter(group -> group.dynamic_load)
                 .map(group -> group.id)
                 .toList();
@@ -718,16 +728,12 @@ public class Scene {
         KahnsSort.Graph graph = new KahnsSort.Graph(nodes, groupList);
         List<Integer> dynamicGroupsOrdered = KahnsSort.doSort(graph);
 
-        List<SceneGroup> newGroups = new ArrayList<>();
-
         //Now we can start unloading and loading groups :D
         dynamicGroupsOrdered.forEach(group -> {
             if(GameData.getGroupReplacements().containsKey((int)group)) { //isGroupJoinReplacement
                 GroupReplacementData data = GameData.getGroupReplacements().get((int)group);
                 SceneGroup sceneGroupReplacement = block.groups.get(group);
-                boolean replaced = false;
                 if(sceneGroupReplacement.is_replaceable != null) {
-                    int lastSize = sceneGroupsIds.size();
                     Iterator<Integer> it = data.replace_groups.iterator();
                     while(it.hasNext()) {
                         int replace_group = it.next();
@@ -735,25 +741,17 @@ public class Scene {
                             //Check if we can replace this group
                             SceneGroup sceneGroup = sceneGroupMap.get(replace_group);
                             if(sceneGroup != null && sceneGroup.is_replaceable != null &&
-                                sceneGroup.is_replaceable.value &&
-                                sceneGroup.is_replaceable.version <= sceneGroupReplacement.is_replaceable.version) {
+                                ((sceneGroup.is_replaceable.value &&
+                                sceneGroup.is_replaceable.version <= sceneGroupReplacement.is_replaceable.version) || sceneGroup.is_replaceable.new_bin_only)) {
                                 unloadGroup(block, replace_group);
                                 it.remove();
                                 Grasscutter.getLogger().info("Graph ordering: unloaded {}", replace_group);
                             }
                         }
                     }
-                    if(lastSize != sceneGroupsIds.size()) replaced = true;
-                }
-
-                if(replaced) {
-                    newGroups.add(sceneGroupReplacement);
-                    Grasscutter.getLogger().info("Graph ordering: loaded {}", sceneGroupReplacement.id);
                 }
             }
         });
-
-        onLoadGroup(newGroups);
     }
 
     public void loadTriggerFromGroup(SceneGroup group, String triggerName) {
@@ -813,7 +811,7 @@ public class Scene {
         Grasscutter.getLogger().info("Scene {} loaded {} group(s)", this.getId(), groups.size());
     }
 
-    private void unloadGroup(SceneBlock block, int group_id) {
+    public void unloadGroup(SceneBlock block, int group_id) {
         List<GameEntity> toRemove = this.getEntities().values().stream()
                 .filter(e -> e != null && (e.getBlockId() == block.id && e.getGroupId() == group_id)).toList();
 

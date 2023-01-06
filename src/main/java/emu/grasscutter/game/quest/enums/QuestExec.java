@@ -15,7 +15,7 @@ public enum QuestExec implements QuestTrigger {
     QUEST_EXEC_UNLOCK_FORCE (4), // missing, currently unused
     QUEST_EXEC_LOCK_FORCE (5), // missing, currently unused
     QUEST_EXEC_CHANGE_AVATAR_ELEMET (6),
-    QUEST_EXEC_REFRESH_GROUP_MONSTER (7), // missing
+    QUEST_EXEC_REFRESH_GROUP_MONSTER (7),
     QUEST_EXEC_SET_IS_FLYABLE (8), // missing, maybe gives glider
     QUEST_EXEC_SET_IS_WEATHER_LOCKED (9), // missing
     QUEST_EXEC_SET_IS_GAME_TIME_LOCKED (10), // missing
@@ -53,8 +53,8 @@ public enum QuestExec implements QuestTrigger {
     QUEST_EXEC_SET_QUEST_GLOBAL_VAR (43),
     QUEST_EXEC_INC_QUEST_GLOBAL_VAR (44),
     QUEST_EXEC_DEC_QUEST_GLOBAL_VAR (45),
-    QUEST_EXEC_REGISTER_DYNAMIC_GROUP (46), // missing
-    QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP (47), // missing
+    QUEST_EXEC_REGISTER_DYNAMIC_GROUP (46), // test, maybe the dynamic should be saved on a list and when you enter the view range this loads it again
+    QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP (47), // test, same for this
     QUEST_EXEC_SET_QUEST_VAR (48),
     QUEST_EXEC_INC_QUEST_VAR (49),
     QUEST_EXEC_DEC_QUEST_VAR (50),

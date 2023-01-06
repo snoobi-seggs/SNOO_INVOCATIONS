@@ -336,6 +336,7 @@ public class QuestManager extends BasePlayerManager {
             case QUEST_CONTENT_USE_ITEM:
             case QUEST_CONTENT_ENTER_VEHICLE:
             case QUEST_CONTENT_FINISH_DUNGEON:
+            case QUEST_CONTENT_CLEAR_GROUP_MONSTER:
                 for (GameMainQuest mainQuest : checkMainQuests) {
                     mainQuest.tryFinishSubQuests(condType, paramStr, params);
                 }

@@ -15,7 +15,7 @@ public enum QuestContent implements QuestTrigger {
     QUEST_CONTENT_FINISH_PLOT (4),
     QUEST_CONTENT_OBTAIN_ITEM (5),
     QUEST_CONTENT_TRIGGER_FIRE (6),
-    QUEST_CONTENT_CLEAR_GROUP_MONSTER (7), // missing, finish
+    QUEST_CONTENT_CLEAR_GROUP_MONSTER (7), // test, finish
     QUEST_CONTENT_NOT_FINISH_PLOT (8), // missing triggers, fail
     QUEST_CONTENT_ENTER_DUNGEON (9),
     QUEST_CONTENT_ENTER_MY_WORLD (10),

@@ -168,9 +168,20 @@ public class SceneScriptManager {
         if (suite == null) {
             return;
         }
+
         resetTriggersForGroupSuite(group, suiteIndex);
         spawnMonstersInGroup(group, suite);
         spawnGadgetsInGroup(group, suite);
+    }
+    public void refreshGroupMonster(SceneGroup group) {
+        var monstersToSpawn = group.monsters.values().stream()
+            .filter(m -> {
+                var entity = scene.getEntityByConfigId(m.config_id);
+                return entity == null || entity.getGroupId()!=group.id;
+            })
+            .map(mob -> createMonster(group.id, group.block_id, mob))
+            .toList();//TODO check if it interferes with bigworld or anything else
+        this.addEntities(monstersToSpawn);
     }
     public EntityRegion getRegionById(int id) {
         return regions.get(id);
@@ -204,6 +215,7 @@ public class SceneScriptManager {
             }
 
             if (!group.isLoaded()) {
+                getLoadedGroupSetPerBlock().get(block.id).add(group);
                 getScene().onLoadGroup(List.of(group));
             }
             return group;
@@ -579,6 +591,10 @@ public class SceneScriptManager {
 
     public void addEntities(List<? extends GameEntity> gameEntity) {
         getScene().addEntities(gameEntity);
+    }
+
+    public void removeEntities(List<? extends GameEntity> gameEntity) {
+        getScene().removeEntities(gameEntity.stream().map(e -> (GameEntity) e).collect(Collectors.toList()), VisionTypeOuterClass.VisionType.VISION_TYPE_REFRESH);
     }
 
     public RTree<SceneBlock, Geometry> getBlocksIndex() {
