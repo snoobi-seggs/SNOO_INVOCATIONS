@@ -18,6 +18,7 @@ import emu.grasscutter.scripts.service.ScriptMonsterTideService;
 import io.netty.util.concurrent.FastThreadLocalThread;
 import kotlin.Pair;
 import lombok.val;
+
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -159,19 +160,50 @@ public class SceneScriptManager {
         if(group == null || group.suites==null){
             return;
         }
-        for (int i = 1; i<= group.suites.size();i++){
-            refreshGroup(group, i);
-        }
+        //for (int i = 1; i<= group.suites.size();i++){
+            //refreshGroup(group, i);
+            refreshGroup(group, group.getSuiteId(), false); //Refresh the last group triggers
+        //}
     }
-    public void refreshGroup(SceneGroup group, int suiteIndex) {
-        var suite = group.getSuiteByIndex(suiteIndex);
-        if (suite == null) {
-            return;
+    public int refreshGroup(SceneGroup group, int suiteIndex, boolean excludePrevSuite) {
+        if(suiteIndex == 0) {
+            if(excludePrevSuite) {
+                suiteIndex = group.findInitSuiteIndex(group.getSuiteId());
+            } else
+                suiteIndex = group.findInitSuiteIndex(0);
+        }
+        if(suiteIndex == 0) return 0;
+
+        var suiteData = group.getSuiteByIndex(suiteIndex);
+        if (suiteData == null) {
+            return 0;
         }
 
-        resetTriggersForGroupSuite(group, suiteIndex);
-        spawnMonstersInGroup(group, suite);
-        spawnGadgetsInGroup(group, suite);
+        int prevSuiteIndex = group.getSuiteId();
+        boolean waitForOne = false;
+        if(prevSuiteIndex != 0) {
+            var prevSuiteData = group.getSuiteByIndex(prevSuiteIndex);
+            if (prevSuiteData != null) {
+                if(prevSuiteData.ban_refresh && !suiteData.ban_refresh) {
+                    waitForOne = true;
+                }
+            }
+        }
+
+        if(waitForOne && (group.getTargetSuiteId() == 0 || prevSuiteIndex != group.getTargetSuiteId())) {
+            group.setTargetSuiteId(suiteIndex);
+            return 0;
+        }
+
+        group.setTargetSuiteId(0);
+
+		for(var suiteItem : group.suites){
+			removeGroupSuite(group, suiteItem);
+		} //Remove old group suites
+		addGroupSuite(group, suiteData);
+
+        group.setSuiteId(suiteIndex);
+        return suiteIndex;
     }
     public void refreshGroupMonster(SceneGroup group) {
         var monstersToSpawn = group.monsters.values().stream()

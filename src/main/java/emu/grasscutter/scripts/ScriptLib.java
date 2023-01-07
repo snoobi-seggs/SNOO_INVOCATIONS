@@ -419,7 +419,7 @@ public class ScriptLib {
 			return 1;
 		}
 
-		getSceneScriptManager().refreshGroup(group, suite);
+		getSceneScriptManager().refreshGroup(group, suite, false);
 
 		return 0;
 	}

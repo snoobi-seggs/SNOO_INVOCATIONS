@@ -788,9 +788,10 @@ public class Scene {
             }
 
             // Load suites
-            int suite = group.init_config.suite;
+            //int suite = group.findInitSuiteIndex(0);
+            this.getScriptManager().refreshGroup(group, 0, false); //This is what the official server does
 
-            if (suite == 0 || group.suites == null || group.suites.size() == 0) {
+            /*if (suite == 0 || group.suites == null || group.suites.size() == 0) {
                 continue;
             }
 
@@ -803,7 +804,7 @@ public class Scene {
 
             if(group.id == 133003371) Grasscutter.getLogger().info("Loading pot group");
 
-            scriptManager.registerRegionInGroupSuite(group, suiteData);
+            scriptManager.registerRegionInGroupSuite(group, suiteData);*/
         }
 
         scriptManager.meetEntities(entities);

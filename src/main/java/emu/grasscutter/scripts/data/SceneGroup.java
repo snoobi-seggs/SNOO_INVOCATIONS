@@ -12,9 +12,11 @@ import javax.script.Bindings;
 import javax.script.CompiledScript;
 import javax.script.ScriptException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @ToString
@@ -43,6 +45,8 @@ public class SceneGroup {
     private transient boolean loaded; // Not an actual variable in the scripts either
     private transient CompiledScript script;
     private transient Bindings bindings;
+    private transient int suite_id;
+    private transient int target_suite_id;
     public static SceneGroup of(int groupId) {
         var group = new SceneGroup();
         group.id = groupId;
@@ -55,6 +59,22 @@ public class SceneGroup {
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
+    }
+
+    public int getSuiteId() {
+        return this.suite_id;
+    }
+
+    public void setSuiteId(int suite_id) {
+        this.suite_id = suite_id;
+    }
+
+    public int getTargetSuiteId() {
+        return this.target_suite_id;
+    }
+
+    public void setTargetSuiteId(int suite_id) {
+        this.target_suite_id = suite_id;
     }
 
     public int getBusinessType() {
@@ -140,6 +160,26 @@ public class SceneGroup {
 
         Grasscutter.getLogger().debug("Successfully loaded group {} in scene {}.", this.id, sceneId);
         return this;
+    }
+
+    public int findInitSuiteIndex(int exclude_index) { //TODO: Investigate end index
+        if(init_config == null) return 1;
+        if(init_config.io_type == 1) return init_config.suite; //IO TYPE FLOW
+        if(init_config.rand_suite) {
+            if(suites.size() == 1) {
+                return init_config.suite;
+            } else {
+                List<Integer> randSuiteList = new ArrayList<>();
+                for(int i = 0; i < suites.size(); i++) {
+                    if(i == exclude_index) continue;
+
+                    var suite = suites.get(i);
+                    for(int j = 0; j < suite.rand_weight; j++) randSuiteList.add(Integer.valueOf(i));
+                }
+                return randSuiteList.get(new Random().nextInt(randSuiteList.size()));
+            }
+        }
+        return init_config.suite;
     }
 
     public Optional<SceneBossChest> searchBossChestInGroup() {

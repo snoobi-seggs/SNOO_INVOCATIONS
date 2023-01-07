@@ -22,22 +22,23 @@ public class ExecRefreshGroupSuite extends QuestExecHandler {
 
             var scriptManager = quest.getOwner().getScene().getScriptManager();
 
-            quest.getMainQuest().getQuestGroupSuites().add(QuestGroupSuite.of()
-                .scene(sceneId)
-                .group(groupId)
-                .suite(suiteId)
-                .build());
-
             // refresh immediately if player is in this scene
             if (quest.getOwner().getScene().getId() == sceneId) {
                 var targetGroup = scriptManager.getGroupById(groupId);
                 if (targetGroup == null) {
                     Grasscutter.getLogger().warn("trying to load unknown group {} in scene {}", groupId, sceneId);
                 } else {
-                    scriptManager.refreshGroup(targetGroup, suiteId);
+                    suiteId = scriptManager.refreshGroup(targetGroup, suiteId, false); //If suiteId is zero, the value of suiteId changes
                     quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
                 }
             }
+
+            if(suiteId != 0)
+                quest.getMainQuest().getQuestGroupSuites().add(QuestGroupSuite.of()
+                    .scene(sceneId)
+                    .group(groupId)
+                    .suite(suiteId)
+                    .build());
         }
 
         return true;
