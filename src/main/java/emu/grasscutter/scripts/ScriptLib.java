@@ -270,13 +270,16 @@ public class ScriptLib {
 			return 1;
 		}
 
-		for(var suiteItem : group.suites){
+		/*for(var suiteItem : group.suites){
 			if(suiteData == suiteItem){
 				continue;
 			}
 			this.getSceneScriptManager().removeGroupSuite(group, suiteItem);
-		}
-		this.getSceneScriptManager().addGroupSuite(group, suiteData);
+		}*/
+        if(group.getSuiteId() != suite) {
+		    this.getSceneScriptManager().addGroupSuite(group, suiteData);
+            group.setSuiteId(suite);
+        }
 
 		return 0;
 	}

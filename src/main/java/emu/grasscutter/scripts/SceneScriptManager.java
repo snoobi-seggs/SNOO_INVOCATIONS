@@ -181,8 +181,9 @@ public class SceneScriptManager {
 
         int prevSuiteIndex = group.getSuiteId();
         boolean waitForOne = false;
+        SceneSuite prevSuiteData = null;
         if(prevSuiteIndex != 0) {
-            var prevSuiteData = group.getSuiteByIndex(prevSuiteIndex);
+            prevSuiteData = group.getSuiteByIndex(prevSuiteIndex);
             if (prevSuiteData != null) {
                 if(prevSuiteData.ban_refresh && !suiteData.ban_refresh) {
                     waitForOne = true;
@@ -197,9 +198,10 @@ public class SceneScriptManager {
 
         group.setTargetSuiteId(0);
 
-		for(var suiteItem : group.suites){
-			removeGroupSuite(group, suiteItem);
-		} //Remove old group suites
+		if(prevSuiteData != null){
+			removeGroupSuite(group, prevSuiteData);
+		} //Remove old group suite
+
 		addGroupSuite(group, suiteData);
 
         group.setSuiteId(suiteIndex);
