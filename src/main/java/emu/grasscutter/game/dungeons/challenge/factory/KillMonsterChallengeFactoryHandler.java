@@ -17,15 +17,15 @@ public class KillMonsterChallengeFactoryHandler implements ChallengeFactoryHandl
     }
 
     @Override
-    public WorldChallenge build(int challengeIndex, int challengeId, int param3, int param4, int param5, int param6, Scene scene, SceneGroup group) {
-        var realGroup = scene.getScriptManager().getGroupById(param4);
+    public WorldChallenge build(int challengeIndex, int challengeId, int timeLimit, int groupId, int targetCount, int param6, Scene scene, SceneGroup group) {
+        var realGroup = scene.getScriptManager().getGroupById(groupId);
         return new WorldChallenge(
                 scene, realGroup,
                 challengeId, // Id
                 challengeIndex, // Index
-                List.of(param5, param3),
-                param3, // Limit
-                param5,  // Goal
+                List.of(targetCount, timeLimit),
+                timeLimit, // Limit
+                targetCount,  // Goal
                 List.of(new KillMonsterTrigger(), new InTimeTrigger())
                 );
     }

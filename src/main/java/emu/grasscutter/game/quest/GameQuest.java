@@ -175,6 +175,8 @@ public class GameQuest {
         getOwner().getQuestManager().queueEvent(QuestCond.QUEST_COND_STATE_EQUAL, this.subQuestId, this.state.getValue(),0,0,0);
         getOwner().getScene().triggerDungeonEvent(DungeonPassConditionType.DUNGEON_COND_FINISH_QUEST, getSubQuestId());
 
+        getOwner().getProgressManager().tryUnlockOpenStates();
+
         if (ChapterData.endQuestChapterMap.containsKey(subQuestId)) {
             mainQuest.getOwner().sendPacket(new PacketChapterStateNotify(
                 ChapterData.endQuestChapterMap.get(subQuestId).getId(),

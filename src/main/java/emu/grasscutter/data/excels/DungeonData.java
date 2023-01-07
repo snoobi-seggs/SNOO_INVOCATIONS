@@ -10,6 +10,8 @@ import java.util.List;
 
 @ResourceType(name = "DungeonExcelConfigData.json")
 public class DungeonData extends GameResource {
+
+    @Getter(onMethod = @__(@Override))
 	private int id;
 	@Getter private int sceneId;
 	@Getter private int showLevel;
@@ -28,12 +30,8 @@ public class DungeonData extends GameResource {
     @Getter private int statueCostID;
     @Getter private int statueCostCount;
 
+    // not part of DungeonExcelConfigData
     @Getter private RewardPreviewData rewardPreviewData;
-
-	@Override
-	public int getId() {
-		return this.id;
-	}
 
     public DungeonType getType() {
         if (type == null) {

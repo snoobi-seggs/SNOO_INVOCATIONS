@@ -27,15 +27,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 public abstract class GameEntity {
-    @Getter protected int id;
     @Getter private final Scene scene;
+    @Getter protected int id;
     @Getter @Setter private SpawnDataEntry spawnEntry;
 
     @Getter @Setter private int blockId;
     @Getter @Setter private int configId;
     @Getter @Setter private int groupId;
 
-    private MotionState moveState;
+    @Getter @Setter private MotionState motionState;
     @Getter @Setter private int lastMoveSceneTimeMs;
     @Getter @Setter private int lastMoveReliableSeq;
 
@@ -51,7 +51,7 @@ public abstract class GameEntity {
 
     public GameEntity(Scene scene) {
         this.scene = scene;
-        this.moveState = MotionState.MOTION_STATE_NONE;
+        this.motionState = MotionState.MOTION_STATE_NONE;
     }
 
     public int getEntityType() {
@@ -92,14 +92,6 @@ public abstract class GameEntity {
 
     public abstract Position getRotation();
 
-    public MotionState getMotionState() {
-        return moveState;
-    }
-
-    public void setMotionState(MotionState moveState) {
-        this.moveState = moveState;
-    }
-
     public void setFightProperty(FightProperty prop, float value) {
         this.getFightProperties().put(prop.getId(), value);
     }
@@ -129,11 +121,11 @@ public abstract class GameEntity {
 
     protected MotionInfo getMotionInfo() {
         MotionInfo proto = MotionInfo.newBuilder()
-                .setPos(this.getPosition().toProto())
-                .setRot(this.getRotation().toProto())
-                .setSpeed(Vector.newBuilder())
-                .setState(this.getMotionState())
-                .build();
+            .setPos(this.getPosition().toProto())
+            .setRot(this.getRotation().toProto())
+            .setSpeed(Vector.newBuilder())
+            .setState(this.getMotionState())
+            .build();
 
         return proto;
     }
@@ -204,14 +196,15 @@ public abstract class GameEntity {
         }
     }
 
-    public void callLuaHPEvent(EntityDamageEvent event){
-        if(entityController != null){
+    public void callLuaHPEvent(EntityDamageEvent event) {
+        if (entityController != null) {
             entityController.onBeHurt(this, event.getAttackElementType(), true);//todo is host handling
         }
     }
 
     /**
      * Move this entity to a new position.
+     *
      * @param position The new position.
      * @param rotation The new rotation.
      */
@@ -223,7 +216,8 @@ public abstract class GameEntity {
 
     /**
      * Called when a player interacts with this entity
-     * @param player Player that is interacting with this entity
+     *
+     * @param player      Player that is interacting with this entity
      * @param interactReq Interact request protobuf data
      */
     public void onInteract(Player player, GadgetInteractReq interactReq) {
@@ -241,14 +235,14 @@ public abstract class GameEntity {
 
     }
 
-    public void onTick(int sceneTime){
-        if(entityController!=null){
+    public void onTick(int sceneTime) {
+        if (entityController != null) {
             entityController.onTimer(this, sceneTime);
         }
     }
 
-    public int onClientExecuteRequest(int param1, int param2, int param3){
-        if(entityController != null){
+    public int onClientExecuteRequest(int param1, int param2, int param3) {
+        if (entityController != null) {
             return entityController.onClientExecuteRequest(this, param1, param2, param3);
         }
         return 0;
@@ -256,6 +250,7 @@ public abstract class GameEntity {
 
     /**
      * Called when this entity dies
+     *
      * @param killerId Entity id of the entity that killed this entity
      */
     public void onDeath(int killerId) {
@@ -263,7 +258,7 @@ public abstract class GameEntity {
         EntityDeathEvent event = new EntityDeathEvent(this, killerId);
         event.call();
 
-        if(entityController != null){
+        if (entityController != null) {
             entityController.onDie(this, getLastAttackType());
         }
     }

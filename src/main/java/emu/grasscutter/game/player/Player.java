@@ -204,6 +204,8 @@ public class Player {
     @Getter private transient MpSettingType mpSetting = MpSettingType.MP_SETTING_TYPE_ENTER_AFTER_APPLY;  // TODO
     @Getter private long playerGameTime = 0;
 
+    @Getter private PlayerProgress playerProgress;
+
     @Deprecated
     @SuppressWarnings({"rawtypes", "unchecked"}) // Morphia only!
     public Player() {
@@ -247,6 +249,7 @@ public class Player {
         this.unlockedSceneAreas = new HashMap<>();
         this.unlockedScenePoints = new HashMap<>();
         this.chatEmojiIdList = new ArrayList<>();
+        this.playerProgress = new PlayerProgress();
 
         this.attackResults = new LinkedBlockingQueue<>();
         this.coopRequests = new Int2ObjectOpenHashMap<>();
