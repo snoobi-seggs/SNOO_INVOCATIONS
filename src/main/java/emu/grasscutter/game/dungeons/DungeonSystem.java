@@ -19,6 +19,7 @@ import emu.grasscutter.server.packet.send.PacketPlayerEnterDungeonRsp;
 import emu.grasscutter.utils.Position;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import lombok.val;
 import org.reflections.Reflections;
 
 import java.util.List;
@@ -134,8 +135,9 @@ public class DungeonSystem extends BaseGameSystem {
         int prevScene = scene.getPrevScene() > 0 ? scene.getPrevScene() : 3;
 
         // Get previous position
-        var dungeonManager = scene.getDungeonManager();
+        val dungeonManager = scene.getDungeonManager();
         DungeonData dungeonData =  dungeonManager != null ? dungeonManager.getDungeonData() : null;
+        val finishedSuccessfully = dungeonManager != null && dungeonManager.isFinishedSuccessfully();
         Position prevPos = new Position(GameConstants.START_POSITION);
 
         if (dungeonData != null) {
@@ -155,8 +157,7 @@ public class DungeonSystem extends BaseGameSystem {
         // Transfer player back to world
         Grasscutter.getGameServer().getScheduler().scheduleDelayedTask(() -> {
             player.getWorld().transferPlayerToScene(player, prevScene, prevPos);
-        }, dungeonManager.isFinishedSuccessfully() ? 0 : 3);
-        
+        }, finishedSuccessfully ? 0 : 3);
         player.sendPacket(new BasePacket(PacketOpcodes.PlayerQuitDungeonRsp));
     }
 

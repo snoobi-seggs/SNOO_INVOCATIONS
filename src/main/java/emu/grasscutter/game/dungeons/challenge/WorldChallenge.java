@@ -131,4 +131,8 @@ public class WorldChallenge {
         }
         this.challengeTriggers.forEach(t -> t.onGadgetDamage(this, gadget));
     }
+
+    public int getGroupId(){
+        return group.id;
+    }
 }
