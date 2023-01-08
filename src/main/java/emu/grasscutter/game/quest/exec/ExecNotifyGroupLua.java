@@ -26,10 +26,10 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
             return false;
         }
         scene.runWhenFinished(() -> {
-            var group = scriptManager.getGroupById(groupId);
+            var groupInstance = scriptManager.getGroupInstanceById(groupId);
             // workaround to make sure the triggers are still there todo find better way of trigger handling
-            scriptManager.refreshGroup(group);
-            Grasscutter.getLogger().warn("group: {} \ncondition: {} \nparamStr {}", group, condition, paramStr);
+            scriptManager.refreshGroup(groupInstance);
+            Grasscutter.getLogger().warn("group: {} \ncondition: {} \nparamStr {}", groupInstance.getLuaGroup(), condition, paramStr);
             val eventType = quest.getState() == QuestState.QUEST_STATE_FINISHED ?
                 EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START;
             scriptManager.callEvent(

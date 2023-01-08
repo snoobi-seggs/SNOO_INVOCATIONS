@@ -16,7 +16,6 @@ import emu.grasscutter.game.entity.gadget.GadgetWorktop;
 import emu.grasscutter.game.managers.blossom.BlossomManager;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.player.TeamInfo;
-import emu.grasscutter.game.player.Player.SceneLoadState;
 import emu.grasscutter.game.props.*;
 import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.world.data.TeleportProperties;
@@ -42,8 +41,6 @@ import lombok.Setter;
 import lombok.val;
 
 import javax.annotation.Nullable;
-
-import dev.morphia.aggregation.experimental.stages.Group;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -658,7 +655,6 @@ public class Scene {
 
         List<SceneGroup> groups = sceneGroups.stream()
             .filter(group -> !scriptManager.getLoadedGroupSetPerBlock().get(block.id).contains(group))
-            .peek(group -> scriptManager.getLoadedGroupSetPerBlock().get(block.id).add(group))
             .toList();
 
         if (groups.size() == 0) {
@@ -692,7 +688,9 @@ public class Scene {
 
     public int loadDynamicGroup(int group_id) {
         SceneGroup group = getScriptManager().getGroupById(group_id);
-        if(group == null) return -1;
+        if(group == null || getScriptManager().getGroupInstanceById(group_id) != null) return -1; //Group not found or already instanced
+
+        onLoadGroup(new ArrayList<>(Arrays.asList(group)));
 
         if(GameData.getGroupReplacements().containsKey(group_id)) onRegisterGroups(getScriptManager().getBlocks().get(group.block_id));
 
@@ -766,6 +764,7 @@ public class Scene {
         for (SceneGroup group : groups) {
             // We load the script files for the groups here
             this.getScriptManager().loadGroupFromScript(group);
+            scriptManager.getLoadedGroupSetPerBlock().get(group.block_id).add(group);
         }
 
         // Spawn gadgets AFTER triggers are added
@@ -775,6 +774,8 @@ public class Scene {
             if (group.init_config == null) {
                 continue;
             }
+
+            SceneGroupInstance groupInstance = this.getScriptManager().getGroupInstanceById(group.id);
 
             // Load garbages
             List<SceneGadget> garbageGadgets = group.getGarbageGadgets();
@@ -787,7 +788,7 @@ public class Scene {
 
             // Load suites
             //int suite = group.findInitSuiteIndex(0);
-            this.getScriptManager().refreshGroup(group, 0, false); //This is what the official server does
+            this.getScriptManager().refreshGroup(groupInstance, 0, false); //This is what the official server does
 
             /*if (suite == 0 || group.suites == null || group.suites.size() == 0) {
                 continue;
@@ -828,6 +829,7 @@ public class Scene {
         }
 
         scriptManager.getLoadedGroupSetPerBlock().get(block.id).remove(group);
+        scriptManager.unregisterGroup(group);
     }
 
     public void onUnloadBlock(SceneBlock block) {
@@ -966,11 +968,12 @@ public class Scene {
             if (group == null) {
                 return;
             }
+            var groupInstance = scriptManager.getGroupInstanceById(i.getGroup());
             var suite = group.getSuiteByIndex(i.getSuite());
-            if (suite == null) {
+            if (suite == null || groupInstance == null) {
                 return;
             }
-            scriptManager.addGroupSuite(group, suite);
+            scriptManager.refreshGroup(groupInstance, i.getSuite(), false);
         });
     }
 

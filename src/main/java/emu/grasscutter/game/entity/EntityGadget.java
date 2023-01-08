@@ -9,6 +9,7 @@ import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.EntityIdType;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.world.Scene;
+import emu.grasscutter.game.world.SceneGroupInstance;
 import emu.grasscutter.net.proto.AbilitySyncStateInfoOuterClass.AbilitySyncStateInfo;
 import emu.grasscutter.net.proto.AnimatorParameterValueInfoPairOuterClass.AnimatorParameterValueInfoPair;
 import emu.grasscutter.net.proto.EntityAuthorityInfoOuterClass.EntityAuthorityInfo;
@@ -167,6 +168,10 @@ public class EntityGadget extends EntityBaseGadget {
             getScene().getChallenge().onGadgetDeath(this);
         }
         getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_GADGET_DIE, this.getConfigId()));
+
+        SceneGroupInstance groupInstance = getScene().getScriptManager().getGroupInstanceById(this.getGroupId());
+        if(groupInstance != null)
+            groupInstance.getDeadEntities().add(this);
     }
 
     public boolean startPlatform(){

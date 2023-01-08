@@ -24,11 +24,11 @@ public class ExecRefreshGroupSuite extends QuestExecHandler {
 
             // refresh immediately if player is in this scene
             if (quest.getOwner().getScene().getId() == sceneId) {
-                var targetGroup = scriptManager.getGroupById(groupId);
-                if (targetGroup == null) {
+                var targetGroupInstance = scriptManager.getGroupInstanceById(groupId);
+                if (targetGroupInstance == null) {
                     Grasscutter.getLogger().warn("trying to load unknown group {} in scene {}", groupId, sceneId);
                 } else {
-                    suiteId = scriptManager.refreshGroup(targetGroup, suiteId, false); //If suiteId is zero, the value of suiteId changes
+                    suiteId = scriptManager.refreshGroup(targetGroupInstance, suiteId, false); //If suiteId is zero, the value of suiteId changes
                     quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
                 }
             }

@@ -16,11 +16,11 @@ public class ExecRefreshGroupMonster extends QuestExecHandler {
 
         var scriptManager = quest.getOwner().getScene().getScriptManager();
 
-        var targetGroup = scriptManager.getGroupById(groupId);
-        if (targetGroup == null) {
+        var targetGroupInstance = scriptManager.getGroupInstanceById(groupId);
+        if (targetGroupInstance == null) {
             Grasscutter.getLogger().warn("trying to load unknown group {} in scene {}", groupId, quest.getOwner().getScene().getId());
         } else {
-            scriptManager.refreshGroupMonster(targetGroup);
+            scriptManager.refreshGroupMonster(targetGroupInstance);
         }
 
         return true;

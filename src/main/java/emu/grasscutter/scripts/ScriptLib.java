@@ -15,6 +15,7 @@ import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.game.quest.enums.QuestCond;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.game.quest.enums.QuestState;
+import emu.grasscutter.game.world.SceneGroupInstance;
 import emu.grasscutter.net.proto.EnterTypeOuterClass;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.constants.GroupKillPolicy;
@@ -240,8 +241,9 @@ public class ScriptLib {
 		logger.debug("[LUA] Call AddExtraGroupSuite with {},{}",
 				groupId,suite);
 		SceneGroup group = getSceneScriptManager().getGroupById(groupId);
+        SceneGroupInstance groupInstance = getSceneScriptManager().getGroupInstanceById(groupId);
 
-		if (group == null || group.monsters == null) {
+		if (group == null || groupInstance == null || group.monsters == null) {
 			return 1;
 		}
 		var suiteData = group.getSuiteByIndex(suite);
@@ -254,7 +256,7 @@ public class ScriptLib {
 					getSceneScriptManager().getScene().getChallenge().getGroup().id != groupId){
 			return 0;
 		}
-		this.getSceneScriptManager().addGroupSuite(group, suiteData);
+		this.getSceneScriptManager().addGroupSuite(groupInstance, suiteData);
 
 		return 0;
 	}
@@ -262,7 +264,8 @@ public class ScriptLib {
 		logger.debug("[LUA] Call GoToGroupSuite with {},{}",
 				groupId,suite);
 		SceneGroup group = getSceneScriptManager().getGroupById(groupId);
-		if (group == null || group.monsters == null) {
+        SceneGroupInstance groupInstance = getSceneScriptManager().getGroupInstanceById(groupId);
+		if (group == null || groupInstance == null || group.monsters == null) {
 			return 1;
 		}
 		var suiteData = group.getSuiteByIndex(suite);
@@ -276,9 +279,10 @@ public class ScriptLib {
 			}
 			this.getSceneScriptManager().removeGroupSuite(group, suiteItem);
 		}*/
-        if(group.getSuiteId() != suite) {
-		    this.getSceneScriptManager().addGroupSuite(group, suiteData);
-            group.setSuiteId(suite);
+        if(groupInstance.getActiveSuiteId() == 0 || groupInstance.getActiveSuiteId() != suite) {
+            groupInstance.getDeadEntities().clear();
+		    this.getSceneScriptManager().addGroupSuite(groupInstance, suiteData);
+            groupInstance.setActiveSuiteId(suite);
         }
 
 		return 0;
@@ -415,14 +419,14 @@ public class ScriptLib {
 		int groupId = table.get("group_id").toint();
 		int suite = table.get("suite").toint();
 
-		SceneGroup group = getSceneScriptManager().getGroupById(groupId);
+        SceneGroupInstance groupInstance = getSceneScriptManager().getGroupInstanceById(groupId);
 
-		if (group == null) {
+		if (groupInstance == null) {
             logger.warn("[LUA] trying to refresh unloaded group {}", groupId);
 			return 1;
 		}
 
-		getSceneScriptManager().refreshGroup(group, suite, false);
+		getSceneScriptManager().refreshGroup(groupInstance, suite, false);
 
 		return 0;
 	}

@@ -45,8 +45,6 @@ public class SceneGroup {
     private transient boolean loaded; // Not an actual variable in the scripts either
     private transient CompiledScript script;
     private transient Bindings bindings;
-    private transient int suite_id;
-    private transient int target_suite_id;
     public static SceneGroup of(int groupId) {
         var group = new SceneGroup();
         group.id = groupId;
@@ -59,22 +57,6 @@ public class SceneGroup {
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
-    }
-
-    public int getSuiteId() {
-        return this.suite_id;
-    }
-
-    public void setSuiteId(int suite_id) {
-        this.suite_id = suite_id;
-    }
-
-    public int getTargetSuiteId() {
-        return this.target_suite_id;
-    }
-
-    public void setTargetSuiteId(int suite_id) {
-        this.target_suite_id = suite_id;
     }
 
     public int getBusinessType() {
