@@ -5,11 +5,13 @@ import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.common.ItemParamData;
 import emu.grasscutter.data.excels.DungeonData;
 import emu.grasscutter.data.excels.DungeonPassConfigData;
+import emu.grasscutter.game.activity.trialavatar.TrialAvatarActivityHandler;
 import emu.grasscutter.game.dungeons.dungeon_results.BaseDungeonResult;
 import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
+import emu.grasscutter.game.props.ActivityType;
 import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.quest.enums.LogicType;
 import emu.grasscutter.game.quest.enums.QuestContent;
@@ -221,9 +223,39 @@ public class DungeonManager {
         return rewards;
     }
 
+    public void handleTrialAvatarAction(Player player, boolean giveTrialAvatars) {
+        if (getDungeonData() == null) return;
+
+        switch (getDungeonData().getType()) {
+            // case DUNGEON_PLOT is handled by quest execs
+            case DUNGEON_ACTIVITY -> {
+                switch (getDungeonData().getPlayType()) {
+                    case DUNGEON_PLAY_TYPE_TRIAL_AVATAR -> {
+                        val playerData = player.getActivityManager()
+                            .getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
+                        if (playerData == null) return;
+
+                        val handler = (TrialAvatarActivityHandler) playerData.get().getActivityHandler();
+                        if (handler == null) return;
+
+                        if (giveTrialAvatars) {
+                            handler.setupTrialAvatarTeam(player);
+                            return;
+                        }
+                        handler.unsetTrialAvatarTeam(player);
+                    }
+                }
+            }
+            // case DUNGEON_ELEMENT_CHALLENGE -> {} // TODO
+        }
+    }
+
     public void startDungeon() {
         this.startSceneTime = scene.getSceneTimeSeconds();
-        scene.getPlayers().forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ENTER_DUNGEON, dungeonData.getId()));
+        scene.getPlayers().forEach(p -> {
+            p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_ENTER_DUNGEON, dungeonData.getId());
+            handleTrialAvatarAction(p, true);
+        });
     }
 
     public void finishDungeon() {

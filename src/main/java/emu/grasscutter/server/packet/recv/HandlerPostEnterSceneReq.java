@@ -1,7 +1,5 @@
 package emu.grasscutter.server.packet.recv;
 
-import emu.grasscutter.game.props.ActivityType;
-import emu.grasscutter.game.activity.trialavatar.TrialAvatarActivityHandler;
 import emu.grasscutter.game.quest.enums.QuestContent;
 import emu.grasscutter.net.packet.Opcodes;
 import emu.grasscutter.net.packet.PacketOpcodes;
@@ -26,23 +24,7 @@ public class HandlerPostEnterSceneReq extends PacketHandler {
             }
             case SCENE_DUNGEON -> {
                 val dungeonManager = session.getPlayer().getScene().getDungeonManager();
-                if (dungeonManager != null) {
-                    dungeonManager.startDungeon();
-                    if (dungeonManager.getDungeonData() != null) {
-                        switch (dungeonManager.getDungeonData().getPlayType()) {
-                            case DUNGEON_PLAY_TYPE_TRIAL_AVATAR -> {
-                                val playerData = session.getPlayer().getActivityManager()
-                                    .getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
-                                if (playerData != null) {
-                                    val handler = (TrialAvatarActivityHandler) playerData.get().getActivityHandler();
-                                    if (handler != null) {
-                                        handler.setupTrialAvatarTeam(session.getPlayer());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                if (dungeonManager != null) dungeonManager.startDungeon();
             }
         }
 

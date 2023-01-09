@@ -149,6 +149,8 @@ public class DungeonSystem extends BaseGameSystem {
             if(!dungeonManager.isFinishedSuccessfully()){
                 dungeonManager.quitDungeon();
             }
+
+            dungeonManager.handleTrialAvatarAction(player, false);
         }
         // clean temp team if it has
         player.getTeamManager().cleanTemporaryTeam();
