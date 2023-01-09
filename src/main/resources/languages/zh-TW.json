@@ -334,6 +334,16 @@
       "success": "傳送 %s 到座標 %s,%s,%s ，場景為 %s 。",
       "description": "將玩家的位置傳送到你所指定的座標。"
     },
+    "trialAvatarActivity": {
+      "not_found": "未找到試用角色活動玩家數據。也許該活動未被啟用。",
+      "invalid_param": "無效的參數。",
+      "schedule_not_found": "未找到計劃 %s。",
+      "success_schedule": "已將計劃 ID 更改為 %s。",
+      "success_dungeon": "已切換角色 %s 的地牢狀態。",
+      "success_dungeon_all": "已切換所有角色的地牢狀態。",
+      "success_reward": "已切換角色 %s 的獎勵狀態。",
+      "success_reward_all": "已切換所有角色的獎勵狀態。"
+    },
     "weather": {
       "success": "已設定天氣ID 為 %s，氣候型別為 %s。",
       "status": "當前天氣ID 為 %s，氣候型別為 %s。",

@@ -334,6 +334,16 @@
       "success": "%s を %s、%s、%s のシーン %s にテレポートしました。",
       "description": "プレイヤーの位置を変更する"
     },
+    "trialAvatarActivity": {
+      "not_found": "試用アバター アクティビティ プレーヤー データが見つかりません。アクティビティが有効になっていない可能性があります。",
+      "invalid_param": "無効なパラメーター。",
+      "schedule_not_found": "スケジュール %s が見つかりません。",
+      "success_schedule": "スケジュール ID を %s に変更しました。",
+      "success_dungeon": "アバター %s のダンジョン ステータスを切り替えました。",
+      "success_dungeon_all": "すべてのアバターのダンジョン ステータスを切り替えました。",
+      "success_reward": "アバター %s の報酬ステータスを切り替えました。",
+      "success_reward_all": "すべてのアバターの報酬ステータスを切り替えました。"
+    },
     "weather": {
       "success": "天気IDを %s に設定し、気候タイプは %s です。",
       "status": "現在の天気 ID は %s で、気候タイプは %s です。",

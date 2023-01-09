@@ -334,6 +334,16 @@
       "success": "传送 %s 到坐标 %s, %s, %s，场景为 %s。",
       "description": "改变指定玩家的位置"
     },
+    "trialAvatarActivity": {
+      "not_found": "未找到试用角色活动玩家数据。也许该活动未被启用。",
+      "invalid_param": "无效的参数。",
+      "schedule_not_found": "未找到计划 %s。",
+      "success_schedule": "已将计划 ID 更改为 %s。",
+      "success_dungeon": "已切换角色 %s 的地牢状态。",
+      "success_dungeon_all": "已切换所有角色的地牢状态。",
+      "success_reward": "已切换角色 %s 的奖励状态。",
+      "success_reward_all": "已切换所有角色的奖励状态。"
+    },
     "weather": {
       "success": "已设置天气ID 为 %s，气候类型为 %s。",
       "status": "当前天气ID 为 %s，气候类型为 %s。",

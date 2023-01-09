@@ -334,6 +334,16 @@
       "success": "Teleported %s to %s, %s, %s in scene %s.",
       "description": "Change the player's position"
     },
+    "trialAvatarActivity": {
+      "not_found": "Trial avatar activity player data not found. Maybe the activity is not enabled.",
+      "invalid_param": "Invalid parameter.",
+      "schedule_not_found": "Schedule %s not found.",
+      "success_schedule": "Changed schedule id to %s.",
+      "success_dungeon": "Togggled avatar %s's dungeon status.",
+      "success_dungeon_all": "Toggled all avatars' dungeon status.",
+      "success_reward": "Togggled avatar %s's reward status.",
+      "success_reward_all": "Togggled all avatars reward status."
+    },
     "weather": {
       "success": "Set weather ID to %s with climate type %s.",
       "status": "Current weather ID is %s with climate type %s.",
