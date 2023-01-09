@@ -246,6 +246,7 @@ public class ScriptLib {
 		}
 		var suiteData = group.getSuiteByIndex(suite);
 		if(suiteData == null){
+            Grasscutter.getLogger().warn("trying to get suite that doesn't exist: {} {}", groupId, suite);
 			return 1;
 		}
 		// avoid spawn wrong monster
@@ -744,16 +745,7 @@ public class ScriptLib {
     }
     public long GetServerTimeByWeek(){
         logger.debug("[LUA] Call GetServerTimeByWeek");
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-        cal.clear(Calendar.MINUTE);
-        cal.clear(Calendar.SECOND);
-        cal.clear(Calendar.MILLISECOND);
-
-        // get start of this week in milliseconds
-        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        //TODO check
-        return cal.getTimeInMillis();
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
     }
     public int GetCurTriggerCount(){
         logger.debug("[LUA] Call GetCurTriggerCount");
