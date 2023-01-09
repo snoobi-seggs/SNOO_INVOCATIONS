@@ -18,7 +18,7 @@ import lombok.val;
 import static emu.grasscutter.utils.Language.translate;
 
 @Command(
-    label = "trialavataractivity",
+    label = "trialAvatarActivity",
     aliases = {"taa"},
     usage = {"change <scheduleId>", "toggleDungeon <index(start from 1)|all>", "toggleReward <index(start from 1)|all>"},
     permission = "player.trialavataractivity",
