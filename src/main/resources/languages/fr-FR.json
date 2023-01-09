@@ -335,6 +335,7 @@
       "description": "Change la position du joueur"
     },
     "trialAvatarActivity": {
+      "description": "Manipuler les fonctionnalités de Trial Avatar Activity. Cela inclut le basculement des états de donjon et de récompense.",
       "not_found": "Les données du lecteur d'activité d'avatar d'essai sont introuvables. Peut-être que l'activité n'est pas activée.",
       "invalid_param": "Paramètre invalide.",
       "schedule_not_found": "Horaire %s introuvable.",

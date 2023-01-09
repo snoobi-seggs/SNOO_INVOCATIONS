@@ -335,6 +335,7 @@
       "description": "Przemieść wybranego gracza do podanej pozycji w podanej scenie."
     },
     "trialAvatarActivity": {
+      "description": "Manipuluj funkcjami Trial Avatar Activity. Obejmuje to przełączanie stanów lochów i nagród.",
       "not_found": "Nie znaleziono danych gracza o aktywności awatara w wersji próbnej. Być może aktywność nie jest włączona.",
       "invalid_param": "Niewłaściwy parametr.",
       "schedule_not_found": "Nie znaleziono harmonogramu %s.",

@@ -335,6 +335,7 @@
       "description": "Change the player's position"
     },
     "trialAvatarActivity": {
+      "description": "Manipulate functionalities of Trial Avatar Activity. This includes toggling dungeon and reward states.",
       "not_found": "Trial avatar activity player data not found. Maybe the activity is not enabled.",
       "invalid_param": "Invalid parameter.",
       "schedule_not_found": "Schedule %s not found.",

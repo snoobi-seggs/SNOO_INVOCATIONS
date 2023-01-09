@@ -335,6 +335,7 @@
       "description": "改变指定玩家的位置"
     },
     "trialAvatarActivity": {
+      "description": "操纵试用角色活动的功能。这包括切换地牢和奖励的状态。",
       "not_found": "未找到试用角色活动玩家数据。也许该活动未被启用。",
       "invalid_param": "无效的参数。",
       "schedule_not_found": "未找到计划 %s。",

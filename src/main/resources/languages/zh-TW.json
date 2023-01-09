@@ -335,6 +335,7 @@
       "description": "將玩家的位置傳送到你所指定的座標。"
     },
     "trialAvatarActivity": {
+      "description": "操縱試用角色活動的功能。這包括切換地牢和獎勵的狀態。",
       "not_found": "未找到試用角色活動玩家數據。也許該活動未被啟用。",
       "invalid_param": "無效的參數。",
       "schedule_not_found": "未找到計劃 %s。",

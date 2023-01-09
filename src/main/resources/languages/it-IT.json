@@ -328,6 +328,7 @@
       "description": "Cambia la posizione del giocatore"
     },
     "trialAvatarActivity": {
+      "description": "Manipolare le funzionalità dell'attività Avatar di prova. Ciò include la commutazione degli stati dei sotterranei e delle ricompense.",
       "not_found": "Dati giocatore attività avatar di prova non trovati. Forse l'attività non è abilitata.",
       "invalid_param": "Parametro non valido.",
       "schedule_not_found": "Programma %s non trovato.",

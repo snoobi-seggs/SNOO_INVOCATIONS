@@ -335,14 +335,15 @@
       "description": "Изменяет местоположение игрока"
     },
     "trialAvatarActivity": {
-      "not_found": "Nie znaleziono danych gracza o aktywności awatara w wersji próbnej. Być może aktywność nie jest włączona.",
-      "invalid_param": "Niewłaściwy parametr.",
-      "schedule_not_found": "Nie znaleziono harmonogramu %s.",
-      "success_schedule": "Zmieniono identyfikator harmonogramu na %s.",
-      "success_dungeon": "Zmieniono stan lochów awatara %s.",
-      "success_dungeon_all": "Zmieniono stan lochów wszystkich awatarów.",
-      "success_reward": "Zmieniono status nagrody awatara %s.",
-      "success_reward_all": "Zmieniono status nagrody dla wszystkich awatarów."
+      "description": "Управление функциями пробного аватара. Это включает в себя переключение состояний подземелий и наград.",
+      "not_found": "Данные об активности пробного аватара игрока не найдены. Возможно, активность не включена.",
+      "invalid_param": "Неверный параметр.",
+      "schedule_not_found": "Расписание %s не найдено.",
+      "success_schedule": "Идентификатор расписания изменен на %s.",
+      "success_dungeon": "Переключен статус подземелья аватара %s.",
+      "success_dungeon_all": "Переключен статус подземелий всех аватаров.",
+      "success_reward": "Переключен статус награды аватара %s.",
+      "success_reward_all": "Переключен статус вознаграждения всех аватаров."
     },
     "weather": {
       "success": "Установлен ID погоды %s, тип климата: %s.",

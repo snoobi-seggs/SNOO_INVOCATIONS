@@ -335,6 +335,7 @@
       "description": "Cambia la posición del jugador"
     },
     "trialAvatarActivity": {
+      "description": "Manipular las funcionalidades de la Actividad de Avatar de Prueba. Esto incluye alternar estados de mazmorra y recompensa.",
       "not_found": "No se encontraron los datos del jugador de la actividad del avatar de prueba. Quizás la actividad no esté habilitada.",
       "invalid_param": "Invalid parameter.",
       "schedule_not_found": "Horario %s no encontrado.",
