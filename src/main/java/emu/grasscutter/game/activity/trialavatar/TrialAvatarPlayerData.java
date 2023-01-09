@@ -19,7 +19,7 @@ import java.util.stream.*;
 public class TrialAvatarPlayerData {
     List<RewardInfoItem> rewardInfoList;
 
-    private static List<Integer> getAvatarIdList(int scheduleId) {
+    public static List<Integer> getAvatarIdList(int scheduleId) {
         if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
             if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
 
@@ -29,7 +29,7 @@ public class TrialAvatarPlayerData {
         return GameData.getTrialAvatarActivityCustomData().get(scheduleId).getAvatarIndexIdList();
     }
 
-    private static List<Integer> getRewardIdList(int scheduleId) {
+    public static List<Integer> getRewardIdList(int scheduleId) {
         if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
             if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
 
@@ -77,7 +77,7 @@ public class TrialAvatarPlayerData {
             return RewardInfoItem.of()
                 .trialAvatarIndexId(trialAvatarIndexId)
                 .rewardId(rewardId)
-                .passedDungeon(true)
+                .passedDungeon(false)
                 .receivedReward(false)
                 .build();
         }

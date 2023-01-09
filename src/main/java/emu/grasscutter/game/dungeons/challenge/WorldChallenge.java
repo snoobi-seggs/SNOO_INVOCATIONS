@@ -5,6 +5,7 @@ import emu.grasscutter.game.dungeons.challenge.trigger.ChallengeTrigger;
 import emu.grasscutter.game.dungeons.enums.DungeonPassConditionType;
 import emu.grasscutter.game.entity.EntityGadget;
 import emu.grasscutter.game.entity.EntityMonster;
+import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.SceneGroup;
@@ -76,6 +77,15 @@ public class WorldChallenge {
             return;
         }
         finish(true);
+        if (getScene().getDungeonManager() != null && getScene().getDungeonManager().getDungeonData() != null) {
+            getScene().getPlayers().forEach(p -> p.getActivityManager().triggerWatcher(
+                WatcherTriggerType.TRIGGER_FINISH_CHALLENGE,
+                String.valueOf(getScene().getDungeonManager().getDungeonData().getId()),
+                String.valueOf(getGroup().id),
+                String.valueOf(getChallengeId())
+            ));
+        }
+        
         this.getScene().getScriptManager().callEvent(
                 // TODO record the time in PARAM2 and used in action
                 new ScriptArgs(EventType.EVENT_CHALLENGE_SUCCESS).setParam2(finishedTime));
