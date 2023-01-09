@@ -20,6 +20,7 @@ public class TrialAvatarActivityChallengeTrigger extends ActivityWatcher {
         val paramList = handler.getTriggerParamList();
         if(paramList.isEmpty()) return false;
 
+        val paramCond = Stream.of(paramList.get(0).split(",")).toList();
         return Stream.of(param).allMatch(x -> paramCond.contains(x));
     }
 
