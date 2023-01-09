@@ -298,6 +298,7 @@ public class Scene {
     public synchronized void removeEntities(List<GameEntity> entity, VisionType visionType) {
         var toRemove = entity.stream()
             .map(this::removeEntityDirectly)
+            .filter(Objects::nonNull)
             .toList();
         if (toRemove.size() > 0) {
             this.broadcastPacket(new PacketSceneEntityDisappearNotify(toRemove, visionType));
