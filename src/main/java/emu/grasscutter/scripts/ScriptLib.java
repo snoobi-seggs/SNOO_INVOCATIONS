@@ -317,7 +317,7 @@ public class ScriptLib {
 			return 1;
 		}
 
-		this.getSceneScriptManager().removeGroupSuite(group, suiteData);
+		this.getSceneScriptManager().killGroupSuite(group, suiteData);
 
 		return 0;
 	}

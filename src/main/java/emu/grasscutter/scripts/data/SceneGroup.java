@@ -29,6 +29,7 @@ public class SceneGroup {
     public Position pos;
 
     public Map<Integer,SceneMonster> monsters; // <ConfigId, Monster>
+    public Map<Integer, SceneNPC> npcs; // <ConfigId, Npc>
     public Map<Integer, SceneGadget> gadgets; // <ConfigId, Gadgets>
     public Map<String, SceneTrigger> triggers;
     public Map<Integer, SceneRegion> regions;
@@ -104,6 +105,10 @@ public class SceneGroup {
             this.monsters = ScriptLoader.getSerializer().toList(SceneMonster.class, this.bindings.get("monsters")).stream()
                     .collect(Collectors.toMap(x -> x.config_id, y -> y, (a, b) -> a));
             this.monsters.values().forEach(m -> m.group = this);
+
+            this.npcs = ScriptLoader.getSerializer().toList(SceneNPC.class, this.bindings.get("npcs")).stream()
+                    .collect(Collectors.toMap(x -> x.config_id, y -> y, (a, b) -> a));
+            this.npcs.values().forEach(m -> m.group = this);
 
             this.gadgets = ScriptLoader.getSerializer().toList(SceneGadget.class, this.bindings.get("gadgets")).stream()
                     .collect(Collectors.toMap(x -> x.config_id, y -> y, (a, b) -> a));

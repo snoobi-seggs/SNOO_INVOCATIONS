@@ -2,10 +2,12 @@ package emu.grasscutter.scripts;
 
 import com.github.davidmoten.rtreemulti.RTree;
 import com.github.davidmoten.rtreemulti.geometry.Geometry;
+
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.MonsterData;
 import emu.grasscutter.data.excels.WorldLevelData;
+import emu.grasscutter.data.server.Grid;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.platform.BaseRoute;
 import emu.grasscutter.game.props.EntityType;
@@ -16,6 +18,10 @@ import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.*;
 import emu.grasscutter.scripts.service.ScriptMonsterSpawnService;
 import emu.grasscutter.scripts.service.ScriptMonsterTideService;
+import emu.grasscutter.utils.FileUtils;
+import emu.grasscutter.utils.GridPosition;
+import emu.grasscutter.utils.JsonUtils;
+import emu.grasscutter.utils.Position;
 import io.netty.util.concurrent.FastThreadLocalThread;
 import kotlin.Pair;
 import lombok.val;
@@ -25,6 +31,9 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import javax.annotation.Nonnull;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,6 +62,7 @@ public class SceneScriptManager {
      * blockid - loaded groupSet
      */
     private final Map<Integer, Set<SceneGroup>> loadedGroupSetPerBlock;
+    private List<Grid> groupGrids;
     public static final ExecutorService eventExecutor;
     static {
         eventExecutor = new ThreadPoolExecutor(4, 4,
@@ -72,6 +82,7 @@ public class SceneScriptManager {
         this.sceneGroupsInstances = new ConcurrentHashMap<>();
         this.scriptMonsterSpawnService = new ScriptMonsterSpawnService(this);
         this.loadedGroupSetPerBlock = new ConcurrentHashMap<>();
+        this.groupGrids = null; //This is changed on init
 
         // TEMPORARY
         if (this.getScene().getId() < 10 && !Grasscutter.getConfig().server.game.enableScriptInBigWorld) {
@@ -84,6 +95,10 @@ public class SceneScriptManager {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public List<Grid> getGroupGrids() {
+        return groupGrids;
     }
 
     public SceneConfig getConfig() {
@@ -247,15 +262,17 @@ public class SceneScriptManager {
 
     // TODO optimize
     public SceneGroup getGroupById(int groupId) {
-        for (SceneBlock block : this.getScene().getLoadedBlocks()) {
+        for (SceneBlock block : getBlocks().values()) {
+            loadBlockFromScript(block); //Load it in case it's not loaded, caching it
+
             var group = block.groups.get(groupId);
             if (group == null) {
                 continue;
             }
 
-            if (!group.isLoaded()) {
+            if (!this.sceneGroupsInstances.containsKey(groupId)) {
                 getScene().onLoadGroup(List.of(group));
-                getScene().onRegisterGroups(block);
+                getScene().onRegisterGroups();
             }
             return group;
         }
@@ -266,12 +283,71 @@ public class SceneScriptManager {
         return sceneGroupsInstances.getOrDefault(groupId, null);
     }
 
+    private static void addGridPositionToMap(Map<GridPosition, Set<Integer>> map, int group_id, int vision_level, Position position) {
+        //Convert position to grid position
+        GridPosition gridPos;
+        int width = Grasscutter.getConfig().server.game.visionOptions[vision_level].gridWidth;
+        gridPos = new GridPosition((int)(position.getX() / width), (int)(position.getZ() / width), width);
+
+        Set<Integer> groups = map.getOrDefault(gridPos, new HashSet<>());
+        groups.add(group_id);
+        map.put(gridPos, groups);
+    }
+
     private void init() {
         var meta = ScriptLoader.getSceneMeta(getScene().getId());
         if (meta == null) {
             return;
         }
         this.meta = meta;
+
+        var path = FileUtils.getScriptPath("Scene/" + getScene().getId() + "/scene_grid.json");
+
+        try {
+            this.groupGrids = JsonUtils.loadToList(path, Grid.class);
+        } catch (IOException ignored) {
+            Grasscutter.getLogger().error("Scene {} unable to load grid file.", getScene().getId());
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Scene {} unable to load grid file.", e, getScene().getId());
+        }
+
+        boolean runForFirstTime = this.groupGrids == null;
+
+        //Find if the scene entities are already generated, if not generate it
+        if(Grasscutter.getConfig().server.game.cacheSceneEntitiesEveryRun || runForFirstTime) {
+            List<Map<GridPosition, Set<Integer>>> groupPositions = new ArrayList<>();
+            for(int i = 0; i < 6; i++) groupPositions.add(new HashMap<>());
+
+            meta.blocks.values().forEach(block -> {
+                block.load(scene.getId(), meta.context);
+                block.groups.values().stream().filter(g -> !g.dynamic_load).forEach(group -> {
+                    group.load(this.scene.getId());
+
+                    //Add all entitites here
+                    group.monsters.values().forEach(m -> addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos));
+                    group.gadgets.values().forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
+                    group.npcs.values().forEach(n -> addGridPositionToMap(groupPositions.get(n.vision_level), group.id, n.vision_level, n.pos));
+                    group.regions.values().forEach(r -> addGridPositionToMap(groupPositions.get(0), group.id, 0, r.pos));
+                    if(group.garbages != null && group.garbages.gadgets != null) group.garbages.gadgets.forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
+                });
+            });
+
+            this.groupGrids = new ArrayList<>();
+            for(int i = 0; i < 6; i++) {
+                this.groupGrids.add(new Grid());
+                this.groupGrids.get(i).grid = groupPositions.get(i);
+            }
+
+            try (FileWriter file = new FileWriter(path.toFile())) {
+                file.write(JsonUtils.encode(groupGrids));
+            } catch (IOException ignored) {
+                Grasscutter.getLogger().error("Scene {} unable to write to grid file.", getScene().getId());
+            } catch (Exception e) {
+                Grasscutter.getLogger().error("Scene {} unable to save grid file.", e, getScene().getId());
+            }
+
+            Grasscutter.getLogger().info("Scene {} saved grid file.", getScene().getId());
+        }
 
         // TEMP
         this.isInit = true;
@@ -384,6 +460,14 @@ public class SceneScriptManager {
         deregisterTrigger(suite.sceneTriggers);
         removeMonstersInGroup(group, suite);
         removeGadgetsInGroup(group, suite);
+
+        suite.sceneRegions.forEach(this::deregisterRegion);
+    }
+    public void killGroupSuite(SceneGroup group, SceneSuite suite) {
+        deregisterTrigger(suite.sceneTriggers);
+
+        killMonstersInGroup(group, suite);
+        killGadgetsInGroup(group, suite);
 
         suite.sceneRegions.forEach(this::deregisterRegion);
     }
@@ -655,6 +739,31 @@ public class SceneScriptManager {
                 .toList();
 
         getScene().removeEntities(toRemove, VisionTypeOuterClass.VisionType.VISION_TYPE_MISS);
+    }
+
+    public void killMonstersInGroup(SceneGroup group, SceneSuite suite) {
+        var configSet = suite.sceneMonsters.stream()
+                .map(m -> m.config_id)
+                .collect(Collectors.toSet());
+        var toRemove = getScene().getEntities().values().stream()
+                .filter(e -> e instanceof EntityMonster)
+                .filter(e -> e.getGroupId() == group.id)
+                .filter(e -> configSet.contains(e.getConfigId()))
+                .toList();
+
+        toRemove.forEach(getScene()::killEntity);
+    }
+    public void killGadgetsInGroup(SceneGroup group, SceneSuite suite) {
+        var configSet = suite.sceneGadgets.stream()
+                .map(m -> m.config_id)
+                .collect(Collectors.toSet());
+        var toRemove = getScene().getEntities().values().stream()
+                .filter(e -> e instanceof EntityGadget)
+                .filter(e -> e.getGroupId() == group.id)
+                .filter(e -> configSet.contains(e.getConfigId()))
+                .toList();
+
+        toRemove.forEach(getScene()::killEntity);
     }
 
     public int createGroupTimerEvent(int groupID, String source, double time) {
