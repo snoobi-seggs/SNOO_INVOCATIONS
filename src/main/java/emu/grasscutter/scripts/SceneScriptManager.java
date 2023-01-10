@@ -4,6 +4,7 @@ import com.github.davidmoten.rtreemulti.RTree;
 import com.github.davidmoten.rtreemulti.geometry.Geometry;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.config.ConfigContainer.VisionOptions;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.MonsterData;
 import emu.grasscutter.data.excels.WorldLevelData;
@@ -231,7 +232,7 @@ public class SceneScriptManager {
         var monstersToSpawn = group.monsters.values().stream()
             .filter(m -> {
                 var entity = scene.getEntityByConfigId(m.config_id);
-                return (entity == null || entity.getGroupId()!=group.id) && !groupInstance.getDeadEntities().contains(entity);
+                return (entity == null || entity.getGroupId()!=group.id);/*&& !groupInstance.getDeadEntities().contains(entity); */ //TODO: Investigate the usage of deadEntities
             })
             .map(mob -> createMonster(group.id, group.block_id, mob))
             .toList();//TODO check if it interferes with bigworld or anything else
@@ -294,6 +295,19 @@ public class SceneScriptManager {
         map.put(gridPos, groups);
     }
 
+    private static int getGadgetVisionLevel(int gadget_id) {
+        var gadget = GameData.getGadgetDataMap().get(gadget_id);
+        if(gadget == null || gadget.getVisionLevel() == null) return 0;
+
+        var visionOptions = Grasscutter.getConfig().server.game.visionOptions;
+        for(int i = 0; i < visionOptions.length; i++)
+            if(visionOptions[i].name.compareTo(gadget.getVisionLevel()) == 0) {
+                return i;
+            }
+
+        return 0;
+    }
+
     private void init() {
         var meta = ScriptLoader.getSceneMeta(getScene().getId());
         if (meta == null) {
@@ -325,7 +339,7 @@ public class SceneScriptManager {
 
                     //Add all entitites here
                     group.monsters.values().forEach(m -> addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos));
-                    group.gadgets.values().forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
+                    group.gadgets.values().forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, getGadgetVisionLevel(g.gadget_id), g.pos));
                     group.npcs.values().forEach(n -> addGridPositionToMap(groupPositions.get(n.vision_level), group.id, n.vision_level, n.pos));
                     group.regions.values().forEach(r -> addGridPositionToMap(groupPositions.get(0), group.id, 0, r.pos));
                     if(group.garbages != null && group.garbages.gadgets != null) group.garbages.gadgets.forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
@@ -427,7 +441,7 @@ public class SceneScriptManager {
         return suite.sceneGadgets.stream()
             .filter(m -> {
                 var entity = scene.getEntityByConfigId(m.config_id);
-                return (entity == null || entity.getGroupId()!=group.id) && !groupInstance.getDeadEntities().contains(entity);
+                return (entity == null || entity.getGroupId()!=group.id);/*&& !groupInstance.getDeadEntities().contains(entity); */ //TODO: Investigate the usage of deadEntities
             })
             .map(g -> createGadget(group.id, group.block_id, g))
             .filter(Objects::nonNull)
@@ -438,7 +452,7 @@ public class SceneScriptManager {
         return suite.sceneMonsters.stream()
             .filter(m -> {
                 var entity = scene.getEntityByConfigId(m.config_id);
-                return (entity == null || entity.getGroupId()!=group.id) && !groupInstance.getDeadEntities().contains(entity);
+                return (entity == null || entity.getGroupId()!=group.id);/*&& !groupInstance.getDeadEntities().contains(entity); */ //TODO: Investigate the usage of deadEntities
             })
             .map(mob -> createMonster(group.id, group.block_id, mob))
             .filter(Objects::nonNull)
