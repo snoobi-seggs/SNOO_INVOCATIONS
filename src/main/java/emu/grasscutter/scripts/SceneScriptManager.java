@@ -263,7 +263,7 @@ public class SceneScriptManager {
     // TODO optimize
     public SceneGroup getGroupById(int groupId) {
         for (SceneBlock block : getBlocks().values()) {
-            loadBlockFromScript(block); //Load it in case it's not loaded, caching it
+            getScene().loadBlock(block);
 
             var group = block.groups.get(groupId);
             if (group == null) {
