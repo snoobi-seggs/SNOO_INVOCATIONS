@@ -57,7 +57,7 @@ public class EntityGadget extends EntityBaseGadget {
     @Getter @Setter private GameEntity owner = null;
     @Getter @Setter private List<GameEntity> children = new ArrayList<>();
 
-    @Getter @Setter private int state;
+    @Getter private int state;
     @Getter @Setter private int pointType;
     @Getter private GadgetContent content;
     @Getter(onMethod = @__(@Override), lazy = true)
@@ -95,6 +95,15 @@ public class EntityGadget extends EntityBaseGadget {
         if(GameData.getGadgetMappingMap().containsKey(gadgetId)) {
             String controllerName = GameData.getGadgetMappingMap().get(gadgetId).getServerController();
             setEntityController(EntityControllerScriptManager.getGadgetController(controllerName));
+        }
+    }
+
+    public void setState(int state) {
+        this.state = state;
+        //Cache the gadget state
+        if(metaGadget != null && metaGadget.group != null) {
+            var instance = getScene().getScriptManager().getCachedGroupInstanceById(metaGadget.group.id);
+            if(instance != null) instance.cacheGadgetState(metaGadget, state);
         }
     }
 
@@ -169,9 +178,9 @@ public class EntityGadget extends EntityBaseGadget {
         }
         getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_GADGET_DIE, this.getConfigId()));
 
-        SceneGroupInstance groupInstance = getScene().getScriptManager().getGroupInstanceById(this.getGroupId());
-        if(groupInstance != null)
-            groupInstance.getDeadEntities().add(this);
+        SceneGroupInstance groupInstance = getScene().getScriptManager().getCachedGroupInstanceById(this.getGroupId());
+        if(groupInstance != null && metaGadget != null)
+            groupInstance.getDeadEntities().add(metaGadget.config_id);
     }
 
     public boolean startPlatform(){

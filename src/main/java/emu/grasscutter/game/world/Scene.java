@@ -766,6 +766,8 @@ public class Scene {
             }
 
             SceneGroupInstance groupInstance = this.getScriptManager().getGroupInstanceById(group.id);
+            var cachedInstance = this.getScriptManager().getCachedGroupInstanceById(group.id);
+            if(cachedInstance != null) groupInstance = cachedInstance;
 
             // Load garbages
             List<SceneGadget> garbageGadgets = group.getGarbageGadgets();
@@ -778,7 +780,7 @@ public class Scene {
 
             // Load suites
             //int suite = group.findInitSuiteIndex(0);
-            this.getScriptManager().refreshGroup(groupInstance, 0, false); //This is what the official server does
+            this.getScriptManager().refreshGroup(groupInstance, groupInstance.getActiveSuiteId(), false); //This is what the official server does
 
             this.loadedGroups.add(group);
         }
