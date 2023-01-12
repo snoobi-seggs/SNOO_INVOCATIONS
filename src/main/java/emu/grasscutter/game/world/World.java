@@ -213,7 +213,12 @@ public class World implements Iterable<Player> {
     }
 
     public void deregisterScene(Scene scene) {
+        scene.saveGroups();
         this.getScenes().remove(scene.getId());
+    }
+
+    public void save() {
+        this.getScenes().values().forEach(Scene::saveGroups);
     }
 
     public boolean transferPlayerToScene(Player player, int sceneId, Position pos) {

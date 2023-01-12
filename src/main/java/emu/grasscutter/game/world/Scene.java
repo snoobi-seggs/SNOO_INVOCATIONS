@@ -208,6 +208,7 @@ public class Scene {
         if (this.getPlayerCount() <= 0 && !this.dontDestroyWhenEmpty) {
             this.getWorld().deregisterScene(this);
         }
+        this.saveGroups();
     }
 
     private void setupPlayerAvatars(Player player) {
@@ -767,7 +768,10 @@ public class Scene {
 
             SceneGroupInstance groupInstance = this.getScriptManager().getGroupInstanceById(group.id);
             var cachedInstance = this.getScriptManager().getCachedGroupInstanceById(group.id);
-            if(cachedInstance != null) groupInstance = cachedInstance;
+            if(cachedInstance != null) {
+                cachedInstance.setLuaGroup(group);
+                groupInstance = cachedInstance;
+            }
 
             // Load garbages
             List<SceneGadget> garbageGadgets = group.getGarbageGadgets();
@@ -967,5 +971,9 @@ public class Scene {
                 }
             }
         }
+    }
+
+    public void saveGroups() {
+        this.getScriptManager().getCachedGroupInstances().values().forEach(SceneGroupInstance::save);
     }
 }

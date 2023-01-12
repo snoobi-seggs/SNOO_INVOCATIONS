@@ -9,6 +9,7 @@ import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.MonsterData;
 import emu.grasscutter.data.excels.WorldLevelData;
 import emu.grasscutter.data.server.Grid;
+import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.platform.BaseRoute;
 import emu.grasscutter.game.props.EntityType;
@@ -287,8 +288,18 @@ public class SceneScriptManager {
         return sceneGroupsInstances.getOrDefault(groupId, null);
     }
 
+    public Map<Integer, SceneGroupInstance> getCachedGroupInstances() {
+        return cachedSceneGroupsInstances;
+    }
+
     public SceneGroupInstance getCachedGroupInstanceById(int groupId) {
-        return cachedSceneGroupsInstances.getOrDefault(groupId, null);
+        var instance = cachedSceneGroupsInstances.getOrDefault(groupId, null);
+        if(instance == null) {
+            instance = DatabaseHelper.loadGroupInstance(groupId, scene.getWorld().getHost());
+            if(instance != null) cachedSceneGroupsInstances.put(groupId, instance);
+        }
+
+        return instance;
     }
 
     private static void addGridPositionToMap(Map<GridPosition, Set<Integer>> map, int group_id, int vision_level, Position position) {
@@ -389,13 +400,14 @@ public class SceneScriptManager {
         group.load(getScene().getId());
 
         this.sceneGroups.put(group.id, group);
-        if(this.cachedSceneGroupsInstances.containsKey(group.id)) {
+        if(this.getCachedGroupInstanceById(group.id) != null) {
             this.sceneGroupsInstances.put(group.id, this.cachedSceneGroupsInstances.get(group.id));
             this.cachedSceneGroupsInstances.get(group.id).setCached(false);
         } else {
-            var instance = new SceneGroupInstance(group);
+            var instance = new SceneGroupInstance(group, getScene().getWorld().getHost());
             this.sceneGroupsInstances.put(group.id, instance);
             this.cachedSceneGroupsInstances.put(group.id, instance);
+            instance.save(); //Save the instance
         }
 
         if (group.variables != null) {
