@@ -229,6 +229,7 @@ public class SceneScriptManager {
 		addGroupSuite(groupInstance, suiteData);
 
         groupInstance.setActiveSuiteId(suiteIndex);
+        groupInstance.setLastTimeRefreshed(getScene().getWorld().getGameTime());
         return suiteIndex;
     }
     public void refreshGroupMonster(SceneGroupInstance groupInstance) {

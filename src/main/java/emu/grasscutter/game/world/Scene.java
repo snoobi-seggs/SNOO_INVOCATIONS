@@ -655,11 +655,11 @@ public class Scene {
             for(var b : scriptManager.getBlocks().values()) {
                 loadBlock(b);
                 SceneGroup group = b.groups.getOrDefault(g, null);
-                if(group != null) return group;
+                if(group != null && !group.dynamic_load) return group;
             }
 
             return null;
-        }).toList();
+        }).filter(g -> g != null).toList();
 
         this.onLoadGroup(toLoad);
         if(!toLoad.isEmpty()) this.onRegisterGroups();
@@ -819,6 +819,7 @@ public class Scene {
             Grasscutter.getLogger().info("Scene {} Block {} is unloaded.", this.getId(), block.id);
         }
 
+        broadcastPacket(new PacketGroupUnloadNotify(Arrays.asList(group_id)));
         scriptManager.unregisterGroup(group);
     }
 

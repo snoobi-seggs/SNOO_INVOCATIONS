@@ -709,15 +709,21 @@ public class ScriptLib {
         return sceneScriptManager.get().cancelGroupTimerEvent(groupID, source);
     }
 
-    public int GetGroupSuite(int var1) {
-        logger.warn("[LUA] Call unimplemented GetGroupSuite with {}", var1);
-        //TODO implement
+    public int GetGroupSuite(int groupId) {
+        //logger.warn("[LUA] Call GetGroupSuite with {}", groupID);
+        var instance = getSceneScriptManager().getGroupInstanceById(groupId);
+        if(instance != null) return instance.getActiveSuiteId();
         return 0;
     }
-    public int SetGroupReplaceable(int groupId, boolean var2) {
-        logger.warn("[LUA] Call unimplemented SetGroupReplaceable with {} {}", groupId, var2);
-        //TODO implement
-        return 0;
+    public int SetGroupReplaceable(int groupId, boolean value) {
+        logger.warn("[LUA] Call SetGroupReplaceable with {} {}", groupId, value);
+
+        var group = getSceneScriptManager().getGroupById(groupId);
+        if(group != null && group.is_replaceable != null) {
+            group.is_replaceable.value = value;
+            return 0;
+        }
+        return 1;
     }
 
     public int[] GetSceneUidList(){

@@ -33,11 +33,14 @@ public class SceneGroupInstance {
     @Getter private Map<Integer, Integer> cachedGadgetStates;
     @Getter private Map<String, Integer> cachedVariables;
 
+    @Getter @Setter private int lastTimeRefreshed;
+
     public SceneGroupInstance(SceneGroup group, Player owner) {
         this.luaGroup = group;
         this.groupId = group.id;
         this.targetSuiteId = 0;
         this.activeSuiteId = 0;
+        this.lastTimeRefreshed = 0;
         this.ownerUid = owner.getUid();
         this.deadEntities = new HashSet<>();
         this.cachedGadgetStates = new ConcurrentHashMap<>();
