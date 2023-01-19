@@ -305,6 +305,7 @@ public class Scene {
         var toRemove = entity.stream()
             .filter(e -> e != null)
             .map(this::removeEntityDirectly)
+            .filter(Objects::nonNull)
             .toList();
         if (toRemove.size() > 0) {
             this.broadcastPacket(new PacketSceneEntityDisappearNotify(toRemove, visionType));

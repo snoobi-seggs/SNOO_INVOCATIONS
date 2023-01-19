@@ -73,6 +73,9 @@ public class SceneGroup {
     }
 
     public SceneSuite getSuiteByIndex(int index) {
+        if(index < 1 || index > suites.size()) {
+            return null;
+        }
         return this.suites.get(index - 1);
     }
 

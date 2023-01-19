@@ -771,6 +771,9 @@ public class Avatar {
     }
     public boolean unlockConstellation(boolean skipPayment) {
         int currentTalentLevel = this.getCoreProudSkillLevel();
+        if(currentTalentLevel == -1){
+            return false;
+        }
         int talentId = this.skillDepot.getTalents().get(currentTalentLevel);
         return this.unlockConstellation(talentId, skipPayment);
     }
