@@ -313,7 +313,7 @@ public class GameMainQuest {
 
                 for (int i = 0; i < subQuestWithCond.getQuestData().getAcceptCond().size(); i++) {
                     val condition = acceptCond.get(i);
-                    boolean result = this.getOwner().getServer().getQuestSystem().triggerCondition(subQuestWithCond, condition, paramStr, params);
+                    boolean result = this.getOwner().getServer().getQuestSystem().triggerCondition(getOwner(), subQuestWithCond.getQuestData(), condition, paramStr, params);
                     accept[i] = result ? 1 : 0;
                 }
 

@@ -95,6 +95,8 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         if (value != previousValue) {
             this.player.getOpenStates().put(openState, value);
 
+            this.player.getQuestManager().queueEvent(QuestCond.QUEST_COND_OPEN_STATE_EQUAL, openState, value);
+
             if (sendNotify) {
                 player.getSession().send(new PacketOpenStateChangeNotify(openState, value));
             }
