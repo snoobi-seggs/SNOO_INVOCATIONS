@@ -16,6 +16,7 @@ import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.quest.enums.*;
+import emu.grasscutter.game.world.World;
 import emu.grasscutter.net.proto.ChildQuestOuterClass.ChildQuest;
 import emu.grasscutter.net.proto.ParentQuestOuterClass.ParentQuest;
 import emu.grasscutter.server.packet.send.PacketCodexDataUpdateNotify;
@@ -37,6 +38,7 @@ public class GameMainQuest {
     @Getter private Map<Integer, GameQuest> childQuests;
     @Getter private int parentQuestId;
     @Getter private int[] questVars;
+    @Getter private long[] timeVar;
     //QuestUpdateQuestVarReq is sent in two stages...
     @Getter private List<Integer> questVarsUpdate;
     @Getter private ParentQuestState state;
@@ -58,6 +60,7 @@ public class GameMainQuest {
         this.talks = new HashMap<>();
         //official server always has a list of 5 questVars, with default value 0
         this.questVars = new int[] {0,0,0,0,0};
+        this.timeVar = new long[] {-1,-1,-1,-1,-1};
         this.state = ParentQuestState.PARENT_QUEST_STATE_NONE;
         this.questGroupSuites = new ArrayList<>();
         addAllChildQuests();
@@ -428,4 +431,50 @@ public class GameMainQuest {
         return proto.build();
     }
 
+    // TimeVar handling TODO check if ingame or irl time
+    public boolean initTimeVar(int index){
+        if(index >= this.timeVar.length){
+            Grasscutter.getLogger().error("Trying to init out of bounds time var {} for quest {}", index, this.parentQuestId);
+            return false;
+        }
+        this.timeVar[index] = owner.getWorld().getWorldTimeSeconds();
+        return true;
+    }
+
+    public boolean clearTimeVar(int index){
+        if(index >= this.timeVar.length){
+            Grasscutter.getLogger().error("Trying to clear out of bounds time var {} for quest {}", index, this.parentQuestId);
+            return false;
+        }
+        this.timeVar[index] = -1;
+        return true;
+    }
+
+    public long getDaysSinceTimeVar(int index){
+        if(index >= this.timeVar.length){
+            Grasscutter.getLogger().error("Trying to get days for out of bounds time var {} for quest {}", index, this.parentQuestId);
+            return -1;
+        }
+        val varTime = timeVar[index];
+
+        if(varTime == -1){
+            return 0;
+        }
+
+        return owner.getWorld().getGameTimeDays() - World.getDaysForGameTime(varTime);
+    }
+
+    public long getHoursSinceTimeVar(int index){
+        if(index >= this.timeVar.length){
+            Grasscutter.getLogger().error("Trying to get hours for out of bounds time var {} for quest {}", index, this.parentQuestId);
+            return -1;
+        }
+        val varTime = timeVar[index];
+
+        if(varTime == -1){
+            return 0;
+        }
+
+        return owner.getWorld().getGameTimeDays() - World.getHoursForGameTime(varTime);
+    }
 }

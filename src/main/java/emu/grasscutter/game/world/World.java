@@ -418,7 +418,15 @@ public class World implements Iterable<Player> {
     }
 
     public long getGameTimeDays() {
-        return getWorldTimeSeconds() / 1440 ;
+        return getDaysForGameTime(getWorldTimeSeconds());
+    }
+
+    public static long getDaysForGameTime(long time){
+        return time / 1440;
+    }
+
+    public static long getHoursForGameTime(long time){
+        return time / 60;
     }
 
     public void setPaused(boolean paused) {

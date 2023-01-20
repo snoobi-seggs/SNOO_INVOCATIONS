@@ -20,6 +20,7 @@ import io.netty.util.concurrent.FastThreadLocalThread;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
+import lombok.val;
 
 public class QuestManager extends BasePlayerManager {
 
@@ -108,6 +109,9 @@ public class QuestManager extends BasePlayerManager {
             }
             quest.checkProgress();
         }
+    }
+
+    public void onTick(){
     }
 
     private List<GameMainQuest> addMultMainQuests(Set<Integer> mainQuestIds) {
@@ -273,33 +277,8 @@ public class QuestManager extends BasePlayerManager {
         List<GameMainQuest> checkMainQuests = this.getMainQuests().values().stream()
             .filter(i -> i.getState() != ParentQuestState.PARENT_QUEST_STATE_FINISHED)
             .toList();
-        switch (condType) {
-            //accept Conds
-            case QUEST_COND_STATE_EQUAL:
-            case QUEST_COND_STATE_NOT_EQUAL:
-            case QUEST_COND_COMPLETE_TALK:
-            case QUEST_COND_LUA_NOTIFY:
-            case QUEST_COND_QUEST_VAR_EQUAL:
-            case QUEST_COND_QUEST_VAR_GREATER:
-            case QUEST_COND_QUEST_VAR_LESS:
-            case QUEST_COND_PLAYER_LEVEL_EQUAL_GREATER:
-            case QUEST_COND_QUEST_GLOBAL_VAR_EQUAL:
-            case QUEST_COND_QUEST_GLOBAL_VAR_GREATER:
-            case QUEST_COND_QUEST_GLOBAL_VAR_LESS:
-            case QUEST_COND_PACK_HAVE_ITEM:
-            case QUEST_COND_ITEM_NUM_LESS_THAN:
-            case QUEST_COND_ACTIVITY_OPEN:
-            case QUEST_COND_ACTIVITY_END:
-            case QUEST_COND_ACTIVITY_COND:
-                for (GameMainQuest mainquest : checkMainQuests) {
-                    mainquest.tryAcceptSubQuests(condType, paramStr, params);
-                }
-                break;
-
-            // unused
-            case QUEST_COND_PLAYER_CHOOSE_MALE:
-            default:
-                Grasscutter.getLogger().error("Unhandled QuestCondition {}", condType);
+        for (GameMainQuest mainquest : checkMainQuests) {
+            mainquest.tryAcceptSubQuests(condType, paramStr, params);
         }
     }
     public void triggerEvent(QuestContent condType, String paramStr, int... params) {
@@ -307,62 +286,9 @@ public class QuestManager extends BasePlayerManager {
         List<GameMainQuest> checkMainQuests = this.getMainQuests().values().stream()
             .filter(i -> i.getState() != ParentQuestState.PARENT_QUEST_STATE_FINISHED)
             .toList();
-        switch (condType) {
-            //fail Conds
-            case QUEST_CONTENT_NOT_FINISH_PLOT:
-            case QUEST_CONTENT_ANY_MANUAL_TRANSPORT:
-                for (GameMainQuest mainquest : checkMainQuests) {
-                    mainquest.tryFailSubQuests(condType, paramStr, params);
-                }
-                break;
-            //finish Conds
-            case QUEST_CONTENT_COMPLETE_TALK:
-            case QUEST_CONTENT_FINISH_PLOT:
-            case QUEST_CONTENT_COMPLETE_ANY_TALK:
-            case QUEST_CONTENT_QUEST_VAR_EQUAL:
-            case QUEST_CONTENT_QUEST_VAR_GREATER:
-            case QUEST_CONTENT_QUEST_VAR_LESS:
-            case QUEST_CONTENT_ENTER_DUNGEON:
-            case QUEST_CONTENT_ENTER_MY_WORLD_SCENE:
-            case QUEST_CONTENT_INTERACT_GADGET:
-            case QUEST_CONTENT_TRIGGER_FIRE:
-            case QUEST_CONTENT_UNLOCK_TRANS_POINT:
-            case QUEST_CONTENT_UNLOCK_AREA:
-            case QUEST_CONTENT_SKILL:
-            case QUEST_CONTENT_OBTAIN_ITEM:
-            case QUEST_CONTENT_MONSTER_DIE:
-            case QUEST_CONTENT_DESTROY_GADGET:
-            case QUEST_CONTENT_PLAYER_LEVEL_UP:
-            case QUEST_CONTENT_USE_ITEM:
-            case QUEST_CONTENT_ENTER_VEHICLE:
-            case QUEST_CONTENT_FINISH_DUNGEON:
-                for (GameMainQuest mainQuest : checkMainQuests) {
-                    mainQuest.tryFinishSubQuests(condType, paramStr, params);
-                }
-                break;
-
-            //finish Or Fail Conds
-            case QUEST_CONTENT_GAME_TIME_TICK:
-            case QUEST_CONTENT_QUEST_STATE_EQUAL:
-            case QUEST_CONTENT_ADD_QUEST_PROGRESS:
-            case QUEST_CONTENT_LEAVE_SCENE:
-            case QUEST_CONTENT_ITEM_LESS_THAN:
-            case QUEST_CONTENT_KILL_MONSTER:
-            case QUEST_CONTENT_LUA_NOTIFY:
-            case QUEST_CONTENT_ENTER_MY_WORLD:
-            case QUEST_CONTENT_ENTER_ROOM:
-            case QUEST_CONTENT_FAIL_DUNGEON:
-                for (GameMainQuest mainQuest : checkMainQuests) {
-                    mainQuest.tryFailSubQuests(condType, paramStr, params);
-                    mainQuest.tryFinishSubQuests(condType, paramStr, params);
-                }
-                break;
-
-            //Unused
-            case QUEST_CONTENT_QUEST_STATE_NOT_EQUAL:
-            case QUEST_CONTENT_WORKTOP_SELECT:
-            default:
-                Grasscutter.getLogger().error("Unhandled QuestTrigger {}", condType);
+        for (GameMainQuest mainQuest : checkMainQuests) {
+            mainQuest.tryFailSubQuests(condType, paramStr, params);
+            mainQuest.tryFinishSubQuests(condType, paramStr, params);
         }
     }
 
