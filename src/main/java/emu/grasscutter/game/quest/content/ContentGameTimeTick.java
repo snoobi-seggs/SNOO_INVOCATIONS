@@ -12,7 +12,7 @@ public class ContentGameTimeTick extends BaseContent {
 
     @Override
     public boolean execute(GameQuest quest, QuestData.QuestContentCondition condition, String paramStr, int... params) {
-        val daysSinceStart = quest.getOwner().getWorld().getGameTimeDays() - quest.getStartGameDay();
+        val daysSinceStart = quest.getOwner().getWorld().getTotalGameTimeDays() - quest.getStartGameDay();
         val currentHour = quest.getOwner().getWorld().getGameTimeHours();
 
         // params[0] is days since start, str is hours of day

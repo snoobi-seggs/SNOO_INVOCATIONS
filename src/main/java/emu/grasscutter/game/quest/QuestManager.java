@@ -26,6 +26,10 @@ public class QuestManager extends BasePlayerManager {
 
     @Getter private final Player player;
     @Getter private final Int2ObjectMap<GameMainQuest> mainQuests;
+
+    private long lastHourCheck = 0;
+    private long lastDayCheck = 0;
+
     public static final ExecutorService eventExecutor;
     static {
         eventExecutor = new ThreadPoolExecutor(4, 4,
@@ -112,6 +116,36 @@ public class QuestManager extends BasePlayerManager {
     }
 
     public void onTick(){
+        checkTimeVars();
+
+        // trigger game time tick for quests
+        queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
+            player.getWorld().getGameTimeHours() , // hours
+            0);
+    }
+
+    private void checkTimeVars(){
+        val currentDays = player.getWorld().getTotalGameTimeDays();
+        val currentHours = player.getWorld().getTotalGameTimeHours();
+        boolean checkDays =  currentDays != lastDayCheck;
+        boolean checkHours = currentHours != lastHourCheck;
+
+        if(!checkDays && !checkHours){
+            return;
+        }
+
+        this.lastDayCheck = currentDays;
+        this.lastHourCheck = currentHours;
+        player.getActiveQuestTimers().forEach(mainQuestId -> {
+            if(checkHours) {
+                queueEvent(QuestCond.QUEST_COND_TIME_VAR_GT_EQ, mainQuestId);
+                queueEvent(QuestContent.QUEST_CONTENT_TIME_VAR_GT_EQ, mainQuestId);
+            }
+            if(checkDays) {
+                queueEvent(QuestCond.QUEST_COND_TIME_VAR_PASS_DAY, mainQuestId);
+                queueEvent(QuestContent.QUEST_CONTENT_TIME_VAR_PASS_DAY, mainQuestId);
+            }
+        });
     }
 
     private List<GameMainQuest> addMultMainQuests(Set<Integer> mainQuestIds) {

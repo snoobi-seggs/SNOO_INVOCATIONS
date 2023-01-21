@@ -374,11 +374,6 @@ public class World implements Iterable<Player> {
         if (this.getPlayerCount() == 0) return true;
         this.scenes.forEach((k, scene) -> scene.onTick());
 
-        // trigger game time tick for quests TODO maybe move it to onTick for QuestManager?
-        players.forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
-            getGameTimeHours() , // hours
-            0)); //days
-
 
         // sync time every 10 seconds
         if(tickCount%10 == 0){
@@ -417,8 +412,12 @@ public class World implements Iterable<Player> {
         return getGameTime() / 60 ;
     }
 
-    public long getGameTimeDays() {
+    public long getTotalGameTimeDays() {
         return getDaysForGameTime(getWorldTimeSeconds());
+    }
+
+    public long getTotalGameTimeHours() {
+        return getHoursForGameTime(getWorldTimeSeconds());
     }
 
     public static long getDaysForGameTime(long time){

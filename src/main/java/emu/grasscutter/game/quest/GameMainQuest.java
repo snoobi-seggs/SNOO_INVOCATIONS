@@ -60,7 +60,7 @@ public class GameMainQuest {
         this.talks = new HashMap<>();
         //official server always has a list of 5 questVars, with default value 0
         this.questVars = new int[] {0,0,0,0,0};
-        this.timeVar = new long[] {-1,-1,-1,-1,-1};
+        this.timeVar = new long[] {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}; // theoretically max is 10 here
         this.state = ParentQuestState.PARENT_QUEST_STATE_NONE;
         this.questGroupSuites = new ArrayList<>();
         addAllChildQuests();
@@ -438,6 +438,7 @@ public class GameMainQuest {
             return false;
         }
         this.timeVar[index] = owner.getWorld().getWorldTimeSeconds();
+        owner.getActiveQuestTimers().add(this.parentQuestId);
         return true;
     }
 
@@ -447,7 +448,14 @@ public class GameMainQuest {
             return false;
         }
         this.timeVar[index] = -1;
+        if(!checkActiveTimers()){
+            owner.getActiveQuestTimers().remove(this.parentQuestId);
+        }
         return true;
+    }
+
+    public boolean checkActiveTimers(){
+        return Arrays.stream(timeVar).anyMatch(value -> value!=-1);
     }
 
     public long getDaysSinceTimeVar(int index){
@@ -461,7 +469,7 @@ public class GameMainQuest {
             return 0;
         }
 
-        return owner.getWorld().getGameTimeDays() - World.getDaysForGameTime(varTime);
+        return owner.getWorld().getTotalGameTimeDays() - World.getDaysForGameTime(varTime);
     }
 
     public long getHoursSinceTimeVar(int index){
@@ -475,6 +483,6 @@ public class GameMainQuest {
             return 0;
         }
 
-        return owner.getWorld().getGameTimeDays() - World.getHoursForGameTime(varTime);
+        return owner.getWorld().getTotalGameTimeDays() - World.getHoursForGameTime(varTime);
     }
 }
