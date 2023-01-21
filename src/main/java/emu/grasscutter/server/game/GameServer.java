@@ -237,7 +237,7 @@ public final class GameServer extends KcpServer {
         this.getWorlds().add(world);
 
         //TODO: Test this
-        GameData.getRefreshPolicyDataMap().forEach(rp -> {
+        /* GameData.getRefreshPolicyDataMap().forEach(rp -> {
             int interval = rp.getIntervalInSeconds(world);
             getScheduler().scheduleDelayedRepeatingTask(() -> {
                 world.getScenes().values().forEach(s -> s.getLoadedGroups().forEach(g -> {
@@ -248,7 +248,7 @@ public final class GameServer extends KcpServer {
                     }
                 }));
             }, interval, interval);
-        });
+        }); */
     }
 
     public void deregisterWorld(World world) {
