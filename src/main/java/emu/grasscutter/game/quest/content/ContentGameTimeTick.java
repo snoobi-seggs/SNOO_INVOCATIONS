@@ -22,12 +22,16 @@ public class ContentGameTimeTick extends BaseContent {
 
         val daysToPass = condition.getParam()[0];
 
-        val isTimeMeet = from < to ? currentHour >= from && currentHour <= to
-            : currentHour <= to || currentHour >= from;
+        // if to is at the beginning of the day, we need to pass it one more time
+        val daysMod = to < from && daysToPass > 0 && currentHour < to ? 1 : 0;
 
-        val isDaysSinceMet =  daysSinceStart >= daysToPass;
+        val isTimeMet = from < to ? currentHour >= from && currentHour < to
+            : currentHour < to || currentHour >= from;
 
-        return isTimeMeet && isDaysSinceMet;
+        val isDaysSinceMet =  daysSinceStart >= daysToPass+daysMod;
+
+        return isTimeMet && isDaysSinceMet;
     }
 
 }
+
