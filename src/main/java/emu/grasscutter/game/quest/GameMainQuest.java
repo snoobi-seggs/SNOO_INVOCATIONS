@@ -309,6 +309,7 @@ public class GameMainQuest {
                 .filter(p -> p.getState() == QuestState.QUEST_STATE_UNSTARTED || p.getState() == QuestState.UNFINISHED)
                 .filter(p -> p.getQuestData().getAcceptCond().stream().anyMatch(q -> condType == QuestCond.QUEST_COND_NONE || q.getType() == condType))
                 .toList();
+            val questSystem = owner.getServer().getQuestSystem();
 
             for (GameQuest subQuestWithCond : subQuestsWithCond) {
                 val acceptCond = subQuestWithCond.getQuestData().getAcceptCond();
@@ -316,7 +317,7 @@ public class GameMainQuest {
 
                 for (int i = 0; i < subQuestWithCond.getQuestData().getAcceptCond().size(); i++) {
                     val condition = acceptCond.get(i);
-                    boolean result = this.getOwner().getServer().getQuestSystem().triggerCondition(getOwner(), subQuestWithCond.getQuestData(), condition, paramStr, params);
+                    boolean result = questSystem.triggerCondition(getOwner(), subQuestWithCond.getQuestData(), condition, paramStr, params);
                     accept[i] = result ? 1 : 0;
                 }
 

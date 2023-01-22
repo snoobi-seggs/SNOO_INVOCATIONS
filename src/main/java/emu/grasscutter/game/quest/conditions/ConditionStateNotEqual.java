@@ -14,7 +14,7 @@ public class ConditionStateNotEqual extends BaseCondition {
     @Override
     public boolean execute(Player owner, QuestData questData, QuestData.QuestAcceptCondition condition, String paramStr, int... params) {
         val questId = condition.getParam()[0];
-        val questStateValue = condition.getParam()[0];
+        val questStateValue = condition.getParam()[1];
         GameQuest checkQuest = owner.getQuestManager().getQuestById(questId);
         if (checkQuest == null) {
             /*
