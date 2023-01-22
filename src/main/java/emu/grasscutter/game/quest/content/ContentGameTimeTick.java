@@ -12,7 +12,7 @@ public class ContentGameTimeTick extends BaseContent {
 
     @Override
     public boolean execute(GameQuest quest, QuestData.QuestContentCondition condition, String paramStr, int... params) {
-        val daysSinceStart = quest.getOwner().getWorld().getGameTimeDays() - quest.getStartGameDay();
+        val daysSinceStart = quest.getOwner().getWorld().getTotalGameTimeDays() - quest.getStartGameDay();
         val currentHour = quest.getOwner().getWorld().getGameTimeHours();
 
         // params[0] is days since start, str is hours of day
@@ -21,13 +21,16 @@ public class ContentGameTimeTick extends BaseContent {
         val to = Integer.parseInt(range[1]);
 
         val daysToPass = condition.getParam()[0];
+        // if to is at the beginning of the day, we need to pass it one more time
+        val daysMod = to < from && daysToPass > 0 && currentHour < to ? 1 : 0;
 
-        val isTimeMeet = from < to ? currentHour >= from && currentHour < to
-            : currentHour < to ? daysToPass == 0 || to + daysToPass * 24 == daysSinceStart * 24 : currentHour >= from;
+        val isTimeMet = from < to ? currentHour >= from && currentHour < to
+            : currentHour < to || currentHour >= from;
 
-        val isDaysSinceMet = daysSinceStart * 24 >= daysToPass * 24 + to;
+        val isDaysSinceMet =  daysSinceStart >= daysToPass+daysMod;
 
-        return isTimeMeet && isDaysSinceMet;
+        return isTimeMet && isDaysSinceMet;
     }
 
 }
+

@@ -905,4 +905,18 @@ public class SceneScriptManager {
         return 1;
     }
 
+    // todo implement properly with proper group loading
+    public boolean hasClearedGroupMonsters(int groupId){
+        val group = getGroupById(groupId);
+        if(group == null || !group.isLoaded() || group.monsters == null){
+            return false;
+        }
+        for(val monster : group.monsters.values()) {
+            if(scene.getEntityByConfigId(monster.config_id, groupId) !=null){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
