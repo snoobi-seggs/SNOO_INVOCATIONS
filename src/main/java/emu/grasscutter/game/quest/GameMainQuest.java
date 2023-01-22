@@ -438,7 +438,7 @@ public class GameMainQuest {
             Grasscutter.getLogger().error("Trying to init out of bounds time var {} for quest {}", index, this.parentQuestId);
             return false;
         }
-        this.timeVar[index] = owner.getWorld().getWorldTimeSeconds();
+        this.timeVar[index] = owner.getWorld().getTotalGameTimeMinutes();
         owner.getActiveQuestTimers().add(this.parentQuestId);
         return true;
     }
