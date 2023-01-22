@@ -31,7 +31,7 @@ public class RefreshPolicyExcelConfigData extends GameResource {
     public int getIntervalInSeconds(World world) {
         if(time.isEmpty()) return -1;
 
-        var currentTimestamp = world.getGameTime();
+        var currentTimestamp = world.getTotalGameTimeMinutes();
 
         try {
             List<String> paramsStr = Arrays.asList(time.split(";"));
@@ -45,7 +45,7 @@ public class RefreshPolicyExcelConfigData extends GameResource {
                     return params.get(0);
                 case REFRESH_DAILY:
                     {
-                        var dayTime = (world.getWorldTimeSeconds() / (24 * 60)) * 24 * 60 * 60;
+                        var dayTime = (world.getTotalGameTimeMinutes() / (24 * 60)) * 24 * 60 * 60;
                         var temp = currentTimestamp - dayTime;
                         var upper_bound_idx = upperBound(params, (int)params.get(0), (int)params.get(params.size() - 1), (int)temp);
                         var upper_bound = params.get(upper_bound_idx);
@@ -59,7 +59,7 @@ public class RefreshPolicyExcelConfigData extends GameResource {
                 case REFRESH_WEEKlY:
                     if(params.size() < 2) return -1;
                     {
-                        var weekTime = (world.getGameTimeDays() / 7) * 60 * 60 * 24 * 7;
+                        var weekTime = (world.getTotalGameTimeDays() / 7) * 60 * 60 * 24 * 7;
                         var temp = currentTimestamp - weekTime;
                         var upper_bound_idx = upperBound(params, (int)params.get(0), (int)params.get(params.size() - 1), (int)temp);
                         var upper_bound = params.get(upper_bound_idx);
