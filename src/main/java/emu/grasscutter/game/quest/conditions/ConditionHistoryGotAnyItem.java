@@ -3,17 +3,16 @@ package emu.grasscutter.game.quest.conditions;
 import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.quest.QuestValueCond;
+import emu.grasscutter.game.quest.enums.QuestCond;
 import lombok.val;
 
-import static emu.grasscutter.game.quest.enums.QuestCond.QUEST_COND_ACTIVITY_OPEN;
-
-@QuestValueCond(QUEST_COND_ACTIVITY_OPEN)
-public class ConditionActivityOpen extends BaseCondition {
+@QuestValueCond(QuestCond.QUEST_COND_HISTORY_GOT_ANY_ITEM)
+public class ConditionHistoryGotAnyItem extends BaseCondition {
 
     @Override
     public boolean execute(Player owner, QuestData questData, QuestData.QuestAcceptCondition condition, String paramStr, int... params) {
-        val activityId = condition.getParam()[0];
-        return owner.getActivityManager().isActivityActive(activityId);
+        val itemId = condition.getParam()[0];
+        return owner.getPlayerProgress().hasPlayerObtainedItemHistorically(itemId);
     }
 
 }
