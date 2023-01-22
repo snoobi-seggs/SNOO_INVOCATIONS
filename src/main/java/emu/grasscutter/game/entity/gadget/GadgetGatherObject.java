@@ -1,5 +1,6 @@
 package emu.grasscutter.game.entity.gadget;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.GatherData;
 import emu.grasscutter.data.excels.ItemData;
@@ -30,6 +31,10 @@ public class GadgetGatherObject extends GadgetContent {
             if(gatherData != null) {
                 this.itemId = gatherData.getItemId();
                 this.isForbidGuest = gatherData.isForbidGuest();
+            } else if (gadget.getSpawnEntry() != null) {
+                this.itemId = gadget.getSpawnEntry().getGatherItemId();
+            } else {
+                Grasscutter.getLogger().error("invalid gather object: {}", gadget.getConfigId());
             }
         }
     }

@@ -253,7 +253,7 @@ public final class GameServer extends KcpServer {
 
     public void deregisterWorld(World world) {
         // TODO Auto-generated method stub
-
+        world.save(); //Save the player's world
     }
 
     public void start() {
@@ -285,5 +285,7 @@ public final class GameServer extends KcpServer {
         for (Player player : list) {
             player.getSession().close();
         }
+
+        getWorlds().forEach(World::save);
     }
 }

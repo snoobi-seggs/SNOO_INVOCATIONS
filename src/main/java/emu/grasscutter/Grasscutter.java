@@ -288,7 +288,6 @@ public final class Grasscutter {
                     Grasscutter.getLogger().info("Press Ctrl-C again to shutdown.");
                     continue;
                 } else {
-                    getGameServer().getWorlds().forEach(World::save);
                     Runtime.getRuntime().exit(0);
                 }
             } catch (EndOfFileException e) {

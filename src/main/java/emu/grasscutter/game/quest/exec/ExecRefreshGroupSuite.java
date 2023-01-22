@@ -1,13 +1,10 @@
 package emu.grasscutter.game.quest.exec;
 
-import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.excels.QuestData;
 import emu.grasscutter.game.quest.GameQuest;
-import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.quest.QuestValueExec;
 import emu.grasscutter.game.quest.enums.QuestExec;
 import emu.grasscutter.game.quest.handlers.QuestExecHandler;
-import emu.grasscutter.server.packet.send.PacketGroupSuiteNotify;
 
 @QuestValueExec(QuestExec.QUEST_EXEC_REFRESH_GROUP_SUITE)
 public class ExecRefreshGroupSuite extends QuestExecHandler {
@@ -16,32 +13,18 @@ public class ExecRefreshGroupSuite extends QuestExecHandler {
     public boolean execute(GameQuest quest, QuestData.QuestExecParam condition, String... paramStr) {
         var sceneId = Integer.parseInt(paramStr[0]);
         var entries = paramStr[1].split(";");
+
+        boolean result = true;
         for(var entry : entries) {
             var groupId = Integer.parseInt(entry.split(",")[0]);
             var suiteId = Integer.parseInt(entry.split(",")[1]);
 
-            var scriptManager = quest.getOwner().getScene().getScriptManager();
-
-            // refresh immediately if player is in this scene
-            if (quest.getOwner().getScene().getId() == sceneId) {
-                var targetGroupInstance = scriptManager.getGroupInstanceById(groupId);
-                if (targetGroupInstance == null) {
-                    Grasscutter.getLogger().warn("trying to load unknown group {} in scene {}", groupId, sceneId);
-                } else {
-                    suiteId = scriptManager.refreshGroup(targetGroupInstance, suiteId, false); //If suiteId is zero, the value of suiteId changes
-                    quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
-                }
+            if(!quest.getOwner().getWorld().getSceneById(sceneId).getScriptManager().refreshGroupSuite(groupId, suiteId, quest)) {
+                result = false;
             }
-
-            if(suiteId != 0)
-                quest.getMainQuest().getQuestGroupSuites().add(QuestGroupSuite.of()
-                    .scene(sceneId)
-                    .group(groupId)
-                    .suite(suiteId)
-                    .build());
         }
 
-        return true;
+        return result;
     }
 
 }

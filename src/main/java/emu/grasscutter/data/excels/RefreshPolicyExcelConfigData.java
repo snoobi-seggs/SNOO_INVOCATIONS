@@ -45,7 +45,7 @@ public class RefreshPolicyExcelConfigData extends GameResource {
                     return params.get(0);
                 case REFRESH_DAILY:
                     {
-                        var dayTime = (world.getGameTimeHours() / 24) * 24 * 60 * 60;
+                        var dayTime = (world.getWorldTimeSeconds() / (24 * 60)) * 24 * 60 * 60;
                         var temp = currentTimestamp - dayTime;
                         var upper_bound_idx = upperBound(params, (int)params.get(0), (int)params.get(params.size() - 1), (int)temp);
                         var upper_bound = params.get(upper_bound_idx);

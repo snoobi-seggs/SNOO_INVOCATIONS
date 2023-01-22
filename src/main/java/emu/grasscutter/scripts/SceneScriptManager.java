@@ -13,6 +13,8 @@ import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.platform.BaseRoute;
 import emu.grasscutter.game.props.EntityType;
+import emu.grasscutter.game.quest.GameQuest;
+import emu.grasscutter.game.quest.QuestGroupSuite;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.game.world.SceneGroupInstance;
 import emu.grasscutter.net.proto.VisionTypeOuterClass;
@@ -20,6 +22,7 @@ import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.*;
 import emu.grasscutter.scripts.service.ScriptMonsterSpawnService;
 import emu.grasscutter.scripts.service.ScriptMonsterTideService;
+import emu.grasscutter.server.packet.send.PacketGroupSuiteNotify;
 import emu.grasscutter.utils.FileUtils;
 import emu.grasscutter.utils.GridPosition;
 import emu.grasscutter.utils.JsonUtils;
@@ -232,7 +235,35 @@ public class SceneScriptManager {
         groupInstance.setLastTimeRefreshed(getScene().getWorld().getGameTime());
         return suiteIndex;
     }
-    public void refreshGroupMonster(SceneGroupInstance groupInstance) {
+
+    public boolean refreshGroupSuite(int groupId, int suiteId, GameQuest quest) {
+        var targetGroupInstance = getGroupInstanceById(groupId);
+        if (targetGroupInstance == null) {
+            Grasscutter.getLogger().warn("trying to regresh group suite {} in an unloaded and uncached group {} in scene {}", suiteId, groupId, getScene().getId());
+            return false;
+        } else {
+            suiteId = refreshGroup(targetGroupInstance, suiteId, false); //If suiteId is zero, the value of suiteId changes
+            quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
+        }
+
+        if(suiteId != 0 && quest != null) {
+            quest.getMainQuest().getQuestGroupSuites().add(QuestGroupSuite.of()
+                .scene(getScene().getId())
+                .group(groupId)
+                .suite(suiteId)
+                .build());
+        }
+
+        return true;
+    }
+
+    public boolean refreshGroupMonster(int groupId) {
+        var groupInstance = getGroupInstanceById(groupId);
+        if (groupInstance == null) {
+            Grasscutter.getLogger().warn("trying to refesh monster group in unloaded and uncached group {} in scene {}", groupId, getScene().getId());
+            return false;
+        }
+
         var group = groupInstance.getLuaGroup();
         var monstersToSpawn = group.monsters.values().stream()
             .filter(m -> {
@@ -242,6 +273,8 @@ public class SceneScriptManager {
             .map(mob -> createMonster(group.id, group.block_id, mob))
             .toList();//TODO check if it interferes with bigworld or anything else
         this.addEntities(monstersToSpawn);
+
+        return true;
     }
     public EntityRegion getRegionById(int id) {
         return regions.get(id);
@@ -493,6 +526,19 @@ public class SceneScriptManager {
             .filter(Objects::nonNull)
             .toList();
     }
+
+    public boolean isClearedGroupMonsters(int groupId) {
+        var groupInstance = getGroupInstanceById(groupId);
+        if (groupInstance == null || groupInstance.getLuaGroup() == null) return false;
+
+        var group = groupInstance.getLuaGroup();
+        return group.monsters.values().stream()
+            .filter(m -> {
+                var entity = scene.getEntityByConfigId(m.config_id);
+                return entity != null && entity.getGroupId()==group.id;
+            }).count() == 0;
+    }
+
     public void addGroupSuite(SceneGroupInstance groupInstance, SceneSuite suite) {
         // we added trigger first
         registerTrigger(suite.sceneTriggers);
