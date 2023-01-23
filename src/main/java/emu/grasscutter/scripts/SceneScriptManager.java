@@ -437,6 +437,7 @@ public class SceneScriptManager {
         if(this.getCachedGroupInstanceById(group.id) != null) {
             this.sceneGroupsInstances.put(group.id, this.cachedSceneGroupsInstances.get(group.id));
             this.cachedSceneGroupsInstances.get(group.id).setCached(false);
+            this.cachedSceneGroupsInstances.get(group.id).setLuaGroup(group);
         } else {
             var instance = new SceneGroupInstance(group, getScene().getWorld().getHost());
             this.sceneGroupsInstances.put(group.id, instance);
@@ -540,6 +541,18 @@ public class SceneScriptManager {
     }
 
     public void addGroupSuite(SceneGroupInstance groupInstance, SceneSuite suite) {
+        // we added trigger first
+        registerTrigger(suite.sceneTriggers);
+
+        var group = groupInstance.getLuaGroup();
+        var toCreate = new ArrayList<GameEntity>();
+        toCreate.addAll(getGadgetsInGroupSuite(groupInstance, suite));
+        toCreate.addAll(getMonstersInGroupSuite(groupInstance, suite));
+        addEntities(toCreate);
+
+        registerRegionInGroupSuite(group, suite);
+    }
+    public void refreshGroupSuite(SceneGroupInstance groupInstance, SceneSuite suite) {
         // we added trigger first
         registerTrigger(suite.sceneTriggers);
 
