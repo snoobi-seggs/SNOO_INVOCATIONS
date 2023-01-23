@@ -223,6 +223,12 @@
       "description": "Add or finish quests",
       "enabled": "Questing enabled."
     },
+    "group": {
+      "invalid_groupid": "Invalid group ID.",
+      "invalid_suiteid": "Invalid suite ID.",
+      "group_not_found": "Group not found.",
+      "refreshed": "Group %d refreshed."
+    },
     "reload": {
       "reload_start": "Reloading config.",
       "reload_done": "Reload complete.",
