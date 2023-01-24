@@ -203,6 +203,7 @@ public class SceneScriptManager {
 
         var suiteData = group.getSuiteByIndex(suiteIndex);
         if (suiteData == null) {
+            Grasscutter.getLogger().warn("Group {} suite {} not found", group.id, suiteIndex);
             return 0;
         }
 
@@ -220,6 +221,7 @@ public class SceneScriptManager {
 
         if(waitForOne && (groupInstance.getTargetSuiteId() == 0 || prevSuiteIndex != groupInstance.getTargetSuiteId())) {
             groupInstance.setTargetSuiteId(suiteIndex);
+            Grasscutter.getLogger().debug("Group {} suite {} wating one more refresh", group.id, suiteIndex);
             return 0;
         }
 
@@ -239,9 +241,11 @@ public class SceneScriptManager {
     public boolean refreshGroupSuite(int groupId, int suiteId, GameQuest quest) {
         var targetGroupInstance = getGroupInstanceById(groupId);
         if (targetGroupInstance == null) {
-            Grasscutter.getLogger().warn("trying to regresh group suite {} in an unloaded and uncached group {} in scene {}", suiteId, groupId, getScene().getId());
-            return false;
+            getGroupById(groupId); //Load the group, this ensures an instance is created and the if neccesary unloaded, but the suite data is stored
+            targetGroupInstance = getGroupInstanceById(groupId);
+            Grasscutter.getLogger().debug("trying to regresh group suite {} in an unloaded and uncached group {} in scene {}", suiteId, groupId, getScene().getId());
         } else {
+            Grasscutter.getLogger().debug("Refreshing group {} suite {}", groupId, suiteId);
             suiteId = refreshGroup(targetGroupInstance, suiteId, false); //If suiteId is zero, the value of suiteId changes
             quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
         }
