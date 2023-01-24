@@ -450,9 +450,9 @@ public class ScriptLib {
     private void printLog(String source, String msg){
         var currentGroup = this.currentGroup.getIfExists();
         if(currentGroup!=null) {
-            logger.debug("[LUA] {} {} {}", source, currentGroup.id, msg);
+            logger.info("[LUA] {} {} {}", source, currentGroup.id, msg);
         } else {
-            logger.debug("[LUA] {} {}", source, msg);
+            logger.info("[LUA] {} {}", source, msg);
         }
     }
 
@@ -849,7 +849,7 @@ public class ScriptLib {
         return 0;
     }
     public int RefreshHuntingClueGroup(){
-        //logger.warn("[LUA] Call unimplemented RefreshHuntingClueGroup"); //TODO: Much many calls o this garbages the log
+        logger.warn("[LUA] Call unimplemented RefreshHuntingClueGroup"); //TODO: Much many calls o this garbages the log
         //TODO implement
         return 0;
     }
