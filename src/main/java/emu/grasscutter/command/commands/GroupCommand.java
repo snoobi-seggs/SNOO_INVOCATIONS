@@ -59,7 +59,7 @@ public final class GroupCommand implements CommandHandler {
                     targetPlayer.getScene().getScriptManager().refreshGroup(groupInstance);
                 }
 
-                CommandHandler.sendMessage(sender, translate(sender, "commands.quest.refreshed", groupId));
+                CommandHandler.sendMessage(sender, translate(sender, "commands.group.refreshed", groupId));
             }
             default -> {
                 sendUsageMessage(sender);
