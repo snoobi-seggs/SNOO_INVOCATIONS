@@ -21,7 +21,6 @@ public class ContentGameTimeTick extends BaseContent {
         val to = Integer.parseInt(range[1]);
 
         val daysToPass = condition.getParam()[0];
-
         // if to is at the beginning of the day, we need to pass it one more time
         val daysMod = to < from && daysToPass > 0 && currentHour < to ? 1 : 0;
 
