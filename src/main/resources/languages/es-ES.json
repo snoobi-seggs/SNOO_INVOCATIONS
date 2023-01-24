@@ -223,6 +223,12 @@
       "description": "Añade o finaliza misiones",
       "enabled": "Questing enabled."
     },
+    "group": {
+      "invalid_groupid": "ID de grupo invalida.",
+      "invalid_suiteid": "ID del conjunto invalida.",
+      "group_not_found": "Grupo no encontrado.",
+      "refreshed": "Grupo %d refrescado."
+    },
     "reload": {
       "reload_start": "Recargando configuración.",
       "reload_done": "Recarga completada.",
