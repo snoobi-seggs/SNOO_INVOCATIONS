@@ -532,18 +532,6 @@ public class SceneScriptManager {
             .toList();
     }
 
-    public boolean isClearedGroupMonsters(int groupId) {
-        var groupInstance = getGroupInstanceById(groupId);
-        if (groupInstance == null || groupInstance.getLuaGroup() == null) return false;
-
-        var group = groupInstance.getLuaGroup();
-        return group.monsters.values().stream()
-            .filter(m -> {
-                var entity = scene.getEntityByConfigId(m.config_id);
-                return entity != null && entity.getGroupId()==group.id;
-            }).count() == 0;
-    }
-
     public void addGroupSuite(SceneGroupInstance groupInstance, SceneSuite suite) {
         // we added trigger first
         registerTrigger(suite.sceneTriggers);
@@ -922,18 +910,18 @@ public class SceneScriptManager {
         return 1;
     }
 
-    // todo implement properly with proper group loading
-    public boolean hasClearedGroupMonsters(int groupId){
-        val group = getGroupById(groupId);
-        if(group == null || !group.isLoaded() || group.monsters == null){
-            return false;
-        }
-        for(val monster : group.monsters.values()) {
-            if(scene.getEntityByConfigId(monster.config_id, groupId) !=null){
-                return false;
-            }
-        }
-        return true;
-    }
+    // todo use killed monsters instead of spawned entites for check?
+    public boolean isClearedGroupMonsters(int groupId) {
+        val groupInstance = getGroupInstanceById(groupId);
+        if (groupInstance == null || groupInstance.getLuaGroup() == null) return false;
 
+        val monsters = groupInstance.getLuaGroup().monsters;
+
+        if(monsters == null || monsters.isEmpty()) return true;
+
+        return monsters.values().stream().noneMatch(m -> {
+            val entity = scene.getEntityByConfigId(m.config_id);
+            return entity != null && entity.getGroupId() == groupId;
+        });
+    }
 }

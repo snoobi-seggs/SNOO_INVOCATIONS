@@ -41,7 +41,7 @@ public class RefreshPolicyExcelConfigData extends GameResource {
                 case REFRESH_NONE:
                     return -1;
                 case REFRESH_INTERVAL:
-                    if(params.size() == 0) return -1;
+                    if(params.isEmpty()) return -1;
                     return params.get(0);
                 case REFRESH_DAILY:
                     {

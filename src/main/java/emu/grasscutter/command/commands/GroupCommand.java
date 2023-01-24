@@ -18,31 +18,33 @@ public final class GroupCommand implements CommandHandler {
 
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
-        if (args.size() == 0) {
-            sendUsageMessage(sender);
+        if (args.isEmpty()) {
             return;
         }
         String cmd = args.remove(0).toLowerCase();
 
         int groupId = 0;
         int suiteId = 0;
-        if (args.size() >= 1) {
-            try {
-                groupId = Integer.parseInt(args.get(0));
-            }
-            catch (Exception e) {
-                CommandHandler.sendMessage(sender, translate(sender, "commands.group.invalid_groupid"));
-                return;
-            }
-        }
-        if (args.size() >= 2) {
-            try {
-                suiteId = Integer.parseInt(args.get(1));
-            }
-            catch (Exception e) {
-                CommandHandler.sendMessage(sender, translate(sender, "commands.group.invalid_suiteid"));
-                return;
-            }
+        switch (args.size()){
+            case 2:
+                try {
+                    suiteId = Integer.parseInt(args.get(1));
+                }
+                catch (Exception e) {
+                    CommandHandler.sendMessage(sender, translate(sender, "commands.group.invalid_suiteid"));
+                    return;
+                }  // Fallthrough
+            case 1:
+                try {
+                    groupId = Integer.parseInt(args.get(0));
+                }
+                catch (Exception e) {
+                    CommandHandler.sendMessage(sender, translate(sender, "commands.group.invalid_groupid"));
+                    return;
+                }
+                break;
+            default:
+                sendUsageMessage(sender);
         }
 
         switch (cmd) {

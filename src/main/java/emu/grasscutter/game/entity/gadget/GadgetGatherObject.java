@@ -24,16 +24,18 @@ public class GadgetGatherObject extends GadgetContent {
     public GadgetGatherObject(EntityGadget gadget) {
         super(gadget);
 
+        // overwrites the default spawn handling
         if (gadget.getSpawnEntry() != null) {
             this.itemId = gadget.getSpawnEntry().getGatherItemId();
+            return;
+        }
+
+        GatherData gatherData = GameData.getGatherDataMap().get(gadget.getPointType());
+        if(gatherData != null) {
+            this.itemId = gatherData.getItemId();
+            this.isForbidGuest = gatherData.isForbidGuest();
         } else {
-            GatherData gatherData = GameData.getGatherDataMap().get(gadget.getPointType());
-            if(gatherData != null) {
-                this.itemId = gatherData.getItemId();
-                this.isForbidGuest = gatherData.isForbidGuest();
-            } else {
-                Grasscutter.getLogger().error("invalid gather object: {}", gadget.getConfigId());
-            }
+            Grasscutter.getLogger().error("invalid gather object: {}", gadget.getConfigId());
         }
     }
 

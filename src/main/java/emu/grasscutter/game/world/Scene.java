@@ -685,6 +685,15 @@ public class Scene {
         return group.init_config.suite;
     }
 
+    public boolean unregisterDynamicGroup(int groupId){
+        SceneGroup group = getScriptManager().getGroupById(groupId);
+        if(group == null) return false;
+
+        SceneBlock block = getScriptManager().getBlocks().get(group.block_id);
+        unloadGroup(block, groupId);
+        return true;
+    }
+
     public void onRegisterGroups() {
         Set<SceneGroup> sceneGroups = this.loadedGroups;
         Map<Integer, SceneGroup> sceneGroupMap = sceneGroups.stream().collect(Collectors.toMap(item -> item.id, item -> item));
