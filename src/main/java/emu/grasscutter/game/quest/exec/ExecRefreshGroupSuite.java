@@ -16,8 +16,9 @@ public class ExecRefreshGroupSuite extends QuestExecHandler {
 
         boolean result = true;
         for(var entry : entries) {
-            var groupId = Integer.parseInt(entry.split(",")[0]);
-            var suiteId = Integer.parseInt(entry.split(",")[1]);
+            var entryArray = entry.split(",");
+            var groupId = Integer.parseInt(entryArray[0]);
+            var suiteId = Integer.parseInt(entryArray[1]);
 
             if(!quest.getOwner().getWorld().getSceneById(sceneId).getScriptManager().refreshGroupSuite(groupId, suiteId, quest)) {
                 result = false;
