@@ -18,6 +18,7 @@ import emu.grasscutter.game.activity.PlayerActivityData;
 import emu.grasscutter.game.props.ActivityType;
 import emu.grasscutter.net.proto.ActivityInfoOuterClass.ActivityInfo;
 import emu.grasscutter.server.packet.send.PacketActivityInfoNotify;
+import emu.grasscutter.server.packet.send.PacketScenePlayerLocationNotify;
 import emu.grasscutter.utils.JsonUtils;
 
 import java.util.*;
@@ -88,12 +89,16 @@ public class TrialAvatarActivityHandler extends ActivityHandler {
     }
 
     public boolean enterTrialDungeon(Player player, int trialAvatarIndexId, int enterPointId) {
+        // TODO, not sure if this will cause problem in MP, since we are entering trial activity dungeon
+        player.sendPacket(new PacketScenePlayerLocationNotify(player.getScene())); // official does send this
+
         if (!player.getServer().getDungeonSystem().enterDungeon(
-                player, 
-                enterPointId, 
+                player,
+                enterPointId,
                 getTrialActivityDungeonId(trialAvatarIndexId))) return false;
-        
+
         setSelectedTrialAvatarIndex(trialAvatarIndexId);
+
         return true;
     }
 
@@ -125,8 +130,14 @@ public class TrialAvatarActivityHandler extends ActivityHandler {
         setSelectedTrialAvatarIndex(0);
     }
 
-    public boolean getReward(Player player, PlayerActivityData playerActivityData, int trialAvatarIndexId) {
-        TrialAvatarPlayerData trialAvatarPlayerData = getTrialAvatarPlayerData(playerActivityData);
+    public boolean getReward(Player player, int trialAvatarIndexId) {
+        val playerActivityData = player.getActivityManager().getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
+
+        if(playerActivityData.isEmpty()){
+            return false;
+        }
+
+        TrialAvatarPlayerData trialAvatarPlayerData = getTrialAvatarPlayerData(playerActivityData.get());
         TrialAvatarPlayerData.RewardInfoItem rewardInfo = trialAvatarPlayerData.getRewardInfo(trialAvatarIndexId);
         if (rewardInfo == null) return false;
 
@@ -135,8 +146,8 @@ public class TrialAvatarActivityHandler extends ActivityHandler {
 
         player.getInventory().addItemParamDatas(rewardParam.getRewardItemList(), ActionReason.TrialAvatarActivityFirstPassReward);
         rewardInfo.setReceivedReward(true);
-        playerActivityData.setDetail(trialAvatarPlayerData);
-        playerActivityData.save();
+        playerActivityData.get().setDetail(trialAvatarPlayerData);
+        playerActivityData.get().save();
         return true;
     }
 

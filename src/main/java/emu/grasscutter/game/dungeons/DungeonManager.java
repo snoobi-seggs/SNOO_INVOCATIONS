@@ -233,7 +233,7 @@ public class DungeonManager {
                     case DUNGEON_PLAY_TYPE_TRIAL_AVATAR -> {
                         val playerData = player.getActivityManager()
                             .getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
-                        if (playerData == null) return;
+                        if (playerData.isEmpty()) return;
 
                         val handler = (TrialAvatarActivityHandler) playerData.get().getActivityHandler();
                         if (handler == null) return;

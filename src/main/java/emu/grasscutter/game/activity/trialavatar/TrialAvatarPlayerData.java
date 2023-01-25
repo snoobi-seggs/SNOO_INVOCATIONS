@@ -1,14 +1,14 @@
 package emu.grasscutter.game.activity.trialavatar;
 
 import emu.grasscutter.data.GameData;
-import emu.grasscutter.data.excels.TrialAvatarActivityData;
-import emu.grasscutter.game.activity.ActivityConfigItem;
+import emu.grasscutter.data.common.BaseTrialActivityData;
 import emu.grasscutter.net.proto.TrialAvatarActivityDetailInfoOuterClass.TrialAvatarActivityDetailInfo;
 import emu.grasscutter.net.proto.TrialAvatarActivityRewardDetailInfoOuterClass.TrialAvatarActivityRewardDetailInfo;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import lombok.val;
 
 import java.util.List;
 import java.util.stream.*;
@@ -19,24 +19,20 @@ import java.util.stream.*;
 public class TrialAvatarPlayerData {
     List<RewardInfoItem> rewardInfoList;
 
-    public static List<Integer> getAvatarIdList(int scheduleId) {
-        if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
-            if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
+    private static BaseTrialActivityData getActivityData(int scheduleId){
+        // prefer custom data over official data
+        return GameData.getTrialAvatarActivityCustomData().isEmpty() ? GameData.getTrialAvatarActivityDataMap().get(scheduleId)
+            : GameData.getTrialAvatarActivityCustomData().get(scheduleId);
+    }
 
-            return GameData.getTrialAvatarActivityDataMap().get(scheduleId).getAvatarIndexIdList();
-        }
-        if (GameData.getTrialAvatarActivityCustomData().get(scheduleId) == null) return List.of();
-        return GameData.getTrialAvatarActivityCustomData().get(scheduleId).getAvatarIndexIdList();
+    public static List<Integer> getAvatarIdList(int scheduleId) {
+        val activityData = getActivityData(scheduleId);
+        return activityData != null ? activityData.getAvatarIndexIdList() : List.of();
     }
 
     public static List<Integer> getRewardIdList(int scheduleId) {
-        if (GameData.getTrialAvatarActivityCustomData().isEmpty()) {
-            if (GameData.getTrialAvatarActivityDataMap().get(scheduleId) == null) return List.of();
-
-            return GameData.getTrialAvatarActivityDataMap().get(scheduleId).getRewardIdList();
-        }
-        if (GameData.getTrialAvatarActivityCustomData().get(scheduleId) == null) return List.of();
-        return GameData.getTrialAvatarActivityCustomData().get(scheduleId).getRewardIdList();
+        val activityData = getActivityData(scheduleId);
+        return activityData != null ? activityData.getRewardIdList() : List.of();
     }
 
     public static TrialAvatarPlayerData create(int scheduleId) {
@@ -46,7 +42,7 @@ public class TrialAvatarPlayerData {
             .rewardInfoList(IntStream.range(0, avatarIds.size())
                 .filter(i -> avatarIds.get(i) > 0 && rewardIds.get(i) > 0)
                 .mapToObj(i -> RewardInfoItem.create(
-                    avatarIds.get(i), 
+                    avatarIds.get(i),
                     rewardIds.get(i)))
                 .collect(Collectors.toList()))
             .build();

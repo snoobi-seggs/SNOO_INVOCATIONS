@@ -14,46 +14,20 @@ import lombok.val;
 
 @Opcodes(PacketOpcodes.EnterTrialAvatarActivityDungeonReq)
 public class HandlerEnterTrialAvatarActivityDungeonReq extends PacketHandler {
-	
+
 	@Override
 	public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {
-		EnterTrialAvatarActivityDungeonReq req = EnterTrialAvatarActivityDungeonReq.parseFrom(payload);
+        val req = EnterTrialAvatarActivityDungeonReq.parseFrom(payload);
 
-		val playerData = session.getPlayer().getActivityManager()
-			.getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
-		if (playerData == null) {
-			session.getPlayer().sendPacket(new PacketEnterTrialAvatarActivityDungeonRsp(
-				req.getActivityId(),
-				req.getTrialAvatarIndexId(),
-				Retcode.RET_FAIL_VALUE));
-			return;
-		}
+        val handler = session.getPlayer().getActivityManager()
+            .getActivityHandlerAs(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR, TrialAvatarActivityHandler.class);
 
-		val handler = (TrialAvatarActivityHandler) playerData.get().getActivityHandler();
-		if (handler == null) {
-			session.getPlayer().sendPacket(new PacketEnterTrialAvatarActivityDungeonRsp(
-				req.getActivityId(),
-				req.getTrialAvatarIndexId(),
-				Retcode.RET_FAIL_VALUE));
-			return;
-		}
+        boolean result = handler.isPresent() && handler.get().enterTrialDungeon(session.getPlayer(), req.getTrialAvatarIndexId(), req.getEnterPointId());
 
-		// TODO, not sure if this will cause problem in MP, since we are entering trial activity dungeon
-		session.getPlayer().sendPacket(new PacketScenePlayerLocationNotify(session.getPlayer().getScene())); // official does send this
-
-
-		if (!handler.enterTrialDungeon(session.getPlayer(), req.getTrialAvatarIndexId(), req.getEnterPointId())) {
-			session.getPlayer().sendPacket(new PacketEnterTrialAvatarActivityDungeonRsp(
-			req.getActivityId(),
-			req.getTrialAvatarIndexId(),
-			Retcode.RET_FAIL_VALUE));
-			return;
-		}
-
-		session.getPlayer().sendPacket(new PacketEnterTrialAvatarActivityDungeonRsp(
-			req.getActivityId(),
-			req.getTrialAvatarIndexId(),
-			Retcode.RET_SUCC_VALUE));
+        session.getPlayer().sendPacket(new PacketEnterTrialAvatarActivityDungeonRsp(
+            req.getActivityId(),
+            req.getTrialAvatarIndexId(),
+            result));
 	}
 
 }

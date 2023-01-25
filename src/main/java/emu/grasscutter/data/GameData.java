@@ -165,7 +165,7 @@ public class GameData {
     protected static Int2ObjectMap<IntSet> avatarSkillLevels = new Int2ObjectOpenHashMap<>();
     @Getter private static final Map<String, List<QuestData>> beginCondQuestMap = new HashMap<>(); // cache filled by QuestData
     @Getter private static final Map<Integer, Integer> questTalkMap = new HashMap<>();
-    @Getter private static final Map<Integer, TrialAvatarCustomData> trialAvatarCustomData = new HashMap<>();
+    @Getter private static final Int2ObjectMap<TrialAvatarCustomData> trialAvatarCustomData = new Int2ObjectOpenHashMap<>();
     @Getter private static final Map<Integer, TrialAvatarActivityCustomData> trialAvatarActivityCustomData = new HashMap<>();
     @Getter private static final Map<Integer, TrialAvatarActivityDataCustomData> trialAvatarActivityDataCustomData = new HashMap<>();
 

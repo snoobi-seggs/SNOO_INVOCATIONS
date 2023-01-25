@@ -14,41 +14,19 @@ import lombok.val;
 
 @Opcodes(PacketOpcodes.ReceivedTrialAvatarActivityRewardReq)
 public class HandlerReceivedTrialAvatarActivityRewardReq extends PacketHandler {
-	
+
 	@Override
 	public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {
-		ReceivedTrialAvatarActivityRewardReq req = ReceivedTrialAvatarActivityRewardReq.parseFrom(payload);
+        val req = ReceivedTrialAvatarActivityRewardReq.parseFrom(payload);
+        val player = session.getPlayer();
+        val handler = player.getActivityManager().getActivityHandlerAs(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR, TrialAvatarActivityHandler.class);
 
-		val playerData = session.getPlayer().getActivityManager()
-			.getPlayerActivityDataByActivityType(ActivityType.NEW_ACTIVITY_TRIAL_AVATAR);
-		if (playerData == null) {
-			session.getPlayer().sendPacket(new PacketReceivedTrialAvatarActivityRewardRsp(
-				5002, // trial activity id
-				req.getTrialAvatarIndexId(),
-				Retcode.RET_FAIL_VALUE));
-			return;
-		}
+        boolean result = handler.isPresent() && handler.get().getReward(player, req.getTrialAvatarIndexId());
 
-		val handler = (TrialAvatarActivityHandler) playerData.get().getActivityHandler();
-		if (handler == null) {
-			session.getPlayer().sendPacket(new PacketReceivedTrialAvatarActivityRewardRsp(
-				5002, // trial activity id
-				req.getTrialAvatarIndexId(),
-				Retcode.RET_FAIL_VALUE));
-			return;
-		}
-
-		if (!handler.getReward(session.getPlayer(), playerData.get(), req.getTrialAvatarIndexId())) {
-			session.getPlayer().sendPacket(new PacketReceivedTrialAvatarActivityRewardRsp(
-				5002, // trial activity id
-				req.getTrialAvatarIndexId(),
-				Retcode.RET_FAIL_VALUE));
-			return;
-		}
-		session.getPlayer().sendPacket(new PacketReceivedTrialAvatarActivityRewardRsp(
-			5002, // trial activity id
-			req.getTrialAvatarIndexId(),
-			Retcode.RET_SUCC_VALUE));
+        session.getPlayer().sendPacket(new PacketReceivedTrialAvatarActivityRewardRsp(
+            5002, // trial activity id
+            req.getTrialAvatarIndexId(),
+            result));
 	}
 
 }
