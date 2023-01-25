@@ -228,7 +228,7 @@
       "invalid_suiteid": "ID del conjunto invalida.",
       "group_not_found": "Grupo no encontrado.",
       "description": "Altera la carga de grupos",
-      "refreshed": "Grupo %d refrescado."
+      "refreshed": "Grupo %s refrescado."
     },
     "reload": {
       "reload_start": "Recargando configuración.",

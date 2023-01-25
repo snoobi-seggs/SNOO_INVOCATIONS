@@ -45,6 +45,7 @@ public final class GroupCommand implements CommandHandler {
                 break;
             default:
                 sendUsageMessage(sender);
+                return;
         }
 
         switch (cmd) {

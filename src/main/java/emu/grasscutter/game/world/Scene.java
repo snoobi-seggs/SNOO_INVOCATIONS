@@ -206,6 +206,7 @@ public class Scene {
 
         // Deregister scene if not in use
         if (this.getPlayerCount() <= 0 && !this.dontDestroyWhenEmpty) {
+            this.getScriptManager().onDestroy();
             this.getWorld().deregisterScene(this);
         }
         this.saveGroups();
@@ -426,13 +427,19 @@ public class Scene {
     }
 
     private void checkPlayerRespawn() {
+        val diePos = getScriptManager().getConfig().die_y;
         players.forEach(player -> {
             //Check if we need a respawn
             if (getScriptManager().getConfig() != null) {
-                if (getScriptManager().getConfig().die_y >= player.getPosition().getY()) {
+                if (diePos >= player.getPosition().getY()) {
                     //Respawn the player
                     respawnPlayer(player);
                 }
+            }
+        });
+        getEntities().forEach((eid, e) -> {
+            if(diePos >= e.getPosition().getY()){
+                killEntity(e);
             }
         });
     }

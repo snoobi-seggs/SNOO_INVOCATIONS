@@ -228,7 +228,7 @@
       "invalid_suiteid": "Invalid suite ID.",
       "group_not_found": "Group not found.",
       "description": "Alter group loading",
-      "refreshed": "Group %d refreshed."
+      "refreshed": "Group %s refreshed."
     },
     "reload": {
       "reload_start": "Se reîncarcă configurația.",
