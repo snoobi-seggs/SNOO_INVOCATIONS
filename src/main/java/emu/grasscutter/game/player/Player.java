@@ -205,6 +205,7 @@ public class Player {
     @Getter private long playerGameTime = 0;
 
     @Getter private PlayerProgress playerProgress;
+    @Getter private Set<Integer> activeQuestTimers;
 
     @Deprecated
     @SuppressWarnings({"rawtypes", "unchecked"}) // Morphia only!
@@ -250,6 +251,7 @@ public class Player {
         this.unlockedScenePoints = new HashMap<>();
         this.chatEmojiIdList = new ArrayList<>();
         this.playerProgress = new PlayerProgress();
+        this.activeQuestTimers = new HashSet<>();
 
         this.attackResults = new LinkedBlockingQueue<>();
         this.coopRequests = new Int2ObjectOpenHashMap<>();
@@ -1222,6 +1224,9 @@ public class Player {
 
         // Recharge resin.
         this.getResinManager().rechargeResin();
+
+        // Quest tick handling
+        getQuestManager().onTick();
     }
 
     private synchronized void doDailyReset() {

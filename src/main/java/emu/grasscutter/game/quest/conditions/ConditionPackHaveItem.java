@@ -1,8 +1,9 @@
 package emu.grasscutter.game.quest.conditions;
 
 import emu.grasscutter.data.excels.QuestData;
-import emu.grasscutter.game.quest.GameQuest;
+import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.quest.QuestValueCond;
+import lombok.val;
 
 import static emu.grasscutter.game.quest.enums.QuestCond.QUEST_COND_PACK_HAVE_ITEM;
 
@@ -10,9 +11,11 @@ import static emu.grasscutter.game.quest.enums.QuestCond.QUEST_COND_PACK_HAVE_IT
 public class ConditionPackHaveItem extends BaseCondition {
 
     @Override
-    public boolean execute(GameQuest quest, QuestData.QuestAcceptCondition condition, String paramStr, int... params) {
-        var checkItem = quest.getOwner().getInventory().getItemByGuid(condition.getParam()[0]);
-        return checkItem != null && checkItem.getCount() >= condition.getParam()[1];
+    public boolean execute(Player owner, QuestData questData, QuestData.QuestAcceptCondition condition, String paramStr, int... params) {
+        val itemId = condition.getParam()[0];
+        val targetAmount = condition.getParam()[1];
+        val checkItem = owner.getInventory().getItemByGuid(itemId);
+        return checkItem != null && checkItem.getCount() >= targetAmount;
     }
 
 }

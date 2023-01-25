@@ -213,7 +213,12 @@ public class World implements Iterable<Player> {
     }
 
     public void deregisterScene(Scene scene) {
+        scene.saveGroups();
         this.getScenes().remove(scene.getId());
+    }
+
+    public void save() {
+        this.getScenes().values().forEach(Scene::saveGroups);
     }
 
     public boolean transferPlayerToScene(Player player, int sceneId, Position pos) {
@@ -374,11 +379,6 @@ public class World implements Iterable<Player> {
         if (this.getPlayerCount() == 0) return true;
         this.scenes.forEach((k, scene) -> scene.onTick());
 
-        // trigger game time tick for quests TODO maybe move it to onTick for QuestManager?
-        players.forEach(p -> p.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_GAME_TIME_TICK,
-            getGameTimeHours() , // hours
-            0)); //days
-
 
         // sync time every 10 seconds
         if(tickCount%10 == 0){
@@ -409,18 +409,6 @@ public class World implements Iterable<Player> {
             days)); //days
     }
 
-    public int getGameTime() {
-        return (int)(getWorldTimeSeconds() % 1440);
-    }
-
-    public int getGameTimeHours() {
-        return getGameTime() / 60 ;
-    }
-
-    public long getGameTimeDays() {
-        return getWorldTimeSeconds() / 1440 ;
-    }
-
     public void setPaused(boolean paused) {
         getWorldTime();
         if(this.isPaused != paused && !paused){
@@ -431,6 +419,52 @@ public class World implements Iterable<Player> {
         scenes.forEach((key, scene) -> scene.setPaused(paused));
     }
 
+    public static long getDaysForGameTime(long inGameMinutes){
+        return inGameMinutes / 1440;
+    }
+
+    public static long getHoursForGameTime(long inGameMinutes){
+        return inGameMinutes / 60;
+    }
+
+    /**
+     * Returns the current in game days world time in ingame minutes (0-1439)
+     */
+    public int getGameTime() {
+        return (int)(getTotalGameTimeMinutes() % 1440);
+    }
+
+    /**
+     * Returns the current in game days world time in ingame hours (0-23)
+     */
+    public int getGameTimeHours() {
+        return getGameTime() / 60 ;
+    }
+
+    /**
+     * Returns the total number of in game days that got completed since the beginning of the game
+     */
+    public long getTotalGameTimeDays() {
+        return getDaysForGameTime(getTotalGameTimeMinutes());
+    }
+
+    /**
+     * Returns the total number of in game hours that got completed since the beginning of the game
+     */
+    public long getTotalGameTimeHours() {
+        return getHoursForGameTime(getTotalGameTimeMinutes());
+    }
+
+    /**
+     * Returns the total amount of ingame minutes that got completed since the beginning of the game
+     */
+    public long getTotalGameTimeMinutes() {
+        return getWorldTime()/1000;
+    }
+
+    /**
+     * Returns the ingame world time in irl millis
+     */
     public long getWorldTime() {
         if(!isPaused) {
             long newUpdateTime = System.currentTimeMillis();
@@ -438,10 +472,6 @@ public class World implements Iterable<Player> {
             this.lastUpdateTime = newUpdateTime;
         }
         return currentWorldTime;
-    }
-
-    public long getWorldTimeSeconds() {
-        return getWorldTime()/1000;
     }
 
     @Override

@@ -68,7 +68,7 @@ public class GameQuest {
         clearProgress(false);
         this.acceptTime = Utils.getCurrentSeconds();
         this.startTime = this.acceptTime;
-        this.startGameDay = getOwner().getWorld().getGameTimeDays();
+        this.startGameDay = getOwner().getWorld().getTotalGameTimeDays();
         this.state = QuestState.QUEST_STATE_UNFINISHED;
         val triggerCond = questData.getFinishCond().stream()
             .filter(p -> p.getType() == QuestContent.QUEST_CONTENT_TRIGGER_FIRE).toList();
