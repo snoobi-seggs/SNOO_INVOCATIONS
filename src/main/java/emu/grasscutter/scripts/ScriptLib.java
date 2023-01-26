@@ -450,9 +450,9 @@ public class ScriptLib {
     private void printLog(String source, String msg){
         var currentGroup = this.currentGroup.getIfExists();
         if(currentGroup!=null) {
-            logger.info("[LUA] {} {} {}", source, currentGroup.id, msg);
+            logger.debug("[LUA] {} {} {}", source, currentGroup.id, msg);
         } else {
-            logger.info("[LUA] {} {}", source, msg);
+            logger.debug("[LUA] {} {}", source, msg);
         }
     }
 
