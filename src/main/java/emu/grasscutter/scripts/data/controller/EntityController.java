@@ -33,7 +33,7 @@ public class EntityController {
     }
 
     public int onClientExecuteRequest(GameEntity entity, int param1, int param2, int param3) {
-        Grasscutter.getLogger().info("Request on {}, {}: {}", entity.getGroupId(), param1, entity.getPosition().toString());
+        Grasscutter.getLogger().debug("Request on {}, {}: {}", entity.getGroupId(), param1, entity.getPosition().toString());
         LuaValue value = callControllerScriptFunc(entity, "OnClientExecuteReq", LuaValue.valueOf(param1), LuaValue.valueOf(param2), LuaValue.valueOf(param3));
         if(value.isint() && value.toint() == 1) return 1;
 
