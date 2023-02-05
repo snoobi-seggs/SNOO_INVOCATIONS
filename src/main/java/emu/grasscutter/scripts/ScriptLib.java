@@ -1514,4 +1514,17 @@ public class ScriptLib {
 
         return gadget.getGroupId();
     }
+
+    public int[] GetGatherConfigIdList() {
+        EntityGadget gadget = getCurrentEntityGadget();
+
+        GameEntity[] children = (GameEntity[]) gadget.getChildren().toArray();
+
+        int[] configIds = new int[children.length + 1];
+        for(int i = 0; i < children.length; i++) {
+            configIds[i] = children[i].getConfigId();
+        }
+
+        return configIds;
+    }
 }
