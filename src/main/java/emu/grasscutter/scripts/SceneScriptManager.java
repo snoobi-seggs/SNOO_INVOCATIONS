@@ -227,11 +227,17 @@ public class SceneScriptManager {
 
         groupInstance.setTargetSuiteId(0);
 
-		if(prevSuiteData != null){
+		if(prevSuiteData != null) {
 			removeGroupSuite(group, prevSuiteData);
 		} //Remove old group suite
 
 		addGroupSuite(groupInstance, suiteData);
+
+        //Refesh variables here
+        group.variables.forEach(variable -> {
+            if(!variable.no_refresh)
+                groupInstance.getCachedVariables().put(variable.name, variable.value);
+        });
 
         groupInstance.setActiveSuiteId(suiteIndex);
         groupInstance.setLastTimeRefreshed(getScene().getWorld().getGameTime());
@@ -604,7 +610,7 @@ public class SceneScriptManager {
         // TODO delay
         var entity = scene.getEntityByConfigId(configId);
         if(entity!=null && entity.getGroupId() == group.id){
-            Grasscutter.getLogger().info("entity already exists failed in group {} with config {}", group.id, configId);
+            Grasscutter.getLogger().debug("entity already exists failed in group {} with config {}", group.id, configId);
             return;
         }
         entity = createMonster(group.id, group.block_id, group.monsters.get(configId));
