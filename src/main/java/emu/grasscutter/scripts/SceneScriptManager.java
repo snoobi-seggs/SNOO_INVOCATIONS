@@ -227,11 +227,17 @@ public class SceneScriptManager {
 
         groupInstance.setTargetSuiteId(0);
 
-		if(prevSuiteData != null){
+		if(prevSuiteData != null) {
 			removeGroupSuite(group, prevSuiteData);
 		} //Remove old group suite
 
 		addGroupSuite(groupInstance, suiteData);
+
+        //Refesh variables here
+        group.variables.forEach(variable -> {
+            if(!variable.no_refresh)
+                groupInstance.getCachedVariables().put(variable.name, variable.value);
+        });
 
         groupInstance.setActiveSuiteId(suiteIndex);
         groupInstance.setLastTimeRefreshed(getScene().getWorld().getGameTime());
@@ -388,20 +394,37 @@ public class SceneScriptManager {
             List<Map<GridPosition, Set<Integer>>> groupPositions = new ArrayList<>();
             for(int i = 0; i < 6; i++) groupPositions.add(new HashMap<>());
 
+            var visionOptions = Grasscutter.getConfig().server.game.visionOptions;
             meta.blocks.values().forEach(block -> {
                 block.load(scene.getId(), meta.context);
                 block.groups.values().stream().filter(g -> !g.dynamic_load).forEach(group -> {
                     group.load(this.scene.getId());
 
                     //Add all entitites here
-                    group.monsters.values().forEach(m -> addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos));
+                    Set<Integer> vision_levels = new HashSet<>();
+                    group.monsters.values().forEach(m -> {
+                        addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos);
+                        vision_levels.add(m.vision_level);
+                    });
                     group.gadgets.values().forEach(g -> {
                         int vision_level = Math.max(getGadgetVisionLevel(g.gadget_id), g.vision_level);
                         addGridPositionToMap(groupPositions.get(vision_level), group.id, vision_level, g.pos);
+                        vision_levels.add(vision_level);
                     });
                     group.npcs.values().forEach(n -> addGridPositionToMap(groupPositions.get(n.vision_level), group.id, n.vision_level, n.pos));
                     group.regions.values().forEach(r -> addGridPositionToMap(groupPositions.get(0), group.id, 0, r.pos));
                     if(group.garbages != null && group.garbages.gadgets != null) group.garbages.gadgets.forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
+
+                    int max_vision_level = -1;
+                    if(!vision_levels.isEmpty()) {
+                        for(int vision_level : vision_levels) {
+                            if(max_vision_level == -1 || visionOptions[max_vision_level].visionRange < visionOptions[vision_level].visionRange)
+                                max_vision_level = vision_level;
+                        }
+                    }
+                    if(max_vision_level == -1) max_vision_level = 0;
+
+                    addGridPositionToMap(groupPositions.get(max_vision_level), group.id, max_vision_level, group.pos);
                 });
             });
 
@@ -587,7 +610,7 @@ public class SceneScriptManager {
         // TODO delay
         var entity = scene.getEntityByConfigId(configId);
         if(entity!=null && entity.getGroupId() == group.id){
-            Grasscutter.getLogger().info("entity already exists failed in group {} with config {}", group.id, configId);
+            Grasscutter.getLogger().debug("entity already exists failed in group {} with config {}", group.id, configId);
             return;
         }
         entity = createMonster(group.id, group.block_id, group.monsters.get(configId));

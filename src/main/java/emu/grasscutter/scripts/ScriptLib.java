@@ -450,9 +450,9 @@ public class ScriptLib {
     private void printLog(String source, String msg){
         var currentGroup = this.currentGroup.getIfExists();
         if(currentGroup!=null) {
-            logger.info("[LUA] {} {} {}", source, currentGroup.id, msg);
+            logger.debug("[LUA] {} {} {}", source, currentGroup.id, msg);
         } else {
-            logger.info("[LUA] {} {}", source, msg);
+            logger.debug("[LUA] {} {}", source, msg);
         }
     }
 
@@ -1521,5 +1521,18 @@ public class ScriptLib {
         if(gadget == null) return -1;
 
         return gadget.getGroupId();
+    }
+
+    public int[] GetGatherConfigIdList() {
+        EntityGadget gadget = getCurrentEntityGadget();
+
+        GameEntity[] children = (GameEntity[]) gadget.getChildren().toArray();
+
+        int[] configIds = new int[children.length + 1];
+        for(int i = 0; i < children.length; i++) {
+            configIds[i] = children[i].getConfigId();
+        }
+
+        return configIds;
     }
 }
