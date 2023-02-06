@@ -824,7 +824,7 @@ public class Player {
         }
         // use custom data
         if (GameData.getTrialAvatarCustomData().get(trialAvatarId) == null) return List.of();
-        
+
         val trialCustomParams = GameData.getTrialAvatarCustomData().get(trialAvatarId).getTrialAvatarParamList();
         return trialCustomParams.isEmpty() ? List.of() : Stream.of(trialCustomParams.get(0).split(";")).map(Integer::parseInt).toList();
     }
@@ -853,8 +853,8 @@ public class Player {
     public boolean addTrialAvatarForQuest(int trialAvatarId, int questMainId) {
         getTeamManager().setupTrialAvatarTeamForQuest();
         if (!addTrialAvatar(
-            trialAvatarId, 
-            GrantReason.GRANT_REASON_BY_QUEST, 
+            trialAvatarId,
+            GrantReason.GRANT_REASON_BY_QUEST,
             questMainId)) return false;
         getTeamManager().trialAvatarTeamPostUpdate();
         // Packet, mimic official server behaviour, neccessary to stop player from modifying team
@@ -865,8 +865,8 @@ public class Player {
     public void addTrialAvatarsForActivity(List<Integer> trialAvatarIds) {
         getTeamManager().setupTrialAvatarTeamForActivity();
         trialAvatarIds.forEach(trialAvatarId -> addTrialAvatar(
-            trialAvatarId, 
-            GrantReason.GRANT_REASON_BY_TRIAL_AVATAR_ACTIVITY, 
+            trialAvatarId,
+            GrantReason.GRANT_REASON_BY_TRIAL_AVATAR_ACTIVITY,
             0));
         getTeamManager().trialAvatarTeamPostUpdate(0);
     }

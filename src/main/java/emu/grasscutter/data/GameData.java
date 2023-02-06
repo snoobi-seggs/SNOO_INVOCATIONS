@@ -30,6 +30,7 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
+import lombok.val;
 
 import javax.annotation.Nullable;
 
@@ -167,7 +168,8 @@ public class GameData {
     @Getter private static final Map<Integer, Integer> questTalkMap = new HashMap<>();
     @Getter private static final Int2ObjectMap<TrialAvatarCustomData> trialAvatarCustomData = new Int2ObjectOpenHashMap<>();
     @Getter private static final Map<Integer, TrialAvatarActivityCustomData> trialAvatarActivityCustomData = new HashMap<>();
-    @Getter private static final Map<Integer, TrialAvatarActivityDataCustomData> trialAvatarActivityDataCustomData = new HashMap<>();
+    @Getter private static final Map<Integer, TrialAvatarActivityDataData> trialAvatarActivityDataCustomData = new HashMap<>();
+    @Getter private static final Int2IntMap trialAvatarIndexIdTrialActivityDataDataMap = new Int2IntOpenHashMap();
 
     // Getters with wrong names, remove later
     @Deprecated(forRemoval = true) public static Int2ObjectMap<CodexReliquaryData> getcodexReliquaryIdMap() {return codexReliquaryDataIdMap;}
@@ -275,6 +277,15 @@ public class GameData {
 
     public static Int2ObjectMap<Route> getSceneRoutes(int sceneId) {
         return sceneRouteData.computeIfAbsent(sceneId, k -> new Int2ObjectOpenHashMap<>());
+    }
+
+    @Nullable
+    public static TrialAvatarActivityDataData getTrialAvatarActivityDataByAvatarIndex(int trialAvatarIndexId){
+        // prefer custom data over official data
+        val dataId = trialAvatarIndexIdTrialActivityDataDataMap.get(trialAvatarIndexId);
+        val datamap = GameData.getTrialAvatarActivityDataCustomData().isEmpty() ? GameData.getTrialAvatarActivityDataDataMap()
+            : GameData.getTrialAvatarActivityDataCustomData();
+        return datamap.get(dataId);
     }
 
     @Nullable

@@ -103,7 +103,6 @@ public class DungeonSystem extends BaseGameSystem {
         }
 
         scene.setPrevScenePoint(pointId);
-        player.sendPacket(new PacketPlayerEnterDungeonRsp(pointId, dungeonId)); // todo, dont have to send packet for trial avatar activity dungeon
         return true;
     }
 
@@ -137,7 +136,6 @@ public class DungeonSystem extends BaseGameSystem {
         // Get previous position
         val dungeonManager = scene.getDungeonManager();
         DungeonData dungeonData =  dungeonManager != null ? dungeonManager.getDungeonData() : null;
-        val finishedSuccessfully = dungeonManager != null && dungeonManager.isFinishedSuccessfully();
         Position prevPos = new Position(GameConstants.START_POSITION);
 
         if (dungeonData != null) {
@@ -150,17 +148,15 @@ public class DungeonSystem extends BaseGameSystem {
                 dungeonManager.quitDungeon();
             }
 
-            dungeonManager.handleTrialAvatarAction(player, false);
+            dungeonManager.unsetTrialTeam(player);
         }
         // clean temp team if it has
         player.getTeamManager().cleanTemporaryTeam();
         player.getTowerManager().clearEntry();
 
+
         // Transfer player back to world
-        Grasscutter.getGameServer().getScheduler().scheduleDelayedTask(() -> {
-            player.getWorld().transferPlayerToScene(player, prevScene, prevPos);
-        }, finishedSuccessfully ? 0 : 3);
-        player.sendPacket(new BasePacket(PacketOpcodes.PlayerQuitDungeonRsp));
+        player.getWorld().transferPlayerToScene(player, prevScene, prevPos);
     }
 
     public void updateDailyDungeons() {

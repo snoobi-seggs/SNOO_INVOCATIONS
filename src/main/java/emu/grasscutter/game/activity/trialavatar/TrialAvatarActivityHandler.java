@@ -3,12 +3,10 @@ package emu.grasscutter.game.activity.trialavatar;
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
-import emu.grasscutter.data.custom.TrialAvatarActivityDataCustomData;
 import emu.grasscutter.data.excels.RewardData;
-import emu.grasscutter.data.excels.TrialAvatarActivityDataData;
 import emu.grasscutter.game.activity.ActivityWatcher;
 import emu.grasscutter.game.activity.DefaultWatcher;
-import emu.grasscutter.game.dungeons.challenge.factory.ChallengeFactory;
+import emu.grasscutter.game.dungeons.DungeonTrialTeam;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.ActionReason;
 import emu.grasscutter.game.props.WatcherTriggerType;
@@ -17,6 +15,7 @@ import emu.grasscutter.game.activity.GameActivity;
 import emu.grasscutter.game.activity.PlayerActivityData;
 import emu.grasscutter.game.props.ActivityType;
 import emu.grasscutter.net.proto.ActivityInfoOuterClass.ActivityInfo;
+import emu.grasscutter.net.proto.TrialAvatarGrantRecordOuterClass.TrialAvatarGrantRecord.GrantReason;
 import emu.grasscutter.server.packet.send.PacketActivityInfoNotify;
 import emu.grasscutter.server.packet.send.PacketScenePlayerLocationNotify;
 import emu.grasscutter.utils.JsonUtils;
@@ -68,24 +67,13 @@ public class TrialAvatarActivityHandler extends ActivityHandler {
     }
 
     public int getTrialActivityDungeonId(int trialAvatarIndexId) {
-        if (GameData.getTrialAvatarActivityDataCustomData().isEmpty()) {
-            if (GameData.getTrialAvatarActivityDataDataMap().get(trialAvatarIndexId) == null) return 0;
-
-            return GameData.getTrialAvatarActivityDataDataMap().get(trialAvatarIndexId).getDungeonId();
-        }
-        if (GameData.getTrialAvatarActivityDataCustomData().get(trialAvatarIndexId) == null) return 0;
-        return GameData.getTrialAvatarActivityDataCustomData().get(trialAvatarIndexId).getDungeonId();
+        val data = GameData.getTrialAvatarActivityDataByAvatarIndex(trialAvatarIndexId);
+        return data!=null ? data.getDungeonId() : -1;
     }
 
     public List<String> getTriggerParamList() {
-        // TODO maybe make the custom data an extended class to reduce repeated code
-        if (GameData.getTrialAvatarActivityDataCustomData().isEmpty()) {
-            if (GameData.getTrialAvatarActivityDataDataMap().get(getSelectedTrialAvatarIndex()) == null) return List.of();
-
-            return GameData.getTrialAvatarActivityDataDataMap().get(getSelectedTrialAvatarIndex()).getTriggerConfig().getParamList();
-        }
-        if (GameData.getTrialAvatarActivityDataCustomData().get(getSelectedTrialAvatarIndex()) == null) return List.of();
-        return GameData.getTrialAvatarActivityDataCustomData().get(getSelectedTrialAvatarIndex()).getTriggerConfig().getParamList();
+        val data = GameData.getTrialAvatarActivityDataByAvatarIndex(getSelectedTrialAvatarIndex());
+        return data!=null ? data.getTriggerConfig().getParamList() : Collections.emptyList();
     }
 
     public boolean enterTrialDungeon(Player player, int trialAvatarIndexId, int enterPointId) {
@@ -103,25 +91,16 @@ public class TrialAvatarActivityHandler extends ActivityHandler {
     }
 
     public List<Integer> getBattleAvatarsList() {
-        if (GameData.getTrialAvatarActivityDataCustomData().isEmpty()) {
-            TrialAvatarActivityDataData activityData = GameData.getTrialAvatarActivityDataDataMap()
-                    .get(getSelectedTrialAvatarIndex());
-            if (activityData == null && activityData.getBattleAvatarsList().isBlank()) return List.of();
-            return Stream.of(activityData.getBattleAvatarsList().split(",")).map(Integer::parseInt).toList();
-        }
-        TrialAvatarActivityDataCustomData activityCustomData = GameData.getTrialAvatarActivityDataCustomData()
-                    .get(getSelectedTrialAvatarIndex());
-        if (activityCustomData == null && activityCustomData.getBattleAvatarsList().isBlank()) return List.of();
-        return Stream.of(activityCustomData.getBattleAvatarsList().split(",")).map(Integer::parseInt).toList();
+        val activityData = GameData.getTrialAvatarActivityDataByAvatarIndex(getSelectedTrialAvatarIndex());
+        if (activityData == null || activityData.getBattleAvatarsList().isBlank()) return List.of();
+        return Stream.of(activityData.getBattleAvatarsList().split(",")).map(Integer::parseInt).toList();
     }
 
-    public void setupTrialAvatarTeam(Player player) {
-        if (getSelectedTrialAvatarIndex() <= 0) return;
-
+    public DungeonTrialTeam getTrialAvatarDungeonTeam(){
         List<Integer> battleAvatarsList = getBattleAvatarsList();
-        if (battleAvatarsList.isEmpty()) return;
+        if (battleAvatarsList.isEmpty()) return null;
 
-        player.addTrialAvatarsForActivity(battleAvatarsList);
+        return new DungeonTrialTeam(battleAvatarsList, GrantReason.GRANT_REASON_BY_TRIAL_AVATAR_ACTIVITY);
     }
 
     public void unsetTrialAvatarTeam(Player player) {

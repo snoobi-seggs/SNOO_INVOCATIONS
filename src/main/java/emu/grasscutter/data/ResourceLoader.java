@@ -7,6 +7,7 @@ import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.routes.SceneRoutes;
 import emu.grasscutter.data.common.PointData;
 import emu.grasscutter.data.custom.*;
+import emu.grasscutter.data.excels.TrialAvatarActivityDataData;
 import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDrop;
 import emu.grasscutter.game.managers.blossom.BlossomConfig;
@@ -661,7 +662,7 @@ public class ResourceLoader {
             try {
                 JsonUtils.loadToList(
                     getResourcePath(pathName + "TrialAvatarActivityDataExcelConfigData.json"),
-                    TrialAvatarActivityDataCustomData.class).forEach(instance -> {
+                    TrialAvatarActivityDataData.class).forEach(instance -> {
                         instance.onLoad();
                         GameData.getTrialAvatarActivityDataCustomData()
                             .put(instance.getTrialAvatarIndexId(), instance);
