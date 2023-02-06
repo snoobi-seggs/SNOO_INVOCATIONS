@@ -79,12 +79,14 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.stream.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -813,21 +815,30 @@ public class Player {
         addAvatar(new Avatar(avatarId), true);
     }
 
-    public boolean addTrialAvatarForQuest(int trialAvatarId, GrantReason reason, int questMainId){
-        // TODO, other trial avatar like activity and element trial dungeon might have
-        // completely different scenario, this function is currently used for Quest Exec only
-        TrialAvatarData trialAvatar = GameData.getTrialAvatarDataMap().get(trialAvatarId);
-        if (trialAvatar == null) return false;
+    public List<Integer> getTrialAvatarParam (int trialAvatarId) {
+        if (GameData.getTrialAvatarCustomData().isEmpty()) { // use default data if custom data not available
+            if (GameData.getTrialAvatarDataMap().get(trialAvatarId) == null) return List.of();
 
-        List<Integer> trialParams = trialAvatar.getTrialAvatarParamList();
-        if (trialParams == null || trialParams.size() < 2) return false;
+            return GameData.getTrialAvatarDataMap().get(trialAvatarId)
+                .getTrialAvatarParamList();
+        }
+        // use custom data
+        if (GameData.getTrialAvatarCustomData().get(trialAvatarId) == null) return List.of();
 
-        Avatar avatar = new Avatar(trialParams.get(0));
+        val trialCustomParams = GameData.getTrialAvatarCustomData().get(trialAvatarId).getTrialAvatarParamList();
+        return trialCustomParams.isEmpty() ? List.of() : Stream.of(trialCustomParams.get(0).split(";")).map(Integer::parseInt).toList();
+    }
+
+    public boolean addTrialAvatar(int trialAvatarId, GrantReason reason, int questMainId){
+        List<Integer> trialAvatarBasicParam = getTrialAvatarParam(trialAvatarId);
+        if (trialAvatarBasicParam.isEmpty()) return false;
+
+        Avatar avatar = new Avatar(trialAvatarBasicParam.get(0));
         if (avatar.getAvatarData() == null || !hasSentLoginPackets()) return false;
 
         avatar.setOwner(this);
         // Add trial weapons and relics
-        avatar.setTrialAvatarInfo(trialAvatar, reason, questMainId);
+        avatar.setTrialAvatarInfo(trialAvatarBasicParam.get(1), trialAvatarId, reason, questMainId);
         avatar.equipTrialItems();
         // Recalc stats
         avatar.recalcStats();
@@ -836,26 +847,45 @@ public class Player {
         sendPacket(new PacketAvatarAddNotify(avatar, false));
         // add to avatar to temporary trial team
         getTeamManager().addAvatarToTrialTeam(avatar);
+        return true;
+    }
+
+    public boolean addTrialAvatarForQuest(int trialAvatarId, int questMainId) {
+        getTeamManager().setupTrialAvatarTeamForQuest();
+        if (!addTrialAvatar(
+            trialAvatarId,
+            GrantReason.GRANT_REASON_BY_QUEST,
+            questMainId)) return false;
+        getTeamManager().trialAvatarTeamPostUpdate();
         // Packet, mimic official server behaviour, neccessary to stop player from modifying team
         sendPacket(new PacketAvatarTeamUpdateNotify(this));
         return true;
     }
 
-    public boolean removeTrialAvatar(int trialAvatarId){
-        EntityAvatar trialEntityAvatar = getTeamManager().trialAvatarInTeam(trialAvatarId);
-        if (trialEntityAvatar == null) return false;
+    public void addTrialAvatarsForActivity(List<Integer> trialAvatarIds) {
+        getTeamManager().setupTrialAvatarTeamForActivity();
+        trialAvatarIds.forEach(trialAvatarId -> addTrialAvatar(
+            trialAvatarId,
+            GrantReason.GRANT_REASON_BY_TRIAL_AVATAR_ACTIVITY,
+            0));
+        getTeamManager().trialAvatarTeamPostUpdate(0);
+    }
 
-        Avatar trialAvatar = trialEntityAvatar.getAvatar();
-        // Packet, mimic official server behaviour
-        sendPacket(new PacketAvatarDelNotify(Arrays.asList(trialAvatar.getGuid())));
-        // Reset temporary trial team
-        getTeamManager().removeAvatarFromTrialTeam(trialEntityAvatar);
+    public boolean removeTrialAvatarForQuest(int trialAvatarId) {
+        if (!getTeamManager().isUseTrialTeam()) return false;
 
-        trialAvatar.removeTrialItems();
-        trialAvatar.removeOwner();
-        // Packet, mimic official server behaviour, necessary to unlock team modifying
+        sendPacket(new PacketAvatarDelNotify(List.of(getTeamManager().getTrialAvatarGuid(trialAvatarId))));
+        getTeamManager().removeTrialAvatarTeamForQuest(trialAvatarId);
         sendPacket(new PacketAvatarTeamUpdateNotify());
         return true;
+    }
+
+    public void removeTrialAvatarForActivity() {
+        if (!getTeamManager().isUseTrialTeam()) return;
+
+        sendPacket(new PacketAvatarDelNotify(getTeamManager().getActiveTeam().stream()
+            .map(x -> x.getAvatar().getGuid()).toList()));
+        getTeamManager().removeTrialAvatarTeamForActivity();
     }
 
     public void addFlycloak(int flycloakId) {

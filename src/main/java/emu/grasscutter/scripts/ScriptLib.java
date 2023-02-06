@@ -782,11 +782,19 @@ public class ScriptLib {
         //TODO check
         return 1;
     }
-    public int sendCloseCommonTipsToClient(){
-        logger.warn("[LUA] Call unimplemented sendCloseCommonTipsToClient");
-        //TODO implement
+
+    public int sendShowCommonTipsToClient(String title, String content, int closeTime) {
+        logger.debug("[LUA] Call sendShowCommonTipsToClient with {}, {}, {}", title, content, closeTime);
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketShowCommonTipsNotify(title, content, closeTime));
         return 0;
     }
+
+    public int sendCloseCommonTipsToClient(){
+        logger.debug("[LUA] Call unimplemented sendCloseCommonTipsToClient");
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketCloseCommonTipsNotify());
+        return 0;
+    }
+
     public int CreateFatherChallenge(int var1, int var2, int var3, LuaTable var4){
         logger.warn("[LUA] Call unimplemented CreateFatherChallenge with {} {} {} {}", var1, var2, var3, var4);
         //TODO implement var4 object has int success, int fail, bool fail_on_wipe

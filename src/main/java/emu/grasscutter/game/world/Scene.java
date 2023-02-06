@@ -206,6 +206,7 @@ public class Scene {
 
         // Deregister scene if not in use
         if (this.getPlayerCount() <= 0 && !this.dontDestroyWhenEmpty) {
+            this.getScriptManager().onDestroy();
             this.getWorld().deregisterScene(this);
         }
         this.saveGroups();
@@ -218,8 +219,14 @@ public class Scene {
         // Add new entities for player
         TeamInfo teamInfo = player.getTeamManager().getCurrentTeamInfo();
         for (int avatarId : teamInfo.getAvatars()) {
-            EntityAvatar entity = new EntityAvatar(player.getScene(), player.getAvatars().getAvatarById(avatarId));
-            player.getTeamManager().getActiveTeam().add(entity);
+            Avatar avatar = player.getAvatars().getAvatarById(avatarId);
+            if (avatar == null) {
+                if (player.getTeamManager().isUseTrialTeam()) {
+                    avatar = player.getTeamManager().getTrialAvatars().get(avatarId);
+                }
+                if (avatar == null) continue;
+            }
+            player.getTeamManager().getActiveTeam().add(new EntityAvatar(player.getScene(), avatar));
         }
 
         // Limit character index in case its out of bounds
@@ -420,13 +427,19 @@ public class Scene {
     }
 
     private void checkPlayerRespawn() {
+        val diePos = getScriptManager().getConfig().die_y;
         players.forEach(player -> {
             //Check if we need a respawn
             if (getScriptManager().getConfig() != null) {
-                if (getScriptManager().getConfig().die_y >= player.getPosition().getY()) {
+                if (diePos >= player.getPosition().getY()) {
                     //Respawn the player
                     respawnPlayer(player);
                 }
+            }
+        });
+        getEntities().forEach((eid, e) -> {
+            if(diePos >= e.getPosition().getY()){
+                killEntity(e);
             }
         });
     }

@@ -947,4 +947,9 @@ public class SceneScriptManager {
             return entity != null && entity.getGroupId() == groupId;
         });
     }
+
+    public void onDestroy(){
+        activeGroupTimers.forEach((gid,times) -> times.forEach((e)->Grasscutter.getGameServer().getScheduler().cancelTask(e.getSecond())));
+        activeGroupTimers.clear();
+    }
 }

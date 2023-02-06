@@ -228,7 +228,7 @@
       "invalid_suiteid": "ID del conjunto invalida.",
       "group_not_found": "Grupo no encontrado.",
       "description": "Altera la carga de grupos",
-      "refreshed": "Grupo %d refrescado."
+      "refreshed": "Grupo %s refrescado."
     },
     "reload": {
       "reload_start": "Recargando configuración.",
@@ -340,6 +340,17 @@
       "exists_error": "El escenario especificado no existe.",
       "success": "Teletransportado %s a %s, %s, %s en el escenario %s.",
       "description": "Cambia la posición del jugador"
+    },
+    "trialAvatarActivity": {
+      "description": "Manipular las funcionalidades de la Actividad de Avatar de Prueba. Esto incluye alternar estados de mazmorra y recompensa.",
+      "not_found": "No se encontraron los datos del jugador de la actividad del avatar de prueba. Quizás la actividad no esté habilitada.",
+      "invalid_param": "Invalid parameter.",
+      "schedule_not_found": "Horario %s no encontrado.",
+      "success_schedule": "Cambió la identificación del horario a %s.",
+      "success_dungeon": "Se alteró el estado de la mazmorra del avatar %s.",
+      "success_dungeon_all": "Cambiado el estado de mazmorra de todos los avatares.",
+      "success_reward": "Se alteró el estado de recompensa del avatar %s.",
+      "success_reward_all": "Cambiado el estado de recompensa de todos los avatares."
     },
     "weather": {
       "success": "Establece el ID del clima %s con el tipo de clima %s.",
