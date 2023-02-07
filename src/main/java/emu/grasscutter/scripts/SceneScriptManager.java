@@ -710,12 +710,12 @@ public class SceneScriptManager {
             deregisterRegion(region.getMetaRegion());
         }
 
+        if(trigger.getEvent() == EVENT_TIMER_EVENT){
+            cancelGroupTimerEvent(trigger.currentGroup.id, trigger.getSource());
+        }
         // always deregister on error, otherwise only if the count is reached
         if(ret.isboolean() && !ret.checkboolean() || ret.isint() && ret.checkint()!=0
         || trigger.getTrigger_count()>0 && invocations >= trigger.getTrigger_count()) {
-            if(trigger.getEvent() == EVENT_TIMER_EVENT){
-                cancelGroupTimerEvent(trigger.currentGroup.id, trigger.getSource());
-            }
             deregisterTrigger(trigger);
         }
     }
