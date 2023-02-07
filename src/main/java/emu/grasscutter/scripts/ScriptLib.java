@@ -509,6 +509,12 @@ public class ScriptLib {
 		return 0;
 	}
 
+    public int SetEntityServerGlobalValueByConfigId(int cfgId, String sgvName, int value){
+        logger.warn("[LUA] Call unimplemented SetEntityServerGlobalValueByConfigId with {} {} {}", cfgId, sgvName, value);
+        //TODO implement
+        return 0;
+    }
+
 	public int GetGroupVariableValueByGroup(String name, int groupId){
 		logger.debug("[LUA] Call GetGroupVariableValueByGroup with {},{}",
 				name,groupId);
@@ -734,17 +740,17 @@ public class ScriptLib {
         return 1;
     }
 
-    public int[] GetSceneUidList(){
+    public LuaTable GetSceneUidList(){
         logger.warn("[LUA] Call unchecked GetSceneUidList");
         //TODO check
         var scriptManager = sceneScriptManager.getIfExists();
         if(scriptManager == null){
-            return new int[0];
+            return new LuaTable();
         }
         var players = scriptManager.getScene().getPlayers();
-        var result = new int[players.size()];
+        var result = new LuaTable();
         for(int i = 0; i< players.size(); i++){
-            result[i] = players.get(i).getUid();
+            result.set(Integer.toString(i), players.get(i).getUid());
         }
         return result;
     }
@@ -904,7 +910,12 @@ public class ScriptLib {
 
     public int InitTimeAxis(String var1, int[] var2, boolean var3){
         logger.warn("[LUA] Call unimplemented InitTimeAxis with {} {} {}", var1, var2, var3);
-        //TODO implement
+        //TODO implement var1 == name? var2 == delay? var3 == should loop?
+        return 0;
+    }
+    public int EndTimeAxis(String var1){
+        logger.warn("[LUA] Call unimplemented EndTimeAxis with {} {} {}", var1);
+        //TODO implement var1 == name?
         return 0;
     }
 
@@ -1262,6 +1273,12 @@ public class ScriptLib {
     public int AssignPlayerShowTemplateReminder(int var1, LuaTable var2){
         logger.warn("[LUA] Call unimplemented AssignPlayerShowTemplateReminder {} {}", var1, var2);
         //TODO implement var2 contains LuaTable param_uid_vec, LuaTable param_vec int[] uid_vec
+        return 0;
+    }
+
+    public int RevokePlayerShowTemplateReminder(int var1, LuaValue var2){
+        logger.warn("[LUA] Call unimplemented AssignPlayerShowTemplateReminder {} {}", var1, var2);
+        //TODO implement
         return 0;
     }
 
