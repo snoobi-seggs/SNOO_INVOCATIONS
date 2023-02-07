@@ -123,7 +123,7 @@ public class DungeonManager {
         return pointData.getRot() != null ? pointData.getRot() : null;
     }
 
-    public boolean getStatueDrops(Player player, boolean useCondensed) {
+    public boolean getStatueDrops(Player player, boolean useCondensed, int groupId) {
         if (!isFinishedSuccessfully() || dungeonData.getRewardPreviewData() == null || dungeonData.getRewardPreviewData().getPreviewItems().length == 0) {
             return false;
         }
@@ -146,7 +146,7 @@ public class DungeonManager {
 
         rewardedPlayers.add(player.getUid());
 
-        scene.getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_DUNGEON_REWARD_GET));
+        scene.getScriptManager().callEvent(new ScriptArgs(groupId, EventType.EVENT_DUNGEON_REWARD_GET));
         return true;
     }
 
@@ -280,7 +280,7 @@ public class DungeonManager {
                 p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_FINISH_DUNGEON);
             }
         });
-        scene.getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_DUNGEON_SETTLE, successfully ? 1 : 0));
+        scene.getScriptManager().callEvent(new ScriptArgs(0, EventType.EVENT_DUNGEON_SETTLE, successfully ? 1 : 0));
     }
 
     public void quitDungeon() {

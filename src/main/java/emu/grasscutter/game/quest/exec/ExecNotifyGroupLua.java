@@ -39,7 +39,7 @@ public class ExecNotifyGroupLua extends QuestExecHandler {
             val eventType = quest.getState() == QuestState.QUEST_STATE_FINISHED ?
                 EventType.EVENT_QUEST_FINISH : EventType.EVENT_QUEST_START;
             scriptManager.callEvent(
-                new ScriptArgs(eventType, quest.getSubQuestId()));
+                new ScriptArgs(groupId, eventType, quest.getSubQuestId()));
         });
 
         return true;

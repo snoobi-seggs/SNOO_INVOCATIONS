@@ -36,6 +36,7 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -119,6 +120,7 @@ public class SceneScriptManager {
         return meta.blocks;
     }
 
+    @Nullable
     public Map<String, Integer> getVariables(int group_id) {
         if(getCachedGroupInstanceById(group_id) == null) return null;
         return getCachedGroupInstanceById(group_id).getCachedVariables();
@@ -473,9 +475,10 @@ public class SceneScriptManager {
         }
 
         if (group.variables != null) {
-            group.variables.forEach(var -> {
-                if(!this.getVariables(group.id).containsKey(var.name))
-                    this.getVariables(group.id).put(var.name, var.value);
+            group.variables.forEach(variable -> {
+                val variables = this.getVariables(group.id);
+                if(variables != null && !variables.containsKey(variable.name))
+                    variables.put(variable.name, variable.value);
             });
         }
     }
@@ -506,7 +509,7 @@ public class SceneScriptManager {
 
             if (region.hasNewEntities()) {
                 Grasscutter.getLogger().trace("Call EVENT_ENTER_REGION_{}",region.getMetaRegion().config_id);
-                callEvent(new ScriptArgs(EventType.EVENT_ENTER_REGION, region.getConfigId())
+                callEvent(new ScriptArgs(region.getGroupId(), EventType.EVENT_ENTER_REGION, region.getConfigId())
                     .setSourceEntityId(region.getId())
                     .setTargetEntityId(targetID)
                 );
@@ -521,7 +524,7 @@ public class SceneScriptManager {
                 }
             }
             if (region.entityLeave()) {
-                callEvent(new ScriptArgs(EventType.EVENT_LEAVE_REGION, region.getConfigId())
+                callEvent(new ScriptArgs(region.getGroupId(), EventType.EVENT_LEAVE_REGION, region.getConfigId())
                     .setSourceEntityId(region.getId())
                     .setTargetEntityId(region.getFirstEntityId())
                 );
@@ -621,8 +624,8 @@ public class SceneScriptManager {
         }
     }
     // Events
-    public void callEvent(int eventType) {
-        callEvent(new ScriptArgs(eventType));
+    public void callEvent(int groupId, int eventType) {
+        callEvent(new ScriptArgs(groupId, eventType));
     }
     public void callEvent(@Nonnull ScriptArgs params) {
         /**
@@ -644,7 +647,11 @@ public class SceneScriptManager {
                     .filter(p -> p.getCondition().contains(String.valueOf(params.param1)) &&
                         (p.getSource().isEmpty() || p.getSource().equals(params.getEventSource()))).toList();
                 relevantTriggers = new HashSet<>(relevantTriggersList);
-            } else {relevantTriggers = new HashSet<>(this.getTriggersByEvent(eventType));}
+            } else {
+                relevantTriggers = this.getTriggersByEvent(eventType).stream()
+                    .filter(t -> params.getGroupId() == 0 || t.getCurrentGroup().id == params.getGroupId())
+                    .collect(Collectors.toSet());
+            }
             for (SceneTrigger trigger : relevantTriggers) {
                 handleEventForTrigger(params, trigger);
             }
@@ -909,7 +916,7 @@ public class SceneScriptManager {
                 Grasscutter.getLogger().warn("[LUA] Found timer trigger with source {} for group {} : {}",
                     source, groupID, trigger.getName());
                 var taskIdentifier = Grasscutter.getGameServer().getScheduler().scheduleDelayedRepeatingTask(() ->
-                    callEvent(new ScriptArgs(EVENT_TIMER_EVENT)
+                    callEvent(new ScriptArgs(groupID, EVENT_TIMER_EVENT)
                         .setEventSource(source)), (int)time, (int)time);
                 var groupTasks = activeGroupTimers.computeIfAbsent(groupID, k -> new HashSet<>());
                 groupTasks.add(new Pair<>(source, taskIdentifier));

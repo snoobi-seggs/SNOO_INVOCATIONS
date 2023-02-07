@@ -48,6 +48,9 @@ public class SceneGroupInstance {
 
         this.isCached = false; //This is true when the group is not loaded on scene but caches suite data
     }
+    SceneGroupInstance(){
+        this.cachedVariables = new ConcurrentHashMap<>();
+    }
 
     public void setLuaGroup(SceneGroup group) {
         this.luaGroup = group;

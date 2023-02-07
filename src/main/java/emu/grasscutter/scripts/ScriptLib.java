@@ -393,20 +393,27 @@ public class ScriptLib {
 		logger.debug("[LUA] Call SetGroupVariableValue with {},{}",
 				var, value);
 
-        val old = getSceneScriptManager().getVariables(currentGroup.get().id).getOrDefault(var, value);
-		getSceneScriptManager().getVariables(currentGroup.get().id).put(var, value);
-        getSceneScriptManager().callEvent(new ScriptArgs(EventType.EVENT_VARIABLE_CHANGE, value, old));
+        val groupId= currentGroup.get().id;
+        val variables = getSceneScriptManager().getVariables(groupId);
+
+        val old = variables.getOrDefault(var, value);
+        variables.put(var, value);
+        getSceneScriptManager().callEvent(new ScriptArgs(groupId, EventType.EVENT_VARIABLE_CHANGE, value, old));
 		return 0;
 	}
 
 	public LuaValue ChangeGroupVariableValue(String var, int value) {
 		logger.debug("[LUA] Call ChangeGroupVariableValue with {},{}",
 				var, value);
-        val old = getSceneScriptManager().getVariables(currentGroup.get().id).getOrDefault(var, 0);
-		getSceneScriptManager().getVariables(currentGroup.get().id).put(var, old + value);
+
+        val groupId= currentGroup.get().id;
+        val variables = getSceneScriptManager().getVariables(groupId);
+
+        val old = variables.getOrDefault(var, 0);
+        variables.put(var, old + value);
         logger.debug("[LUA] Call ChangeGroupVariableValue with {},{}",
             old, old+value);
-        getSceneScriptManager().callEvent(new ScriptArgs(EventType.EVENT_VARIABLE_CHANGE, old+value, old));
+        getSceneScriptManager().callEvent(new ScriptArgs(groupId, EventType.EVENT_VARIABLE_CHANGE, old+value, old));
 		return LuaValue.ZERO;
 	}
 
