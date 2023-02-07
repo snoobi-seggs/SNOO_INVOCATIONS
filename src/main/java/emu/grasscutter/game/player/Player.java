@@ -4,7 +4,9 @@ import dev.morphia.annotations.*;
 import emu.grasscutter.GameConstants;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
-import emu.grasscutter.data.binout.ConfigLevelEntity;
+import emu.grasscutter.data.binout.AbilityData;
+import emu.grasscutter.data.binout.config.ConfigLevelEntity;
+import emu.grasscutter.data.binout.config.fields.ConfigAbilityData;
 import emu.grasscutter.data.excels.*;
 import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.Account;
@@ -74,7 +76,6 @@ import emu.grasscutter.utils.DateHelper;
 import emu.grasscutter.utils.MessageHandler;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.utils.Utils;
-import emu.grasscutter.net.proto.AvatarDelNotifyOuterClass.AvatarDelNotify;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
@@ -958,7 +959,7 @@ public class Player {
                 if (config.getAvatarAbilities() == null){
                     continue; // continue and not break because has to rebuild ability for the next avatar if any
                 }
-                for (ConfigLevelEntity.EntityAbilities abilities : config.getAvatarAbilities()){
+                for (ConfigAbilityData abilities : config.getAvatarAbilities()){
                     avatarData.getAbilities().add(Utils.abilityHash(abilities.getAbilityName()));
                 }
             }

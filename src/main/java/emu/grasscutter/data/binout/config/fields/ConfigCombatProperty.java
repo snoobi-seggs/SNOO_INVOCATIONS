@@ -1,13 +1,12 @@
-package emu.grasscutter.data.binout;
+package emu.grasscutter.data.binout.config.fields;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ConfigGadgetCombatProperty {
+public class ConfigCombatProperty {
     float HP;
     boolean isLockHP;
     boolean isInvincible;

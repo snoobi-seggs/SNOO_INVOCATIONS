@@ -1,7 +1,7 @@
 package emu.grasscutter.game.entity;
 
 import emu.grasscutter.data.GameData;
-import emu.grasscutter.data.binout.ConfigGadget;
+import emu.grasscutter.data.binout.config.ConfigEntityGadget;
 import emu.grasscutter.data.excels.GadgetData;
 import emu.grasscutter.game.entity.gadget.*;
 import emu.grasscutter.game.entity.gadget.platform.BaseRoute;
@@ -41,8 +41,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Optional;
-
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +62,7 @@ public class EntityGadget extends EntityBaseGadget {
     private final Int2FloatMap fightProperties = new Int2FloatOpenHashMap();
     @Getter @Setter private SceneGadget metaGadget;
     @Nullable @Getter
-    private ConfigGadget configGadget;
+    private ConfigEntityGadget configGadget;
     @Getter @Setter private BaseRoute routeConfig;
 
     @Getter @Setter private int stopValue = 0; //Controller related, inited to zero
