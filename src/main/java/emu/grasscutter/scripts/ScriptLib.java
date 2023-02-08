@@ -35,6 +35,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static emu.grasscutter.game.props.EnterReason.Lua;
+import static emu.grasscutter.scripts.ScriptUtils.luaToPos;
+import static emu.grasscutter.scripts.ScriptUtils.posToLua;
 import static emu.grasscutter.scripts.constants.GroupKillPolicy.*;
 
 @SuppressWarnings("unused")
@@ -750,10 +752,11 @@ public class ScriptLib {
         var players = scriptManager.getScene().getPlayers();
         var result = new LuaTable();
         for(int i = 0; i< players.size(); i++){
-            result.set(Integer.toString(i), players.get(i).getUid());
+            result.set(Integer.toString(i+1), players.get(i).getUid());
         }
         return result;
     }
+
     public int GetSeaLampActivityPhase(){
         logger.warn("[LUA] Call unimplemented GetSeaLampActivityPhase");
         //TODO implement
@@ -1398,31 +1401,7 @@ public class ScriptLib {
         return entity.map(GameEntity::getId).orElse(0);
     }
 
-    private LuaTable posToLua(Position position){
-        var result = new LuaTable();
-        if(position != null){
-            result.set("x", position.getX());
-            result.set("y", position.getY());
-            result.set("z", position.getZ());
-        } else {
-            result.set("x", 0);
-            result.set("y", 0);
-            result.set("z", 0);
-        }
 
-        return result;
-    }
-
-    private Position luaToPos(LuaValue position){
-        val result = new Position();
-        if(position != null && !position.isnil()){
-            result.setX(position.get("x").optint(0));
-            result.setY(position.get("y").optint(0));
-            result.setZ(position.get("z").optint(0));
-        }
-
-        return result;
-    }
 
     public LuaTable GetPosByEntityId(int entityId){
         logger.warn("[LUA] Call unchecked GetPosByEntityId with {}", entityId);
