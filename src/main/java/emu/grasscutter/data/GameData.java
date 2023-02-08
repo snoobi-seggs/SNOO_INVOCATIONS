@@ -9,6 +9,10 @@ import java.util.Optional;
 
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.binout.*;
+import emu.grasscutter.data.binout.config.ConfigEntityAvatar;
+import emu.grasscutter.data.binout.config.ConfigEntityGadget;
+import emu.grasscutter.data.binout.config.ConfigEntityMonster;
+import emu.grasscutter.data.binout.config.ConfigLevelEntity;
 import emu.grasscutter.data.binout.routes.Route;
 import emu.grasscutter.data.custom.*;
 import emu.grasscutter.data.server.GadgetMapping;
@@ -40,7 +44,9 @@ public class GameData {
     @Getter private static final Int2ObjectMap<String> abilityHashes = new Int2ObjectOpenHashMap<>();
     @Deprecated(forRemoval = true)
     @Getter private static final Map<String, AbilityModifierEntry> abilityModifiers = new HashMap<>();
-    @Getter private static final Map<String, ConfigGadget> gadgetConfigData = new HashMap<>();
+    @Getter private static final Map<String, ConfigEntityAvatar> avatarConfigData = new HashMap<>();
+    @Getter private static final Map<String, ConfigEntityGadget> gadgetConfigData = new HashMap<>();
+    @Getter private static final Map<String, ConfigEntityMonster> monsterConfigData = new HashMap<>();
     @Getter private static final Map<String, OpenConfigEntry> openConfigEntries = new HashMap<>();
     @Deprecated(forRemoval = true) @Getter private static final Map<String, ScenePointEntry> scenePointEntries = new HashMap<>();
     protected static final Map<String, AbilityData> abilityDataMap = new HashMap<>();

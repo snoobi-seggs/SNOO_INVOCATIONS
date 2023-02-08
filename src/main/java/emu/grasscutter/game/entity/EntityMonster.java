@@ -107,7 +107,7 @@ public class EntityMonster extends GameEntity {
     @Override
     public void onCreate() {
         // Lua event
-        getScene().getScriptManager().callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_LIVE, this.getConfigId()));
+        getScene().getScriptManager().callEvent(new ScriptArgs(this.getGroupId(), EventType.EVENT_ANY_MONSTER_LIVE, this.getConfigId()));
     }
 
     @Override
@@ -130,7 +130,7 @@ public class EntityMonster extends GameEntity {
     @Override
     public void callLuaHPEvent(EntityDamageEvent event) {
         super.callLuaHPEvent(event);
-        getScene().getScriptManager().callEvent(new ScriptArgs(EVENT_SPECIFIC_MONSTER_HP_CHANGE, getConfigId(), monsterData.getId())
+        getScene().getScriptManager().callEvent(new ScriptArgs(this.getGroupId(), EVENT_SPECIFIC_MONSTER_HP_CHANGE, getConfigId(), monsterData.getId())
             .setSourceEntityId(getId())
             .setParam3((int) this.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP))
             .setEventSource(Integer.toString(getConfigId())));
@@ -152,11 +152,11 @@ public class EntityMonster extends GameEntity {
             Optional.ofNullable(scriptManager.getScriptMonsterSpawnService()).ifPresent(s -> s.onMonsterDead(this));
 
             // prevent spawn monster after success
-            if (challenge.map(c -> c.inProgress()).orElse(true)) {
-                scriptManager.callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()));
+            /*if (challenge.map(c -> c.inProgress()).orElse(true)) {
+                scriptManager.callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()).setGroupId(this.getGroupId()));
             } else if (getScene().getChallenge() == null) {
-                scriptManager.callEvent(new ScriptArgs(EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()));
-            }
+            }*/
+            scriptManager.callEvent(new ScriptArgs(this.getGroupId(), EventType.EVENT_ANY_MONSTER_DIE, this.getConfigId()));
         }
         // Battle Pass trigger
         scene.getPlayers().forEach(p -> p.getBattlePassManager().triggerMission(WatcherTriggerType.TRIGGER_MONSTER_DIE, this.getMonsterId(), 1));

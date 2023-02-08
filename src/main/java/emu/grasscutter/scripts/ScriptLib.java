@@ -35,6 +35,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static emu.grasscutter.game.props.EnterReason.Lua;
+import static emu.grasscutter.scripts.ScriptUtils.luaToPos;
+import static emu.grasscutter.scripts.ScriptUtils.posToLua;
 import static emu.grasscutter.scripts.constants.GroupKillPolicy.*;
 
 @SuppressWarnings("unused")
@@ -393,20 +395,27 @@ public class ScriptLib {
 		logger.debug("[LUA] Call SetGroupVariableValue with {},{}",
 				var, value);
 
-        val old = getSceneScriptManager().getVariables(currentGroup.get().id).getOrDefault(var, value);
-		getSceneScriptManager().getVariables(currentGroup.get().id).put(var, value);
-        getSceneScriptManager().callEvent(new ScriptArgs(EventType.EVENT_VARIABLE_CHANGE, value, old));
+        val groupId= currentGroup.get().id;
+        val variables = getSceneScriptManager().getVariables(groupId);
+
+        val old = variables.getOrDefault(var, value);
+        variables.put(var, value);
+        getSceneScriptManager().callEvent(new ScriptArgs(groupId, EventType.EVENT_VARIABLE_CHANGE, value, old));
 		return 0;
 	}
 
 	public LuaValue ChangeGroupVariableValue(String var, int value) {
 		logger.debug("[LUA] Call ChangeGroupVariableValue with {},{}",
 				var, value);
-        val old = getSceneScriptManager().getVariables(currentGroup.get().id).getOrDefault(var, 0);
-		getSceneScriptManager().getVariables(currentGroup.get().id).put(var, old + value);
+
+        val groupId= currentGroup.get().id;
+        val variables = getSceneScriptManager().getVariables(groupId);
+
+        val old = variables.getOrDefault(var, 0);
+        variables.put(var, old + value);
         logger.debug("[LUA] Call ChangeGroupVariableValue with {},{}",
             old, old+value);
-        getSceneScriptManager().callEvent(new ScriptArgs(EventType.EVENT_VARIABLE_CHANGE, old+value, old));
+        getSceneScriptManager().callEvent(new ScriptArgs(groupId, EventType.EVENT_VARIABLE_CHANGE, old+value, old));
 		return LuaValue.ZERO;
 	}
 
@@ -501,6 +510,12 @@ public class ScriptLib {
         dungeonManager.failDungeon();
 		return 0;
 	}
+
+    public int SetEntityServerGlobalValueByConfigId(int cfgId, String sgvName, int value){
+        logger.warn("[LUA] Call unimplemented SetEntityServerGlobalValueByConfigId with {} {} {}", cfgId, sgvName, value);
+        //TODO implement
+        return 0;
+    }
 
 	public int GetGroupVariableValueByGroup(String name, int groupId){
 		logger.debug("[LUA] Call GetGroupVariableValueByGroup with {},{}",
@@ -727,20 +742,21 @@ public class ScriptLib {
         return 1;
     }
 
-    public int[] GetSceneUidList(){
+    public LuaTable GetSceneUidList(){
         logger.warn("[LUA] Call unchecked GetSceneUidList");
         //TODO check
         var scriptManager = sceneScriptManager.getIfExists();
         if(scriptManager == null){
-            return new int[0];
+            return new LuaTable();
         }
         var players = scriptManager.getScene().getPlayers();
-        var result = new int[players.size()];
+        var result = new LuaTable();
         for(int i = 0; i< players.size(); i++){
-            result[i] = players.get(i).getUid();
+            result.set(Integer.toString(i+1), players.get(i).getUid());
         }
         return result;
     }
+
     public int GetSeaLampActivityPhase(){
         logger.warn("[LUA] Call unimplemented GetSeaLampActivityPhase");
         //TODO implement
@@ -897,7 +913,12 @@ public class ScriptLib {
 
     public int InitTimeAxis(String var1, int[] var2, boolean var3){
         logger.warn("[LUA] Call unimplemented InitTimeAxis with {} {} {}", var1, var2, var3);
-        //TODO implement
+        //TODO implement var1 == name? var2 == delay? var3 == should loop?
+        return 0;
+    }
+    public int EndTimeAxis(String var1){
+        logger.warn("[LUA] Call unimplemented EndTimeAxis with {} {} {}", var1);
+        //TODO implement var1 == name?
         return 0;
     }
 
@@ -1258,6 +1279,12 @@ public class ScriptLib {
         return 0;
     }
 
+    public int RevokePlayerShowTemplateReminder(int var1, LuaValue var2){
+        logger.warn("[LUA] Call unimplemented AssignPlayerShowTemplateReminder {} {}", var1, var2);
+        //TODO implement
+        return 0;
+    }
+
     public int UnlockForce(int force){
         logger.debug("[LUA] Call UnlockForce {}", force);
         getSceneScriptManager().getScene().unlockForce(force);
@@ -1374,31 +1401,7 @@ public class ScriptLib {
         return entity.map(GameEntity::getId).orElse(0);
     }
 
-    private LuaTable posToLua(Position position){
-        var result = new LuaTable();
-        if(position != null){
-            result.set("x", position.getX());
-            result.set("y", position.getY());
-            result.set("z", position.getZ());
-        } else {
-            result.set("x", 0);
-            result.set("y", 0);
-            result.set("z", 0);
-        }
 
-        return result;
-    }
-
-    private Position luaToPos(LuaValue position){
-        val result = new Position();
-        if(position != null && !position.isnil()){
-            result.setX(position.get("x").optint(0));
-            result.setY(position.get("y").optint(0));
-            result.setZ(position.get("z").optint(0));
-        }
-
-        return result;
-    }
 
     public LuaTable GetPosByEntityId(int entityId){
         logger.warn("[LUA] Call unchecked GetPosByEntityId with {}", entityId);
