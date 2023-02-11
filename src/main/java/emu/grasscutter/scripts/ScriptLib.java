@@ -1066,8 +1066,15 @@ public class ScriptLib {
         return 0;
     }
 
-    public int PlayCutScene(int var1, int var2){
-        logger.warn("[LUA] Call unimplemented PlayCutScene with {} {}", var1, var2);
+    public int PlayCutScene(int cutsceneId, int var2){
+        logger.warn("[LUA] Call unimplemented PlayCutScene with {} {}", cutsceneId, var2);
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketCutsceneBeginNotify(cutsceneId));
+        //TODO implement
+        return 0;
+    }
+
+    public int PlayCutSceneWithParam(int cutsceneId, int var2, LuaTable var3){
+        logger.warn("[LUA] Call unimplemented PlayCutScene with {} {}", cutsceneId, var2, var3);
         //TODO implement
         return 0;
     }

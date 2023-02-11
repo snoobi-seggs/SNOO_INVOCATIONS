@@ -700,6 +700,12 @@ public class SceneScriptManager {
         val invocations = invocationsCounter.incrementAndGet();
         Grasscutter.getLogger().trace("Call Action Trigger {}", trigger.getAction());
 
+
+        val activeChallenge = scene.getChallenge();
+        if(activeChallenge!=null){
+            activeChallenge.onGroupTriggerDeath(trigger);
+        }
+
         if (trigger.getEvent() == EventType.EVENT_ENTER_REGION) {
             EntityRegion region = this.regions.values().stream().filter(p -> p.getConfigId() == params.param1).toList().get(0);
             getScene().getPlayers().forEach(p -> p.onEnterRegion(region.getMetaRegion()));

@@ -9,11 +9,13 @@ import emu.grasscutter.game.props.WatcherTriggerType;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.scripts.constants.EventType;
 import emu.grasscutter.scripts.data.SceneGroup;
+import emu.grasscutter.scripts.data.SceneTrigger;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.PacketDungeonChallengeBeginNotify;
 import emu.grasscutter.server.packet.send.PacketDungeonChallengeFinishNotify;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -130,6 +132,16 @@ public class WorldChallenge {
             return;
         }
         this.challengeTriggers.forEach(t -> t.onGadgetDeath(this, gadget));
+    }
+    public void onGroupTriggerDeath(SceneTrigger trigger){
+        if(!inProgress()){
+            return;
+        }
+        val triggerGroup = trigger.getCurrentGroup();
+        if(triggerGroup==null || triggerGroup.id != getGroup().id){
+            return;
+        }
+        this.challengeTriggers.forEach(t -> t.onGroupTrigger(this, trigger));
     }
 
     public void onGadgetDamage(EntityGadget gadget){
