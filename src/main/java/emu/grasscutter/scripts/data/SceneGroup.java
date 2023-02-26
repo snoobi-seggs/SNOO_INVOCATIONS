@@ -144,7 +144,7 @@ public class SceneGroup {
             // Add monsters and gadgets to suite
             this.suites.forEach(i -> i.init(this));
 
-        } catch (ScriptException e) {
+        } catch (Exception e) {
             Grasscutter.getLogger().error("An error occurred while loading group " + this.id + " in scene " + sceneId + ".", e);
         }
 

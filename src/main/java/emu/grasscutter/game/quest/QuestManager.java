@@ -22,6 +22,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.Getter;
 import lombok.val;
 
+import javax.annotation.Nonnull;
+
 public class QuestManager extends BasePlayerManager {
 
     @Getter private final Player player;
@@ -42,9 +44,9 @@ public class QuestManager extends BasePlayerManager {
         Note: quest 40063 is already set to finished, with childQuest 4006406's state set to 3
     */
 
-    private static Set<Integer> newPlayerMainQuests = Set.of(303,318,348,349,350,351,416,500,
+    /*private static Set<Integer> newPlayerMainQuests = Set.of(303,318,348,349,350,351,416,500,
         501,502,503,504,505,506,507,508,509,20000,20507,20509,21004,21005,21010,21011,21016,21017,
-        21020,21021,21025,40063,70121,70124,70511,71010,71012,71013,71015,71016,71017,71555);
+        21020,21021,21025,40063,70121,70124,70511,71010,71012,71013,71015,71016,71017,71555);*/
 
     /*
         On SetPlayerBornDataReq, the server sends ServerCondMeetQuestListUpdateNotify, with this exact
@@ -82,13 +84,17 @@ public class QuestManager extends BasePlayerManager {
         this.mainQuests = new Int2ObjectOpenHashMap<>();
     }
 
+    // TODO store user value set on enable
+    public boolean isQuestingEnabled(){
+        return Grasscutter.getConfig().server.game.gameOptions.questing;
+    }
+
     public void onPlayerBorn() {
         // TODO scan the quest and start the quest with acceptCond fulfilled
         // The off send 3 request in that order: 1. FinishedParentQuestNotify, 2. QuestListNotify, 3. ServerCondMeetQuestListUpdateNotify
 
-        List<GameMainQuest> newQuests = this.addMultMainQuests(newPlayerMainQuests);
-        for (GameMainQuest mainQuest : newQuests) {
-            startMainQuest(mainQuest.getParentQuestId());
+        if(isQuestingEnabled()) {
+            enableQuests();
         }
 
         //getPlayer().sendPacket(new PacketFinishedParentQuestUpdateNotify(newQuests));
@@ -113,6 +119,7 @@ public class QuestManager extends BasePlayerManager {
             }
             quest.checkProgress();
         }
+        player.getActivityManager().triggerActivityConditions();
     }
 
     public void onTick(){
@@ -159,7 +166,8 @@ public class QuestManager extends BasePlayerManager {
     }
 
     public void enableQuests() {
-        onPlayerBorn();
+        triggerEvent(QuestCond.QUEST_COND_NONE, null, 0);
+        triggerEvent(QuestCond.QUEST_COND_PLAYER_LEVEL_EQUAL_GREATER, null, 1);
     }
 
     /*
@@ -247,10 +255,14 @@ public class QuestManager extends BasePlayerManager {
 
     public GameQuest addQuest(int questId) {
         QuestData questConfig = GameData.getQuestDataMap().get(questId);
-
         if (questConfig == null) {
             return null;
         }
+
+       return addQuest(questConfig);
+    }
+
+    public GameQuest addQuest(@Nonnull QuestData questConfig) {
 
         // Main quest
         GameMainQuest mainQuest = this.getMainQuestById(questConfig.getMainId());
@@ -261,7 +273,7 @@ public class QuestManager extends BasePlayerManager {
         }
 
         // Sub quest
-        GameQuest quest = mainQuest.getChildQuestById(questId);
+        GameQuest quest = mainQuest.getChildQuestById(questConfig.getSubId());
 
         // Forcefully start
         quest.start();
@@ -282,13 +294,13 @@ public class QuestManager extends BasePlayerManager {
             .map(MainQuestData.SubQuestData::getSubId)
             .ifPresent(this::addQuest);
         //TODO find a better way then hardcoding to detect needed required quests
-        if(mainQuestId == 355){
+        /*if(mainQuestId == 355){
             startMainQuest(361);
             startMainQuest(418);
             startMainQuest(423);
             startMainQuest(20509);
 
-        }
+        }*/
     }
     public void queueEvent(QuestCond condType, int... params) {
         queueEvent(condType, "", params);
@@ -308,13 +320,42 @@ public class QuestManager extends BasePlayerManager {
 
     public void triggerEvent(QuestCond condType, String paramStr, int... params) {
         Grasscutter.getLogger().debug("Trigger Event {}, {}, {}", condType, paramStr, params);
-        List<GameMainQuest> checkMainQuests = this.getMainQuests().values().stream()
-            .filter(i -> i.getState() != ParentQuestState.PARENT_QUEST_STATE_FINISHED)
-            .toList();
-        for (GameMainQuest mainquest : checkMainQuests) {
-            mainquest.tryAcceptSubQuests(condType, paramStr, params);
+        val potentialQuests = GameData.getQuestDataByConditions(condType, params[0], paramStr);
+        if(potentialQuests == null){
+            return;
         }
+        val questSystem = getPlayer().getServer().getQuestSystem();
+        val owner = getPlayer();
+
+        potentialQuests.forEach(questData -> {
+            if(wasSubQuestStarted(questData)){
+                return;
+            }
+            val acceptCond = questData.getAcceptCond();
+            int[] accept = new int[acceptCond.size()];
+            for (int i = 0; i < acceptCond.size(); i++) {
+                val condition = acceptCond.get(i);
+                boolean result = questSystem.triggerCondition(owner, questData, condition, paramStr, params);
+                accept[i] = result ? 1 : 0;
+            }
+
+            boolean shouldAccept = LogicType.calculate(questData.getAcceptCondComb(), accept);
+
+            if (shouldAccept){
+                GameQuest quest = owner.getQuestManager().addQuest(questData);
+                Grasscutter.getLogger().debug("Added quest {} result {}", questData.getSubId(), quest !=null);
+            }
+        });
     }
+
+    public boolean wasSubQuestStarted(QuestData questData){
+        val quest = getQuestById(questData.getId());
+        if(quest==null){
+            return false;
+        }
+        return quest.state != QuestState.QUEST_STATE_UNSTARTED;
+    }
+
     public void triggerEvent(QuestContent condType, String paramStr, int... params) {
         Grasscutter.getLogger().debug("Trigger Event {}, {}, {}", condType, paramStr, params);
         List<GameMainQuest> checkMainQuests = this.getMainQuests().values().stream()
@@ -328,6 +369,7 @@ public class QuestManager extends BasePlayerManager {
 
     /**
      * TODO maybe trigger them delayed to allow basic communication finish first
+     * TODO move content checks to use static informations where possible to allow direct already fulfilled checking
      * @param quest
      */
     public void checkQuestAlreadyFullfilled(GameQuest quest){
@@ -351,6 +393,7 @@ public class QuestManager extends BasePlayerManager {
                             queueEvent(condition.getType(), condition.getParam()[0], condition.getParam()[1]);
                         }
                     }
+                    case QUEST_CONTENT_PLAYER_LEVEL_UP -> queueEvent(condition.getType(), player.getLevel());
                 }
             }
         }, 1);

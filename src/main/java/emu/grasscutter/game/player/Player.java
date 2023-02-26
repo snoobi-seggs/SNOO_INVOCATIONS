@@ -448,6 +448,7 @@ public class Player {
             // Handle open state unlocks from level-up.
             this.getProgressManager().tryUnlockOpenStates();
             this.getQuestManager().queueEvent(QuestContent.QUEST_CONTENT_PLAYER_LEVEL_UP, level);
+            this.getQuestManager().queueEvent(QuestCond.QUEST_COND_PLAYER_LEVEL_EQUAL_GREATER, level);
 
             return true;
         }
@@ -1302,7 +1303,7 @@ public class Player {
     }
 
     public void onPlayerBorn() {
-        if (Grasscutter.getConfig().server.game.gameOptions.questing) getQuestManager().onPlayerBorn();
+        getQuestManager().onPlayerBorn();
     }
 
     public void onLogin() {

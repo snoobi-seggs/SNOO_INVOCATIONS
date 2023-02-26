@@ -230,6 +230,9 @@
       "description": "Altera la carga de grupos",
       "refreshed": "Grupo %s refrescado."
     },
+    "cutscene": {
+      "description": "Reproduce una escena"
+    },
     "reload": {
       "reload_start": "Recargando configuración.",
       "reload_done": "Recarga completada.",

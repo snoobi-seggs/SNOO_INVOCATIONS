@@ -40,7 +40,7 @@ public class GameMainQuest {
     @Getter private int[] questVars;
     @Getter private long[] timeVar;
     //QuestUpdateQuestVarReq is sent in two stages...
-    @Getter private List<Integer> questVarsUpdate;
+    private List<Integer> questVarsUpdate;
     @Getter private ParentQuestState state;
     @Getter private boolean isFinished;
     @Getter List<QuestGroupSuite> questGroupSuites;
@@ -64,6 +64,13 @@ public class GameMainQuest {
         this.state = ParentQuestState.PARENT_QUEST_STATE_NONE;
         this.questGroupSuites = new ArrayList<>();
         addAllChildQuests();
+    }
+
+    public List<Integer> getQuestVarsUpdate() {
+        if(questVarsUpdate == null){
+            questVarsUpdate = new ArrayList<>();
+        }
+        return questVarsUpdate;
     }
 
     private void addAllChildQuests() {
@@ -165,10 +172,10 @@ public class GameMainQuest {
         }
 
         // handoff main quest
-        if (mainQuestData.getSuggestTrackMainQuestList() != null) {
+        /*if (mainQuestData.getSuggestTrackMainQuestList() != null) {
             Arrays.stream(mainQuestData.getSuggestTrackMainQuestList())
                 .forEach(getQuestManager()::startMainQuest);
-        }
+        }*/
     }
     //TODO
     public void fail() {}
@@ -301,36 +308,6 @@ public class GameMainQuest {
                 questManager.checkQuestAlreadyFullfilled(quest);
             }
         }
-    }
-
-    public void tryAcceptSubQuests(QuestCond condType, String paramStr, int... params) {
-        try {
-            List<GameQuest> subQuestsWithCond = getChildQuests().values().stream()
-                .filter(p -> p.getState() == QuestState.QUEST_STATE_UNSTARTED || p.getState() == QuestState.UNFINISHED)
-                .filter(p -> p.getQuestData().getAcceptCond().stream().anyMatch(q -> condType == QuestCond.QUEST_COND_NONE || q.getType() == condType))
-                .toList();
-            val questSystem = owner.getServer().getQuestSystem();
-
-            for (GameQuest subQuestWithCond : subQuestsWithCond) {
-                val acceptCond = subQuestWithCond.getQuestData().getAcceptCond();
-                int[] accept = new int[acceptCond.size()];
-
-                for (int i = 0; i < subQuestWithCond.getQuestData().getAcceptCond().size(); i++) {
-                    val condition = acceptCond.get(i);
-                    boolean result = questSystem.triggerCondition(getOwner(), subQuestWithCond.getQuestData(), condition, paramStr, params);
-                    accept[i] = result ? 1 : 0;
-                }
-
-                boolean shouldAccept = LogicType.calculate(subQuestWithCond.getQuestData().getAcceptCondComb(), accept);
-
-                if (shouldAccept)
-                    subQuestWithCond.start();
-            }
-            this.save();
-        } catch (Exception e) {
-            Grasscutter.getLogger().error("An error occurred while trying to accept quest.", e);
-        }
-
     }
 
     public void tryFailSubQuests(QuestContent condType, String paramStr, int... params) {

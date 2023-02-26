@@ -230,6 +230,9 @@
       "description": "Alter group loading",
       "refreshed": "Group %s refreshed."
     },
+    "cutscene": {
+      "description": "Joue une cinématique"
+    },
     "reload": {
       "reload_start": "Rechargement de la configuration.",
       "reload_done": "Rechargement terminé.",

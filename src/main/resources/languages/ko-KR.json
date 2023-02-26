@@ -230,6 +230,9 @@
       "description": "Alter group loading",
       "refreshed": "Group %s refreshed."
     },
+    "cutscene": {
+      "description": "Plays a cutscene"
+    },
     "reload": {
       "reload_start": "구성 설정을 다시 불러오는중...",
       "reload_done": "리로드 완료.",
