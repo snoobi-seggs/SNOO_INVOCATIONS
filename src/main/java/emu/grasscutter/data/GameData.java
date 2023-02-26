@@ -15,6 +15,7 @@ import emu.grasscutter.data.binout.config.ConfigEntityMonster;
 import emu.grasscutter.data.binout.config.ConfigLevelEntity;
 import emu.grasscutter.data.binout.routes.Route;
 import emu.grasscutter.data.custom.*;
+import emu.grasscutter.data.server.ActivityCondGroup;
 import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDropEntry;
 import emu.grasscutter.game.quest.QuestEncryptionKey;
@@ -156,6 +157,7 @@ public class GameData {
 
     // Custom community server resources
     @Getter private static final Int2ObjectMap<GadgetMapping> gadgetMappingMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static final Int2ObjectMap<ActivityCondGroup> activityCondGroupMap = new Int2ObjectOpenHashMap<>();
     @Getter private static final Int2ObjectMap<GroupReplacementData> groupReplacements = new Int2ObjectOpenHashMap<>();
 
     // Cache

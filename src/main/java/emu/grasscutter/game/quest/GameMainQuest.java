@@ -76,7 +76,7 @@ public class GameMainQuest {
 
     public Collection<GameQuest> getActiveQuests(){
         return childQuests.values().stream()
-            .filter(q->q.getState().getValue() == QuestState.UNFINISHED.getValue())
+            .filter(q->q.getState().getValue() == QuestState.QUEST_STATE_UNFINISHED.getValue())
             .toList();
     }
 

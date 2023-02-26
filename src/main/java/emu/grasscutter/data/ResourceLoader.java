@@ -10,6 +10,7 @@ import emu.grasscutter.data.binout.routes.SceneRoutes;
 import emu.grasscutter.data.common.PointData;
 import emu.grasscutter.data.custom.*;
 import emu.grasscutter.data.excels.TrialAvatarActivityDataData;
+import emu.grasscutter.data.server.ActivityCondGroup;
 import emu.grasscutter.data.server.GadgetMapping;
 import emu.grasscutter.game.dungeons.DungeonDrop;
 import emu.grasscutter.game.managers.blossom.BlossomConfig;
@@ -123,8 +124,9 @@ public class ResourceLoader {
         loadConfigLevelEntityData();
         loadQuestShareConfig();
         loadGadgetMappings();
-        loadTrialAvatarCustomData();
+        loadActivityCondGroups();
         loadGroupReplacements();
+        loadTrialAvatarCustomData();
         EntityControllerScriptManager.load();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
@@ -664,6 +666,18 @@ public class ResourceLoader {
             Grasscutter.getLogger().debug("Loaded {} gadget mappings.", gadgetMap.size());
         } catch (Exception e) {
             Grasscutter.getLogger().error("Unable to load gadget mappings.", e);
+        }
+    }
+
+    private static void loadActivityCondGroups() {
+        try {
+            val gadgetMap = GameData.getActivityCondGroupMap();
+            try {
+                JsonUtils.loadToList(getResourcePath("Server/ActivityCondGroups.json"), ActivityCondGroup.class).forEach(entry -> gadgetMap.put(entry.getCondGroupId(), entry));
+            } catch (IOException | NullPointerException ignored) {}
+            Grasscutter.getLogger().debug("Loaded {} ActivityCondGroups.", gadgetMap.size());
+        } catch (Exception e) {
+            Grasscutter.getLogger().error("Unable to load ActivityCondGroups.", e);
         }
     }
 

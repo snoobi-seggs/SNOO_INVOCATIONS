@@ -53,7 +53,7 @@ public class PlayerActivityData {
             return;
         }
 
-        if (watcherInfo.curProgress >= watcherInfo.totalProgress) {
+        if (watcherInfo.isFinished()) {
             return;
         }
 
@@ -105,6 +105,11 @@ public class PlayerActivityData {
         int totalProgress;
         int curProgress;
         boolean isTakenReward;
+
+
+        public boolean isFinished(){
+            return curProgress >= totalProgress;
+        }
 
         public ActivityWatcherData getMetadata() {
             return GameData.getActivityWatcherDataMap().get(watcherId);
