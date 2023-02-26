@@ -952,6 +952,23 @@ public class ScriptLib {
         return 0;
     }
 
+    public int AddSceneTag(int sceneId, int sceneTagId){
+        logger.warn("[LUA] Call unimplemented AddSceneTag with {}, {}", sceneId, sceneTagId);
+        //TODO implement
+        return 0;
+    }
+
+    public int DelSceneTag(int sceneId, int sceneTagId){
+        logger.warn("[LUA] Call unimplemented DelSceneTag with {}, {}", sceneId, sceneTagId);
+        //TODO implement
+        return 0;
+    }
+
+    public boolean CheckSceneTag(int sceneId, int sceneTagId){
+        logger.warn("[LUA] Call unimplemented CheckSceneTag with {}, {}", sceneId, sceneTagId);
+        //TODO implement
+        return false;
+    }
     public int StartHomeGallery(int galleryId, int uid){
         logger.warn("[LUA] Call unimplemented StartHomeGallery with {} {}", galleryId, uid);
         //TODO implement
