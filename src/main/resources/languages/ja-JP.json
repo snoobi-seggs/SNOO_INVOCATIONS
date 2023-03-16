@@ -233,6 +233,9 @@
     "cutscene": {
       "description": "カットシーンを再生します"
     },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "設定を再読み込みしています。",
       "reload_done": "再読み込み完了｡",

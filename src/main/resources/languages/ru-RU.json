@@ -233,6 +233,9 @@
     "cutscene": {
       "description": "Odtwarza przerywnik filmowy"
     },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "Перезагружаем файл конфигурации.",
       "reload_done": "Перезагрузка завершена.",

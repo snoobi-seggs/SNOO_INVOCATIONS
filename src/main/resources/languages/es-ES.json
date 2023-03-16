@@ -233,6 +233,9 @@
     "cutscene": {
       "description": "Reproduce una escena"
     },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "Recargando configuración.",
       "reload_done": "Recarga completada.",

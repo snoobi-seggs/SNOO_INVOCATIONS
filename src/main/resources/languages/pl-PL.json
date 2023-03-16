@@ -233,6 +233,9 @@
     "cutscene": {
       "description": "Odtwarza przerywnik filmowy"
     },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "Ponowne ładowanie konfiguracji...",
       "reload_done": "Ponowne ładowanie konfiguracji zakończone.",

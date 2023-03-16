@@ -21,9 +21,9 @@ import static emu.grasscutter.utils.Language.translate;
 @Command(label = "group",
          aliases = {"g"},
          usage = {
-            "(refresh) [<groupId>] [<suiteId>]",
-            "(register/unregister) [<groupId>] [<suiteId>] [<sceneId>]",
-            "(list) [<sceneId>]"
+            "(refresh) [grp<groupId>] [suite<suiteId>]",
+            "(register/unregister) [grp<groupId>] [suite<suiteId>] [scene<sceneId>]",
+            "(list) [scene<sceneId>]"
          },
          permission = "player.group",
          permissionTargeted = "player.group.others")
