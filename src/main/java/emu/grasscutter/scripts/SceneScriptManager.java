@@ -12,6 +12,7 @@ import emu.grasscutter.data.server.Grid;
 import emu.grasscutter.database.DatabaseHelper;
 import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.entity.gadget.platform.BaseRoute;
+import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.game.quest.GameQuest;
 import emu.grasscutter.game.quest.QuestGroupSuite;
@@ -246,7 +247,7 @@ public class SceneScriptManager {
         return suiteIndex;
     }
 
-    public boolean refreshGroupSuite(int groupId, int suiteId, GameQuest quest) {
+    public boolean refreshGroupSuite(int groupId, int suiteId) {
         var targetGroupInstance = getGroupInstanceById(groupId);
         if (targetGroupInstance == null) {
             getGroupById(groupId); //Load the group, this ensures an instance is created and the if neccesary unloaded, but the suite data is stored
@@ -255,9 +256,14 @@ public class SceneScriptManager {
         } else {
             Grasscutter.getLogger().debug("Refreshing group {} suite {}", groupId, suiteId);
             suiteId = refreshGroup(targetGroupInstance, suiteId, false); //If suiteId is zero, the value of suiteId changes
-            quest.getOwner().sendPacket(new PacketGroupSuiteNotify(groupId, suiteId));
+            scene.broadcastPacket(new PacketGroupSuiteNotify(groupId, suiteId));
         }
 
+
+        return true;
+    }
+    public boolean refreshGroupSuite(int groupId, int suiteId, GameQuest quest) {
+        val result = refreshGroupSuite(groupId, suiteId);
         if(suiteId != 0 && quest != null) {
             quest.getMainQuest().getQuestGroupSuites().add(QuestGroupSuite.of()
                 .scene(getScene().getId())
@@ -266,7 +272,7 @@ public class SceneScriptManager {
                 .build());
         }
 
-        return true;
+        return result;
     }
 
     public boolean refreshGroupMonster(int groupId) {
@@ -404,17 +410,37 @@ public class SceneScriptManager {
 
                     //Add all entitites here
                     Set<Integer> vision_levels = new HashSet<>();
-                    group.monsters.values().forEach(m -> {
-                        addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos);
-                        vision_levels.add(m.vision_level);
-                    });
-                    group.gadgets.values().forEach(g -> {
-                        int vision_level = Math.max(getGadgetVisionLevel(g.gadget_id), g.vision_level);
-                        addGridPositionToMap(groupPositions.get(vision_level), group.id, vision_level, g.pos);
-                        vision_levels.add(vision_level);
-                    });
-                    group.npcs.values().forEach(n -> addGridPositionToMap(groupPositions.get(n.vision_level), group.id, n.vision_level, n.pos));
-                    group.regions.values().forEach(r -> addGridPositionToMap(groupPositions.get(0), group.id, 0, r.pos));
+
+                    if(group.monsters != null) {
+                        group.monsters.values().forEach(m -> {
+                            addGridPositionToMap(groupPositions.get(m.vision_level), group.id, m.vision_level, m.pos);
+                            vision_levels.add(m.vision_level);
+                        });
+                    } else {
+                        Grasscutter.getLogger().error("group.monsters null for group {}", group.id);
+                    }
+                    if(group.gadgets != null) {
+                        group.gadgets.values().forEach(g -> {
+                            int vision_level = Math.max(getGadgetVisionLevel(g.gadget_id), g.vision_level);
+                            addGridPositionToMap(groupPositions.get(vision_level), group.id, vision_level, g.pos);
+                            vision_levels.add(vision_level);
+                        });
+                    } else {
+                        Grasscutter.getLogger().error("group.gadgets null for group {}", group.id);
+                    }
+
+                    if(group.npcs != null) {
+                        group.npcs.values().forEach(n -> addGridPositionToMap(groupPositions.get(n.vision_level), group.id, n.vision_level, n.pos));
+                    } else {
+                        Grasscutter.getLogger().error("group.npcs null for group {}", group.id);
+                    }
+
+                    if(group.regions != null) {
+                        group.regions.values().forEach(r -> addGridPositionToMap(groupPositions.get(0), group.id, 0, r.pos));
+                    } else {
+                        Grasscutter.getLogger().error("group.regions null for group {}", group.id);
+                    }
+
                     if(group.garbages != null && group.garbages.gadgets != null) group.garbages.gadgets.forEach(g -> addGridPositionToMap(groupPositions.get(g.vision_level), group.id, g.vision_level, g.pos));
 
                     int max_vision_level = -1;
@@ -643,13 +669,14 @@ public class SceneScriptManager {
             int eventType = params.type;
             Set<SceneTrigger> relevantTriggers = new HashSet<>();
             if (eventType == EventType.EVENT_ENTER_REGION || eventType == EventType.EVENT_LEAVE_REGION) {
-                List<SceneTrigger> relevantTriggersList = this.getTriggersByEvent(eventType).stream()
-                    .filter(p -> p.getCondition().contains(String.valueOf(params.param1)) &&
-                        (p.getSource().isEmpty() || p.getSource().equals(params.getEventSource()))).toList();
-                relevantTriggers = new HashSet<>(relevantTriggersList);
+                relevantTriggers = this.getTriggersByEvent(eventType).stream()
+                    .filter(t -> t.getCondition().contains(String.valueOf(params.param1)) &&
+                        (t.getSource().isEmpty() || t.getSource().equals(params.getEventSource())))
+                    .collect(Collectors.toSet());
             } else {
                 relevantTriggers = this.getTriggersByEvent(eventType).stream()
                     .filter(t -> params.getGroupId() == 0 || t.getCurrentGroup().id == params.getGroupId())
+                    .filter(t ->  (t.getSource().isEmpty() || t.getSource().equals(params.getEventSource())))
                     .collect(Collectors.toSet());
             }
             for (SceneTrigger trigger : relevantTriggers) {
@@ -921,6 +948,7 @@ public class SceneScriptManager {
             if(trigger.getEvent() == EVENT_TIMER_EVENT &&trigger.getSource().equals(source)){
                 Grasscutter.getLogger().warn("[LUA] Found timer trigger with source {} for group {} : {}",
                     source, groupID, trigger.getName());
+                cancelGroupTimerEvent(groupID, source);
                 var taskIdentifier = Grasscutter.getGameServer().getScheduler().scheduleDelayedRepeatingTask(() ->
                     callEvent(new ScriptArgs(groupID, EVENT_TIMER_EVENT)
                         .setEventSource(source)), (int)time, (int)time);
@@ -934,11 +962,13 @@ public class SceneScriptManager {
     public int cancelGroupTimerEvent(int groupID, String source) {
         //TODO test
         var groupTimers = activeGroupTimers.get(groupID);
-        if(groupTimers!=null && !groupTimers.isEmpty())
-        for(var timer : groupTimers){
-            if(timer.component1().equals(source)){
-                Grasscutter.getGameServer().getScheduler().cancelTask(timer.component2());
-                return 0;
+        if(groupTimers!=null && !groupTimers.isEmpty()) {
+            for (var timer : new HashSet<>(groupTimers)) {
+                if (timer.component1().equals(source)) {
+                    Grasscutter.getGameServer().getScheduler().cancelTask(timer.component2());
+                    groupTimers.remove(timer);
+                    return 0;
+                }
             }
         }
 

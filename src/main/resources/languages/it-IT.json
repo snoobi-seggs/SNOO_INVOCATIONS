@@ -223,6 +223,12 @@
       "description": "Alter group loading",
       "refreshed": "Group %s refreshed."
     },
+    "cutscene": {
+      "description": "Riproduce un filmato"
+    },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "Ricarica configurazione.",
       "reload_done": "Ricarica completa.",

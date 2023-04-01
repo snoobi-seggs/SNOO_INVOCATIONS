@@ -223,7 +223,7 @@ public class PlayerProgressManager extends BasePlayerDataManager {
         for (var subData : statueSubQuests) {
             var subGameQuest = statueGameMainQuest.getChildQuestById(subData.getSubId());
             if (subGameQuest != null && subGameQuest.getState() == QuestState.QUEST_STATE_UNSTARTED) {
-                this.player.getQuestManager().addQuest(subData.getSubId());
+                this.player.getQuestManager().addQuest(subGameQuest.getQuestData());
             }
         }
     }

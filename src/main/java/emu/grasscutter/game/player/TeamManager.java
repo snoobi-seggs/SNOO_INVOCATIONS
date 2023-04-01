@@ -143,6 +143,9 @@ public class TeamManager extends BasePlayerDataManager {
     }
 
     public EntityAvatar getCurrentAvatarEntity() {
+        if(currentCharacterIndex >= getActiveTeam().size()){
+            return this.getActiveTeam().get(0);
+        }
         return this.getActiveTeam().get(currentCharacterIndex);
     }
 
@@ -356,7 +359,7 @@ public class TeamManager extends BasePlayerDataManager {
             prevSelectedAvatarIndex = Math.min(this.currentCharacterIndex, this.getActiveTeam().size() - 1);
         }
         this.currentCharacterIndex = prevSelectedAvatarIndex;
-        
+
         updateTeamProperties();
 
         // Run callback

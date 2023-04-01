@@ -230,6 +230,12 @@
       "description": "Alter group loading",
       "refreshed": "Group %s refreshed."
     },
+    "cutscene": {
+      "description": "Plays a cutscene"
+    },
+    "sound": {
+      "description": "Plays a sound"
+    },
     "reload": {
       "reload_start": "正在重新加載設定檔。",
       "reload_done": "重新加載已完成。",
