@@ -19,11 +19,11 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     int getAvatarTeamMapCount();
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     boolean containsAvatarTeamMap(
         int key);
@@ -34,19 +34,19 @@ public final class AvatarTeamUpdateNotifyOuterClass {
     java.util.Map<java.lang.Integer, emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam>
     getAvatarTeamMap();
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     java.util.Map<java.lang.Integer, emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam>
     getAvatarTeamMapMap();
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
 
     emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam getAvatarTeamMapOrDefault(
         int key,
         emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam defaultValue);
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
 
     emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam getAvatarTeamMapOrThrow(
@@ -71,10 +71,8 @@ public final class AvatarTeamUpdateNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 1706
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: JNDHMMALEAP
+   * CmdId: 1744
    * </pre>
    *
    * Protobuf type {@code AvatarTeamUpdateNotify}
@@ -123,7 +121,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 18: {
+            case 34: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 avatarTeamMap_ = com.google.protobuf.MapField.newMapField(
                     AvatarTeamMapDefaultEntryHolder.defaultEntry);
@@ -189,7 +187,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 2:
+        case 4:
           return internalGetAvatarTeamMap();
         default:
           throw new RuntimeException(
@@ -204,7 +202,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
               emu.grasscutter.net.proto.AvatarTeamUpdateNotifyOuterClass.AvatarTeamUpdateNotify.class, emu.grasscutter.net.proto.AvatarTeamUpdateNotifyOuterClass.AvatarTeamUpdateNotify.Builder.class);
     }
 
-    public static final int AVATAR_TEAM_MAP_FIELD_NUMBER = 2;
+    public static final int AVATAR_TEAM_MAP_FIELD_NUMBER = 4;
     private static final class AvatarTeamMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, emu.grasscutter.net.proto.AvatarTeamOuterClass.AvatarTeam> defaultEntry =
@@ -231,7 +229,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       return internalGetAvatarTeamMap().getMap().size();
     }
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
 
     @java.lang.Override
@@ -249,7 +247,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       return getAvatarTeamMapMap();
     }
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     @java.lang.Override
 
@@ -257,7 +255,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       return internalGetAvatarTeamMap().getMap();
     }
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     @java.lang.Override
 
@@ -270,7 +268,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+     * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
      */
     @java.lang.Override
 
@@ -333,7 +331,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
           output,
           internalGetAvatarTeamMap(),
           AvatarTeamMapDefaultEntryHolder.defaultEntry,
-          2);
+          4);
       if (getTempAvatarGuidListList().size() > 0) {
         output.writeUInt32NoTag(106);
         output.writeUInt32NoTag(tempAvatarGuidListMemoizedSerializedSize);
@@ -358,7 +356,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, avatarTeamMap__);
+            .computeMessageSize(4, avatarTeamMap__);
       }
       {
         int dataSize = 0;
@@ -509,10 +507,8 @@ public final class AvatarTeamUpdateNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1706
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: JNDHMMALEAP
+     * CmdId: 1744
      * </pre>
      *
      * Protobuf type {@code AvatarTeamUpdateNotify}
@@ -530,7 +526,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 4:
             return internalGetAvatarTeamMap();
           default:
             throw new RuntimeException(
@@ -541,7 +537,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 4:
             return internalGetMutableAvatarTeamMap();
           default:
             throw new RuntimeException(
@@ -728,7 +724,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return internalGetAvatarTeamMap().getMap().size();
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
 
       @java.lang.Override
@@ -746,7 +742,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return getAvatarTeamMapMap();
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
       @java.lang.Override
 
@@ -754,7 +750,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return internalGetAvatarTeamMap().getMap();
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
       @java.lang.Override
 
@@ -767,7 +763,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
       @java.lang.Override
 
@@ -788,7 +784,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return this;
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
 
       public Builder removeAvatarTeamMap(
@@ -807,7 +803,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return internalGetMutableAvatarTeamMap().getMutableMap();
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
       public Builder putAvatarTeamMap(
           int key,
@@ -819,7 +815,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
         return this;
       }
       /**
-       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 2;</code>
+       * <code>map&lt;uint32, .AvatarTeam&gt; avatar_team_map = 4;</code>
        */
 
       public Builder putAllAvatarTeamMap(
@@ -981,7 +977,7 @@ public final class AvatarTeamUpdateNotifyOuterClass {
     java.lang.String[] descriptorData = {
       "\n\034AvatarTeamUpdateNotify.proto\032\020AvatarTe" +
       "am.proto\"\277\001\n\026AvatarTeamUpdateNotify\022C\n\017a" +
-      "vatar_team_map\030\002 \003(\0132*.AvatarTeamUpdateN" +
+      "vatar_team_map\030\004 \003(\0132*.AvatarTeamUpdateN" +
       "otify.AvatarTeamMapEntry\022\035\n\025temp_avatar_" +
       "guid_list\030\r \003(\004\032A\n\022AvatarTeamMapEntry\022\013\n" +
       "\003key\030\001 \001(\r\022\032\n\005value\030\002 \001(\0132\013.AvatarTeam:\002" +

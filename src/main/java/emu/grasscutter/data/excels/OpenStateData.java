@@ -28,7 +28,8 @@ public class OpenStateData extends GameResource {
         OPEN_STATE_COND_QUEST,
         OPEN_STATE_OFFERING_LEVEL,
         OPEN_STATE_CITY_REPUTATION_LEVEL,
-        OPEN_STATE_COND_PARENT_QUEST;
+        OPEN_STATE_COND_PARENT_QUEST,
+		OPEN_STATE_GCG_LEVEL;
     }
 
     @Override

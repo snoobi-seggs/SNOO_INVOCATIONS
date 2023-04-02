@@ -5,6 +5,7 @@ import emu.grasscutter.game.activity.musicgame.MusicGameActivityHandler;
 import emu.grasscutter.game.activity.musicgame.MusicGameBeatmap;
 import emu.grasscutter.game.activity.musicgame.MusicGamePlayerData;
 import emu.grasscutter.game.props.ActivityType;
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.net.packet.Opcodes;
 import emu.grasscutter.net.packet.PacketHandler;
 import emu.grasscutter.net.packet.PacketOpcodes;
@@ -25,9 +26,11 @@ public class HandlerSaveUgcReq extends PacketHandler {
 	@Override
 	public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {
 		val req = SaveUgcReqOuterClass.SaveUgcReq.parseFrom(payload);
+		
+		Grasscutter.getLogger().warn("3.5 PROTOS IS SHIT SO I COMMENTED THIS OUT, NO HANDLING");
 
         // We only support music game user generated content
-        if(req.getUgcType() != UgcTypeOuterClass.UgcType.UGC_TYPE_MUSIC_GAME){
+        /*if(req.getUgcType() != UgcTypeOuterClass.UgcType.UGC_TYPE_MUSIC_GAME){
             session.send(new PacketMusicGameCreateBeatmapRsp(RetcodeOuterClass.Retcode.RET_UGC_DISABLED, req.getUgcType()));
             return;
         }
@@ -78,7 +81,7 @@ public class HandlerSaveUgcReq extends PacketHandler {
         handler.addPersonalBeatmap(playerData.get(), musicGameBeatmap);
 
         session.send(new PacketActivityInfoNotify(handler.toProto(playerData.get(), session.getPlayer().getActivityManager().getConditionExecutor())));
-        session.send(new PacketMusicGameCreateBeatmapRsp(musicGameBeatmap.getMusicShareId(), req.getUgcType()));
+        session.send(new PacketMusicGameCreateBeatmapRsp(musicGameBeatmap.getMusicShareId(), req.getUgcType()));*/
 	}
 
 }

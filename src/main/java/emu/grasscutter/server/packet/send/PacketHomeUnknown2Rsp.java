@@ -1,4 +1,4 @@
-package emu.grasscutter.server.packet.send;
+/*package emu.grasscutter.server.packet.send;
 
 import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.packet.PacketOpcodes;
@@ -9,4 +9,6 @@ public class PacketHomeUnknown2Rsp extends BasePacket {
         super(PacketOpcodes.Unk2700_KIIOGMKFNNP_ServerRsp);
 
     }
-}
+}*/
+
+//THIS IS UNUSED AF

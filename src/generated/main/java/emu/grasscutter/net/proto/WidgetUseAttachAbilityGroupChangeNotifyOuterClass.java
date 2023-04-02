@@ -19,23 +19,21 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool is_attach = 6;</code>
+     * <code>bool is_attach = 4;</code>
      * @return The isAttach.
      */
     boolean getIsAttach();
 
     /**
-     * <code>uint32 material_id = 11;</code>
+     * <code>uint32 material_id = 1;</code>
      * @return The materialId.
      */
     int getMaterialId();
   }
   /**
    * <pre>
-   * CmdId: 4258
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: MPFLINHGFGI
+   * CmdId: 4291
    * </pre>
    *
    * Protobuf type {@code WidgetUseAttachAbilityGroupChangeNotify}
@@ -82,14 +80,14 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 48: {
-
-              isAttach_ = input.readBool();
-              break;
-            }
-            case 88: {
+            case 8: {
 
               materialId_ = input.readUInt32();
+              break;
+            }
+            case 32: {
+
+              isAttach_ = input.readBool();
               break;
             }
             default: {
@@ -124,10 +122,10 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
               emu.grasscutter.net.proto.WidgetUseAttachAbilityGroupChangeNotifyOuterClass.WidgetUseAttachAbilityGroupChangeNotify.class, emu.grasscutter.net.proto.WidgetUseAttachAbilityGroupChangeNotifyOuterClass.WidgetUseAttachAbilityGroupChangeNotify.Builder.class);
     }
 
-    public static final int IS_ATTACH_FIELD_NUMBER = 6;
+    public static final int IS_ATTACH_FIELD_NUMBER = 4;
     private boolean isAttach_;
     /**
-     * <code>bool is_attach = 6;</code>
+     * <code>bool is_attach = 4;</code>
      * @return The isAttach.
      */
     @java.lang.Override
@@ -135,10 +133,10 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
       return isAttach_;
     }
 
-    public static final int MATERIAL_ID_FIELD_NUMBER = 11;
+    public static final int MATERIAL_ID_FIELD_NUMBER = 1;
     private int materialId_;
     /**
-     * <code>uint32 material_id = 11;</code>
+     * <code>uint32 material_id = 1;</code>
      * @return The materialId.
      */
     @java.lang.Override
@@ -160,11 +158,11 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (isAttach_ != false) {
-        output.writeBool(6, isAttach_);
-      }
       if (materialId_ != 0) {
-        output.writeUInt32(11, materialId_);
+        output.writeUInt32(1, materialId_);
+      }
+      if (isAttach_ != false) {
+        output.writeBool(4, isAttach_);
       }
       unknownFields.writeTo(output);
     }
@@ -175,13 +173,13 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (isAttach_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isAttach_);
-      }
       if (materialId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, materialId_);
+          .computeUInt32Size(1, materialId_);
+      }
+      if (isAttach_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, isAttach_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -315,10 +313,8 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4258
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: MPFLINHGFGI
+     * CmdId: 4291
      * </pre>
      *
      * Protobuf type {@code WidgetUseAttachAbilityGroupChangeNotify}
@@ -475,7 +471,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
 
       private boolean isAttach_ ;
       /**
-       * <code>bool is_attach = 6;</code>
+       * <code>bool is_attach = 4;</code>
        * @return The isAttach.
        */
       @java.lang.Override
@@ -483,7 +479,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
         return isAttach_;
       }
       /**
-       * <code>bool is_attach = 6;</code>
+       * <code>bool is_attach = 4;</code>
        * @param value The isAttach to set.
        * @return This builder for chaining.
        */
@@ -494,7 +490,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
         return this;
       }
       /**
-       * <code>bool is_attach = 6;</code>
+       * <code>bool is_attach = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsAttach() {
@@ -506,7 +502,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
 
       private int materialId_ ;
       /**
-       * <code>uint32 material_id = 11;</code>
+       * <code>uint32 material_id = 1;</code>
        * @return The materialId.
        */
       @java.lang.Override
@@ -514,7 +510,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
         return materialId_;
       }
       /**
-       * <code>uint32 material_id = 11;</code>
+       * <code>uint32 material_id = 1;</code>
        * @param value The materialId to set.
        * @return This builder for chaining.
        */
@@ -525,7 +521,7 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 material_id = 11;</code>
+       * <code>uint32 material_id = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearMaterialId() {
@@ -603,8 +599,8 @@ public final class WidgetUseAttachAbilityGroupChangeNotifyOuterClass {
     java.lang.String[] descriptorData = {
       "\n-WidgetUseAttachAbilityGroupChangeNotif" +
       "y.proto\"Q\n\'WidgetUseAttachAbilityGroupCh" +
-      "angeNotify\022\021\n\tis_attach\030\006 \001(\010\022\023\n\013materia" +
-      "l_id\030\013 \001(\rB\033\n\031emu.grasscutter.net.protob" +
+      "angeNotify\022\021\n\tis_attach\030\004 \001(\010\022\023\n\013materia" +
+      "l_id\030\001 \001(\rB\033\n\031emu.grasscutter.net.protob" +
       "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

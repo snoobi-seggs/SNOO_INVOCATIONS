@@ -19,40 +19,40 @@ public final class LockedPersonallineDataOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+     * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
      * @return The enum numeric value on the wire for lockReason.
      */
     int getLockReasonValue();
     /**
-     * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+     * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
      * @return The lockReason.
      */
     emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason getLockReason();
 
     /**
-     * <code>uint32 personal_line_id = 13;</code>
+     * <code>uint32 personal_line_id = 12;</code>
      * @return The personalLineId.
      */
     int getPersonalLineId();
 
     /**
-     * <code>uint32 chapter_id = 3;</code>
+     * <code>uint32 chapter_id = 14;</code>
      * @return Whether the chapterId field is set.
      */
     boolean hasChapterId();
     /**
-     * <code>uint32 chapter_id = 3;</code>
+     * <code>uint32 chapter_id = 14;</code>
      * @return The chapterId.
      */
     int getChapterId();
 
     /**
-     * <code>uint32 level = 1;</code>
+     * <code>uint32 level = 2;</code>
      * @return Whether the level field is set.
      */
     boolean hasLevel();
     /**
-     * <code>uint32 level = 1;</code>
+     * <code>uint32 level = 2;</code>
      * @return The level.
      */
     int getLevel();
@@ -60,6 +60,10 @@ public final class LockedPersonallineDataOuterClass {
     public emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.ParamCase getParamCase();
   }
   /**
+   * <pre>
+   * Name: FCFKAAGEDPK
+   * </pre>
+   *
    * Protobuf type {@code LockedPersonallineData}
    */
   public static final class LockedPersonallineData extends
@@ -106,24 +110,24 @@ public final class LockedPersonallineDataOuterClass {
               done = true;
               break;
             case 8: {
-              paramCase_ = 1;
-              param_ = input.readUInt32();
-              break;
-            }
-            case 16: {
               int rawValue = input.readEnum();
 
               lockReason_ = rawValue;
               break;
             }
-            case 24: {
-              paramCase_ = 3;
+            case 16: {
+              paramCase_ = 2;
               param_ = input.readUInt32();
               break;
             }
-            case 104: {
+            case 96: {
 
               personalLineId_ = input.readUInt32();
+              break;
+            }
+            case 112: {
+              paramCase_ = 14;
+              param_ = input.readUInt32();
               break;
             }
             default: {
@@ -159,6 +163,10 @@ public final class LockedPersonallineDataOuterClass {
     }
 
     /**
+     * <pre>
+     * Name: HIKGMNEMNOH
+     * </pre>
+     *
      * Protobuf enum {@code LockedPersonallineData.LockReason}
      */
     public enum LockReason
@@ -271,8 +279,8 @@ public final class LockedPersonallineDataOuterClass {
     public enum ParamCase
         implements com.google.protobuf.Internal.EnumLite,
             com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-      CHAPTER_ID(3),
-      LEVEL(1),
+      CHAPTER_ID(14),
+      LEVEL(2),
       PARAM_NOT_SET(0);
       private final int value;
       private ParamCase(int value) {
@@ -290,8 +298,8 @@ public final class LockedPersonallineDataOuterClass {
 
       public static ParamCase forNumber(int value) {
         switch (value) {
-          case 3: return CHAPTER_ID;
-          case 1: return LEVEL;
+          case 14: return CHAPTER_ID;
+          case 2: return LEVEL;
           case 0: return PARAM_NOT_SET;
           default: return null;
         }
@@ -307,17 +315,17 @@ public final class LockedPersonallineDataOuterClass {
           paramCase_);
     }
 
-    public static final int LOCK_REASON_FIELD_NUMBER = 2;
+    public static final int LOCK_REASON_FIELD_NUMBER = 1;
     private int lockReason_;
     /**
-     * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+     * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
      * @return The enum numeric value on the wire for lockReason.
      */
     @java.lang.Override public int getLockReasonValue() {
       return lockReason_;
     }
     /**
-     * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+     * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
      * @return The lockReason.
      */
     @java.lang.Override public emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason getLockReason() {
@@ -326,10 +334,10 @@ public final class LockedPersonallineDataOuterClass {
       return result == null ? emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason.UNRECOGNIZED : result;
     }
 
-    public static final int PERSONAL_LINE_ID_FIELD_NUMBER = 13;
+    public static final int PERSONAL_LINE_ID_FIELD_NUMBER = 12;
     private int personalLineId_;
     /**
-     * <code>uint32 personal_line_id = 13;</code>
+     * <code>uint32 personal_line_id = 12;</code>
      * @return The personalLineId.
      */
     @java.lang.Override
@@ -337,43 +345,43 @@ public final class LockedPersonallineDataOuterClass {
       return personalLineId_;
     }
 
-    public static final int CHAPTER_ID_FIELD_NUMBER = 3;
+    public static final int CHAPTER_ID_FIELD_NUMBER = 14;
     /**
-     * <code>uint32 chapter_id = 3;</code>
+     * <code>uint32 chapter_id = 14;</code>
      * @return Whether the chapterId field is set.
      */
     @java.lang.Override
     public boolean hasChapterId() {
-      return paramCase_ == 3;
+      return paramCase_ == 14;
     }
     /**
-     * <code>uint32 chapter_id = 3;</code>
+     * <code>uint32 chapter_id = 14;</code>
      * @return The chapterId.
      */
     @java.lang.Override
     public int getChapterId() {
-      if (paramCase_ == 3) {
+      if (paramCase_ == 14) {
         return (java.lang.Integer) param_;
       }
       return 0;
     }
 
-    public static final int LEVEL_FIELD_NUMBER = 1;
+    public static final int LEVEL_FIELD_NUMBER = 2;
     /**
-     * <code>uint32 level = 1;</code>
+     * <code>uint32 level = 2;</code>
      * @return Whether the level field is set.
      */
     @java.lang.Override
     public boolean hasLevel() {
-      return paramCase_ == 1;
+      return paramCase_ == 2;
     }
     /**
-     * <code>uint32 level = 1;</code>
+     * <code>uint32 level = 2;</code>
      * @return The level.
      */
     @java.lang.Override
     public int getLevel() {
-      if (paramCase_ == 1) {
+      if (paramCase_ == 2) {
         return (java.lang.Integer) param_;
       }
       return 0;
@@ -393,19 +401,19 @@ public final class LockedPersonallineDataOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (paramCase_ == 1) {
-        output.writeUInt32(
-            1, (int)((java.lang.Integer) param_));
-      }
       if (lockReason_ != emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason.LOCK_REASON_LEVEL.getNumber()) {
-        output.writeEnum(2, lockReason_);
+        output.writeEnum(1, lockReason_);
       }
-      if (paramCase_ == 3) {
+      if (paramCase_ == 2) {
         output.writeUInt32(
-            3, (int)((java.lang.Integer) param_));
+            2, (int)((java.lang.Integer) param_));
       }
       if (personalLineId_ != 0) {
-        output.writeUInt32(13, personalLineId_);
+        output.writeUInt32(12, personalLineId_);
+      }
+      if (paramCase_ == 14) {
+        output.writeUInt32(
+            14, (int)((java.lang.Integer) param_));
       }
       unknownFields.writeTo(output);
     }
@@ -416,23 +424,23 @@ public final class LockedPersonallineDataOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (paramCase_ == 1) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(
-              1, (int)((java.lang.Integer) param_));
-      }
       if (lockReason_ != emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason.LOCK_REASON_LEVEL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, lockReason_);
+          .computeEnumSize(1, lockReason_);
       }
-      if (paramCase_ == 3) {
+      if (paramCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(
-              3, (int)((java.lang.Integer) param_));
+              2, (int)((java.lang.Integer) param_));
       }
       if (personalLineId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, personalLineId_);
+          .computeUInt32Size(12, personalLineId_);
+      }
+      if (paramCase_ == 14) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(
+              14, (int)((java.lang.Integer) param_));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -454,11 +462,11 @@ public final class LockedPersonallineDataOuterClass {
           != other.getPersonalLineId()) return false;
       if (!getParamCase().equals(other.getParamCase())) return false;
       switch (paramCase_) {
-        case 3:
+        case 14:
           if (getChapterId()
               != other.getChapterId()) return false;
           break;
-        case 1:
+        case 2:
           if (getLevel()
               != other.getLevel()) return false;
           break;
@@ -481,11 +489,11 @@ public final class LockedPersonallineDataOuterClass {
       hash = (37 * hash) + PERSONAL_LINE_ID_FIELD_NUMBER;
       hash = (53 * hash) + getPersonalLineId();
       switch (paramCase_) {
-        case 3:
+        case 14:
           hash = (37 * hash) + CHAPTER_ID_FIELD_NUMBER;
           hash = (53 * hash) + getChapterId();
           break;
-        case 1:
+        case 2:
           hash = (37 * hash) + LEVEL_FIELD_NUMBER;
           hash = (53 * hash) + getLevel();
           break;
@@ -588,6 +596,10 @@ public final class LockedPersonallineDataOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: FCFKAAGEDPK
+     * </pre>
+     *
      * Protobuf type {@code LockedPersonallineData}
      */
     public static final class Builder extends
@@ -659,10 +671,10 @@ public final class LockedPersonallineDataOuterClass {
         emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData result = new emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData(this);
         result.lockReason_ = lockReason_;
         result.personalLineId_ = personalLineId_;
-        if (paramCase_ == 3) {
+        if (paramCase_ == 14) {
           result.param_ = param_;
         }
-        if (paramCase_ == 1) {
+        if (paramCase_ == 2) {
           result.param_ = param_;
         }
         result.paramCase_ = paramCase_;
@@ -779,14 +791,14 @@ public final class LockedPersonallineDataOuterClass {
 
       private int lockReason_ = 0;
       /**
-       * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+       * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
        * @return The enum numeric value on the wire for lockReason.
        */
       @java.lang.Override public int getLockReasonValue() {
         return lockReason_;
       }
       /**
-       * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+       * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
        * @param value The enum numeric value on the wire for lockReason to set.
        * @return This builder for chaining.
        */
@@ -797,7 +809,7 @@ public final class LockedPersonallineDataOuterClass {
         return this;
       }
       /**
-       * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+       * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
        * @return The lockReason.
        */
       @java.lang.Override
@@ -807,7 +819,7 @@ public final class LockedPersonallineDataOuterClass {
         return result == null ? emu.grasscutter.net.proto.LockedPersonallineDataOuterClass.LockedPersonallineData.LockReason.UNRECOGNIZED : result;
       }
       /**
-       * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+       * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
        * @param value The lockReason to set.
        * @return This builder for chaining.
        */
@@ -821,7 +833,7 @@ public final class LockedPersonallineDataOuterClass {
         return this;
       }
       /**
-       * <code>.LockedPersonallineData.LockReason lock_reason = 2;</code>
+       * <code>.LockedPersonallineData.LockReason lock_reason = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearLockReason() {
@@ -833,7 +845,7 @@ public final class LockedPersonallineDataOuterClass {
 
       private int personalLineId_ ;
       /**
-       * <code>uint32 personal_line_id = 13;</code>
+       * <code>uint32 personal_line_id = 12;</code>
        * @return The personalLineId.
        */
       @java.lang.Override
@@ -841,7 +853,7 @@ public final class LockedPersonallineDataOuterClass {
         return personalLineId_;
       }
       /**
-       * <code>uint32 personal_line_id = 13;</code>
+       * <code>uint32 personal_line_id = 12;</code>
        * @param value The personalLineId to set.
        * @return This builder for chaining.
        */
@@ -852,7 +864,7 @@ public final class LockedPersonallineDataOuterClass {
         return this;
       }
       /**
-       * <code>uint32 personal_line_id = 13;</code>
+       * <code>uint32 personal_line_id = 12;</code>
        * @return This builder for chaining.
        */
       public Builder clearPersonalLineId() {
@@ -863,39 +875,39 @@ public final class LockedPersonallineDataOuterClass {
       }
 
       /**
-       * <code>uint32 chapter_id = 3;</code>
+       * <code>uint32 chapter_id = 14;</code>
        * @return Whether the chapterId field is set.
        */
       public boolean hasChapterId() {
-        return paramCase_ == 3;
+        return paramCase_ == 14;
       }
       /**
-       * <code>uint32 chapter_id = 3;</code>
+       * <code>uint32 chapter_id = 14;</code>
        * @return The chapterId.
        */
       public int getChapterId() {
-        if (paramCase_ == 3) {
+        if (paramCase_ == 14) {
           return (java.lang.Integer) param_;
         }
         return 0;
       }
       /**
-       * <code>uint32 chapter_id = 3;</code>
+       * <code>uint32 chapter_id = 14;</code>
        * @param value The chapterId to set.
        * @return This builder for chaining.
        */
       public Builder setChapterId(int value) {
-        paramCase_ = 3;
+        paramCase_ = 14;
         param_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 chapter_id = 3;</code>
+       * <code>uint32 chapter_id = 14;</code>
        * @return This builder for chaining.
        */
       public Builder clearChapterId() {
-        if (paramCase_ == 3) {
+        if (paramCase_ == 14) {
           paramCase_ = 0;
           param_ = null;
           onChanged();
@@ -904,39 +916,39 @@ public final class LockedPersonallineDataOuterClass {
       }
 
       /**
-       * <code>uint32 level = 1;</code>
+       * <code>uint32 level = 2;</code>
        * @return Whether the level field is set.
        */
       public boolean hasLevel() {
-        return paramCase_ == 1;
+        return paramCase_ == 2;
       }
       /**
-       * <code>uint32 level = 1;</code>
+       * <code>uint32 level = 2;</code>
        * @return The level.
        */
       public int getLevel() {
-        if (paramCase_ == 1) {
+        if (paramCase_ == 2) {
           return (java.lang.Integer) param_;
         }
         return 0;
       }
       /**
-       * <code>uint32 level = 1;</code>
+       * <code>uint32 level = 2;</code>
        * @param value The level to set.
        * @return This builder for chaining.
        */
       public Builder setLevel(int value) {
-        paramCase_ = 1;
+        paramCase_ = 2;
         param_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 level = 1;</code>
+       * <code>uint32 level = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearLevel() {
-        if (paramCase_ == 1) {
+        if (paramCase_ == 2) {
           paramCase_ = 0;
           param_ = null;
           onChanged();
@@ -1011,10 +1023,10 @@ public final class LockedPersonallineDataOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\034LockedPersonallineData.proto\"\327\001\n\026Locke" +
-      "dPersonallineData\0227\n\013lock_reason\030\002 \001(\0162\"" +
+      "dPersonallineData\0227\n\013lock_reason\030\001 \001(\0162\"" +
       ".LockedPersonallineData.LockReason\022\030\n\020pe" +
-      "rsonal_line_id\030\r \001(\r\022\024\n\nchapter_id\030\003 \001(\r" +
-      "H\000\022\017\n\005level\030\001 \001(\rH\000\":\n\nLockReason\022\025\n\021LOC" +
+      "rsonal_line_id\030\014 \001(\r\022\024\n\nchapter_id\030\016 \001(\r" +
+      "H\000\022\017\n\005level\030\002 \001(\rH\000\":\n\nLockReason\022\025\n\021LOC" +
       "K_REASON_LEVEL\020\000\022\025\n\021LOCK_REASON_QUEST\020\001B" +
       "\007\n\005paramB\033\n\031emu.grasscutter.net.protob\006p" +
       "roto3"

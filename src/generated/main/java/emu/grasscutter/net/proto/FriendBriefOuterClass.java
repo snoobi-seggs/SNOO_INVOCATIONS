@@ -217,6 +217,10 @@ public final class FriendBriefOuterClass {
     emu.grasscutter.net.proto.PlatformTypeOuterClass.PlatformType getPlatformType();
   }
   /**
+   * <pre>
+   * Name: CCNCLHGNBFP
+   * </pre>
+   *
    * Protobuf type {@code FriendBrief}
    */
   public static final class FriendBrief extends
@@ -884,7 +888,7 @@ public final class FriendBriefOuterClass {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signature_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, signature_);
       }
-      if (onlineState_ != emu.grasscutter.net.proto.FriendOnlineStateOuterClass.FriendOnlineState.FRIEND_ONLINE_STATE_FREIEND_DISCONNECT.getNumber()) {
+      if (onlineState_ != emu.grasscutter.net.proto.FriendOnlineStateOuterClass.FriendOnlineState.FRIEND_ONLINE_STATE_FRIEND_DISCONNECT.getNumber()) {
         output.writeEnum(7, onlineState_);
       }
       if (param_ != 0) {
@@ -963,7 +967,7 @@ public final class FriendBriefOuterClass {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signature_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, signature_);
       }
-      if (onlineState_ != emu.grasscutter.net.proto.FriendOnlineStateOuterClass.FriendOnlineState.FRIEND_ONLINE_STATE_FREIEND_DISCONNECT.getNumber()) {
+      if (onlineState_ != emu.grasscutter.net.proto.FriendOnlineStateOuterClass.FriendOnlineState.FRIEND_ONLINE_STATE_FRIEND_DISCONNECT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(7, onlineState_);
       }
@@ -1243,6 +1247,10 @@ public final class FriendBriefOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: CCNCLHGNBFP
+     * </pre>
+     *
      * Protobuf type {@code FriendBrief}
      */
     public static final class Builder extends

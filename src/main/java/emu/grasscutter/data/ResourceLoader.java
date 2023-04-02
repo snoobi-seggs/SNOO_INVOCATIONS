@@ -128,6 +128,7 @@ public class ResourceLoader {
         loadGroupReplacements();
         loadTrialAvatarCustomData();
         EntityControllerScriptManager.load();
+		loadGcgCardSkills();
         Grasscutter.getLogger().info(translate("messages.status.resources.finish"));
         loadedAll = true;
     }
@@ -749,6 +750,39 @@ public class ResourceLoader {
             });
         }
     }
+	
+	private static void loadGcgCardSkills() {
+		val pattern = Pattern.compile(".*\\.json$");
+		try (val stream = Files.newDirectoryStream(getResourcePath("BinOutput/gcg_card_skill"), "*.json")){
+            stream.forEach(path -> {
+                val matcher = pattern.matcher(path.getFileName().toString());
+                if (!matcher.find()) {
+					Grasscutter.getLogger().warn("{} is not loaded",path.getFileName());
+					return;
+				} else {
+					Grasscutter.getLogger().debug("Loading {}",path.getFileName());
+				}
+				
+                GcgConfigSkill config;
+				
+                try {
+                    config = JsonUtils.loadToClass(path, GcgConfigSkill.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                if (config.getName() == null) return;
+				
+				GameData.getGcgConfigSkillDataMap().put(config.getName(), config);
+				config.onLoad();
+            });
+			//debug
+			//Grasscutter.getLogger().info(GameData.getGcgConfigSkillDataMap().toString());
+        } catch (IOException e) {
+            Grasscutter.getLogger().error("gcg_card_skill files cannot be found, you cannot use gcg cards");
+        }
+	}
 
     // BinOutput configs
 

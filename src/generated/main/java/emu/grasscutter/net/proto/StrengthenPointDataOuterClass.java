@@ -19,18 +19,22 @@ public final class StrengthenPointDataOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 base_point = 10;</code>
-     * @return The basePoint.
+     * <code>uint32 OBOMOEJEDHL = 6;</code>
+     * @return The oBOMOEJEDHL.
      */
-    int getBasePoint();
+    int getOBOMOEJEDHL();
 
     /**
-     * <code>uint32 cur_point = 11;</code>
-     * @return The curPoint.
+     * <code>uint32 NHOPNOMIDEF = 2;</code>
+     * @return The nHOPNOMIDEF.
      */
-    int getCurPoint();
+    int getNHOPNOMIDEF();
   }
   /**
+   * <pre>
+   * Name: FGMDHBOGAHG
+   * </pre>
+   *
    * Protobuf type {@code StrengthenPointData}
    */
   public static final class StrengthenPointData extends
@@ -75,14 +79,14 @@ public final class StrengthenPointDataOuterClass {
             case 0:
               done = true;
               break;
-            case 80: {
+            case 16: {
 
-              basePoint_ = input.readUInt32();
+              nHOPNOMIDEF_ = input.readUInt32();
               break;
             }
-            case 88: {
+            case 48: {
 
-              curPoint_ = input.readUInt32();
+              oBOMOEJEDHL_ = input.readUInt32();
               break;
             }
             default: {
@@ -117,26 +121,26 @@ public final class StrengthenPointDataOuterClass {
               emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData.class, emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData.Builder.class);
     }
 
-    public static final int BASE_POINT_FIELD_NUMBER = 10;
-    private int basePoint_;
+    public static final int OBOMOEJEDHL_FIELD_NUMBER = 6;
+    private int oBOMOEJEDHL_;
     /**
-     * <code>uint32 base_point = 10;</code>
-     * @return The basePoint.
+     * <code>uint32 OBOMOEJEDHL = 6;</code>
+     * @return The oBOMOEJEDHL.
      */
     @java.lang.Override
-    public int getBasePoint() {
-      return basePoint_;
+    public int getOBOMOEJEDHL() {
+      return oBOMOEJEDHL_;
     }
 
-    public static final int CUR_POINT_FIELD_NUMBER = 11;
-    private int curPoint_;
+    public static final int NHOPNOMIDEF_FIELD_NUMBER = 2;
+    private int nHOPNOMIDEF_;
     /**
-     * <code>uint32 cur_point = 11;</code>
-     * @return The curPoint.
+     * <code>uint32 NHOPNOMIDEF = 2;</code>
+     * @return The nHOPNOMIDEF.
      */
     @java.lang.Override
-    public int getCurPoint() {
-      return curPoint_;
+    public int getNHOPNOMIDEF() {
+      return nHOPNOMIDEF_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -153,11 +157,11 @@ public final class StrengthenPointDataOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (basePoint_ != 0) {
-        output.writeUInt32(10, basePoint_);
+      if (nHOPNOMIDEF_ != 0) {
+        output.writeUInt32(2, nHOPNOMIDEF_);
       }
-      if (curPoint_ != 0) {
-        output.writeUInt32(11, curPoint_);
+      if (oBOMOEJEDHL_ != 0) {
+        output.writeUInt32(6, oBOMOEJEDHL_);
       }
       unknownFields.writeTo(output);
     }
@@ -168,13 +172,13 @@ public final class StrengthenPointDataOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (basePoint_ != 0) {
+      if (nHOPNOMIDEF_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, basePoint_);
+          .computeUInt32Size(2, nHOPNOMIDEF_);
       }
-      if (curPoint_ != 0) {
+      if (oBOMOEJEDHL_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, curPoint_);
+          .computeUInt32Size(6, oBOMOEJEDHL_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -191,10 +195,10 @@ public final class StrengthenPointDataOuterClass {
       }
       emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData other = (emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData) obj;
 
-      if (getBasePoint()
-          != other.getBasePoint()) return false;
-      if (getCurPoint()
-          != other.getCurPoint()) return false;
+      if (getOBOMOEJEDHL()
+          != other.getOBOMOEJEDHL()) return false;
+      if (getNHOPNOMIDEF()
+          != other.getNHOPNOMIDEF()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -206,10 +210,10 @@ public final class StrengthenPointDataOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + BASE_POINT_FIELD_NUMBER;
-      hash = (53 * hash) + getBasePoint();
-      hash = (37 * hash) + CUR_POINT_FIELD_NUMBER;
-      hash = (53 * hash) + getCurPoint();
+      hash = (37 * hash) + OBOMOEJEDHL_FIELD_NUMBER;
+      hash = (53 * hash) + getOBOMOEJEDHL();
+      hash = (37 * hash) + NHOPNOMIDEF_FIELD_NUMBER;
+      hash = (53 * hash) + getNHOPNOMIDEF();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -306,6 +310,10 @@ public final class StrengthenPointDataOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: FGMDHBOGAHG
+     * </pre>
+     *
      * Protobuf type {@code StrengthenPointData}
      */
     public static final class Builder extends
@@ -343,9 +351,9 @@ public final class StrengthenPointDataOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        basePoint_ = 0;
+        oBOMOEJEDHL_ = 0;
 
-        curPoint_ = 0;
+        nHOPNOMIDEF_ = 0;
 
         return this;
       }
@@ -373,8 +381,8 @@ public final class StrengthenPointDataOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData buildPartial() {
         emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData result = new emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData(this);
-        result.basePoint_ = basePoint_;
-        result.curPoint_ = curPoint_;
+        result.oBOMOEJEDHL_ = oBOMOEJEDHL_;
+        result.nHOPNOMIDEF_ = nHOPNOMIDEF_;
         onBuilt();
         return result;
       }
@@ -423,11 +431,11 @@ public final class StrengthenPointDataOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData other) {
         if (other == emu.grasscutter.net.proto.StrengthenPointDataOuterClass.StrengthenPointData.getDefaultInstance()) return this;
-        if (other.getBasePoint() != 0) {
-          setBasePoint(other.getBasePoint());
+        if (other.getOBOMOEJEDHL() != 0) {
+          setOBOMOEJEDHL(other.getOBOMOEJEDHL());
         }
-        if (other.getCurPoint() != 0) {
-          setCurPoint(other.getCurPoint());
+        if (other.getNHOPNOMIDEF() != 0) {
+          setNHOPNOMIDEF(other.getNHOPNOMIDEF());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -458,64 +466,64 @@ public final class StrengthenPointDataOuterClass {
         return this;
       }
 
-      private int basePoint_ ;
+      private int oBOMOEJEDHL_ ;
       /**
-       * <code>uint32 base_point = 10;</code>
-       * @return The basePoint.
+       * <code>uint32 OBOMOEJEDHL = 6;</code>
+       * @return The oBOMOEJEDHL.
        */
       @java.lang.Override
-      public int getBasePoint() {
-        return basePoint_;
+      public int getOBOMOEJEDHL() {
+        return oBOMOEJEDHL_;
       }
       /**
-       * <code>uint32 base_point = 10;</code>
-       * @param value The basePoint to set.
+       * <code>uint32 OBOMOEJEDHL = 6;</code>
+       * @param value The oBOMOEJEDHL to set.
        * @return This builder for chaining.
        */
-      public Builder setBasePoint(int value) {
+      public Builder setOBOMOEJEDHL(int value) {
         
-        basePoint_ = value;
+        oBOMOEJEDHL_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 base_point = 10;</code>
+       * <code>uint32 OBOMOEJEDHL = 6;</code>
        * @return This builder for chaining.
        */
-      public Builder clearBasePoint() {
+      public Builder clearOBOMOEJEDHL() {
         
-        basePoint_ = 0;
+        oBOMOEJEDHL_ = 0;
         onChanged();
         return this;
       }
 
-      private int curPoint_ ;
+      private int nHOPNOMIDEF_ ;
       /**
-       * <code>uint32 cur_point = 11;</code>
-       * @return The curPoint.
+       * <code>uint32 NHOPNOMIDEF = 2;</code>
+       * @return The nHOPNOMIDEF.
        */
       @java.lang.Override
-      public int getCurPoint() {
-        return curPoint_;
+      public int getNHOPNOMIDEF() {
+        return nHOPNOMIDEF_;
       }
       /**
-       * <code>uint32 cur_point = 11;</code>
-       * @param value The curPoint to set.
+       * <code>uint32 NHOPNOMIDEF = 2;</code>
+       * @param value The nHOPNOMIDEF to set.
        * @return This builder for chaining.
        */
-      public Builder setCurPoint(int value) {
+      public Builder setNHOPNOMIDEF(int value) {
         
-        curPoint_ = value;
+        nHOPNOMIDEF_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 cur_point = 11;</code>
+       * <code>uint32 NHOPNOMIDEF = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCurPoint() {
+      public Builder clearNHOPNOMIDEF() {
         
-        curPoint_ = 0;
+        nHOPNOMIDEF_ = 0;
         onChanged();
         return this;
       }
@@ -586,10 +594,10 @@ public final class StrengthenPointDataOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\031StrengthenPointData.proto\"<\n\023Strengthe" +
-      "nPointData\022\022\n\nbase_point\030\n \001(\r\022\021\n\tcur_po" +
-      "int\030\013 \001(\rB\033\n\031emu.grasscutter.net.protob\006" +
-      "proto3"
+      "\n\031StrengthenPointData.proto\"?\n\023Strengthe" +
+      "nPointData\022\023\n\013OBOMOEJEDHL\030\006 \001(\r\022\023\n\013NHOPN" +
+      "OMIDEF\030\002 \001(\rB\033\n\031emu.grasscutter.net.prot" +
+      "ob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -600,7 +608,7 @@ public final class StrengthenPointDataOuterClass {
     internal_static_StrengthenPointData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StrengthenPointData_descriptor,
-        new java.lang.String[] { "BasePoint", "CurPoint", });
+        new java.lang.String[] { "OBOMOEJEDHL", "NHOPNOMIDEF", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

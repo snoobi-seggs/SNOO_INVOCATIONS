@@ -72,18 +72,19 @@ public class MusicGameBeatmap {
 
         return UgcMusicBriefInfo.newBuilder()
             .setMusicId(musicId)
-            .setNoteCount(musicNoteCount)
+            //.setNoteCount(musicNoteCount)
             .setUgcGuid(musicShareId)
             .setMaxScore(maxScore)
-            .setPublishTime(createTime)
+            //.setPublishTime(createTime)	//change setShareTime
+            //.setShareTime(createTime)
             .setCreatorNickname(player.getNickname())
-            .setSavePageType(savePageType)
+            //.setSavePageType(savePageType)
             .setVersion(version)
-            .addAllAfterNoteList(afterNoteList)
-            .addAllBeforeNoteList(beforeNoteList)
-            .setTimeLineEditTime(timeLineEditTime)
-            .setPublishTime(publishTime)
-            .setRealTimeEditTime(realTimeEditTime)
+            //.addAllAfterNoteList(afterNoteList)
+            //.addAllBeforeNoteList(beforeNoteList)
+            //.setTimeLineEditTime(timeLineEditTime)
+            //.setPublishTime(publishTime)
+            //.setRealTimeEditTime(realTimeEditTime)
             ;
     }
 

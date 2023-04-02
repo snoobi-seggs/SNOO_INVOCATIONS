@@ -54,10 +54,8 @@ public final class OpenStateUpdateNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 193
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: JEAIDHCCOGP
+   * CmdId: 174
    * </pre>
    *
    * Protobuf type {@code OpenStateUpdateNotify}
@@ -411,10 +409,8 @@ public final class OpenStateUpdateNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 193
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: JEAIDHCCOGP
+     * CmdId: 174
      * </pre>
      *
      * Protobuf type {@code OpenStateUpdateNotify}

@@ -12,7 +12,8 @@ public class PacketPlayerGameTimeNotify extends BasePacket {
 		super(PacketOpcodes.PlayerGameTimeNotify);
 
 		PlayerGameTimeNotify proto = PlayerGameTimeNotify.newBuilder()
-				.setGameTime(player.getWorld().getGameTime())
+				//.setGameTime(player.getWorld().getGameTime())
+				.setGameTime((int) player.getWorld().getTotalGameTimeMinutes())	//rn 3.5+ no longer requires a % 1440
 				.setUid(player.getUid())
 				.build();
 

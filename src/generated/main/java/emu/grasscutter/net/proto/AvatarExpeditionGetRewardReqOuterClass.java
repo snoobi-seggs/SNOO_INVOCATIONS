@@ -26,10 +26,8 @@ public final class AvatarExpeditionGetRewardReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 1623
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: MIEMEMKNFDE
+   * CmdId: 1641
    * </pre>
    *
    * Protobuf type {@code AvatarExpeditionGetRewardReq}
@@ -282,10 +280,8 @@ public final class AvatarExpeditionGetRewardReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1623
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: MIEMEMKNFDE
+     * CmdId: 1641
      * </pre>
      *
      * Protobuf type {@code AvatarExpeditionGetRewardReq}

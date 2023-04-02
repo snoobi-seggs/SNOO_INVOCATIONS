@@ -20,10 +20,8 @@ public final class GetChatEmojiCollectionReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 4068
-   * EnetChannelId: 0
-   * EnetIsReliable: true
-   * IsAllowClient: true
+   * Name: OOACLKMOEFE
+   * CmdId: 4021
    * </pre>
    *
    * Protobuf type {@code GetChatEmojiCollectionReq}
@@ -248,10 +246,8 @@ public final class GetChatEmojiCollectionReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4068
-     * EnetChannelId: 0
-     * EnetIsReliable: true
-     * IsAllowClient: true
+     * Name: OOACLKMOEFE
+     * CmdId: 4021
      * </pre>
      *
      * Protobuf type {@code GetChatEmojiCollectionReq}

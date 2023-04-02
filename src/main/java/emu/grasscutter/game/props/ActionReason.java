@@ -180,7 +180,9 @@ public enum ActionReason {
 	ChannellerSlabLoopDungeonFirstPassReward(1090),
 	ChannellerSlabLoopDungeonScoreReward(1091),
 	HomeLimitedShopBuy(1092),
-	HomeCoinCollect(1093);
+	HomeCoinCollect(1093),
+	GCG_FINISH_LEVEL_QUEST(1155),
+    GCG_PROFICIENCY_REWARD(1156);
 	
 	private final int value;
 	private static final Int2ObjectMap<ActionReason> map = new Int2ObjectOpenHashMap<>();

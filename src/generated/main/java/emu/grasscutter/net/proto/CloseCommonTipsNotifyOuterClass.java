@@ -20,9 +20,8 @@ public final class CloseCommonTipsNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 3194
-   * EnetChannelId: 0
-   * EnetIsReliable: true
+   * Name: AFLOLBEDPJM
+   * CmdId: 3196
    * </pre>
    *
    * Protobuf type {@code CloseCommonTipsNotify}
@@ -80,8 +79,6 @@ public final class CloseCommonTipsNotifyOuterClass {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -249,9 +246,8 @@ public final class CloseCommonTipsNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 3194
-     * EnetChannelId: 0
-     * EnetIsReliable: true
+     * Name: AFLOLBEDPJM
+     * CmdId: 3196
      * </pre>
      *
      * Protobuf type {@code CloseCommonTipsNotify}

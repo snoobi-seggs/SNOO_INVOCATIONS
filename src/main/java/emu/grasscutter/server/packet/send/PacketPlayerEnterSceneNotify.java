@@ -76,4 +76,33 @@ public class PacketPlayerEnterSceneNotify extends BasePacket {
 
         this.setData(proto);
     }
+	
+	//THIS IS FOR TCG
+	public PacketPlayerEnterSceneNotify(Player player, Player target, EnterType type, EnterReason reason, int newScene, Position newPos, int dungeonId) {
+		super(PacketOpcodes.PlayerEnterSceneNotify);
+
+        player.setSceneLoadState(SceneLoadState.LOADING);
+        player.setEnterSceneToken(Utils.randomRange(1000, 99999));
+
+        PlayerEnterSceneNotify.Builder proto = PlayerEnterSceneNotify.newBuilder()
+				.setDungeonId(2162) //
+                .setPrevSceneId(player.getSceneId())
+                .setPrevPos(player.getPosition().toProto())
+                .setSceneId(79999)
+                .setPos(newPos.toProto())
+                .setSceneBeginTime(System.currentTimeMillis())
+                .setType(type)
+                .setTargetUid(target.getUid())
+                .setEnterSceneToken(player.getEnterSceneToken()) //
+				.setIsFirstLoginEnterScene(false) //
+				.setIsSkipUi(false)  //
+				.setSceneBeginTime(System.currentTimeMillis()) //
+				//.addAllSceneTagIdList(List.of()) //
+                .setWorldLevel(0)
+                .setEnterReason(13) //
+                .setWorldType(1)
+                .setSceneTransaction(newScene + "-" + target.getUid() + "-" + (int) (System.currentTimeMillis() / 1000) + "-" + 18402);
+
+        this.setData(proto);
+	}
 }

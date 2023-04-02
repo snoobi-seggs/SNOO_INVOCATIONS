@@ -19,60 +19,80 @@ public final class HomeFurnitureDataOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 version = 6;</code>
+     * <code>uint32 version = 1;</code>
      * @return The version.
      */
     int getVersion();
 
     /**
-     * <code>int32 parent_furniture_index = 3;</code>
+     * <pre>
+     * LHFNIEEFJOP
+     * </pre>
+     *
+     * <code>int32 parent_furniture_index = 4;</code>
      * @return The parentFurnitureIndex.
      */
     int getParentFurnitureIndex();
 
     /**
-     * <code>uint32 furniture_id = 4;</code>
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
+     * @return Whether the spawnRot field is set.
+     */
+    boolean hasSpawnRot();
+    /**
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
+     * @return The spawnRot.
+     */
+    emu.grasscutter.net.proto.VectorOuterClass.Vector getSpawnRot();
+    /**
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
+     */
+    emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnRotOrBuilder();
+
+    /**
+     * <code>uint32 furniture_id = 7;</code>
      * @return The furnitureId.
      */
     int getFurnitureId();
 
     /**
-     * <code>uint32 guid = 9;</code>
+     * <code>uint32 guid = 8;</code>
      * @return The guid.
      */
     int getGuid();
 
     /**
-     * <code>.Vector spawn_rot = 10;</code>
-     * @return Whether the spawnRot field is set.
-     */
-    boolean hasSpawnRot();
-    /**
-     * <code>.Vector spawn_rot = 10;</code>
-     * @return The spawnRot.
-     */
-    emu.grasscutter.net.proto.VectorOuterClass.Vector getSpawnRot();
-    /**
-     * <code>.Vector spawn_rot = 10;</code>
-     */
-    emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnRotOrBuilder();
-
-    /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      * @return Whether the spawnPos field is set.
      */
     boolean hasSpawnPos();
     /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      * @return The spawnPos.
      */
     emu.grasscutter.net.proto.VectorOuterClass.Vector getSpawnPos();
     /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      */
     emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnPosOrBuilder();
   }
   /**
+   * <pre>
+   * Name: NICMKPJLHMI
+   * </pre>
+   *
    * Protobuf type {@code HomeFurnitureData}
    */
   public static final class HomeFurnitureData extends
@@ -117,40 +137,17 @@ public final class HomeFurnitureDataOuterClass {
             case 0:
               done = true;
               break;
-            case 24: {
-
-              parentFurnitureIndex_ = input.readInt32();
-              break;
-            }
-            case 32: {
-
-              furnitureId_ = input.readUInt32();
-              break;
-            }
-            case 48: {
+            case 8: {
 
               version_ = input.readUInt32();
               break;
             }
-            case 66: {
-              emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder subBuilder = null;
-              if (spawnPos_ != null) {
-                subBuilder = spawnPos_.toBuilder();
-              }
-              spawnPos_ = input.readMessage(emu.grasscutter.net.proto.VectorOuterClass.Vector.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(spawnPos_);
-                spawnPos_ = subBuilder.buildPartial();
-              }
+            case 32: {
 
+              parentFurnitureIndex_ = input.readInt32();
               break;
             }
-            case 72: {
-
-              guid_ = input.readUInt32();
-              break;
-            }
-            case 82: {
+            case 50: {
               emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder subBuilder = null;
               if (spawnRot_ != null) {
                 subBuilder = spawnRot_.toBuilder();
@@ -159,6 +156,29 @@ public final class HomeFurnitureDataOuterClass {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(spawnRot_);
                 spawnRot_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 56: {
+
+              furnitureId_ = input.readUInt32();
+              break;
+            }
+            case 64: {
+
+              guid_ = input.readUInt32();
+              break;
+            }
+            case 106: {
+              emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder subBuilder = null;
+              if (spawnPos_ != null) {
+                subBuilder = spawnPos_.toBuilder();
+              }
+              spawnPos_ = input.readMessage(emu.grasscutter.net.proto.VectorOuterClass.Vector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(spawnPos_);
+                spawnPos_ = subBuilder.buildPartial();
               }
 
               break;
@@ -195,10 +215,10 @@ public final class HomeFurnitureDataOuterClass {
               emu.grasscutter.net.proto.HomeFurnitureDataOuterClass.HomeFurnitureData.class, emu.grasscutter.net.proto.HomeFurnitureDataOuterClass.HomeFurnitureData.Builder.class);
     }
 
-    public static final int VERSION_FIELD_NUMBER = 6;
+    public static final int VERSION_FIELD_NUMBER = 1;
     private int version_;
     /**
-     * <code>uint32 version = 6;</code>
+     * <code>uint32 version = 1;</code>
      * @return The version.
      */
     @java.lang.Override
@@ -206,10 +226,14 @@ public final class HomeFurnitureDataOuterClass {
       return version_;
     }
 
-    public static final int PARENT_FURNITURE_INDEX_FIELD_NUMBER = 3;
+    public static final int PARENT_FURNITURE_INDEX_FIELD_NUMBER = 4;
     private int parentFurnitureIndex_;
     /**
-     * <code>int32 parent_furniture_index = 3;</code>
+     * <pre>
+     * LHFNIEEFJOP
+     * </pre>
+     *
+     * <code>int32 parent_furniture_index = 4;</code>
      * @return The parentFurnitureIndex.
      */
     @java.lang.Override
@@ -217,32 +241,14 @@ public final class HomeFurnitureDataOuterClass {
       return parentFurnitureIndex_;
     }
 
-    public static final int FURNITURE_ID_FIELD_NUMBER = 4;
-    private int furnitureId_;
-    /**
-     * <code>uint32 furniture_id = 4;</code>
-     * @return The furnitureId.
-     */
-    @java.lang.Override
-    public int getFurnitureId() {
-      return furnitureId_;
-    }
-
-    public static final int GUID_FIELD_NUMBER = 9;
-    private int guid_;
-    /**
-     * <code>uint32 guid = 9;</code>
-     * @return The guid.
-     */
-    @java.lang.Override
-    public int getGuid() {
-      return guid_;
-    }
-
-    public static final int SPAWN_ROT_FIELD_NUMBER = 10;
+    public static final int SPAWN_ROT_FIELD_NUMBER = 6;
     private emu.grasscutter.net.proto.VectorOuterClass.Vector spawnRot_;
     /**
-     * <code>.Vector spawn_rot = 10;</code>
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
      * @return Whether the spawnRot field is set.
      */
     @java.lang.Override
@@ -250,7 +256,11 @@ public final class HomeFurnitureDataOuterClass {
       return spawnRot_ != null;
     }
     /**
-     * <code>.Vector spawn_rot = 10;</code>
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
      * @return The spawnRot.
      */
     @java.lang.Override
@@ -258,17 +268,43 @@ public final class HomeFurnitureDataOuterClass {
       return spawnRot_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : spawnRot_;
     }
     /**
-     * <code>.Vector spawn_rot = 10;</code>
+     * <pre>
+     * MGHIMMEFBDI
+     * </pre>
+     *
+     * <code>.Vector spawn_rot = 6;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnRotOrBuilder() {
       return getSpawnRot();
     }
 
-    public static final int SPAWN_POS_FIELD_NUMBER = 8;
+    public static final int FURNITURE_ID_FIELD_NUMBER = 7;
+    private int furnitureId_;
+    /**
+     * <code>uint32 furniture_id = 7;</code>
+     * @return The furnitureId.
+     */
+    @java.lang.Override
+    public int getFurnitureId() {
+      return furnitureId_;
+    }
+
+    public static final int GUID_FIELD_NUMBER = 8;
+    private int guid_;
+    /**
+     * <code>uint32 guid = 8;</code>
+     * @return The guid.
+     */
+    @java.lang.Override
+    public int getGuid() {
+      return guid_;
+    }
+
+    public static final int SPAWN_POS_FIELD_NUMBER = 13;
     private emu.grasscutter.net.proto.VectorOuterClass.Vector spawnPos_;
     /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      * @return Whether the spawnPos field is set.
      */
     @java.lang.Override
@@ -276,7 +312,7 @@ public final class HomeFurnitureDataOuterClass {
       return spawnPos_ != null;
     }
     /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      * @return The spawnPos.
      */
     @java.lang.Override
@@ -284,7 +320,7 @@ public final class HomeFurnitureDataOuterClass {
       return spawnPos_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : spawnPos_;
     }
     /**
-     * <code>.Vector spawn_pos = 8;</code>
+     * <code>.Vector spawn_pos = 13;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnPosOrBuilder() {
@@ -305,23 +341,23 @@ public final class HomeFurnitureDataOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (parentFurnitureIndex_ != 0) {
-        output.writeInt32(3, parentFurnitureIndex_);
-      }
-      if (furnitureId_ != 0) {
-        output.writeUInt32(4, furnitureId_);
-      }
       if (version_ != 0) {
-        output.writeUInt32(6, version_);
+        output.writeUInt32(1, version_);
       }
-      if (spawnPos_ != null) {
-        output.writeMessage(8, getSpawnPos());
-      }
-      if (guid_ != 0) {
-        output.writeUInt32(9, guid_);
+      if (parentFurnitureIndex_ != 0) {
+        output.writeInt32(4, parentFurnitureIndex_);
       }
       if (spawnRot_ != null) {
-        output.writeMessage(10, getSpawnRot());
+        output.writeMessage(6, getSpawnRot());
+      }
+      if (furnitureId_ != 0) {
+        output.writeUInt32(7, furnitureId_);
+      }
+      if (guid_ != 0) {
+        output.writeUInt32(8, guid_);
+      }
+      if (spawnPos_ != null) {
+        output.writeMessage(13, getSpawnPos());
       }
       unknownFields.writeTo(output);
     }
@@ -332,29 +368,29 @@ public final class HomeFurnitureDataOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (parentFurnitureIndex_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, parentFurnitureIndex_);
-      }
-      if (furnitureId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, furnitureId_);
-      }
       if (version_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, version_);
+          .computeUInt32Size(1, version_);
       }
-      if (spawnPos_ != null) {
+      if (parentFurnitureIndex_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getSpawnPos());
-      }
-      if (guid_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(9, guid_);
+          .computeInt32Size(4, parentFurnitureIndex_);
       }
       if (spawnRot_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, getSpawnRot());
+          .computeMessageSize(6, getSpawnRot());
+      }
+      if (furnitureId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, furnitureId_);
+      }
+      if (guid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(8, guid_);
+      }
+      if (spawnPos_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, getSpawnPos());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -375,15 +411,15 @@ public final class HomeFurnitureDataOuterClass {
           != other.getVersion()) return false;
       if (getParentFurnitureIndex()
           != other.getParentFurnitureIndex()) return false;
-      if (getFurnitureId()
-          != other.getFurnitureId()) return false;
-      if (getGuid()
-          != other.getGuid()) return false;
       if (hasSpawnRot() != other.hasSpawnRot()) return false;
       if (hasSpawnRot()) {
         if (!getSpawnRot()
             .equals(other.getSpawnRot())) return false;
       }
+      if (getFurnitureId()
+          != other.getFurnitureId()) return false;
+      if (getGuid()
+          != other.getGuid()) return false;
       if (hasSpawnPos() != other.hasSpawnPos()) return false;
       if (hasSpawnPos()) {
         if (!getSpawnPos()
@@ -404,14 +440,14 @@ public final class HomeFurnitureDataOuterClass {
       hash = (53 * hash) + getVersion();
       hash = (37 * hash) + PARENT_FURNITURE_INDEX_FIELD_NUMBER;
       hash = (53 * hash) + getParentFurnitureIndex();
-      hash = (37 * hash) + FURNITURE_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getFurnitureId();
-      hash = (37 * hash) + GUID_FIELD_NUMBER;
-      hash = (53 * hash) + getGuid();
       if (hasSpawnRot()) {
         hash = (37 * hash) + SPAWN_ROT_FIELD_NUMBER;
         hash = (53 * hash) + getSpawnRot().hashCode();
       }
+      hash = (37 * hash) + FURNITURE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getFurnitureId();
+      hash = (37 * hash) + GUID_FIELD_NUMBER;
+      hash = (53 * hash) + getGuid();
       if (hasSpawnPos()) {
         hash = (37 * hash) + SPAWN_POS_FIELD_NUMBER;
         hash = (53 * hash) + getSpawnPos().hashCode();
@@ -512,6 +548,10 @@ public final class HomeFurnitureDataOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: NICMKPJLHMI
+     * </pre>
+     *
      * Protobuf type {@code HomeFurnitureData}
      */
     public static final class Builder extends
@@ -553,16 +593,16 @@ public final class HomeFurnitureDataOuterClass {
 
         parentFurnitureIndex_ = 0;
 
-        furnitureId_ = 0;
-
-        guid_ = 0;
-
         if (spawnRotBuilder_ == null) {
           spawnRot_ = null;
         } else {
           spawnRot_ = null;
           spawnRotBuilder_ = null;
         }
+        furnitureId_ = 0;
+
+        guid_ = 0;
+
         if (spawnPosBuilder_ == null) {
           spawnPos_ = null;
         } else {
@@ -597,13 +637,13 @@ public final class HomeFurnitureDataOuterClass {
         emu.grasscutter.net.proto.HomeFurnitureDataOuterClass.HomeFurnitureData result = new emu.grasscutter.net.proto.HomeFurnitureDataOuterClass.HomeFurnitureData(this);
         result.version_ = version_;
         result.parentFurnitureIndex_ = parentFurnitureIndex_;
-        result.furnitureId_ = furnitureId_;
-        result.guid_ = guid_;
         if (spawnRotBuilder_ == null) {
           result.spawnRot_ = spawnRot_;
         } else {
           result.spawnRot_ = spawnRotBuilder_.build();
         }
+        result.furnitureId_ = furnitureId_;
+        result.guid_ = guid_;
         if (spawnPosBuilder_ == null) {
           result.spawnPos_ = spawnPos_;
         } else {
@@ -663,14 +703,14 @@ public final class HomeFurnitureDataOuterClass {
         if (other.getParentFurnitureIndex() != 0) {
           setParentFurnitureIndex(other.getParentFurnitureIndex());
         }
+        if (other.hasSpawnRot()) {
+          mergeSpawnRot(other.getSpawnRot());
+        }
         if (other.getFurnitureId() != 0) {
           setFurnitureId(other.getFurnitureId());
         }
         if (other.getGuid() != 0) {
           setGuid(other.getGuid());
-        }
-        if (other.hasSpawnRot()) {
-          mergeSpawnRot(other.getSpawnRot());
         }
         if (other.hasSpawnPos()) {
           mergeSpawnPos(other.getSpawnPos());
@@ -706,7 +746,7 @@ public final class HomeFurnitureDataOuterClass {
 
       private int version_ ;
       /**
-       * <code>uint32 version = 6;</code>
+       * <code>uint32 version = 1;</code>
        * @return The version.
        */
       @java.lang.Override
@@ -714,7 +754,7 @@ public final class HomeFurnitureDataOuterClass {
         return version_;
       }
       /**
-       * <code>uint32 version = 6;</code>
+       * <code>uint32 version = 1;</code>
        * @param value The version to set.
        * @return This builder for chaining.
        */
@@ -725,7 +765,7 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>uint32 version = 6;</code>
+       * <code>uint32 version = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearVersion() {
@@ -737,7 +777,11 @@ public final class HomeFurnitureDataOuterClass {
 
       private int parentFurnitureIndex_ ;
       /**
-       * <code>int32 parent_furniture_index = 3;</code>
+       * <pre>
+       * LHFNIEEFJOP
+       * </pre>
+       *
+       * <code>int32 parent_furniture_index = 4;</code>
        * @return The parentFurnitureIndex.
        */
       @java.lang.Override
@@ -745,7 +789,11 @@ public final class HomeFurnitureDataOuterClass {
         return parentFurnitureIndex_;
       }
       /**
-       * <code>int32 parent_furniture_index = 3;</code>
+       * <pre>
+       * LHFNIEEFJOP
+       * </pre>
+       *
+       * <code>int32 parent_furniture_index = 4;</code>
        * @param value The parentFurnitureIndex to set.
        * @return This builder for chaining.
        */
@@ -756,7 +804,11 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>int32 parent_furniture_index = 3;</code>
+       * <pre>
+       * LHFNIEEFJOP
+       * </pre>
+       *
+       * <code>int32 parent_furniture_index = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearParentFurnitureIndex() {
@@ -766,80 +818,26 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
 
-      private int furnitureId_ ;
-      /**
-       * <code>uint32 furniture_id = 4;</code>
-       * @return The furnitureId.
-       */
-      @java.lang.Override
-      public int getFurnitureId() {
-        return furnitureId_;
-      }
-      /**
-       * <code>uint32 furniture_id = 4;</code>
-       * @param value The furnitureId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setFurnitureId(int value) {
-        
-        furnitureId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 furniture_id = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearFurnitureId() {
-        
-        furnitureId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int guid_ ;
-      /**
-       * <code>uint32 guid = 9;</code>
-       * @return The guid.
-       */
-      @java.lang.Override
-      public int getGuid() {
-        return guid_;
-      }
-      /**
-       * <code>uint32 guid = 9;</code>
-       * @param value The guid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setGuid(int value) {
-        
-        guid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 guid = 9;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearGuid() {
-        
-        guid_ = 0;
-        onChanged();
-        return this;
-      }
-
       private emu.grasscutter.net.proto.VectorOuterClass.Vector spawnRot_;
       private com.google.protobuf.SingleFieldBuilderV3<
           emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> spawnRotBuilder_;
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        * @return Whether the spawnRot field is set.
        */
       public boolean hasSpawnRot() {
         return spawnRotBuilder_ != null || spawnRot_ != null;
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        * @return The spawnRot.
        */
       public emu.grasscutter.net.proto.VectorOuterClass.Vector getSpawnRot() {
@@ -850,7 +848,11 @@ public final class HomeFurnitureDataOuterClass {
         }
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public Builder setSpawnRot(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
         if (spawnRotBuilder_ == null) {
@@ -866,7 +868,11 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public Builder setSpawnRot(
           emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder builderForValue) {
@@ -880,7 +886,11 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public Builder mergeSpawnRot(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
         if (spawnRotBuilder_ == null) {
@@ -898,7 +908,11 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public Builder clearSpawnRot() {
         if (spawnRotBuilder_ == null) {
@@ -912,7 +926,11 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder getSpawnRotBuilder() {
         
@@ -920,7 +938,11 @@ public final class HomeFurnitureDataOuterClass {
         return getSpawnRotFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnRotOrBuilder() {
         if (spawnRotBuilder_ != null) {
@@ -931,7 +953,11 @@ public final class HomeFurnitureDataOuterClass {
         }
       }
       /**
-       * <code>.Vector spawn_rot = 10;</code>
+       * <pre>
+       * MGHIMMEFBDI
+       * </pre>
+       *
+       * <code>.Vector spawn_rot = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> 
@@ -947,18 +973,80 @@ public final class HomeFurnitureDataOuterClass {
         return spawnRotBuilder_;
       }
 
+      private int furnitureId_ ;
+      /**
+       * <code>uint32 furniture_id = 7;</code>
+       * @return The furnitureId.
+       */
+      @java.lang.Override
+      public int getFurnitureId() {
+        return furnitureId_;
+      }
+      /**
+       * <code>uint32 furniture_id = 7;</code>
+       * @param value The furnitureId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFurnitureId(int value) {
+        
+        furnitureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 furniture_id = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFurnitureId() {
+        
+        furnitureId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int guid_ ;
+      /**
+       * <code>uint32 guid = 8;</code>
+       * @return The guid.
+       */
+      @java.lang.Override
+      public int getGuid() {
+        return guid_;
+      }
+      /**
+       * <code>uint32 guid = 8;</code>
+       * @param value The guid to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGuid(int value) {
+        
+        guid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 guid = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGuid() {
+        
+        guid_ = 0;
+        onChanged();
+        return this;
+      }
+
       private emu.grasscutter.net.proto.VectorOuterClass.Vector spawnPos_;
       private com.google.protobuf.SingleFieldBuilderV3<
           emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> spawnPosBuilder_;
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        * @return Whether the spawnPos field is set.
        */
       public boolean hasSpawnPos() {
         return spawnPosBuilder_ != null || spawnPos_ != null;
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        * @return The spawnPos.
        */
       public emu.grasscutter.net.proto.VectorOuterClass.Vector getSpawnPos() {
@@ -969,7 +1057,7 @@ public final class HomeFurnitureDataOuterClass {
         }
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public Builder setSpawnPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
         if (spawnPosBuilder_ == null) {
@@ -985,7 +1073,7 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public Builder setSpawnPos(
           emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder builderForValue) {
@@ -999,7 +1087,7 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public Builder mergeSpawnPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
         if (spawnPosBuilder_ == null) {
@@ -1017,7 +1105,7 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public Builder clearSpawnPos() {
         if (spawnPosBuilder_ == null) {
@@ -1031,7 +1119,7 @@ public final class HomeFurnitureDataOuterClass {
         return this;
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder getSpawnPosBuilder() {
         
@@ -1039,7 +1127,7 @@ public final class HomeFurnitureDataOuterClass {
         return getSpawnPosFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getSpawnPosOrBuilder() {
         if (spawnPosBuilder_ != null) {
@@ -1050,7 +1138,7 @@ public final class HomeFurnitureDataOuterClass {
         }
       }
       /**
-       * <code>.Vector spawn_pos = 8;</code>
+       * <code>.Vector spawn_pos = 13;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> 
@@ -1133,10 +1221,10 @@ public final class HomeFurnitureDataOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\027HomeFurnitureData.proto\032\014Vector.proto\"" +
-      "\240\001\n\021HomeFurnitureData\022\017\n\007version\030\006 \001(\r\022\036" +
-      "\n\026parent_furniture_index\030\003 \001(\005\022\024\n\014furnit" +
-      "ure_id\030\004 \001(\r\022\014\n\004guid\030\t \001(\r\022\032\n\tspawn_rot\030" +
-      "\n \001(\0132\007.Vector\022\032\n\tspawn_pos\030\010 \001(\0132\007.Vect" +
+      "\240\001\n\021HomeFurnitureData\022\017\n\007version\030\001 \001(\r\022\036" +
+      "\n\026parent_furniture_index\030\004 \001(\005\022\032\n\tspawn_" +
+      "rot\030\006 \001(\0132\007.Vector\022\024\n\014furniture_id\030\007 \001(\r" +
+      "\022\014\n\004guid\030\010 \001(\r\022\032\n\tspawn_pos\030\r \001(\0132\007.Vect" +
       "orB\033\n\031emu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
@@ -1149,7 +1237,7 @@ public final class HomeFurnitureDataOuterClass {
     internal_static_HomeFurnitureData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_HomeFurnitureData_descriptor,
-        new java.lang.String[] { "Version", "ParentFurnitureIndex", "FurnitureId", "Guid", "SpawnRot", "SpawnPos", });
+        new java.lang.String[] { "Version", "ParentFurnitureIndex", "SpawnRot", "FurnitureId", "Guid", "SpawnPos", });
     emu.grasscutter.net.proto.VectorOuterClass.getDescriptor();
   }
 

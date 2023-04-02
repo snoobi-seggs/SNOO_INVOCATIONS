@@ -19,35 +19,33 @@ public final class WorldPlayerRTTNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     java.util.List<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo> 
         getPlayerRttListList();
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo getPlayerRttList(int index);
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     int getPlayerRttListCount();
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     java.util.List<? extends emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder> 
         getPlayerRttListOrBuilderList();
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder getPlayerRttListOrBuilder(
         int index);
   }
   /**
    * <pre>
-   * CmdId: 22
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: DIGOHGCDENF
+   * CmdId: 19
    * </pre>
    *
    * Protobuf type {@code WorldPlayerRTTNotify}
@@ -96,7 +94,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 10: {
+            case 114: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 playerRttList_ = new java.util.ArrayList<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo>();
                 mutable_bitField0_ |= 0x00000001;
@@ -140,17 +138,17 @@ public final class WorldPlayerRTTNotifyOuterClass {
               emu.grasscutter.net.proto.WorldPlayerRTTNotifyOuterClass.WorldPlayerRTTNotify.class, emu.grasscutter.net.proto.WorldPlayerRTTNotifyOuterClass.WorldPlayerRTTNotify.Builder.class);
     }
 
-    public static final int PLAYER_RTT_LIST_FIELD_NUMBER = 1;
+    public static final int PLAYER_RTT_LIST_FIELD_NUMBER = 14;
     private java.util.List<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo> playerRttList_;
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     @java.lang.Override
     public java.util.List<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo> getPlayerRttListList() {
       return playerRttList_;
     }
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     @java.lang.Override
     public java.util.List<? extends emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder> 
@@ -158,21 +156,21 @@ public final class WorldPlayerRTTNotifyOuterClass {
       return playerRttList_;
     }
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     @java.lang.Override
     public int getPlayerRttListCount() {
       return playerRttList_.size();
     }
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo getPlayerRttList(int index) {
       return playerRttList_.get(index);
     }
     /**
-     * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+     * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder getPlayerRttListOrBuilder(
@@ -195,7 +193,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < playerRttList_.size(); i++) {
-        output.writeMessage(1, playerRttList_.get(i));
+        output.writeMessage(14, playerRttList_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -208,7 +206,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
       size = 0;
       for (int i = 0; i < playerRttList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, playerRttList_.get(i));
+          .computeMessageSize(14, playerRttList_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -339,10 +337,8 @@ public final class WorldPlayerRTTNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 22
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: DIGOHGCDENF
+     * CmdId: 19
      * </pre>
      *
      * Protobuf type {@code WorldPlayerRTTNotify}
@@ -542,7 +538,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
           emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder> playerRttListBuilder_;
 
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo> getPlayerRttListList() {
         if (playerRttListBuilder_ == null) {
@@ -552,7 +548,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public int getPlayerRttListCount() {
         if (playerRttListBuilder_ == null) {
@@ -562,7 +558,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo getPlayerRttList(int index) {
         if (playerRttListBuilder_ == null) {
@@ -572,7 +568,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder setPlayerRttList(
           int index, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo value) {
@@ -589,7 +585,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder setPlayerRttList(
           int index, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder builderForValue) {
@@ -603,7 +599,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder addPlayerRttList(emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo value) {
         if (playerRttListBuilder_ == null) {
@@ -619,7 +615,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder addPlayerRttList(
           int index, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo value) {
@@ -636,7 +632,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder addPlayerRttList(
           emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder builderForValue) {
@@ -650,7 +646,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder addPlayerRttList(
           int index, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder builderForValue) {
@@ -664,7 +660,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder addAllPlayerRttList(
           java.lang.Iterable<? extends emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo> values) {
@@ -679,7 +675,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder clearPlayerRttList() {
         if (playerRttListBuilder_ == null) {
@@ -692,7 +688,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public Builder removePlayerRttList(int index) {
         if (playerRttListBuilder_ == null) {
@@ -705,14 +701,14 @@ public final class WorldPlayerRTTNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder getPlayerRttListBuilder(
           int index) {
         return getPlayerRttListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder getPlayerRttListOrBuilder(
           int index) {
@@ -722,7 +718,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public java.util.List<? extends emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfoOrBuilder> 
            getPlayerRttListOrBuilderList() {
@@ -733,14 +729,14 @@ public final class WorldPlayerRTTNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder addPlayerRttListBuilder() {
         return getPlayerRttListFieldBuilder().addBuilder(
             emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder addPlayerRttListBuilder(
           int index) {
@@ -748,7 +744,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
             index, emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PlayerRTTInfo player_rtt_list = 1;</code>
+       * <code>repeated .PlayerRTTInfo player_rtt_list = 14;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.PlayerRTTInfoOuterClass.PlayerRTTInfo.Builder> 
            getPlayerRttListBuilderList() {
@@ -837,7 +833,7 @@ public final class WorldPlayerRTTNotifyOuterClass {
     java.lang.String[] descriptorData = {
       "\n\032WorldPlayerRTTNotify.proto\032\023PlayerRTTI" +
       "nfo.proto\"?\n\024WorldPlayerRTTNotify\022\'\n\017pla" +
-      "yer_rtt_list\030\001 \003(\0132\016.PlayerRTTInfoB\033\n\031em" +
+      "yer_rtt_list\030\016 \003(\0132\016.PlayerRTTInfoB\033\n\031em" +
       "u.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

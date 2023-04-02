@@ -22,6 +22,7 @@ import emu.grasscutter.game.expedition.ExpeditionInfo;
 import emu.grasscutter.game.friends.FriendsList;
 import emu.grasscutter.game.friends.PlayerProfile;
 import emu.grasscutter.game.gacha.PlayerGachaInfo;
+import emu.grasscutter.game.gcg.GcgManager;
 import emu.grasscutter.game.home.GameHome;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.inventory.Inventory;
@@ -105,6 +106,8 @@ public class Player {
     @Getter private int headImage;
     @Getter private int nameCardId = 210001;
     @Getter private Position position;
+	@Getter @Setter private Position prevPos;
+	@Getter @Setter private Position prevRot;
     @Getter private Position rotation;
     @Getter private PlayerBirthday birthday;
     @Getter private PlayerCodex codex;
@@ -125,6 +128,9 @@ public class Player {
     @Getter private Set<Integer> costumeList;
     @Getter private Set<Integer> personalLineList;
     @Getter @Setter private Set<Integer> rewardedLevels;
+	@Getter @Setter private Set<Integer> gcgRewardedLevels;                 //TCG rewards
+	@Getter @Setter private Set<Integer> investigationRewardedLevels;       //adv handbook page1
+	@Getter @Setter private Set<Integer> investigationTargetRewardedLevels; //adv handbook page1
     @Getter @Setter private Set<Integer> realmList;
     @Getter private Set<Integer> unlockedForgingBlueprints;
     @Getter private Set<Integer> unlockedCombines;
@@ -170,6 +176,7 @@ public class Player {
     @Getter private transient ActivityManager activityManager;
     @Getter private transient PlayerBuffManager buffManager;
     @Getter private transient PlayerProgressManager progressManager;
+	@Getter private transient GcgManager gcgManager;
 
     // Manager data (Save-able to the database)
     private PlayerProfile playerProfile;  // Getter has null-check
@@ -222,6 +229,8 @@ public class Player {
         this.buffManager = new PlayerBuffManager(this);
         this.position = new Position(GameConstants.START_POSITION);
         this.rotation = new Position(0, 307, 0);
+		this.prevPos = new Position();
+		this.prevRot = new Position();
         this.sceneId = 3;
         this.regionId = 1;
         this.properties = new HashMap<>();
@@ -262,6 +271,9 @@ public class Player {
 
         this.birthday = new PlayerBirthday();
         this.rewardedLevels = new HashSet<>();
+		this.gcgRewardedLevels = new HashSet<>();
+        this.investigationRewardedLevels = new HashSet<>();
+        this.investigationTargetRewardedLevels = new HashSet<>();
         this.moonCardGetTimes = new HashSet<>();
         this.codex = new PlayerCodex(this);
         this.progressManager = new PlayerProgressManager(this);
@@ -278,6 +290,7 @@ public class Player {
         this.furnitureManager = new FurnitureManager(this);
         this.cookingManager = new CookingManager(this);
         this.cookingCompoundManager=new CookingCompoundManager(this);
+		this.gcgManager = new GcgManager(this);
     }
 
     // On player creation
@@ -313,6 +326,7 @@ public class Player {
         this.furnitureManager = new FurnitureManager(this);
         this.cookingManager = new CookingManager(this);
         this.cookingCompoundManager=new CookingCompoundManager(this);
+		this.gcgManager = new GcgManager(this);
     }
 
     public void updatePlayerGameTime(long gameTime){
@@ -1304,6 +1318,7 @@ public class Player {
 
     public void onPlayerBorn() {
         getQuestManager().onPlayerBorn();
+		this.gcgManager.onPlayerBorn();
     }
 
     public void onLogin() {
@@ -1353,6 +1368,7 @@ public class Player {
         session.send(new PacketAllWidgetDataNotify(this));
         session.send(new PacketWidgetGadgetAllDataNotify());
         session.send(new PacketCombineDataNotify(this.unlockedCombines));
+		session.send(new PacketPlayerInvestigationAllInfoNotify(this)); //rn hardcoded
         session.send(new PacketGetChatEmojiCollectionRsp(this.getChatEmojiIdList()));
         this.forgingManager.sendForgeDataNotify();
         this.resinManager.onPlayerLogin();
@@ -1370,9 +1386,20 @@ public class Player {
         home = GameHome.getByUid(getUid());
         home.onOwnerLogin(this);
 
-        session.send(new PacketPlayerEnterSceneNotify(this)); // Enter game world
+        //session.send(new PacketPlayerEnterSceneNotify(this)); // Enter game world
         session.send(new PacketPlayerLevelRewardUpdateNotify(rewardedLevels));
-
+		
+		//gcg FINAL SO CAN LOGIN AND FK REGULAR LOGIN
+		this.gcgManager.init();
+		this.gcgManager.onPlayerLogin();
+		
+		//in duel login throw back into match go add actual match details storing urself u smelly shit
+		if (this.gcgManager.isInDuel()) {
+			this.gcgManager.returnToMatch();
+		} else {
+			session.send(new PacketPlayerEnterSceneNotify(this)); // Enter game world
+		}
+		
         // First notify packets sent
         this.hasSentLoginPackets = true;
 

@@ -19,17 +19,15 @@ public final class PlayerSetPauseReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool is_paused = 1;</code>
+     * <code>bool is_paused = 4;</code>
      * @return The isPaused.
      */
     boolean getIsPaused();
   }
   /**
    * <pre>
-   * CmdId: 124
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: PMEKJCILJAH
+   * CmdId: 102
    * </pre>
    *
    * Protobuf type {@code PlayerSetPauseReq}
@@ -76,7 +74,7 @@ public final class PlayerSetPauseReqOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 32: {
 
               isPaused_ = input.readBool();
               break;
@@ -113,10 +111,10 @@ public final class PlayerSetPauseReqOuterClass {
               emu.grasscutter.net.proto.PlayerSetPauseReqOuterClass.PlayerSetPauseReq.class, emu.grasscutter.net.proto.PlayerSetPauseReqOuterClass.PlayerSetPauseReq.Builder.class);
     }
 
-    public static final int IS_PAUSED_FIELD_NUMBER = 1;
+    public static final int IS_PAUSED_FIELD_NUMBER = 4;
     private boolean isPaused_;
     /**
-     * <code>bool is_paused = 1;</code>
+     * <code>bool is_paused = 4;</code>
      * @return The isPaused.
      */
     @java.lang.Override
@@ -139,7 +137,7 @@ public final class PlayerSetPauseReqOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (isPaused_ != false) {
-        output.writeBool(1, isPaused_);
+        output.writeBool(4, isPaused_);
       }
       unknownFields.writeTo(output);
     }
@@ -152,7 +150,7 @@ public final class PlayerSetPauseReqOuterClass {
       size = 0;
       if (isPaused_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(1, isPaused_);
+          .computeBoolSize(4, isPaused_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -282,10 +280,8 @@ public final class PlayerSetPauseReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 124
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: PMEKJCILJAH
+     * CmdId: 102
      * </pre>
      *
      * Protobuf type {@code PlayerSetPauseReq}
@@ -436,7 +432,7 @@ public final class PlayerSetPauseReqOuterClass {
 
       private boolean isPaused_ ;
       /**
-       * <code>bool is_paused = 1;</code>
+       * <code>bool is_paused = 4;</code>
        * @return The isPaused.
        */
       @java.lang.Override
@@ -444,7 +440,7 @@ public final class PlayerSetPauseReqOuterClass {
         return isPaused_;
       }
       /**
-       * <code>bool is_paused = 1;</code>
+       * <code>bool is_paused = 4;</code>
        * @param value The isPaused to set.
        * @return This builder for chaining.
        */
@@ -455,7 +451,7 @@ public final class PlayerSetPauseReqOuterClass {
         return this;
       }
       /**
-       * <code>bool is_paused = 1;</code>
+       * <code>bool is_paused = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsPaused() {
@@ -532,7 +528,7 @@ public final class PlayerSetPauseReqOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\027PlayerSetPauseReq.proto\"&\n\021PlayerSetPa" +
-      "useReq\022\021\n\tis_paused\030\001 \001(\010B\033\n\031emu.grasscu" +
+      "useReq\022\021\n\tis_paused\030\004 \001(\010B\033\n\031emu.grasscu" +
       "tter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

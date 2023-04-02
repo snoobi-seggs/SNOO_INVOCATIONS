@@ -19,23 +19,21 @@ public final class PrivateChatRspOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 chat_forbidden_endtime = 12;</code>
+     * <code>uint32 chat_forbidden_endtime = 1;</code>
      * @return The chatForbiddenEndtime.
      */
     int getChatForbiddenEndtime();
 
     /**
-     * <code>int32 retcode = 14;</code>
+     * <code>int32 retcode = 5;</code>
      * @return The retcode.
      */
     int getRetcode();
   }
   /**
    * <pre>
-   * CmdId: 5048
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: LMDHOMDMBBK
+   * CmdId: 5025
    * </pre>
    *
    * Protobuf type {@code PrivateChatRsp}
@@ -82,12 +80,12 @@ public final class PrivateChatRspOuterClass {
             case 0:
               done = true;
               break;
-            case 96: {
+            case 8: {
 
               chatForbiddenEndtime_ = input.readUInt32();
               break;
             }
-            case 112: {
+            case 40: {
 
               retcode_ = input.readInt32();
               break;
@@ -124,10 +122,10 @@ public final class PrivateChatRspOuterClass {
               emu.grasscutter.net.proto.PrivateChatRspOuterClass.PrivateChatRsp.class, emu.grasscutter.net.proto.PrivateChatRspOuterClass.PrivateChatRsp.Builder.class);
     }
 
-    public static final int CHAT_FORBIDDEN_ENDTIME_FIELD_NUMBER = 12;
+    public static final int CHAT_FORBIDDEN_ENDTIME_FIELD_NUMBER = 1;
     private int chatForbiddenEndtime_;
     /**
-     * <code>uint32 chat_forbidden_endtime = 12;</code>
+     * <code>uint32 chat_forbidden_endtime = 1;</code>
      * @return The chatForbiddenEndtime.
      */
     @java.lang.Override
@@ -135,10 +133,10 @@ public final class PrivateChatRspOuterClass {
       return chatForbiddenEndtime_;
     }
 
-    public static final int RETCODE_FIELD_NUMBER = 14;
+    public static final int RETCODE_FIELD_NUMBER = 5;
     private int retcode_;
     /**
-     * <code>int32 retcode = 14;</code>
+     * <code>int32 retcode = 5;</code>
      * @return The retcode.
      */
     @java.lang.Override
@@ -161,10 +159,10 @@ public final class PrivateChatRspOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (chatForbiddenEndtime_ != 0) {
-        output.writeUInt32(12, chatForbiddenEndtime_);
+        output.writeUInt32(1, chatForbiddenEndtime_);
       }
       if (retcode_ != 0) {
-        output.writeInt32(14, retcode_);
+        output.writeInt32(5, retcode_);
       }
       unknownFields.writeTo(output);
     }
@@ -177,11 +175,11 @@ public final class PrivateChatRspOuterClass {
       size = 0;
       if (chatForbiddenEndtime_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(12, chatForbiddenEndtime_);
+          .computeUInt32Size(1, chatForbiddenEndtime_);
       }
       if (retcode_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, retcode_);
+          .computeInt32Size(5, retcode_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -314,10 +312,8 @@ public final class PrivateChatRspOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 5048
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: LMDHOMDMBBK
+     * CmdId: 5025
      * </pre>
      *
      * Protobuf type {@code PrivateChatRsp}
@@ -474,7 +470,7 @@ public final class PrivateChatRspOuterClass {
 
       private int chatForbiddenEndtime_ ;
       /**
-       * <code>uint32 chat_forbidden_endtime = 12;</code>
+       * <code>uint32 chat_forbidden_endtime = 1;</code>
        * @return The chatForbiddenEndtime.
        */
       @java.lang.Override
@@ -482,7 +478,7 @@ public final class PrivateChatRspOuterClass {
         return chatForbiddenEndtime_;
       }
       /**
-       * <code>uint32 chat_forbidden_endtime = 12;</code>
+       * <code>uint32 chat_forbidden_endtime = 1;</code>
        * @param value The chatForbiddenEndtime to set.
        * @return This builder for chaining.
        */
@@ -493,7 +489,7 @@ public final class PrivateChatRspOuterClass {
         return this;
       }
       /**
-       * <code>uint32 chat_forbidden_endtime = 12;</code>
+       * <code>uint32 chat_forbidden_endtime = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearChatForbiddenEndtime() {
@@ -505,7 +501,7 @@ public final class PrivateChatRspOuterClass {
 
       private int retcode_ ;
       /**
-       * <code>int32 retcode = 14;</code>
+       * <code>int32 retcode = 5;</code>
        * @return The retcode.
        */
       @java.lang.Override
@@ -513,7 +509,7 @@ public final class PrivateChatRspOuterClass {
         return retcode_;
       }
       /**
-       * <code>int32 retcode = 14;</code>
+       * <code>int32 retcode = 5;</code>
        * @param value The retcode to set.
        * @return This builder for chaining.
        */
@@ -524,7 +520,7 @@ public final class PrivateChatRspOuterClass {
         return this;
       }
       /**
-       * <code>int32 retcode = 14;</code>
+       * <code>int32 retcode = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearRetcode() {
@@ -601,8 +597,8 @@ public final class PrivateChatRspOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\024PrivateChatRsp.proto\"A\n\016PrivateChatRsp" +
-      "\022\036\n\026chat_forbidden_endtime\030\014 \001(\r\022\017\n\007retc" +
-      "ode\030\016 \001(\005B\033\n\031emu.grasscutter.net.protob\006" +
+      "\022\036\n\026chat_forbidden_endtime\030\001 \001(\r\022\017\n\007retc" +
+      "ode\030\005 \001(\005B\033\n\031emu.grasscutter.net.protob\006" +
       "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

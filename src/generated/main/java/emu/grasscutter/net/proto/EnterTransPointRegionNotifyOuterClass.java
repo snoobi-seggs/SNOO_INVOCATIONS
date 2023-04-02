@@ -19,23 +19,21 @@ public final class EnterTransPointRegionNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 scene_id = 8;</code>
+     * <code>uint32 scene_id = 10;</code>
      * @return The sceneId.
      */
     int getSceneId();
 
     /**
-     * <code>uint32 point_id = 6;</code>
+     * <code>uint32 point_id = 15;</code>
      * @return The pointId.
      */
     int getPointId();
   }
   /**
    * <pre>
-   * CmdId: 205
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: HMBHOFBKBIB
+   * CmdId: 227
    * </pre>
    *
    * Protobuf type {@code EnterTransPointRegionNotify}
@@ -82,14 +80,14 @@ public final class EnterTransPointRegionNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 48: {
-
-              pointId_ = input.readUInt32();
-              break;
-            }
-            case 64: {
+            case 80: {
 
               sceneId_ = input.readUInt32();
+              break;
+            }
+            case 120: {
+
+              pointId_ = input.readUInt32();
               break;
             }
             default: {
@@ -124,10 +122,10 @@ public final class EnterTransPointRegionNotifyOuterClass {
               emu.grasscutter.net.proto.EnterTransPointRegionNotifyOuterClass.EnterTransPointRegionNotify.class, emu.grasscutter.net.proto.EnterTransPointRegionNotifyOuterClass.EnterTransPointRegionNotify.Builder.class);
     }
 
-    public static final int SCENE_ID_FIELD_NUMBER = 8;
+    public static final int SCENE_ID_FIELD_NUMBER = 10;
     private int sceneId_;
     /**
-     * <code>uint32 scene_id = 8;</code>
+     * <code>uint32 scene_id = 10;</code>
      * @return The sceneId.
      */
     @java.lang.Override
@@ -135,10 +133,10 @@ public final class EnterTransPointRegionNotifyOuterClass {
       return sceneId_;
     }
 
-    public static final int POINT_ID_FIELD_NUMBER = 6;
+    public static final int POINT_ID_FIELD_NUMBER = 15;
     private int pointId_;
     /**
-     * <code>uint32 point_id = 6;</code>
+     * <code>uint32 point_id = 15;</code>
      * @return The pointId.
      */
     @java.lang.Override
@@ -160,11 +158,11 @@ public final class EnterTransPointRegionNotifyOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (pointId_ != 0) {
-        output.writeUInt32(6, pointId_);
-      }
       if (sceneId_ != 0) {
-        output.writeUInt32(8, sceneId_);
+        output.writeUInt32(10, sceneId_);
+      }
+      if (pointId_ != 0) {
+        output.writeUInt32(15, pointId_);
       }
       unknownFields.writeTo(output);
     }
@@ -175,13 +173,13 @@ public final class EnterTransPointRegionNotifyOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (pointId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, pointId_);
-      }
       if (sceneId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, sceneId_);
+          .computeUInt32Size(10, sceneId_);
+      }
+      if (pointId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(15, pointId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -314,10 +312,8 @@ public final class EnterTransPointRegionNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 205
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: HMBHOFBKBIB
+     * CmdId: 227
      * </pre>
      *
      * Protobuf type {@code EnterTransPointRegionNotify}
@@ -474,7 +470,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
 
       private int sceneId_ ;
       /**
-       * <code>uint32 scene_id = 8;</code>
+       * <code>uint32 scene_id = 10;</code>
        * @return The sceneId.
        */
       @java.lang.Override
@@ -482,7 +478,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
         return sceneId_;
       }
       /**
-       * <code>uint32 scene_id = 8;</code>
+       * <code>uint32 scene_id = 10;</code>
        * @param value The sceneId to set.
        * @return This builder for chaining.
        */
@@ -493,7 +489,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 scene_id = 8;</code>
+       * <code>uint32 scene_id = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearSceneId() {
@@ -505,7 +501,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
 
       private int pointId_ ;
       /**
-       * <code>uint32 point_id = 6;</code>
+       * <code>uint32 point_id = 15;</code>
        * @return The pointId.
        */
       @java.lang.Override
@@ -513,7 +509,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
         return pointId_;
       }
       /**
-       * <code>uint32 point_id = 6;</code>
+       * <code>uint32 point_id = 15;</code>
        * @param value The pointId to set.
        * @return This builder for chaining.
        */
@@ -524,7 +520,7 @@ public final class EnterTransPointRegionNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 point_id = 6;</code>
+       * <code>uint32 point_id = 15;</code>
        * @return This builder for chaining.
        */
       public Builder clearPointId() {
@@ -601,8 +597,8 @@ public final class EnterTransPointRegionNotifyOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n!EnterTransPointRegionNotify.proto\"A\n\033E" +
-      "nterTransPointRegionNotify\022\020\n\010scene_id\030\010" +
-      " \001(\r\022\020\n\010point_id\030\006 \001(\rB\033\n\031emu.grasscutte" +
+      "nterTransPointRegionNotify\022\020\n\010scene_id\030\n" +
+      " \001(\r\022\020\n\010point_id\030\017 \001(\rB\033\n\031emu.grasscutte" +
       "r.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

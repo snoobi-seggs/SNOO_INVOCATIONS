@@ -26,10 +26,8 @@ public final class PlayerApplyEnterMpReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 1818
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: LKMHAANNAGN
+   * CmdId: 1843
    * </pre>
    *
    * Protobuf type {@code PlayerApplyEnterMpReq}
@@ -281,10 +279,8 @@ public final class PlayerApplyEnterMpReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1818
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: LKMHAANNAGN
+     * CmdId: 1843
      * </pre>
      *
      * Protobuf type {@code PlayerApplyEnterMpReq}

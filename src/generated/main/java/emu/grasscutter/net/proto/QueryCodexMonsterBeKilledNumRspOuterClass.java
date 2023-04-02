@@ -19,68 +19,90 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
-     * @return A list containing the codexIdList.
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
+     * @return A list containing the beCapturedNumList.
      */
-    java.util.List<java.lang.Integer> getCodexIdListList();
+    java.util.List<java.lang.Integer> getBeCapturedNumListList();
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
-     * @return The count of codexIdList.
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
+     * @return The count of beCapturedNumList.
      */
-    int getCodexIdListCount();
+    int getBeCapturedNumListCount();
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
      * @param index The index of the element to return.
-     * @return The codexIdList at the given index.
+     * @return The beCapturedNumList at the given index.
      */
-    int getCodexIdList(int index);
+    int getBeCapturedNumList(int index);
 
     /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @return A list containing the unk2700MKOBMGGPNMI.
+     * <code>int32 retcode = 11;</code>
+     * @return The retcode.
      */
-    java.util.List<java.lang.Integer> getUnk2700MKOBMGGPNMIList();
-    /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @return The count of unk2700MKOBMGGPNMI.
-     */
-    int getUnk2700MKOBMGGPNMICount();
-    /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @param index The index of the element to return.
-     * @return The unk2700MKOBMGGPNMI at the given index.
-     */
-    int getUnk2700MKOBMGGPNMI(int index);
+    int getRetcode();
 
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @return A list containing the beKilledNumList.
      */
     java.util.List<java.lang.Integer> getBeKilledNumListList();
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @return The count of beKilledNumList.
      */
     int getBeKilledNumListCount();
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @param index The index of the element to return.
      * @return The beKilledNumList at the given index.
      */
     int getBeKilledNumList(int index);
 
     /**
-     * <code>int32 retcode = 5;</code>
-     * @return The retcode.
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @return A list containing the codexIdList.
      */
-    int getRetcode();
+    java.util.List<java.lang.Integer> getCodexIdListList();
+    /**
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @return The count of codexIdList.
+     */
+    int getCodexIdListCount();
+    /**
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @param index The index of the element to return.
+     * @return The codexIdList at the given index.
+     */
+    int getCodexIdList(int index);
   }
   /**
    * <pre>
-   * CmdId: 4209
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: LGANMLHFGID
+   * CmdId: 4201
    * </pre>
    *
    * Protobuf type {@code QueryCodexMonsterBeKilledNumRsp}
@@ -95,9 +117,9 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       super(builder);
     }
     private QueryCodexMonsterBeKilledNumRsp() {
-      codexIdList_ = emptyIntList();
-      unk2700MKOBMGGPNMI_ = emptyIntList();
+      beCapturedNumList_ = emptyIntList();
       beKilledNumList_ = emptyIntList();
+      codexIdList_ = emptyIntList();
     }
 
     @java.lang.Override
@@ -131,20 +153,41 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
             case 0:
               done = true;
               break;
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                beKilledNumList_ = newIntList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              beKilledNumList_.addInt(input.readUInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
+                beKilledNumList_ = newIntList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                beKilledNumList_.addInt(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 codexIdList_ = newIntList();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000004;
               }
               codexIdList_.addInt(input.readUInt32());
               break;
             }
-            case 34: {
+            case 66: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000004) != 0) && input.getBytesUntilLimit() > 0) {
                 codexIdList_ = newIntList();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
                 codexIdList_.addInt(input.readUInt32());
@@ -152,49 +195,28 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
               input.popLimit(limit);
               break;
             }
-            case 40: {
+            case 88: {
 
               retcode_ = input.readInt32();
               break;
             }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                unk2700MKOBMGGPNMI_ = newIntList();
-                mutable_bitField0_ |= 0x00000002;
+            case 112: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                beCapturedNumList_ = newIntList();
+                mutable_bitField0_ |= 0x00000001;
               }
-              unk2700MKOBMGGPNMI_.addInt(input.readUInt32());
+              beCapturedNumList_.addInt(input.readUInt32());
               break;
             }
-            case 50: {
+            case 114: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
-                unk2700MKOBMGGPNMI_ = newIntList();
-                mutable_bitField0_ |= 0x00000002;
+              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+                beCapturedNumList_ = newIntList();
+                mutable_bitField0_ |= 0x00000001;
               }
               while (input.getBytesUntilLimit() > 0) {
-                unk2700MKOBMGGPNMI_.addInt(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 96: {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
-                beKilledNumList_ = newIntList();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              beKilledNumList_.addInt(input.readUInt32());
-              break;
-            }
-            case 98: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) != 0) && input.getBytesUntilLimit() > 0) {
-                beKilledNumList_ = newIntList();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                beKilledNumList_.addInt(input.readUInt32());
+                beCapturedNumList_.addInt(input.readUInt32());
               }
               input.popLimit(limit);
               break;
@@ -214,14 +236,14 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          codexIdList_.makeImmutable(); // C
-        }
         if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          unk2700MKOBMGGPNMI_.makeImmutable(); // C
+          beKilledNumList_.makeImmutable(); // C
         }
         if (((mutable_bitField0_ & 0x00000004) != 0)) {
-          beKilledNumList_.makeImmutable(); // C
+          codexIdList_.makeImmutable(); // C
+        }
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          beCapturedNumList_.makeImmutable(); // C
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -240,66 +262,65 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
               emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp.class, emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp.Builder.class);
     }
 
-    public static final int CODEX_ID_LIST_FIELD_NUMBER = 4;
-    private com.google.protobuf.Internal.IntList codexIdList_;
+    public static final int BE_CAPTURED_NUM_LIST_FIELD_NUMBER = 14;
+    private com.google.protobuf.Internal.IntList beCapturedNumList_;
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
-     * @return A list containing the codexIdList.
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
+     * @return A list containing the beCapturedNumList.
      */
     @java.lang.Override
     public java.util.List<java.lang.Integer>
-        getCodexIdListList() {
-      return codexIdList_;
+        getBeCapturedNumListList() {
+      return beCapturedNumList_;
     }
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
-     * @return The count of codexIdList.
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
+     * @return The count of beCapturedNumList.
      */
-    public int getCodexIdListCount() {
-      return codexIdList_.size();
+    public int getBeCapturedNumListCount() {
+      return beCapturedNumList_.size();
     }
     /**
-     * <code>repeated uint32 codex_id_list = 4;</code>
+     * <pre>
+     * EHOHFHEOKHJ
+     * </pre>
+     *
+     * <code>repeated uint32 be_captured_num_list = 14;</code>
      * @param index The index of the element to return.
-     * @return The codexIdList at the given index.
+     * @return The beCapturedNumList at the given index.
      */
-    public int getCodexIdList(int index) {
-      return codexIdList_.getInt(index);
+    public int getBeCapturedNumList(int index) {
+      return beCapturedNumList_.getInt(index);
     }
-    private int codexIdListMemoizedSerializedSize = -1;
+    private int beCapturedNumListMemoizedSerializedSize = -1;
 
-    public static final int UNK2700_MKOBMGGPNMI_FIELD_NUMBER = 6;
-    private com.google.protobuf.Internal.IntList unk2700MKOBMGGPNMI_;
+    public static final int RETCODE_FIELD_NUMBER = 11;
+    private int retcode_;
     /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @return A list containing the unk2700MKOBMGGPNMI.
+     * <code>int32 retcode = 11;</code>
+     * @return The retcode.
      */
     @java.lang.Override
-    public java.util.List<java.lang.Integer>
-        getUnk2700MKOBMGGPNMIList() {
-      return unk2700MKOBMGGPNMI_;
+    public int getRetcode() {
+      return retcode_;
     }
-    /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @return The count of unk2700MKOBMGGPNMI.
-     */
-    public int getUnk2700MKOBMGGPNMICount() {
-      return unk2700MKOBMGGPNMI_.size();
-    }
-    /**
-     * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-     * @param index The index of the element to return.
-     * @return The unk2700MKOBMGGPNMI at the given index.
-     */
-    public int getUnk2700MKOBMGGPNMI(int index) {
-      return unk2700MKOBMGGPNMI_.getInt(index);
-    }
-    private int unk2700MKOBMGGPNMIMemoizedSerializedSize = -1;
 
-    public static final int BE_KILLED_NUM_LIST_FIELD_NUMBER = 12;
+    public static final int BE_KILLED_NUM_LIST_FIELD_NUMBER = 1;
     private com.google.protobuf.Internal.IntList beKilledNumList_;
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @return A list containing the beKilledNumList.
      */
     @java.lang.Override
@@ -308,14 +329,22 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       return beKilledNumList_;
     }
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @return The count of beKilledNumList.
      */
     public int getBeKilledNumListCount() {
       return beKilledNumList_.size();
     }
     /**
-     * <code>repeated uint32 be_killed_num_list = 12;</code>
+     * <pre>
+     * KHEHMPJHELM
+     * </pre>
+     *
+     * <code>repeated uint32 be_killed_num_list = 1;</code>
      * @param index The index of the element to return.
      * @return The beKilledNumList at the given index.
      */
@@ -324,16 +353,33 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
     }
     private int beKilledNumListMemoizedSerializedSize = -1;
 
-    public static final int RETCODE_FIELD_NUMBER = 5;
-    private int retcode_;
+    public static final int CODEX_ID_LIST_FIELD_NUMBER = 8;
+    private com.google.protobuf.Internal.IntList codexIdList_;
     /**
-     * <code>int32 retcode = 5;</code>
-     * @return The retcode.
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @return A list containing the codexIdList.
      */
     @java.lang.Override
-    public int getRetcode() {
-      return retcode_;
+    public java.util.List<java.lang.Integer>
+        getCodexIdListList() {
+      return codexIdList_;
     }
+    /**
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @return The count of codexIdList.
+     */
+    public int getCodexIdListCount() {
+      return codexIdList_.size();
+    }
+    /**
+     * <code>repeated uint32 codex_id_list = 8;</code>
+     * @param index The index of the element to return.
+     * @return The codexIdList at the given index.
+     */
+    public int getCodexIdList(int index) {
+      return codexIdList_.getInt(index);
+    }
+    private int codexIdListMemoizedSerializedSize = -1;
 
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
@@ -350,29 +396,29 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (getBeKilledNumListList().size() > 0) {
+        output.writeUInt32NoTag(10);
+        output.writeUInt32NoTag(beKilledNumListMemoizedSerializedSize);
+      }
+      for (int i = 0; i < beKilledNumList_.size(); i++) {
+        output.writeUInt32NoTag(beKilledNumList_.getInt(i));
+      }
       if (getCodexIdListList().size() > 0) {
-        output.writeUInt32NoTag(34);
+        output.writeUInt32NoTag(66);
         output.writeUInt32NoTag(codexIdListMemoizedSerializedSize);
       }
       for (int i = 0; i < codexIdList_.size(); i++) {
         output.writeUInt32NoTag(codexIdList_.getInt(i));
       }
       if (retcode_ != 0) {
-        output.writeInt32(5, retcode_);
+        output.writeInt32(11, retcode_);
       }
-      if (getUnk2700MKOBMGGPNMIList().size() > 0) {
-        output.writeUInt32NoTag(50);
-        output.writeUInt32NoTag(unk2700MKOBMGGPNMIMemoizedSerializedSize);
+      if (getBeCapturedNumListList().size() > 0) {
+        output.writeUInt32NoTag(114);
+        output.writeUInt32NoTag(beCapturedNumListMemoizedSerializedSize);
       }
-      for (int i = 0; i < unk2700MKOBMGGPNMI_.size(); i++) {
-        output.writeUInt32NoTag(unk2700MKOBMGGPNMI_.getInt(i));
-      }
-      if (getBeKilledNumListList().size() > 0) {
-        output.writeUInt32NoTag(98);
-        output.writeUInt32NoTag(beKilledNumListMemoizedSerializedSize);
-      }
-      for (int i = 0; i < beKilledNumList_.size(); i++) {
-        output.writeUInt32NoTag(beKilledNumList_.getInt(i));
+      for (int i = 0; i < beCapturedNumList_.size(); i++) {
+        output.writeUInt32NoTag(beCapturedNumList_.getInt(i));
       }
       unknownFields.writeTo(output);
     }
@@ -383,6 +429,20 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       if (size != -1) return size;
 
       size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < beKilledNumList_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(beKilledNumList_.getInt(i));
+        }
+        size += dataSize;
+        if (!getBeKilledNumListList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        beKilledNumListMemoizedSerializedSize = dataSize;
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < codexIdList_.size(); i++) {
@@ -399,35 +459,21 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       }
       if (retcode_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, retcode_);
+          .computeInt32Size(11, retcode_);
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < unk2700MKOBMGGPNMI_.size(); i++) {
+        for (int i = 0; i < beCapturedNumList_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(unk2700MKOBMGGPNMI_.getInt(i));
+            .computeUInt32SizeNoTag(beCapturedNumList_.getInt(i));
         }
         size += dataSize;
-        if (!getUnk2700MKOBMGGPNMIList().isEmpty()) {
+        if (!getBeCapturedNumListList().isEmpty()) {
           size += 1;
           size += com.google.protobuf.CodedOutputStream
               .computeInt32SizeNoTag(dataSize);
         }
-        unk2700MKOBMGGPNMIMemoizedSerializedSize = dataSize;
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < beKilledNumList_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(beKilledNumList_.getInt(i));
-        }
-        size += dataSize;
-        if (!getBeKilledNumListList().isEmpty()) {
-          size += 1;
-          size += com.google.protobuf.CodedOutputStream
-              .computeInt32SizeNoTag(dataSize);
-        }
-        beKilledNumListMemoizedSerializedSize = dataSize;
+        beCapturedNumListMemoizedSerializedSize = dataSize;
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -444,14 +490,14 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       }
       emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp other = (emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp) obj;
 
-      if (!getCodexIdListList()
-          .equals(other.getCodexIdListList())) return false;
-      if (!getUnk2700MKOBMGGPNMIList()
-          .equals(other.getUnk2700MKOBMGGPNMIList())) return false;
-      if (!getBeKilledNumListList()
-          .equals(other.getBeKilledNumListList())) return false;
+      if (!getBeCapturedNumListList()
+          .equals(other.getBeCapturedNumListList())) return false;
       if (getRetcode()
           != other.getRetcode()) return false;
+      if (!getBeKilledNumListList()
+          .equals(other.getBeKilledNumListList())) return false;
+      if (!getCodexIdListList()
+          .equals(other.getCodexIdListList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -463,20 +509,20 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getCodexIdListCount() > 0) {
-        hash = (37 * hash) + CODEX_ID_LIST_FIELD_NUMBER;
-        hash = (53 * hash) + getCodexIdListList().hashCode();
+      if (getBeCapturedNumListCount() > 0) {
+        hash = (37 * hash) + BE_CAPTURED_NUM_LIST_FIELD_NUMBER;
+        hash = (53 * hash) + getBeCapturedNumListList().hashCode();
       }
-      if (getUnk2700MKOBMGGPNMICount() > 0) {
-        hash = (37 * hash) + UNK2700_MKOBMGGPNMI_FIELD_NUMBER;
-        hash = (53 * hash) + getUnk2700MKOBMGGPNMIList().hashCode();
-      }
+      hash = (37 * hash) + RETCODE_FIELD_NUMBER;
+      hash = (53 * hash) + getRetcode();
       if (getBeKilledNumListCount() > 0) {
         hash = (37 * hash) + BE_KILLED_NUM_LIST_FIELD_NUMBER;
         hash = (53 * hash) + getBeKilledNumListList().hashCode();
       }
-      hash = (37 * hash) + RETCODE_FIELD_NUMBER;
-      hash = (53 * hash) + getRetcode();
+      if (getCodexIdListCount() > 0) {
+        hash = (37 * hash) + CODEX_ID_LIST_FIELD_NUMBER;
+        hash = (53 * hash) + getCodexIdListList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -574,10 +620,8 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4209
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: LGANMLHFGID
+     * CmdId: 4201
      * </pre>
      *
      * Protobuf type {@code QueryCodexMonsterBeKilledNumRsp}
@@ -617,14 +661,14 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        codexIdList_ = emptyIntList();
+        beCapturedNumList_ = emptyIntList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        unk2700MKOBMGGPNMI_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        beKilledNumList_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000004);
         retcode_ = 0;
 
+        beKilledNumList_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        codexIdList_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -653,21 +697,21 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp result = new emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp(this);
         int from_bitField0_ = bitField0_;
         if (((bitField0_ & 0x00000001) != 0)) {
-          codexIdList_.makeImmutable();
+          beCapturedNumList_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.codexIdList_ = codexIdList_;
+        result.beCapturedNumList_ = beCapturedNumList_;
+        result.retcode_ = retcode_;
         if (((bitField0_ & 0x00000002) != 0)) {
-          unk2700MKOBMGGPNMI_.makeImmutable();
+          beKilledNumList_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.unk2700MKOBMGGPNMI_ = unk2700MKOBMGGPNMI_;
+        result.beKilledNumList_ = beKilledNumList_;
         if (((bitField0_ & 0x00000004) != 0)) {
-          beKilledNumList_.makeImmutable();
+          codexIdList_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.beKilledNumList_ = beKilledNumList_;
-        result.retcode_ = retcode_;
+        result.codexIdList_ = codexIdList_;
         onBuilt();
         return result;
       }
@@ -716,38 +760,38 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp other) {
         if (other == emu.grasscutter.net.proto.QueryCodexMonsterBeKilledNumRspOuterClass.QueryCodexMonsterBeKilledNumRsp.getDefaultInstance()) return this;
-        if (!other.codexIdList_.isEmpty()) {
-          if (codexIdList_.isEmpty()) {
-            codexIdList_ = other.codexIdList_;
+        if (!other.beCapturedNumList_.isEmpty()) {
+          if (beCapturedNumList_.isEmpty()) {
+            beCapturedNumList_ = other.beCapturedNumList_;
             bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensureCodexIdListIsMutable();
-            codexIdList_.addAll(other.codexIdList_);
+            ensureBeCapturedNumListIsMutable();
+            beCapturedNumList_.addAll(other.beCapturedNumList_);
           }
           onChanged();
         }
-        if (!other.unk2700MKOBMGGPNMI_.isEmpty()) {
-          if (unk2700MKOBMGGPNMI_.isEmpty()) {
-            unk2700MKOBMGGPNMI_ = other.unk2700MKOBMGGPNMI_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureUnk2700MKOBMGGPNMIIsMutable();
-            unk2700MKOBMGGPNMI_.addAll(other.unk2700MKOBMGGPNMI_);
-          }
-          onChanged();
+        if (other.getRetcode() != 0) {
+          setRetcode(other.getRetcode());
         }
         if (!other.beKilledNumList_.isEmpty()) {
           if (beKilledNumList_.isEmpty()) {
             beKilledNumList_ = other.beKilledNumList_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureBeKilledNumListIsMutable();
             beKilledNumList_.addAll(other.beKilledNumList_);
           }
           onChanged();
         }
-        if (other.getRetcode() != 0) {
-          setRetcode(other.getRetcode());
+        if (!other.codexIdList_.isEmpty()) {
+          if (codexIdList_.isEmpty()) {
+            codexIdList_ = other.codexIdList_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureCodexIdListIsMutable();
+            codexIdList_.addAll(other.codexIdList_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -779,189 +823,181 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
       }
       private int bitField0_;
 
-      private com.google.protobuf.Internal.IntList codexIdList_ = emptyIntList();
-      private void ensureCodexIdListIsMutable() {
+      private com.google.protobuf.Internal.IntList beCapturedNumList_ = emptyIntList();
+      private void ensureBeCapturedNumListIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          codexIdList_ = mutableCopy(codexIdList_);
+          beCapturedNumList_ = mutableCopy(beCapturedNumList_);
           bitField0_ |= 0x00000001;
          }
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
-       * @return A list containing the codexIdList.
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
+       * @return A list containing the beCapturedNumList.
        */
       public java.util.List<java.lang.Integer>
-          getCodexIdListList() {
+          getBeCapturedNumListList() {
         return ((bitField0_ & 0x00000001) != 0) ?
-                 java.util.Collections.unmodifiableList(codexIdList_) : codexIdList_;
+                 java.util.Collections.unmodifiableList(beCapturedNumList_) : beCapturedNumList_;
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
-       * @return The count of codexIdList.
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
+       * @return The count of beCapturedNumList.
        */
-      public int getCodexIdListCount() {
-        return codexIdList_.size();
+      public int getBeCapturedNumListCount() {
+        return beCapturedNumList_.size();
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
        * @param index The index of the element to return.
-       * @return The codexIdList at the given index.
+       * @return The beCapturedNumList at the given index.
        */
-      public int getCodexIdList(int index) {
-        return codexIdList_.getInt(index);
+      public int getBeCapturedNumList(int index) {
+        return beCapturedNumList_.getInt(index);
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
        * @param index The index to set the value at.
-       * @param value The codexIdList to set.
+       * @param value The beCapturedNumList to set.
        * @return This builder for chaining.
        */
-      public Builder setCodexIdList(
+      public Builder setBeCapturedNumList(
           int index, int value) {
-        ensureCodexIdListIsMutable();
-        codexIdList_.setInt(index, value);
+        ensureBeCapturedNumListIsMutable();
+        beCapturedNumList_.setInt(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
-       * @param value The codexIdList to add.
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
+       * @param value The beCapturedNumList to add.
        * @return This builder for chaining.
        */
-      public Builder addCodexIdList(int value) {
-        ensureCodexIdListIsMutable();
-        codexIdList_.addInt(value);
+      public Builder addBeCapturedNumList(int value) {
+        ensureBeCapturedNumListIsMutable();
+        beCapturedNumList_.addInt(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
-       * @param values The codexIdList to add.
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
+       * @param values The beCapturedNumList to add.
        * @return This builder for chaining.
        */
-      public Builder addAllCodexIdList(
+      public Builder addAllBeCapturedNumList(
           java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureCodexIdListIsMutable();
+        ensureBeCapturedNumListIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, codexIdList_);
+            values, beCapturedNumList_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 codex_id_list = 4;</code>
+       * <pre>
+       * EHOHFHEOKHJ
+       * </pre>
+       *
+       * <code>repeated uint32 be_captured_num_list = 14;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCodexIdList() {
-        codexIdList_ = emptyIntList();
+      public Builder clearBeCapturedNumList() {
+        beCapturedNumList_ = emptyIntList();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.Internal.IntList unk2700MKOBMGGPNMI_ = emptyIntList();
-      private void ensureUnk2700MKOBMGGPNMIIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          unk2700MKOBMGGPNMI_ = mutableCopy(unk2700MKOBMGGPNMI_);
-          bitField0_ |= 0x00000002;
-         }
-      }
+      private int retcode_ ;
       /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @return A list containing the unk2700MKOBMGGPNMI.
+       * <code>int32 retcode = 11;</code>
+       * @return The retcode.
        */
-      public java.util.List<java.lang.Integer>
-          getUnk2700MKOBMGGPNMIList() {
-        return ((bitField0_ & 0x00000002) != 0) ?
-                 java.util.Collections.unmodifiableList(unk2700MKOBMGGPNMI_) : unk2700MKOBMGGPNMI_;
+      @java.lang.Override
+      public int getRetcode() {
+        return retcode_;
       }
       /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @return The count of unk2700MKOBMGGPNMI.
-       */
-      public int getUnk2700MKOBMGGPNMICount() {
-        return unk2700MKOBMGGPNMI_.size();
-      }
-      /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @param index The index of the element to return.
-       * @return The unk2700MKOBMGGPNMI at the given index.
-       */
-      public int getUnk2700MKOBMGGPNMI(int index) {
-        return unk2700MKOBMGGPNMI_.getInt(index);
-      }
-      /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @param index The index to set the value at.
-       * @param value The unk2700MKOBMGGPNMI to set.
+       * <code>int32 retcode = 11;</code>
+       * @param value The retcode to set.
        * @return This builder for chaining.
        */
-      public Builder setUnk2700MKOBMGGPNMI(
-          int index, int value) {
-        ensureUnk2700MKOBMGGPNMIIsMutable();
-        unk2700MKOBMGGPNMI_.setInt(index, value);
+      public Builder setRetcode(int value) {
+        
+        retcode_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @param value The unk2700MKOBMGGPNMI to add.
+       * <code>int32 retcode = 11;</code>
        * @return This builder for chaining.
        */
-      public Builder addUnk2700MKOBMGGPNMI(int value) {
-        ensureUnk2700MKOBMGGPNMIIsMutable();
-        unk2700MKOBMGGPNMI_.addInt(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @param values The unk2700MKOBMGGPNMI to add.
-       * @return This builder for chaining.
-       */
-      public Builder addAllUnk2700MKOBMGGPNMI(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureUnk2700MKOBMGGPNMIIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, unk2700MKOBMGGPNMI_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 Unk2700_MKOBMGGPNMI = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearUnk2700MKOBMGGPNMI() {
-        unk2700MKOBMGGPNMI_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearRetcode() {
+        
+        retcode_ = 0;
         onChanged();
         return this;
       }
 
       private com.google.protobuf.Internal.IntList beKilledNumList_ = emptyIntList();
       private void ensureBeKilledNumListIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           beKilledNumList_ = mutableCopy(beKilledNumList_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @return A list containing the beKilledNumList.
        */
       public java.util.List<java.lang.Integer>
           getBeKilledNumListList() {
-        return ((bitField0_ & 0x00000004) != 0) ?
+        return ((bitField0_ & 0x00000002) != 0) ?
                  java.util.Collections.unmodifiableList(beKilledNumList_) : beKilledNumList_;
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @return The count of beKilledNumList.
        */
       public int getBeKilledNumListCount() {
         return beKilledNumList_.size();
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @param index The index of the element to return.
        * @return The beKilledNumList at the given index.
        */
@@ -969,7 +1005,11 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         return beKilledNumList_.getInt(index);
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @param index The index to set the value at.
        * @param value The beKilledNumList to set.
        * @return This builder for chaining.
@@ -982,7 +1022,11 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @param value The beKilledNumList to add.
        * @return This builder for chaining.
        */
@@ -993,7 +1037,11 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @param values The beKilledNumList to add.
        * @return This builder for chaining.
        */
@@ -1006,43 +1054,95 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 be_killed_num_list = 12;</code>
+       * <pre>
+       * KHEHMPJHELM
+       * </pre>
+       *
+       * <code>repeated uint32 be_killed_num_list = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearBeKilledNumList() {
         beKilledNumList_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
 
-      private int retcode_ ;
-      /**
-       * <code>int32 retcode = 5;</code>
-       * @return The retcode.
-       */
-      @java.lang.Override
-      public int getRetcode() {
-        return retcode_;
+      private com.google.protobuf.Internal.IntList codexIdList_ = emptyIntList();
+      private void ensureCodexIdListIsMutable() {
+        if (!((bitField0_ & 0x00000004) != 0)) {
+          codexIdList_ = mutableCopy(codexIdList_);
+          bitField0_ |= 0x00000004;
+         }
       }
       /**
-       * <code>int32 retcode = 5;</code>
-       * @param value The retcode to set.
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @return A list containing the codexIdList.
+       */
+      public java.util.List<java.lang.Integer>
+          getCodexIdListList() {
+        return ((bitField0_ & 0x00000004) != 0) ?
+                 java.util.Collections.unmodifiableList(codexIdList_) : codexIdList_;
+      }
+      /**
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @return The count of codexIdList.
+       */
+      public int getCodexIdListCount() {
+        return codexIdList_.size();
+      }
+      /**
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @param index The index of the element to return.
+       * @return The codexIdList at the given index.
+       */
+      public int getCodexIdList(int index) {
+        return codexIdList_.getInt(index);
+      }
+      /**
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @param index The index to set the value at.
+       * @param value The codexIdList to set.
        * @return This builder for chaining.
        */
-      public Builder setRetcode(int value) {
-        
-        retcode_ = value;
+      public Builder setCodexIdList(
+          int index, int value) {
+        ensureCodexIdListIsMutable();
+        codexIdList_.setInt(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>int32 retcode = 5;</code>
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @param value The codexIdList to add.
        * @return This builder for chaining.
        */
-      public Builder clearRetcode() {
-        
-        retcode_ = 0;
+      public Builder addCodexIdList(int value) {
+        ensureCodexIdListIsMutable();
+        codexIdList_.addInt(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @param values The codexIdList to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllCodexIdList(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureCodexIdListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, codexIdList_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 codex_id_list = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCodexIdList() {
+        codexIdList_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -1114,11 +1214,11 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n%QueryCodexMonsterBeKilledNumRsp.proto\"" +
-      "\202\001\n\037QueryCodexMonsterBeKilledNumRsp\022\025\n\rc" +
-      "odex_id_list\030\004 \003(\r\022\033\n\023Unk2700_MKOBMGGPNM" +
-      "I\030\006 \003(\r\022\032\n\022be_killed_num_list\030\014 \003(\r\022\017\n\007r" +
-      "etcode\030\005 \001(\005B\033\n\031emu.grasscutter.net.prot" +
-      "ob\006proto3"
+      "\203\001\n\037QueryCodexMonsterBeKilledNumRsp\022\034\n\024b" +
+      "e_captured_num_list\030\016 \003(\r\022\017\n\007retcode\030\013 \001" +
+      "(\005\022\032\n\022be_killed_num_list\030\001 \003(\r\022\025\n\rcodex_" +
+      "id_list\030\010 \003(\rB\033\n\031emu.grasscutter.net.pro" +
+      "tob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1129,7 +1229,7 @@ public final class QueryCodexMonsterBeKilledNumRspOuterClass {
     internal_static_QueryCodexMonsterBeKilledNumRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_QueryCodexMonsterBeKilledNumRsp_descriptor,
-        new java.lang.String[] { "CodexIdList", "Unk2700MKOBMGGPNMI", "BeKilledNumList", "Retcode", });
+        new java.lang.String[] { "BeCapturedNumList", "Retcode", "BeKilledNumList", "CodexIdList", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

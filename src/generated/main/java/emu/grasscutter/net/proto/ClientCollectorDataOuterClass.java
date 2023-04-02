@@ -19,24 +19,28 @@ public final class ClientCollectorDataOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 material_id = 10;</code>
+     * <code>uint32 MOHICPCPAFK = 9;</code>
+     * @return The mOHICPCPAFK.
+     */
+    int getMOHICPCPAFK();
+
+    /**
+     * <code>uint32 material_id = 5;</code>
      * @return The materialId.
      */
     int getMaterialId();
 
     /**
-     * <code>uint32 max_points = 8;</code>
-     * @return The maxPoints.
+     * <code>uint32 GEDKAGMKGAA = 15;</code>
+     * @return The gEDKAGMKGAA.
      */
-    int getMaxPoints();
-
-    /**
-     * <code>uint32 curr_points = 13;</code>
-     * @return The currPoints.
-     */
-    int getCurrPoints();
+    int getGEDKAGMKGAA();
   }
   /**
+   * <pre>
+   * Name: GBLLGEFNPCP
+   * </pre>
+   *
    * Protobuf type {@code ClientCollectorData}
    */
   public static final class ClientCollectorData extends
@@ -81,19 +85,19 @@ public final class ClientCollectorDataOuterClass {
             case 0:
               done = true;
               break;
-            case 64: {
-
-              maxPoints_ = input.readUInt32();
-              break;
-            }
-            case 80: {
+            case 40: {
 
               materialId_ = input.readUInt32();
               break;
             }
-            case 104: {
+            case 72: {
 
-              currPoints_ = input.readUInt32();
+              mOHICPCPAFK_ = input.readUInt32();
+              break;
+            }
+            case 120: {
+
+              gEDKAGMKGAA_ = input.readUInt32();
               break;
             }
             default: {
@@ -128,10 +132,21 @@ public final class ClientCollectorDataOuterClass {
               emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData.class, emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData.Builder.class);
     }
 
-    public static final int MATERIAL_ID_FIELD_NUMBER = 10;
+    public static final int MOHICPCPAFK_FIELD_NUMBER = 9;
+    private int mOHICPCPAFK_;
+    /**
+     * <code>uint32 MOHICPCPAFK = 9;</code>
+     * @return The mOHICPCPAFK.
+     */
+    @java.lang.Override
+    public int getMOHICPCPAFK() {
+      return mOHICPCPAFK_;
+    }
+
+    public static final int MATERIAL_ID_FIELD_NUMBER = 5;
     private int materialId_;
     /**
-     * <code>uint32 material_id = 10;</code>
+     * <code>uint32 material_id = 5;</code>
      * @return The materialId.
      */
     @java.lang.Override
@@ -139,26 +154,15 @@ public final class ClientCollectorDataOuterClass {
       return materialId_;
     }
 
-    public static final int MAX_POINTS_FIELD_NUMBER = 8;
-    private int maxPoints_;
+    public static final int GEDKAGMKGAA_FIELD_NUMBER = 15;
+    private int gEDKAGMKGAA_;
     /**
-     * <code>uint32 max_points = 8;</code>
-     * @return The maxPoints.
+     * <code>uint32 GEDKAGMKGAA = 15;</code>
+     * @return The gEDKAGMKGAA.
      */
     @java.lang.Override
-    public int getMaxPoints() {
-      return maxPoints_;
-    }
-
-    public static final int CURR_POINTS_FIELD_NUMBER = 13;
-    private int currPoints_;
-    /**
-     * <code>uint32 curr_points = 13;</code>
-     * @return The currPoints.
-     */
-    @java.lang.Override
-    public int getCurrPoints() {
-      return currPoints_;
+    public int getGEDKAGMKGAA() {
+      return gEDKAGMKGAA_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -175,14 +179,14 @@ public final class ClientCollectorDataOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (maxPoints_ != 0) {
-        output.writeUInt32(8, maxPoints_);
-      }
       if (materialId_ != 0) {
-        output.writeUInt32(10, materialId_);
+        output.writeUInt32(5, materialId_);
       }
-      if (currPoints_ != 0) {
-        output.writeUInt32(13, currPoints_);
+      if (mOHICPCPAFK_ != 0) {
+        output.writeUInt32(9, mOHICPCPAFK_);
+      }
+      if (gEDKAGMKGAA_ != 0) {
+        output.writeUInt32(15, gEDKAGMKGAA_);
       }
       unknownFields.writeTo(output);
     }
@@ -193,17 +197,17 @@ public final class ClientCollectorDataOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (maxPoints_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, maxPoints_);
-      }
       if (materialId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, materialId_);
+          .computeUInt32Size(5, materialId_);
       }
-      if (currPoints_ != 0) {
+      if (mOHICPCPAFK_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, currPoints_);
+          .computeUInt32Size(9, mOHICPCPAFK_);
+      }
+      if (gEDKAGMKGAA_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(15, gEDKAGMKGAA_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -220,12 +224,12 @@ public final class ClientCollectorDataOuterClass {
       }
       emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData other = (emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData) obj;
 
+      if (getMOHICPCPAFK()
+          != other.getMOHICPCPAFK()) return false;
       if (getMaterialId()
           != other.getMaterialId()) return false;
-      if (getMaxPoints()
-          != other.getMaxPoints()) return false;
-      if (getCurrPoints()
-          != other.getCurrPoints()) return false;
+      if (getGEDKAGMKGAA()
+          != other.getGEDKAGMKGAA()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -237,12 +241,12 @@ public final class ClientCollectorDataOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MOHICPCPAFK_FIELD_NUMBER;
+      hash = (53 * hash) + getMOHICPCPAFK();
       hash = (37 * hash) + MATERIAL_ID_FIELD_NUMBER;
       hash = (53 * hash) + getMaterialId();
-      hash = (37 * hash) + MAX_POINTS_FIELD_NUMBER;
-      hash = (53 * hash) + getMaxPoints();
-      hash = (37 * hash) + CURR_POINTS_FIELD_NUMBER;
-      hash = (53 * hash) + getCurrPoints();
+      hash = (37 * hash) + GEDKAGMKGAA_FIELD_NUMBER;
+      hash = (53 * hash) + getGEDKAGMKGAA();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -339,6 +343,10 @@ public final class ClientCollectorDataOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: GBLLGEFNPCP
+     * </pre>
+     *
      * Protobuf type {@code ClientCollectorData}
      */
     public static final class Builder extends
@@ -376,11 +384,11 @@ public final class ClientCollectorDataOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        mOHICPCPAFK_ = 0;
+
         materialId_ = 0;
 
-        maxPoints_ = 0;
-
-        currPoints_ = 0;
+        gEDKAGMKGAA_ = 0;
 
         return this;
       }
@@ -408,9 +416,9 @@ public final class ClientCollectorDataOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData buildPartial() {
         emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData result = new emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData(this);
+        result.mOHICPCPAFK_ = mOHICPCPAFK_;
         result.materialId_ = materialId_;
-        result.maxPoints_ = maxPoints_;
-        result.currPoints_ = currPoints_;
+        result.gEDKAGMKGAA_ = gEDKAGMKGAA_;
         onBuilt();
         return result;
       }
@@ -459,14 +467,14 @@ public final class ClientCollectorDataOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData other) {
         if (other == emu.grasscutter.net.proto.ClientCollectorDataOuterClass.ClientCollectorData.getDefaultInstance()) return this;
+        if (other.getMOHICPCPAFK() != 0) {
+          setMOHICPCPAFK(other.getMOHICPCPAFK());
+        }
         if (other.getMaterialId() != 0) {
           setMaterialId(other.getMaterialId());
         }
-        if (other.getMaxPoints() != 0) {
-          setMaxPoints(other.getMaxPoints());
-        }
-        if (other.getCurrPoints() != 0) {
-          setCurrPoints(other.getCurrPoints());
+        if (other.getGEDKAGMKGAA() != 0) {
+          setGEDKAGMKGAA(other.getGEDKAGMKGAA());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -497,9 +505,40 @@ public final class ClientCollectorDataOuterClass {
         return this;
       }
 
+      private int mOHICPCPAFK_ ;
+      /**
+       * <code>uint32 MOHICPCPAFK = 9;</code>
+       * @return The mOHICPCPAFK.
+       */
+      @java.lang.Override
+      public int getMOHICPCPAFK() {
+        return mOHICPCPAFK_;
+      }
+      /**
+       * <code>uint32 MOHICPCPAFK = 9;</code>
+       * @param value The mOHICPCPAFK to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMOHICPCPAFK(int value) {
+        
+        mOHICPCPAFK_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 MOHICPCPAFK = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMOHICPCPAFK() {
+        
+        mOHICPCPAFK_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int materialId_ ;
       /**
-       * <code>uint32 material_id = 10;</code>
+       * <code>uint32 material_id = 5;</code>
        * @return The materialId.
        */
       @java.lang.Override
@@ -507,7 +546,7 @@ public final class ClientCollectorDataOuterClass {
         return materialId_;
       }
       /**
-       * <code>uint32 material_id = 10;</code>
+       * <code>uint32 material_id = 5;</code>
        * @param value The materialId to set.
        * @return This builder for chaining.
        */
@@ -518,7 +557,7 @@ public final class ClientCollectorDataOuterClass {
         return this;
       }
       /**
-       * <code>uint32 material_id = 10;</code>
+       * <code>uint32 material_id = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearMaterialId() {
@@ -528,64 +567,33 @@ public final class ClientCollectorDataOuterClass {
         return this;
       }
 
-      private int maxPoints_ ;
+      private int gEDKAGMKGAA_ ;
       /**
-       * <code>uint32 max_points = 8;</code>
-       * @return The maxPoints.
+       * <code>uint32 GEDKAGMKGAA = 15;</code>
+       * @return The gEDKAGMKGAA.
        */
       @java.lang.Override
-      public int getMaxPoints() {
-        return maxPoints_;
+      public int getGEDKAGMKGAA() {
+        return gEDKAGMKGAA_;
       }
       /**
-       * <code>uint32 max_points = 8;</code>
-       * @param value The maxPoints to set.
+       * <code>uint32 GEDKAGMKGAA = 15;</code>
+       * @param value The gEDKAGMKGAA to set.
        * @return This builder for chaining.
        */
-      public Builder setMaxPoints(int value) {
+      public Builder setGEDKAGMKGAA(int value) {
         
-        maxPoints_ = value;
+        gEDKAGMKGAA_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 max_points = 8;</code>
+       * <code>uint32 GEDKAGMKGAA = 15;</code>
        * @return This builder for chaining.
        */
-      public Builder clearMaxPoints() {
+      public Builder clearGEDKAGMKGAA() {
         
-        maxPoints_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int currPoints_ ;
-      /**
-       * <code>uint32 curr_points = 13;</code>
-       * @return The currPoints.
-       */
-      @java.lang.Override
-      public int getCurrPoints() {
-        return currPoints_;
-      }
-      /**
-       * <code>uint32 curr_points = 13;</code>
-       * @param value The currPoints to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCurrPoints(int value) {
-        
-        currPoints_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 curr_points = 13;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCurrPoints() {
-        
-        currPoints_ = 0;
+        gEDKAGMKGAA_ = 0;
         onChanged();
         return this;
       }
@@ -656,10 +664,10 @@ public final class ClientCollectorDataOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\031ClientCollectorData.proto\"S\n\023ClientCol" +
-      "lectorData\022\023\n\013material_id\030\n \001(\r\022\022\n\nmax_p" +
-      "oints\030\010 \001(\r\022\023\n\013curr_points\030\r \001(\rB\033\n\031emu." +
-      "grasscutter.net.protob\006proto3"
+      "\n\031ClientCollectorData.proto\"T\n\023ClientCol" +
+      "lectorData\022\023\n\013MOHICPCPAFK\030\t \001(\r\022\023\n\013mater" +
+      "ial_id\030\005 \001(\r\022\023\n\013GEDKAGMKGAA\030\017 \001(\rB\033\n\031emu" +
+      ".grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -670,7 +678,7 @@ public final class ClientCollectorDataOuterClass {
     internal_static_ClientCollectorData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ClientCollectorData_descriptor,
-        new java.lang.String[] { "MaterialId", "MaxPoints", "CurrPoints", });
+        new java.lang.String[] { "MOHICPCPAFK", "MaterialId", "GEDKAGMKGAA", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

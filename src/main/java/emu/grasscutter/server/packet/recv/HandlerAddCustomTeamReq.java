@@ -5,7 +5,7 @@ import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.net.packet.PacketHandler;
 import emu.grasscutter.server.game.GameSession;
 
-@Opcodes(PacketOpcodes.AddCustomTeamReq)
+@Opcodes(PacketOpcodes.AddBackupAvatarTeamReq)
 public class HandlerAddCustomTeamReq extends PacketHandler {
     @Override
     public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {

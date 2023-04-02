@@ -19,35 +19,33 @@ public final class QuestUpdateQuestVarRspOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 retcode = 10;</code>
+     * <code>int32 retcode = 2;</code>
      * @return The retcode.
      */
     int getRetcode();
 
     /**
-     * <code>uint32 parent_quest_var_seq = 2;</code>
-     * @return The parentQuestVarSeq.
+     * <code>uint32 quest_id = 13;</code>
+     * @return The questId.
      */
-    int getParentQuestVarSeq();
+    int getQuestId();
 
     /**
-     * <code>uint32 parent_quest_id = 8;</code>
+     * <code>uint32 parent_quest_id = 14;</code>
      * @return The parentQuestId.
      */
     int getParentQuestId();
 
     /**
-     * <code>uint32 quest_id = 15;</code>
-     * @return The questId.
+     * <code>uint32 parent_quest_var_seq = 10;</code>
+     * @return The parentQuestVarSeq.
      */
-    int getQuestId();
+    int getParentQuestVarSeq();
   }
   /**
    * <pre>
-   * CmdId: 439
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: NCFJPDCCNBF
+   * CmdId: 456
    * </pre>
    *
    * Protobuf type {@code QuestUpdateQuestVarRsp}
@@ -96,22 +94,22 @@ public final class QuestUpdateQuestVarRspOuterClass {
               break;
             case 16: {
 
-              parentQuestVarSeq_ = input.readUInt32();
-              break;
-            }
-            case 64: {
-
-              parentQuestId_ = input.readUInt32();
+              retcode_ = input.readInt32();
               break;
             }
             case 80: {
 
-              retcode_ = input.readInt32();
+              parentQuestVarSeq_ = input.readUInt32();
               break;
             }
-            case 120: {
+            case 104: {
 
               questId_ = input.readUInt32();
+              break;
+            }
+            case 112: {
+
+              parentQuestId_ = input.readUInt32();
               break;
             }
             default: {
@@ -146,10 +144,10 @@ public final class QuestUpdateQuestVarRspOuterClass {
               emu.grasscutter.net.proto.QuestUpdateQuestVarRspOuterClass.QuestUpdateQuestVarRsp.class, emu.grasscutter.net.proto.QuestUpdateQuestVarRspOuterClass.QuestUpdateQuestVarRsp.Builder.class);
     }
 
-    public static final int RETCODE_FIELD_NUMBER = 10;
+    public static final int RETCODE_FIELD_NUMBER = 2;
     private int retcode_;
     /**
-     * <code>int32 retcode = 10;</code>
+     * <code>int32 retcode = 2;</code>
      * @return The retcode.
      */
     @java.lang.Override
@@ -157,21 +155,21 @@ public final class QuestUpdateQuestVarRspOuterClass {
       return retcode_;
     }
 
-    public static final int PARENT_QUEST_VAR_SEQ_FIELD_NUMBER = 2;
-    private int parentQuestVarSeq_;
+    public static final int QUEST_ID_FIELD_NUMBER = 13;
+    private int questId_;
     /**
-     * <code>uint32 parent_quest_var_seq = 2;</code>
-     * @return The parentQuestVarSeq.
+     * <code>uint32 quest_id = 13;</code>
+     * @return The questId.
      */
     @java.lang.Override
-    public int getParentQuestVarSeq() {
-      return parentQuestVarSeq_;
+    public int getQuestId() {
+      return questId_;
     }
 
-    public static final int PARENT_QUEST_ID_FIELD_NUMBER = 8;
+    public static final int PARENT_QUEST_ID_FIELD_NUMBER = 14;
     private int parentQuestId_;
     /**
-     * <code>uint32 parent_quest_id = 8;</code>
+     * <code>uint32 parent_quest_id = 14;</code>
      * @return The parentQuestId.
      */
     @java.lang.Override
@@ -179,15 +177,15 @@ public final class QuestUpdateQuestVarRspOuterClass {
       return parentQuestId_;
     }
 
-    public static final int QUEST_ID_FIELD_NUMBER = 15;
-    private int questId_;
+    public static final int PARENT_QUEST_VAR_SEQ_FIELD_NUMBER = 10;
+    private int parentQuestVarSeq_;
     /**
-     * <code>uint32 quest_id = 15;</code>
-     * @return The questId.
+     * <code>uint32 parent_quest_var_seq = 10;</code>
+     * @return The parentQuestVarSeq.
      */
     @java.lang.Override
-    public int getQuestId() {
-      return questId_;
+    public int getParentQuestVarSeq() {
+      return parentQuestVarSeq_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -204,17 +202,17 @@ public final class QuestUpdateQuestVarRspOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (parentQuestVarSeq_ != 0) {
-        output.writeUInt32(2, parentQuestVarSeq_);
-      }
-      if (parentQuestId_ != 0) {
-        output.writeUInt32(8, parentQuestId_);
-      }
       if (retcode_ != 0) {
-        output.writeInt32(10, retcode_);
+        output.writeInt32(2, retcode_);
+      }
+      if (parentQuestVarSeq_ != 0) {
+        output.writeUInt32(10, parentQuestVarSeq_);
       }
       if (questId_ != 0) {
-        output.writeUInt32(15, questId_);
+        output.writeUInt32(13, questId_);
+      }
+      if (parentQuestId_ != 0) {
+        output.writeUInt32(14, parentQuestId_);
       }
       unknownFields.writeTo(output);
     }
@@ -225,21 +223,21 @@ public final class QuestUpdateQuestVarRspOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (parentQuestVarSeq_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, parentQuestVarSeq_);
-      }
-      if (parentQuestId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, parentQuestId_);
-      }
       if (retcode_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, retcode_);
+          .computeInt32Size(2, retcode_);
+      }
+      if (parentQuestVarSeq_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(10, parentQuestVarSeq_);
       }
       if (questId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(15, questId_);
+          .computeUInt32Size(13, questId_);
+      }
+      if (parentQuestId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(14, parentQuestId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -258,12 +256,12 @@ public final class QuestUpdateQuestVarRspOuterClass {
 
       if (getRetcode()
           != other.getRetcode()) return false;
-      if (getParentQuestVarSeq()
-          != other.getParentQuestVarSeq()) return false;
-      if (getParentQuestId()
-          != other.getParentQuestId()) return false;
       if (getQuestId()
           != other.getQuestId()) return false;
+      if (getParentQuestId()
+          != other.getParentQuestId()) return false;
+      if (getParentQuestVarSeq()
+          != other.getParentQuestVarSeq()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -277,12 +275,12 @@ public final class QuestUpdateQuestVarRspOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + RETCODE_FIELD_NUMBER;
       hash = (53 * hash) + getRetcode();
-      hash = (37 * hash) + PARENT_QUEST_VAR_SEQ_FIELD_NUMBER;
-      hash = (53 * hash) + getParentQuestVarSeq();
-      hash = (37 * hash) + PARENT_QUEST_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getParentQuestId();
       hash = (37 * hash) + QUEST_ID_FIELD_NUMBER;
       hash = (53 * hash) + getQuestId();
+      hash = (37 * hash) + PARENT_QUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getParentQuestId();
+      hash = (37 * hash) + PARENT_QUEST_VAR_SEQ_FIELD_NUMBER;
+      hash = (53 * hash) + getParentQuestVarSeq();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -380,10 +378,8 @@ public final class QuestUpdateQuestVarRspOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 439
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: NCFJPDCCNBF
+     * CmdId: 456
      * </pre>
      *
      * Protobuf type {@code QuestUpdateQuestVarRsp}
@@ -425,11 +421,11 @@ public final class QuestUpdateQuestVarRspOuterClass {
         super.clear();
         retcode_ = 0;
 
-        parentQuestVarSeq_ = 0;
+        questId_ = 0;
 
         parentQuestId_ = 0;
 
-        questId_ = 0;
+        parentQuestVarSeq_ = 0;
 
         return this;
       }
@@ -458,9 +454,9 @@ public final class QuestUpdateQuestVarRspOuterClass {
       public emu.grasscutter.net.proto.QuestUpdateQuestVarRspOuterClass.QuestUpdateQuestVarRsp buildPartial() {
         emu.grasscutter.net.proto.QuestUpdateQuestVarRspOuterClass.QuestUpdateQuestVarRsp result = new emu.grasscutter.net.proto.QuestUpdateQuestVarRspOuterClass.QuestUpdateQuestVarRsp(this);
         result.retcode_ = retcode_;
-        result.parentQuestVarSeq_ = parentQuestVarSeq_;
-        result.parentQuestId_ = parentQuestId_;
         result.questId_ = questId_;
+        result.parentQuestId_ = parentQuestId_;
+        result.parentQuestVarSeq_ = parentQuestVarSeq_;
         onBuilt();
         return result;
       }
@@ -512,14 +508,14 @@ public final class QuestUpdateQuestVarRspOuterClass {
         if (other.getRetcode() != 0) {
           setRetcode(other.getRetcode());
         }
-        if (other.getParentQuestVarSeq() != 0) {
-          setParentQuestVarSeq(other.getParentQuestVarSeq());
+        if (other.getQuestId() != 0) {
+          setQuestId(other.getQuestId());
         }
         if (other.getParentQuestId() != 0) {
           setParentQuestId(other.getParentQuestId());
         }
-        if (other.getQuestId() != 0) {
-          setQuestId(other.getQuestId());
+        if (other.getParentQuestVarSeq() != 0) {
+          setParentQuestVarSeq(other.getParentQuestVarSeq());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -552,7 +548,7 @@ public final class QuestUpdateQuestVarRspOuterClass {
 
       private int retcode_ ;
       /**
-       * <code>int32 retcode = 10;</code>
+       * <code>int32 retcode = 2;</code>
        * @return The retcode.
        */
       @java.lang.Override
@@ -560,7 +556,7 @@ public final class QuestUpdateQuestVarRspOuterClass {
         return retcode_;
       }
       /**
-       * <code>int32 retcode = 10;</code>
+       * <code>int32 retcode = 2;</code>
        * @param value The retcode to set.
        * @return This builder for chaining.
        */
@@ -571,7 +567,7 @@ public final class QuestUpdateQuestVarRspOuterClass {
         return this;
       }
       /**
-       * <code>int32 retcode = 10;</code>
+       * <code>int32 retcode = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearRetcode() {
@@ -581,71 +577,9 @@ public final class QuestUpdateQuestVarRspOuterClass {
         return this;
       }
 
-      private int parentQuestVarSeq_ ;
-      /**
-       * <code>uint32 parent_quest_var_seq = 2;</code>
-       * @return The parentQuestVarSeq.
-       */
-      @java.lang.Override
-      public int getParentQuestVarSeq() {
-        return parentQuestVarSeq_;
-      }
-      /**
-       * <code>uint32 parent_quest_var_seq = 2;</code>
-       * @param value The parentQuestVarSeq to set.
-       * @return This builder for chaining.
-       */
-      public Builder setParentQuestVarSeq(int value) {
-        
-        parentQuestVarSeq_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 parent_quest_var_seq = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearParentQuestVarSeq() {
-        
-        parentQuestVarSeq_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int parentQuestId_ ;
-      /**
-       * <code>uint32 parent_quest_id = 8;</code>
-       * @return The parentQuestId.
-       */
-      @java.lang.Override
-      public int getParentQuestId() {
-        return parentQuestId_;
-      }
-      /**
-       * <code>uint32 parent_quest_id = 8;</code>
-       * @param value The parentQuestId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setParentQuestId(int value) {
-        
-        parentQuestId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 parent_quest_id = 8;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearParentQuestId() {
-        
-        parentQuestId_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int questId_ ;
       /**
-       * <code>uint32 quest_id = 15;</code>
+       * <code>uint32 quest_id = 13;</code>
        * @return The questId.
        */
       @java.lang.Override
@@ -653,7 +587,7 @@ public final class QuestUpdateQuestVarRspOuterClass {
         return questId_;
       }
       /**
-       * <code>uint32 quest_id = 15;</code>
+       * <code>uint32 quest_id = 13;</code>
        * @param value The questId to set.
        * @return This builder for chaining.
        */
@@ -664,12 +598,74 @@ public final class QuestUpdateQuestVarRspOuterClass {
         return this;
       }
       /**
-       * <code>uint32 quest_id = 15;</code>
+       * <code>uint32 quest_id = 13;</code>
        * @return This builder for chaining.
        */
       public Builder clearQuestId() {
         
         questId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int parentQuestId_ ;
+      /**
+       * <code>uint32 parent_quest_id = 14;</code>
+       * @return The parentQuestId.
+       */
+      @java.lang.Override
+      public int getParentQuestId() {
+        return parentQuestId_;
+      }
+      /**
+       * <code>uint32 parent_quest_id = 14;</code>
+       * @param value The parentQuestId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setParentQuestId(int value) {
+        
+        parentQuestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 parent_quest_id = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearParentQuestId() {
+        
+        parentQuestId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int parentQuestVarSeq_ ;
+      /**
+       * <code>uint32 parent_quest_var_seq = 10;</code>
+       * @return The parentQuestVarSeq.
+       */
+      @java.lang.Override
+      public int getParentQuestVarSeq() {
+        return parentQuestVarSeq_;
+      }
+      /**
+       * <code>uint32 parent_quest_var_seq = 10;</code>
+       * @param value The parentQuestVarSeq to set.
+       * @return This builder for chaining.
+       */
+      public Builder setParentQuestVarSeq(int value) {
+        
+        parentQuestVarSeq_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 parent_quest_var_seq = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearParentQuestVarSeq() {
+        
+        parentQuestVarSeq_ = 0;
         onChanged();
         return this;
       }
@@ -741,9 +737,9 @@ public final class QuestUpdateQuestVarRspOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\034QuestUpdateQuestVarRsp.proto\"r\n\026QuestU" +
-      "pdateQuestVarRsp\022\017\n\007retcode\030\n \001(\005\022\034\n\024par" +
-      "ent_quest_var_seq\030\002 \001(\r\022\027\n\017parent_quest_" +
-      "id\030\010 \001(\r\022\020\n\010quest_id\030\017 \001(\rB\033\n\031emu.grassc" +
+      "pdateQuestVarRsp\022\017\n\007retcode\030\002 \001(\005\022\020\n\010que" +
+      "st_id\030\r \001(\r\022\027\n\017parent_quest_id\030\016 \001(\r\022\034\n\024" +
+      "parent_quest_var_seq\030\n \001(\rB\033\n\031emu.grassc" +
       "utter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
@@ -755,7 +751,7 @@ public final class QuestUpdateQuestVarRspOuterClass {
     internal_static_QuestUpdateQuestVarRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_QuestUpdateQuestVarRsp_descriptor,
-        new java.lang.String[] { "Retcode", "ParentQuestVarSeq", "ParentQuestId", "QuestId", });
+        new java.lang.String[] { "Retcode", "QuestId", "ParentQuestId", "ParentQuestVarSeq", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -15,6 +15,10 @@ public final class InteractTypeOuterClass {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
+   * <pre>
+   * Name: CHKGDGODKAA
+   * </pre>
+   *
    * Protobuf enum {@code InteractType}
    */
   public enum InteractType
@@ -80,13 +84,13 @@ public final class InteractTypeOuterClass {
      */
     INTERACT_TYPE_QUEST_GADGET(14),
     /**
-     * <code>INTERACT_TYPE_Unk2700_LIEIKFDFMGF = 15;</code>
+     * <code>INTERACT_TYPE_UI_INTERACT = 15;</code>
      */
-    INTERACT_TYPE_Unk2700_LIEIKFDFMGF(15),
+    INTERACT_TYPE_UI_INTERACT(15),
     /**
-     * <code>INTERACT_TYPE_Unk3000_NMOCFKDNCOB = 16;</code>
+     * <code>INTERACT_TYPE_DESHRET_OBELISK = 16;</code>
      */
-    INTERACT_TYPE_Unk3000_NMOCFKDNCOB(16),
+    INTERACT_TYPE_DESHRET_OBELISK(16),
     UNRECOGNIZED(-1),
     ;
 
@@ -151,13 +155,13 @@ public final class InteractTypeOuterClass {
      */
     public static final int INTERACT_TYPE_QUEST_GADGET_VALUE = 14;
     /**
-     * <code>INTERACT_TYPE_Unk2700_LIEIKFDFMGF = 15;</code>
+     * <code>INTERACT_TYPE_UI_INTERACT = 15;</code>
      */
-    public static final int INTERACT_TYPE_Unk2700_LIEIKFDFMGF_VALUE = 15;
+    public static final int INTERACT_TYPE_UI_INTERACT_VALUE = 15;
     /**
-     * <code>INTERACT_TYPE_Unk3000_NMOCFKDNCOB = 16;</code>
+     * <code>INTERACT_TYPE_DESHRET_OBELISK = 16;</code>
      */
-    public static final int INTERACT_TYPE_Unk3000_NMOCFKDNCOB_VALUE = 16;
+    public static final int INTERACT_TYPE_DESHRET_OBELISK_VALUE = 16;
 
 
     public final int getNumber() {
@@ -199,8 +203,8 @@ public final class InteractTypeOuterClass {
         case 12: return INTERACT_TYPE_HOME_GATHER;
         case 13: return INTERACT_TYPE_ENV_ANIMAL;
         case 14: return INTERACT_TYPE_QUEST_GADGET;
-        case 15: return INTERACT_TYPE_Unk2700_LIEIKFDFMGF;
-        case 16: return INTERACT_TYPE_Unk3000_NMOCFKDNCOB;
+        case 15: return INTERACT_TYPE_UI_INTERACT;
+        case 16: return INTERACT_TYPE_DESHRET_OBELISK;
         default: return null;
       }
     }
@@ -266,7 +270,7 @@ public final class InteractTypeOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022InteractType.proto*\227\004\n\014InteractType\022\026\n" +
+      "\n\022InteractType.proto*\213\004\n\014InteractType\022\026\n" +
       "\022INTERACT_TYPE_NONE\020\000\022\033\n\027INTERACT_TYPE_P" +
       "ICK_ITEM\020\001\022\030\n\024INTERACT_TYPE_GATHER\020\002\022\034\n\030" +
       "INTERACT_TYPE_OPEN_CHEST\020\003\022\035\n\031INTERACT_T" +
@@ -278,9 +282,9 @@ public final class InteractTypeOuterClass {
       "\030INTERACT_TYPE_ECHO_SHELL\020\013\022\035\n\031INTERACT_" +
       "TYPE_HOME_GATHER\020\014\022\034\n\030INTERACT_TYPE_ENV_" +
       "ANIMAL\020\r\022\036\n\032INTERACT_TYPE_QUEST_GADGET\020\016" +
-      "\022%\n!INTERACT_TYPE_Unk2700_LIEIKFDFMGF\020\017\022" +
-      "%\n!INTERACT_TYPE_Unk3000_NMOCFKDNCOB\020\020B\033" +
-      "\n\031emu.grasscutter.net.protob\006proto3"
+      "\022\035\n\031INTERACT_TYPE_UI_INTERACT\020\017\022!\n\035INTER" +
+      "ACT_TYPE_DESHRET_OBELISK\020\020B\033\n\031emu.grassc" +
+      "utter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

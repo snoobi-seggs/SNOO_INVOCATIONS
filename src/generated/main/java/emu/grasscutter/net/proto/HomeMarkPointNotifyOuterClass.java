@@ -19,35 +19,33 @@ public final class HomeMarkPointNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     java.util.List<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData> 
         getMarkPointDataListList();
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData getMarkPointDataList(int index);
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     int getMarkPointDataListCount();
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     java.util.List<? extends emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder> 
         getMarkPointDataListOrBuilderList();
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder getMarkPointDataListOrBuilder(
         int index);
   }
   /**
    * <pre>
-   * CmdId: 4474
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: DNHKDNNINEI
+   * CmdId: 4697
    * </pre>
    *
    * Protobuf type {@code HomeMarkPointNotify}
@@ -96,7 +94,7 @@ public final class HomeMarkPointNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 98: {
+            case 50: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 markPointDataList_ = new java.util.ArrayList<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData>();
                 mutable_bitField0_ |= 0x00000001;
@@ -140,17 +138,17 @@ public final class HomeMarkPointNotifyOuterClass {
               emu.grasscutter.net.proto.HomeMarkPointNotifyOuterClass.HomeMarkPointNotify.class, emu.grasscutter.net.proto.HomeMarkPointNotifyOuterClass.HomeMarkPointNotify.Builder.class);
     }
 
-    public static final int MARK_POINT_DATA_LIST_FIELD_NUMBER = 12;
+    public static final int MARK_POINT_DATA_LIST_FIELD_NUMBER = 6;
     private java.util.List<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData> markPointDataList_;
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     @java.lang.Override
     public java.util.List<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData> getMarkPointDataListList() {
       return markPointDataList_;
     }
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     @java.lang.Override
     public java.util.List<? extends emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder> 
@@ -158,21 +156,21 @@ public final class HomeMarkPointNotifyOuterClass {
       return markPointDataList_;
     }
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     @java.lang.Override
     public int getMarkPointDataListCount() {
       return markPointDataList_.size();
     }
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData getMarkPointDataList(int index) {
       return markPointDataList_.get(index);
     }
     /**
-     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+     * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder getMarkPointDataListOrBuilder(
@@ -195,7 +193,7 @@ public final class HomeMarkPointNotifyOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < markPointDataList_.size(); i++) {
-        output.writeMessage(12, markPointDataList_.get(i));
+        output.writeMessage(6, markPointDataList_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -208,7 +206,7 @@ public final class HomeMarkPointNotifyOuterClass {
       size = 0;
       for (int i = 0; i < markPointDataList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, markPointDataList_.get(i));
+          .computeMessageSize(6, markPointDataList_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -339,10 +337,8 @@ public final class HomeMarkPointNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4474
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: DNHKDNNINEI
+     * CmdId: 4697
      * </pre>
      *
      * Protobuf type {@code HomeMarkPointNotify}
@@ -542,7 +538,7 @@ public final class HomeMarkPointNotifyOuterClass {
           emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder> markPointDataListBuilder_;
 
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData> getMarkPointDataListList() {
         if (markPointDataListBuilder_ == null) {
@@ -552,7 +548,7 @@ public final class HomeMarkPointNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public int getMarkPointDataListCount() {
         if (markPointDataListBuilder_ == null) {
@@ -562,7 +558,7 @@ public final class HomeMarkPointNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData getMarkPointDataList(int index) {
         if (markPointDataListBuilder_ == null) {
@@ -572,7 +568,7 @@ public final class HomeMarkPointNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder setMarkPointDataList(
           int index, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData value) {
@@ -589,7 +585,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder setMarkPointDataList(
           int index, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder builderForValue) {
@@ -603,7 +599,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder addMarkPointDataList(emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData value) {
         if (markPointDataListBuilder_ == null) {
@@ -619,7 +615,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder addMarkPointDataList(
           int index, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData value) {
@@ -636,7 +632,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder addMarkPointDataList(
           emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder builderForValue) {
@@ -650,7 +646,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder addMarkPointDataList(
           int index, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder builderForValue) {
@@ -664,7 +660,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder addAllMarkPointDataList(
           java.lang.Iterable<? extends emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData> values) {
@@ -679,7 +675,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder clearMarkPointDataList() {
         if (markPointDataListBuilder_ == null) {
@@ -692,7 +688,7 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public Builder removeMarkPointDataList(int index) {
         if (markPointDataListBuilder_ == null) {
@@ -705,14 +701,14 @@ public final class HomeMarkPointNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder getMarkPointDataListBuilder(
           int index) {
         return getMarkPointDataListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder getMarkPointDataListOrBuilder(
           int index) {
@@ -722,7 +718,7 @@ public final class HomeMarkPointNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public java.util.List<? extends emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneDataOrBuilder> 
            getMarkPointDataListOrBuilderList() {
@@ -733,14 +729,14 @@ public final class HomeMarkPointNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder addMarkPointDataListBuilder() {
         return getMarkPointDataListFieldBuilder().addBuilder(
             emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.getDefaultInstance());
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder addMarkPointDataListBuilder(
           int index) {
@@ -748,7 +744,7 @@ public final class HomeMarkPointNotifyOuterClass {
             index, emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.getDefaultInstance());
       }
       /**
-       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 12;</code>
+       * <code>repeated .HomeMarkPointSceneData mark_point_data_list = 6;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.HomeMarkPointSceneDataOuterClass.HomeMarkPointSceneData.Builder> 
            getMarkPointDataListBuilderList() {
@@ -837,7 +833,7 @@ public final class HomeMarkPointNotifyOuterClass {
     java.lang.String[] descriptorData = {
       "\n\031HomeMarkPointNotify.proto\032\034HomeMarkPoi" +
       "ntSceneData.proto\"L\n\023HomeMarkPointNotify" +
-      "\0225\n\024mark_point_data_list\030\014 \003(\0132\027.HomeMar" +
+      "\0225\n\024mark_point_data_list\030\006 \003(\0132\027.HomeMar" +
       "kPointSceneDataB\033\n\031emu.grasscutter.net.p" +
       "rotob\006proto3"
     };

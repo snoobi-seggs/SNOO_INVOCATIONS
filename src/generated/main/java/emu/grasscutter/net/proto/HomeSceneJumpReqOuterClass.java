@@ -26,10 +26,8 @@ public final class HomeSceneJumpReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 4528
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: DGGGGCPKFNL
+   * CmdId: 4665
    * </pre>
    *
    * Protobuf type {@code HomeSceneJumpReq}
@@ -282,10 +280,8 @@ public final class HomeSceneJumpReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4528
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: DGGGGCPKFNL
+     * CmdId: 4665
      * </pre>
      *
      * Protobuf type {@code HomeSceneJumpReq}

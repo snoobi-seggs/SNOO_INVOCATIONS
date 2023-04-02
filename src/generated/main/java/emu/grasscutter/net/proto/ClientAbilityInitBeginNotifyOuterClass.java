@@ -26,10 +26,8 @@ public final class ClientAbilityInitBeginNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 1112
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: NKIIJPIKOPP
+   * CmdId: 1154
    * </pre>
    *
    * Protobuf type {@code ClientAbilityInitBeginNotify}
@@ -281,10 +279,8 @@ public final class ClientAbilityInitBeginNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1112
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: NKIIJPIKOPP
+     * CmdId: 1154
      * </pre>
      *
      * Protobuf type {@code ClientAbilityInitBeginNotify}

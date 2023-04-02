@@ -19,7 +19,11 @@ public final class AbilityMixinCostStaminaOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool is_swim = 3;</code>
+     * <pre>
+     *snooguess RNG FIELD VALUE
+     * </pre>
+     *
+     * <code>bool is_swim = 12;</code>
      * @return The isSwim.
      */
     boolean getIsSwim();
@@ -69,7 +73,7 @@ public final class AbilityMixinCostStaminaOuterClass {
             case 0:
               done = true;
               break;
-            case 24: {
+            case 96: {
 
               isSwim_ = input.readBool();
               break;
@@ -106,10 +110,14 @@ public final class AbilityMixinCostStaminaOuterClass {
               emu.grasscutter.net.proto.AbilityMixinCostStaminaOuterClass.AbilityMixinCostStamina.class, emu.grasscutter.net.proto.AbilityMixinCostStaminaOuterClass.AbilityMixinCostStamina.Builder.class);
     }
 
-    public static final int IS_SWIM_FIELD_NUMBER = 3;
+    public static final int IS_SWIM_FIELD_NUMBER = 12;
     private boolean isSwim_;
     /**
-     * <code>bool is_swim = 3;</code>
+     * <pre>
+     *snooguess RNG FIELD VALUE
+     * </pre>
+     *
+     * <code>bool is_swim = 12;</code>
      * @return The isSwim.
      */
     @java.lang.Override
@@ -132,7 +140,7 @@ public final class AbilityMixinCostStaminaOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (isSwim_ != false) {
-        output.writeBool(3, isSwim_);
+        output.writeBool(12, isSwim_);
       }
       unknownFields.writeTo(output);
     }
@@ -145,7 +153,7 @@ public final class AbilityMixinCostStaminaOuterClass {
       size = 0;
       if (isSwim_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, isSwim_);
+          .computeBoolSize(12, isSwim_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -422,7 +430,11 @@ public final class AbilityMixinCostStaminaOuterClass {
 
       private boolean isSwim_ ;
       /**
-       * <code>bool is_swim = 3;</code>
+       * <pre>
+       *snooguess RNG FIELD VALUE
+       * </pre>
+       *
+       * <code>bool is_swim = 12;</code>
        * @return The isSwim.
        */
       @java.lang.Override
@@ -430,7 +442,11 @@ public final class AbilityMixinCostStaminaOuterClass {
         return isSwim_;
       }
       /**
-       * <code>bool is_swim = 3;</code>
+       * <pre>
+       *snooguess RNG FIELD VALUE
+       * </pre>
+       *
+       * <code>bool is_swim = 12;</code>
        * @param value The isSwim to set.
        * @return This builder for chaining.
        */
@@ -441,7 +457,11 @@ public final class AbilityMixinCostStaminaOuterClass {
         return this;
       }
       /**
-       * <code>bool is_swim = 3;</code>
+       * <pre>
+       *snooguess RNG FIELD VALUE
+       * </pre>
+       *
+       * <code>bool is_swim = 12;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsSwim() {
@@ -518,7 +538,7 @@ public final class AbilityMixinCostStaminaOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\035AbilityMixinCostStamina.proto\"*\n\027Abili" +
-      "tyMixinCostStamina\022\017\n\007is_swim\030\003 \001(\010B\033\n\031e" +
+      "tyMixinCostStamina\022\017\n\007is_swim\030\014 \001(\010B\033\n\031e" +
       "mu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

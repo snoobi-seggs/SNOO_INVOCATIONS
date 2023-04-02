@@ -20,9 +20,8 @@ public final class EndCameraSceneLookNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 217
-   * EnetChannelId: 0
-   * EnetIsReliable: true
+   * Name: NJNFDJOHBIO
+   * CmdId: 293
    * </pre>
    *
    * Protobuf type {@code EndCameraSceneLookNotify}
@@ -247,9 +246,8 @@ public final class EndCameraSceneLookNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 217
-     * EnetChannelId: 0
-     * EnetIsReliable: true
+     * Name: NJNFDJOHBIO
+     * CmdId: 293
      * </pre>
      *
      * Protobuf type {@code EndCameraSceneLookNotify}

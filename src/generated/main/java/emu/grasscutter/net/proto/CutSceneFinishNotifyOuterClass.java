@@ -19,17 +19,15 @@ public final class CutSceneFinishNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 cutscene_id = 12;</code>
+     * <code>uint32 cutscene_id = 7;</code>
      * @return The cutsceneId.
      */
     int getCutsceneId();
   }
   /**
    * <pre>
-   * CmdId: 262
-   * EnetChannelId: 0
-   * EnetIsReliable: true
-   * IsAllowClient: true
+   * Name: JJDGJPGALJM
+   * CmdId: 228
    * </pre>
    *
    * Protobuf type {@code CutSceneFinishNotify}
@@ -76,7 +74,7 @@ public final class CutSceneFinishNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 96: {
+            case 56: {
 
               cutsceneId_ = input.readUInt32();
               break;
@@ -113,10 +111,10 @@ public final class CutSceneFinishNotifyOuterClass {
               emu.grasscutter.net.proto.CutSceneFinishNotifyOuterClass.CutSceneFinishNotify.class, emu.grasscutter.net.proto.CutSceneFinishNotifyOuterClass.CutSceneFinishNotify.Builder.class);
     }
 
-    public static final int CUTSCENE_ID_FIELD_NUMBER = 12;
+    public static final int CUTSCENE_ID_FIELD_NUMBER = 7;
     private int cutsceneId_;
     /**
-     * <code>uint32 cutscene_id = 12;</code>
+     * <code>uint32 cutscene_id = 7;</code>
      * @return The cutsceneId.
      */
     @java.lang.Override
@@ -139,7 +137,7 @@ public final class CutSceneFinishNotifyOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (cutsceneId_ != 0) {
-        output.writeUInt32(12, cutsceneId_);
+        output.writeUInt32(7, cutsceneId_);
       }
       unknownFields.writeTo(output);
     }
@@ -152,7 +150,7 @@ public final class CutSceneFinishNotifyOuterClass {
       size = 0;
       if (cutsceneId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(12, cutsceneId_);
+          .computeUInt32Size(7, cutsceneId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -281,10 +279,8 @@ public final class CutSceneFinishNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 262
-     * EnetChannelId: 0
-     * EnetIsReliable: true
-     * IsAllowClient: true
+     * Name: JJDGJPGALJM
+     * CmdId: 228
      * </pre>
      *
      * Protobuf type {@code CutSceneFinishNotify}
@@ -435,7 +431,7 @@ public final class CutSceneFinishNotifyOuterClass {
 
       private int cutsceneId_ ;
       /**
-       * <code>uint32 cutscene_id = 12;</code>
+       * <code>uint32 cutscene_id = 7;</code>
        * @return The cutsceneId.
        */
       @java.lang.Override
@@ -443,7 +439,7 @@ public final class CutSceneFinishNotifyOuterClass {
         return cutsceneId_;
       }
       /**
-       * <code>uint32 cutscene_id = 12;</code>
+       * <code>uint32 cutscene_id = 7;</code>
        * @param value The cutsceneId to set.
        * @return This builder for chaining.
        */
@@ -454,7 +450,7 @@ public final class CutSceneFinishNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 cutscene_id = 12;</code>
+       * <code>uint32 cutscene_id = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearCutsceneId() {
@@ -531,7 +527,7 @@ public final class CutSceneFinishNotifyOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\032CutSceneFinishNotify.proto\"+\n\024CutScene" +
-      "FinishNotify\022\023\n\013cutscene_id\030\014 \001(\rB\033\n\031emu" +
+      "FinishNotify\022\023\n\013cutscene_id\030\007 \001(\rB\033\n\031emu" +
       ".grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

@@ -14,7 +14,8 @@ public class PacketCompoundDataNotify extends BasePacket {
         super(PacketOpcodes.CompoundDataNotify);
         var proto= CompoundDataNotify.newBuilder()
             .addAllUnlockCompoundList(unlockedCompounds)
-            .addAllCompoundQueDataList(compoundQueueData)
+            //.addAllCompoundQueDataList(compoundQueueData)
+            .addAllCompoundQueueDataList(compoundQueueData)
             .build();
         this.setData(proto);
     }

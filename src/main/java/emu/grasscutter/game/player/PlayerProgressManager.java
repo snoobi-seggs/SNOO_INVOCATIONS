@@ -74,9 +74,11 @@ public class PlayerProgressManager extends BasePlayerDataManager {
             // All states whose unlock we don't handle correctly yet.
             || (s.getCond().stream().anyMatch(c -> c.getCondType() == OpenStateCondType.
                     OPEN_STATE_OFFERING_LEVEL || c.getCondType() == OpenStateCondType.
-                OPEN_STATE_CITY_REPUTATION_LEVEL))
+                OPEN_STATE_CITY_REPUTATION_LEVEL || c.getCondType() == OpenStateCondType.
+				OPEN_STATE_GCG_LEVEL))
             // Always unlock OPEN_STATE_PAIMON, otherwise the player will not have a working chat.
             || s.getId() == 1
+			|| List.of(3300,3304,3307,3309).contains(s.getId()) //tcg
         )
         .filter(s -> !BLACKLIST_OPEN_STATES.contains(s.getId()))    // Filter out states in the blacklist.
         .map(OpenStateData::getId)

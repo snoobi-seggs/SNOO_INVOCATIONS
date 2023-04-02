@@ -43,40 +43,38 @@ public final class CoopDataNotifyOuterClass {
         int index);
 
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @return A list containing the viewedChapterList.
      */
     java.util.List<java.lang.Integer> getViewedChapterListList();
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @return The count of viewedChapterList.
      */
     int getViewedChapterListCount();
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @param index The index of the element to return.
      * @return The viewedChapterList at the given index.
      */
     int getViewedChapterList(int index);
 
     /**
-     * <code>bool is_have_progress = 10;</code>
+     * <code>bool is_have_progress = 11;</code>
      * @return The isHaveProgress.
      */
     boolean getIsHaveProgress();
 
     /**
-     * <code>uint32 cur_coop_point = 5;</code>
+     * <code>uint32 cur_coop_point = 4;</code>
      * @return The curCoopPoint.
      */
     int getCurCoopPoint();
   }
   /**
    * <pre>
-   * CmdId: 1979
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: KMBIEGGBPMF
+   * CmdId: 1994
    * </pre>
    *
    * Protobuf type {@code CoopDataNotify}
@@ -126,12 +124,7 @@ public final class CoopDataNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 40: {
-
-              curCoopPoint_ = input.readUInt32();
-              break;
-            }
-            case 56: {
+            case 16: {
               if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 viewedChapterList_ = newIntList();
                 mutable_bitField0_ |= 0x00000002;
@@ -139,7 +132,7 @@ public final class CoopDataNotifyOuterClass {
               viewedChapterList_.addInt(input.readUInt32());
               break;
             }
-            case 58: {
+            case 18: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
@@ -152,7 +145,12 @@ public final class CoopDataNotifyOuterClass {
               input.popLimit(limit);
               break;
             }
-            case 80: {
+            case 32: {
+
+              curCoopPoint_ = input.readUInt32();
+              break;
+            }
+            case 88: {
 
               isHaveProgress_ = input.readBool();
               break;
@@ -244,10 +242,10 @@ public final class CoopDataNotifyOuterClass {
       return chapterList_.get(index);
     }
 
-    public static final int VIEWED_CHAPTER_LIST_FIELD_NUMBER = 7;
+    public static final int VIEWED_CHAPTER_LIST_FIELD_NUMBER = 2;
     private com.google.protobuf.Internal.IntList viewedChapterList_;
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @return A list containing the viewedChapterList.
      */
     @java.lang.Override
@@ -256,14 +254,14 @@ public final class CoopDataNotifyOuterClass {
       return viewedChapterList_;
     }
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @return The count of viewedChapterList.
      */
     public int getViewedChapterListCount() {
       return viewedChapterList_.size();
     }
     /**
-     * <code>repeated uint32 viewed_chapter_list = 7;</code>
+     * <code>repeated uint32 viewed_chapter_list = 2;</code>
      * @param index The index of the element to return.
      * @return The viewedChapterList at the given index.
      */
@@ -272,10 +270,10 @@ public final class CoopDataNotifyOuterClass {
     }
     private int viewedChapterListMemoizedSerializedSize = -1;
 
-    public static final int IS_HAVE_PROGRESS_FIELD_NUMBER = 10;
+    public static final int IS_HAVE_PROGRESS_FIELD_NUMBER = 11;
     private boolean isHaveProgress_;
     /**
-     * <code>bool is_have_progress = 10;</code>
+     * <code>bool is_have_progress = 11;</code>
      * @return The isHaveProgress.
      */
     @java.lang.Override
@@ -283,10 +281,10 @@ public final class CoopDataNotifyOuterClass {
       return isHaveProgress_;
     }
 
-    public static final int CUR_COOP_POINT_FIELD_NUMBER = 5;
+    public static final int CUR_COOP_POINT_FIELD_NUMBER = 4;
     private int curCoopPoint_;
     /**
-     * <code>uint32 cur_coop_point = 5;</code>
+     * <code>uint32 cur_coop_point = 4;</code>
      * @return The curCoopPoint.
      */
     @java.lang.Override
@@ -309,18 +307,18 @@ public final class CoopDataNotifyOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (curCoopPoint_ != 0) {
-        output.writeUInt32(5, curCoopPoint_);
-      }
       if (getViewedChapterListList().size() > 0) {
-        output.writeUInt32NoTag(58);
+        output.writeUInt32NoTag(18);
         output.writeUInt32NoTag(viewedChapterListMemoizedSerializedSize);
       }
       for (int i = 0; i < viewedChapterList_.size(); i++) {
         output.writeUInt32NoTag(viewedChapterList_.getInt(i));
       }
+      if (curCoopPoint_ != 0) {
+        output.writeUInt32(4, curCoopPoint_);
+      }
       if (isHaveProgress_ != false) {
-        output.writeBool(10, isHaveProgress_);
+        output.writeBool(11, isHaveProgress_);
       }
       for (int i = 0; i < chapterList_.size(); i++) {
         output.writeMessage(15, chapterList_.get(i));
@@ -334,10 +332,6 @@ public final class CoopDataNotifyOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (curCoopPoint_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, curCoopPoint_);
-      }
       {
         int dataSize = 0;
         for (int i = 0; i < viewedChapterList_.size(); i++) {
@@ -352,9 +346,13 @@ public final class CoopDataNotifyOuterClass {
         }
         viewedChapterListMemoizedSerializedSize = dataSize;
       }
+      if (curCoopPoint_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, curCoopPoint_);
+      }
       if (isHaveProgress_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(10, isHaveProgress_);
+          .computeBoolSize(11, isHaveProgress_);
       }
       for (int i = 0; i < chapterList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -504,10 +502,8 @@ public final class CoopDataNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1979
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: KMBIEGGBPMF
+     * CmdId: 1994
      * </pre>
      *
      * Protobuf type {@code CoopDataNotify}
@@ -971,7 +967,7 @@ public final class CoopDataNotifyOuterClass {
          }
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @return A list containing the viewedChapterList.
        */
       public java.util.List<java.lang.Integer>
@@ -980,14 +976,14 @@ public final class CoopDataNotifyOuterClass {
                  java.util.Collections.unmodifiableList(viewedChapterList_) : viewedChapterList_;
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @return The count of viewedChapterList.
        */
       public int getViewedChapterListCount() {
         return viewedChapterList_.size();
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @param index The index of the element to return.
        * @return The viewedChapterList at the given index.
        */
@@ -995,7 +991,7 @@ public final class CoopDataNotifyOuterClass {
         return viewedChapterList_.getInt(index);
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @param index The index to set the value at.
        * @param value The viewedChapterList to set.
        * @return This builder for chaining.
@@ -1008,7 +1004,7 @@ public final class CoopDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @param value The viewedChapterList to add.
        * @return This builder for chaining.
        */
@@ -1019,7 +1015,7 @@ public final class CoopDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @param values The viewedChapterList to add.
        * @return This builder for chaining.
        */
@@ -1032,7 +1028,7 @@ public final class CoopDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated uint32 viewed_chapter_list = 7;</code>
+       * <code>repeated uint32 viewed_chapter_list = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearViewedChapterList() {
@@ -1044,7 +1040,7 @@ public final class CoopDataNotifyOuterClass {
 
       private boolean isHaveProgress_ ;
       /**
-       * <code>bool is_have_progress = 10;</code>
+       * <code>bool is_have_progress = 11;</code>
        * @return The isHaveProgress.
        */
       @java.lang.Override
@@ -1052,7 +1048,7 @@ public final class CoopDataNotifyOuterClass {
         return isHaveProgress_;
       }
       /**
-       * <code>bool is_have_progress = 10;</code>
+       * <code>bool is_have_progress = 11;</code>
        * @param value The isHaveProgress to set.
        * @return This builder for chaining.
        */
@@ -1063,7 +1059,7 @@ public final class CoopDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>bool is_have_progress = 10;</code>
+       * <code>bool is_have_progress = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsHaveProgress() {
@@ -1075,7 +1071,7 @@ public final class CoopDataNotifyOuterClass {
 
       private int curCoopPoint_ ;
       /**
-       * <code>uint32 cur_coop_point = 5;</code>
+       * <code>uint32 cur_coop_point = 4;</code>
        * @return The curCoopPoint.
        */
       @java.lang.Override
@@ -1083,7 +1079,7 @@ public final class CoopDataNotifyOuterClass {
         return curCoopPoint_;
       }
       /**
-       * <code>uint32 cur_coop_point = 5;</code>
+       * <code>uint32 cur_coop_point = 4;</code>
        * @param value The curCoopPoint to set.
        * @return This builder for chaining.
        */
@@ -1094,7 +1090,7 @@ public final class CoopDataNotifyOuterClass {
         return this;
       }
       /**
-       * <code>uint32 cur_coop_point = 5;</code>
+       * <code>uint32 cur_coop_point = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearCurCoopPoint() {
@@ -1173,8 +1169,8 @@ public final class CoopDataNotifyOuterClass {
       "\n\024CoopDataNotify.proto\032\021CoopChapter.prot" +
       "o\"\203\001\n\016CoopDataNotify\022\"\n\014chapter_list\030\017 \003" +
       "(\0132\014.CoopChapter\022\033\n\023viewed_chapter_list\030" +
-      "\007 \003(\r\022\030\n\020is_have_progress\030\n \001(\010\022\026\n\016cur_c" +
-      "oop_point\030\005 \001(\rB\033\n\031emu.grasscutter.net.p" +
+      "\002 \003(\r\022\030\n\020is_have_progress\030\013 \001(\010\022\026\n\016cur_c" +
+      "oop_point\030\004 \001(\rB\033\n\031emu.grasscutter.net.p" +
       "rotob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

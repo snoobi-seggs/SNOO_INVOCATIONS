@@ -1,4 +1,4 @@
-package emu.grasscutter.server.packet.recv;
+/*package emu.grasscutter.server.packet.recv;
 
 import emu.grasscutter.net.packet.Opcodes;
 import emu.grasscutter.net.packet.PacketHandler;
@@ -11,10 +11,12 @@ public class HandlerHomeUnknown2Req extends PacketHandler {
 
     @Override
     public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {
-        /*
-         * This packet is about the edit mode
-         */
+        //*
+        //* This packet is about the edit mode
+        //*
         session.send(new PacketHomeUnknown2Rsp());
     }
 
-}
+}*/
+
+//THIS PACKET IS DEPRECATED AF

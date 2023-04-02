@@ -20,10 +20,8 @@ public final class GetCompoundDataReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 141
-   * EnetChannelId: 0
-   * EnetIsReliable: true
-   * IsAllowClient: true
+   * Name: KJDGGCGBDCK
+   * CmdId: 158
    * </pre>
    *
    * Protobuf type {@code GetCompoundDataReq}
@@ -248,10 +246,8 @@ public final class GetCompoundDataReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 141
-     * EnetChannelId: 0
-     * EnetIsReliable: true
-     * IsAllowClient: true
+     * Name: KJDGGCGBDCK
+     * CmdId: 158
      * </pre>
      *
      * Protobuf type {@code GetCompoundDataReq}

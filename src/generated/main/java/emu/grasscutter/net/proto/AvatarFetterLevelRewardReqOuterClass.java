@@ -19,23 +19,21 @@ public final class AvatarFetterLevelRewardReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint64 avatar_guid = 1;</code>
+     * <code>uint64 avatar_guid = 15;</code>
      * @return The avatarGuid.
      */
     long getAvatarGuid();
 
     /**
-     * <code>uint32 fetter_level = 6;</code>
+     * <code>uint32 fetter_level = 13;</code>
      * @return The fetterLevel.
      */
     int getFetterLevel();
   }
   /**
    * <pre>
+   * Name: OGJNGMANPOH
    * CmdId: 1653
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
    * </pre>
    *
    * Protobuf type {@code AvatarFetterLevelRewardReq}
@@ -82,14 +80,14 @@ public final class AvatarFetterLevelRewardReqOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
-
-              avatarGuid_ = input.readUInt64();
-              break;
-            }
-            case 48: {
+            case 104: {
 
               fetterLevel_ = input.readUInt32();
+              break;
+            }
+            case 120: {
+
+              avatarGuid_ = input.readUInt64();
               break;
             }
             default: {
@@ -124,10 +122,10 @@ public final class AvatarFetterLevelRewardReqOuterClass {
               emu.grasscutter.net.proto.AvatarFetterLevelRewardReqOuterClass.AvatarFetterLevelRewardReq.class, emu.grasscutter.net.proto.AvatarFetterLevelRewardReqOuterClass.AvatarFetterLevelRewardReq.Builder.class);
     }
 
-    public static final int AVATAR_GUID_FIELD_NUMBER = 1;
+    public static final int AVATAR_GUID_FIELD_NUMBER = 15;
     private long avatarGuid_;
     /**
-     * <code>uint64 avatar_guid = 1;</code>
+     * <code>uint64 avatar_guid = 15;</code>
      * @return The avatarGuid.
      */
     @java.lang.Override
@@ -135,10 +133,10 @@ public final class AvatarFetterLevelRewardReqOuterClass {
       return avatarGuid_;
     }
 
-    public static final int FETTER_LEVEL_FIELD_NUMBER = 6;
+    public static final int FETTER_LEVEL_FIELD_NUMBER = 13;
     private int fetterLevel_;
     /**
-     * <code>uint32 fetter_level = 6;</code>
+     * <code>uint32 fetter_level = 13;</code>
      * @return The fetterLevel.
      */
     @java.lang.Override
@@ -160,11 +158,11 @@ public final class AvatarFetterLevelRewardReqOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (avatarGuid_ != 0L) {
-        output.writeUInt64(1, avatarGuid_);
-      }
       if (fetterLevel_ != 0) {
-        output.writeUInt32(6, fetterLevel_);
+        output.writeUInt32(13, fetterLevel_);
+      }
+      if (avatarGuid_ != 0L) {
+        output.writeUInt64(15, avatarGuid_);
       }
       unknownFields.writeTo(output);
     }
@@ -175,13 +173,13 @@ public final class AvatarFetterLevelRewardReqOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (avatarGuid_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, avatarGuid_);
-      }
       if (fetterLevel_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, fetterLevel_);
+          .computeUInt32Size(13, fetterLevel_);
+      }
+      if (avatarGuid_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(15, avatarGuid_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -315,10 +313,8 @@ public final class AvatarFetterLevelRewardReqOuterClass {
     }
     /**
      * <pre>
+     * Name: OGJNGMANPOH
      * CmdId: 1653
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
      * </pre>
      *
      * Protobuf type {@code AvatarFetterLevelRewardReq}
@@ -475,7 +471,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
 
       private long avatarGuid_ ;
       /**
-       * <code>uint64 avatar_guid = 1;</code>
+       * <code>uint64 avatar_guid = 15;</code>
        * @return The avatarGuid.
        */
       @java.lang.Override
@@ -483,7 +479,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
         return avatarGuid_;
       }
       /**
-       * <code>uint64 avatar_guid = 1;</code>
+       * <code>uint64 avatar_guid = 15;</code>
        * @param value The avatarGuid to set.
        * @return This builder for chaining.
        */
@@ -494,7 +490,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
         return this;
       }
       /**
-       * <code>uint64 avatar_guid = 1;</code>
+       * <code>uint64 avatar_guid = 15;</code>
        * @return This builder for chaining.
        */
       public Builder clearAvatarGuid() {
@@ -506,7 +502,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
 
       private int fetterLevel_ ;
       /**
-       * <code>uint32 fetter_level = 6;</code>
+       * <code>uint32 fetter_level = 13;</code>
        * @return The fetterLevel.
        */
       @java.lang.Override
@@ -514,7 +510,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
         return fetterLevel_;
       }
       /**
-       * <code>uint32 fetter_level = 6;</code>
+       * <code>uint32 fetter_level = 13;</code>
        * @param value The fetterLevel to set.
        * @return This builder for chaining.
        */
@@ -525,7 +521,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
         return this;
       }
       /**
-       * <code>uint32 fetter_level = 6;</code>
+       * <code>uint32 fetter_level = 13;</code>
        * @return This builder for chaining.
        */
       public Builder clearFetterLevel() {
@@ -603,7 +599,7 @@ public final class AvatarFetterLevelRewardReqOuterClass {
     java.lang.String[] descriptorData = {
       "\n AvatarFetterLevelRewardReq.proto\"G\n\032Av" +
       "atarFetterLevelRewardReq\022\023\n\013avatar_guid\030" +
-      "\001 \001(\004\022\024\n\014fetter_level\030\006 \001(\rB\033\n\031emu.grass" +
+      "\017 \001(\004\022\024\n\014fetter_level\030\r \001(\rB\033\n\031emu.grass" +
       "cutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

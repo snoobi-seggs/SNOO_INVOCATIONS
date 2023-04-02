@@ -19,53 +19,51 @@ public final class BattlePassBuySuccNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 schedule_id = 4;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
+     */
+    java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> 
+        getItemListList();
+    /**
+     * <code>repeated .ItemParam item_list = 11;</code>
+     */
+    emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam getItemList(int index);
+    /**
+     * <code>repeated .ItemParam item_list = 11;</code>
+     */
+    int getItemListCount();
+    /**
+     * <code>repeated .ItemParam item_list = 11;</code>
+     */
+    java.util.List<? extends emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder> 
+        getItemListOrBuilderList();
+    /**
+     * <code>repeated .ItemParam item_list = 11;</code>
+     */
+    emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder getItemListOrBuilder(
+        int index);
+
+    /**
+     * <code>uint32 schedule_id = 5;</code>
      * @return The scheduleId.
      */
     int getScheduleId();
 
     /**
-     * <code>uint32 product_play_type = 11;</code>
-     * @return The productPlayType.
+     * <code>uint32 LLLJGJDMKJC = 12;</code>
+     * @return The lLLJGJDMKJC.
      */
-    int getProductPlayType();
+    int getLLLJGJDMKJC();
 
     /**
-     * <code>uint32 add_point = 12;</code>
-     * @return The addPoint.
+     * <code>uint32 GFGLGCCELCI = 9;</code>
+     * @return The gFGLGCCELCI.
      */
-    int getAddPoint();
-
-    /**
-     * <code>repeated .ItemParam item_list = 9;</code>
-     */
-    java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> 
-        getItemListList();
-    /**
-     * <code>repeated .ItemParam item_list = 9;</code>
-     */
-    emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam getItemList(int index);
-    /**
-     * <code>repeated .ItemParam item_list = 9;</code>
-     */
-    int getItemListCount();
-    /**
-     * <code>repeated .ItemParam item_list = 9;</code>
-     */
-    java.util.List<? extends emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder> 
-        getItemListOrBuilderList();
-    /**
-     * <code>repeated .ItemParam item_list = 9;</code>
-     */
-    emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder getItemListOrBuilder(
-        int index);
+    int getGFGLGCCELCI();
   }
   /**
    * <pre>
-   * CmdId: 2614
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: INAGMPGOFAB
+   * CmdId: 2617
    * </pre>
    *
    * Protobuf type {@code BattlePassBuySuccNotify}
@@ -114,12 +112,17 @@ public final class BattlePassBuySuccNotifyOuterClass {
             case 0:
               done = true;
               break;
-            case 32: {
+            case 40: {
 
               scheduleId_ = input.readUInt32();
               break;
             }
-            case 74: {
+            case 72: {
+
+              gFGLGCCELCI_ = input.readUInt32();
+              break;
+            }
+            case 90: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 itemList_ = new java.util.ArrayList<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam>();
                 mutable_bitField0_ |= 0x00000001;
@@ -128,14 +131,9 @@ public final class BattlePassBuySuccNotifyOuterClass {
                   input.readMessage(emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.parser(), extensionRegistry));
               break;
             }
-            case 88: {
-
-              productPlayType_ = input.readUInt32();
-              break;
-            }
             case 96: {
 
-              addPoint_ = input.readUInt32();
+              lLLJGJDMKJC_ = input.readUInt32();
               break;
             }
             default: {
@@ -173,50 +171,17 @@ public final class BattlePassBuySuccNotifyOuterClass {
               emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify.class, emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify.Builder.class);
     }
 
-    public static final int SCHEDULE_ID_FIELD_NUMBER = 4;
-    private int scheduleId_;
-    /**
-     * <code>uint32 schedule_id = 4;</code>
-     * @return The scheduleId.
-     */
-    @java.lang.Override
-    public int getScheduleId() {
-      return scheduleId_;
-    }
-
-    public static final int PRODUCT_PLAY_TYPE_FIELD_NUMBER = 11;
-    private int productPlayType_;
-    /**
-     * <code>uint32 product_play_type = 11;</code>
-     * @return The productPlayType.
-     */
-    @java.lang.Override
-    public int getProductPlayType() {
-      return productPlayType_;
-    }
-
-    public static final int ADD_POINT_FIELD_NUMBER = 12;
-    private int addPoint_;
-    /**
-     * <code>uint32 add_point = 12;</code>
-     * @return The addPoint.
-     */
-    @java.lang.Override
-    public int getAddPoint() {
-      return addPoint_;
-    }
-
-    public static final int ITEM_LIST_FIELD_NUMBER = 9;
+    public static final int ITEM_LIST_FIELD_NUMBER = 11;
     private java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> itemList_;
     /**
-     * <code>repeated .ItemParam item_list = 9;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
      */
     @java.lang.Override
     public java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> getItemListList() {
       return itemList_;
     }
     /**
-     * <code>repeated .ItemParam item_list = 9;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
      */
     @java.lang.Override
     public java.util.List<? extends emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder> 
@@ -224,26 +189,59 @@ public final class BattlePassBuySuccNotifyOuterClass {
       return itemList_;
     }
     /**
-     * <code>repeated .ItemParam item_list = 9;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
      */
     @java.lang.Override
     public int getItemListCount() {
       return itemList_.size();
     }
     /**
-     * <code>repeated .ItemParam item_list = 9;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam getItemList(int index) {
       return itemList_.get(index);
     }
     /**
-     * <code>repeated .ItemParam item_list = 9;</code>
+     * <code>repeated .ItemParam item_list = 11;</code>
      */
     @java.lang.Override
     public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder getItemListOrBuilder(
         int index) {
       return itemList_.get(index);
+    }
+
+    public static final int SCHEDULE_ID_FIELD_NUMBER = 5;
+    private int scheduleId_;
+    /**
+     * <code>uint32 schedule_id = 5;</code>
+     * @return The scheduleId.
+     */
+    @java.lang.Override
+    public int getScheduleId() {
+      return scheduleId_;
+    }
+
+    public static final int LLLJGJDMKJC_FIELD_NUMBER = 12;
+    private int lLLJGJDMKJC_;
+    /**
+     * <code>uint32 LLLJGJDMKJC = 12;</code>
+     * @return The lLLJGJDMKJC.
+     */
+    @java.lang.Override
+    public int getLLLJGJDMKJC() {
+      return lLLJGJDMKJC_;
+    }
+
+    public static final int GFGLGCCELCI_FIELD_NUMBER = 9;
+    private int gFGLGCCELCI_;
+    /**
+     * <code>uint32 GFGLGCCELCI = 9;</code>
+     * @return The gFGLGCCELCI.
+     */
+    @java.lang.Override
+    public int getGFGLGCCELCI() {
+      return gFGLGCCELCI_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -261,16 +259,16 @@ public final class BattlePassBuySuccNotifyOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (scheduleId_ != 0) {
-        output.writeUInt32(4, scheduleId_);
+        output.writeUInt32(5, scheduleId_);
+      }
+      if (gFGLGCCELCI_ != 0) {
+        output.writeUInt32(9, gFGLGCCELCI_);
       }
       for (int i = 0; i < itemList_.size(); i++) {
-        output.writeMessage(9, itemList_.get(i));
+        output.writeMessage(11, itemList_.get(i));
       }
-      if (productPlayType_ != 0) {
-        output.writeUInt32(11, productPlayType_);
-      }
-      if (addPoint_ != 0) {
-        output.writeUInt32(12, addPoint_);
+      if (lLLJGJDMKJC_ != 0) {
+        output.writeUInt32(12, lLLJGJDMKJC_);
       }
       unknownFields.writeTo(output);
     }
@@ -283,19 +281,19 @@ public final class BattlePassBuySuccNotifyOuterClass {
       size = 0;
       if (scheduleId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, scheduleId_);
+          .computeUInt32Size(5, scheduleId_);
+      }
+      if (gFGLGCCELCI_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, gFGLGCCELCI_);
       }
       for (int i = 0; i < itemList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, itemList_.get(i));
+          .computeMessageSize(11, itemList_.get(i));
       }
-      if (productPlayType_ != 0) {
+      if (lLLJGJDMKJC_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, productPlayType_);
-      }
-      if (addPoint_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(12, addPoint_);
+          .computeUInt32Size(12, lLLJGJDMKJC_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -312,14 +310,14 @@ public final class BattlePassBuySuccNotifyOuterClass {
       }
       emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify other = (emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify) obj;
 
-      if (getScheduleId()
-          != other.getScheduleId()) return false;
-      if (getProductPlayType()
-          != other.getProductPlayType()) return false;
-      if (getAddPoint()
-          != other.getAddPoint()) return false;
       if (!getItemListList()
           .equals(other.getItemListList())) return false;
+      if (getScheduleId()
+          != other.getScheduleId()) return false;
+      if (getLLLJGJDMKJC()
+          != other.getLLLJGJDMKJC()) return false;
+      if (getGFGLGCCELCI()
+          != other.getGFGLGCCELCI()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -331,16 +329,16 @@ public final class BattlePassBuySuccNotifyOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + SCHEDULE_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getScheduleId();
-      hash = (37 * hash) + PRODUCT_PLAY_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getProductPlayType();
-      hash = (37 * hash) + ADD_POINT_FIELD_NUMBER;
-      hash = (53 * hash) + getAddPoint();
       if (getItemListCount() > 0) {
         hash = (37 * hash) + ITEM_LIST_FIELD_NUMBER;
         hash = (53 * hash) + getItemListList().hashCode();
       }
+      hash = (37 * hash) + SCHEDULE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getScheduleId();
+      hash = (37 * hash) + LLLJGJDMKJC_FIELD_NUMBER;
+      hash = (53 * hash) + getLLLJGJDMKJC();
+      hash = (37 * hash) + GFGLGCCELCI_FIELD_NUMBER;
+      hash = (53 * hash) + getGFGLGCCELCI();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -438,10 +436,8 @@ public final class BattlePassBuySuccNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 2614
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: INAGMPGOFAB
+     * CmdId: 2617
      * </pre>
      *
      * Protobuf type {@code BattlePassBuySuccNotify}
@@ -482,18 +478,18 @@ public final class BattlePassBuySuccNotifyOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        scheduleId_ = 0;
-
-        productPlayType_ = 0;
-
-        addPoint_ = 0;
-
         if (itemListBuilder_ == null) {
           itemList_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           itemListBuilder_.clear();
         }
+        scheduleId_ = 0;
+
+        lLLJGJDMKJC_ = 0;
+
+        gFGLGCCELCI_ = 0;
+
         return this;
       }
 
@@ -521,9 +517,6 @@ public final class BattlePassBuySuccNotifyOuterClass {
       public emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify buildPartial() {
         emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify result = new emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify(this);
         int from_bitField0_ = bitField0_;
-        result.scheduleId_ = scheduleId_;
-        result.productPlayType_ = productPlayType_;
-        result.addPoint_ = addPoint_;
         if (itemListBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             itemList_ = java.util.Collections.unmodifiableList(itemList_);
@@ -533,6 +526,9 @@ public final class BattlePassBuySuccNotifyOuterClass {
         } else {
           result.itemList_ = itemListBuilder_.build();
         }
+        result.scheduleId_ = scheduleId_;
+        result.lLLJGJDMKJC_ = lLLJGJDMKJC_;
+        result.gFGLGCCELCI_ = gFGLGCCELCI_;
         onBuilt();
         return result;
       }
@@ -581,15 +577,6 @@ public final class BattlePassBuySuccNotifyOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify other) {
         if (other == emu.grasscutter.net.proto.BattlePassBuySuccNotifyOuterClass.BattlePassBuySuccNotify.getDefaultInstance()) return this;
-        if (other.getScheduleId() != 0) {
-          setScheduleId(other.getScheduleId());
-        }
-        if (other.getProductPlayType() != 0) {
-          setProductPlayType(other.getProductPlayType());
-        }
-        if (other.getAddPoint() != 0) {
-          setAddPoint(other.getAddPoint());
-        }
         if (itemListBuilder_ == null) {
           if (!other.itemList_.isEmpty()) {
             if (itemList_.isEmpty()) {
@@ -615,6 +602,15 @@ public final class BattlePassBuySuccNotifyOuterClass {
               itemListBuilder_.addAllMessages(other.itemList_);
             }
           }
+        }
+        if (other.getScheduleId() != 0) {
+          setScheduleId(other.getScheduleId());
+        }
+        if (other.getLLLJGJDMKJC() != 0) {
+          setLLLJGJDMKJC(other.getLLLJGJDMKJC());
+        }
+        if (other.getGFGLGCCELCI() != 0) {
+          setGFGLGCCELCI(other.getGFGLGCCELCI());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -646,99 +642,6 @@ public final class BattlePassBuySuccNotifyOuterClass {
       }
       private int bitField0_;
 
-      private int scheduleId_ ;
-      /**
-       * <code>uint32 schedule_id = 4;</code>
-       * @return The scheduleId.
-       */
-      @java.lang.Override
-      public int getScheduleId() {
-        return scheduleId_;
-      }
-      /**
-       * <code>uint32 schedule_id = 4;</code>
-       * @param value The scheduleId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setScheduleId(int value) {
-        
-        scheduleId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 schedule_id = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearScheduleId() {
-        
-        scheduleId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int productPlayType_ ;
-      /**
-       * <code>uint32 product_play_type = 11;</code>
-       * @return The productPlayType.
-       */
-      @java.lang.Override
-      public int getProductPlayType() {
-        return productPlayType_;
-      }
-      /**
-       * <code>uint32 product_play_type = 11;</code>
-       * @param value The productPlayType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setProductPlayType(int value) {
-        
-        productPlayType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 product_play_type = 11;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearProductPlayType() {
-        
-        productPlayType_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int addPoint_ ;
-      /**
-       * <code>uint32 add_point = 12;</code>
-       * @return The addPoint.
-       */
-      @java.lang.Override
-      public int getAddPoint() {
-        return addPoint_;
-      }
-      /**
-       * <code>uint32 add_point = 12;</code>
-       * @param value The addPoint to set.
-       * @return This builder for chaining.
-       */
-      public Builder setAddPoint(int value) {
-        
-        addPoint_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 add_point = 12;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearAddPoint() {
-        
-        addPoint_ = 0;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> itemList_ =
         java.util.Collections.emptyList();
       private void ensureItemListIsMutable() {
@@ -752,7 +655,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
           emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder> itemListBuilder_;
 
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> getItemListList() {
         if (itemListBuilder_ == null) {
@@ -762,7 +665,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public int getItemListCount() {
         if (itemListBuilder_ == null) {
@@ -772,7 +675,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam getItemList(int index) {
         if (itemListBuilder_ == null) {
@@ -782,7 +685,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder setItemList(
           int index, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam value) {
@@ -799,7 +702,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder setItemList(
           int index, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder builderForValue) {
@@ -813,7 +716,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder addItemList(emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam value) {
         if (itemListBuilder_ == null) {
@@ -829,7 +732,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder addItemList(
           int index, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam value) {
@@ -846,7 +749,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder addItemList(
           emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder builderForValue) {
@@ -860,7 +763,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder addItemList(
           int index, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder builderForValue) {
@@ -874,7 +777,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder addAllItemList(
           java.lang.Iterable<? extends emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam> values) {
@@ -889,7 +792,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder clearItemList() {
         if (itemListBuilder_ == null) {
@@ -902,7 +805,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public Builder removeItemList(int index) {
         if (itemListBuilder_ == null) {
@@ -915,14 +818,14 @@ public final class BattlePassBuySuccNotifyOuterClass {
         return this;
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder getItemListBuilder(
           int index) {
         return getItemListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder getItemListOrBuilder(
           int index) {
@@ -932,7 +835,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public java.util.List<? extends emu.grasscutter.net.proto.ItemParamOuterClass.ItemParamOrBuilder> 
            getItemListOrBuilderList() {
@@ -943,14 +846,14 @@ public final class BattlePassBuySuccNotifyOuterClass {
         }
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder addItemListBuilder() {
         return getItemListFieldBuilder().addBuilder(
             emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.getDefaultInstance());
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder addItemListBuilder(
           int index) {
@@ -958,7 +861,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
             index, emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.getDefaultInstance());
       }
       /**
-       * <code>repeated .ItemParam item_list = 9;</code>
+       * <code>repeated .ItemParam item_list = 11;</code>
        */
       public java.util.List<emu.grasscutter.net.proto.ItemParamOuterClass.ItemParam.Builder> 
            getItemListBuilderList() {
@@ -977,6 +880,99 @@ public final class BattlePassBuySuccNotifyOuterClass {
           itemList_ = null;
         }
         return itemListBuilder_;
+      }
+
+      private int scheduleId_ ;
+      /**
+       * <code>uint32 schedule_id = 5;</code>
+       * @return The scheduleId.
+       */
+      @java.lang.Override
+      public int getScheduleId() {
+        return scheduleId_;
+      }
+      /**
+       * <code>uint32 schedule_id = 5;</code>
+       * @param value The scheduleId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setScheduleId(int value) {
+        
+        scheduleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 schedule_id = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearScheduleId() {
+        
+        scheduleId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int lLLJGJDMKJC_ ;
+      /**
+       * <code>uint32 LLLJGJDMKJC = 12;</code>
+       * @return The lLLJGJDMKJC.
+       */
+      @java.lang.Override
+      public int getLLLJGJDMKJC() {
+        return lLLJGJDMKJC_;
+      }
+      /**
+       * <code>uint32 LLLJGJDMKJC = 12;</code>
+       * @param value The lLLJGJDMKJC to set.
+       * @return This builder for chaining.
+       */
+      public Builder setLLLJGJDMKJC(int value) {
+        
+        lLLJGJDMKJC_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 LLLJGJDMKJC = 12;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearLLLJGJDMKJC() {
+        
+        lLLJGJDMKJC_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gFGLGCCELCI_ ;
+      /**
+       * <code>uint32 GFGLGCCELCI = 9;</code>
+       * @return The gFGLGCCELCI.
+       */
+      @java.lang.Override
+      public int getGFGLGCCELCI() {
+        return gFGLGCCELCI_;
+      }
+      /**
+       * <code>uint32 GFGLGCCELCI = 9;</code>
+       * @param value The gFGLGCCELCI to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGFGLGCCELCI(int value) {
+        
+        gFGLGCCELCI_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 GFGLGCCELCI = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGFGLGCCELCI() {
+        
+        gFGLGCCELCI_ = 0;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1046,11 +1042,11 @@ public final class BattlePassBuySuccNotifyOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\035BattlePassBuySuccNotify.proto\032\017ItemPar" +
-      "am.proto\"{\n\027BattlePassBuySuccNotify\022\023\n\013s" +
-      "chedule_id\030\004 \001(\r\022\031\n\021product_play_type\030\013 " +
-      "\001(\r\022\021\n\tadd_point\030\014 \001(\r\022\035\n\titem_list\030\t \003(" +
-      "\0132\n.ItemParamB\033\n\031emu.grasscutter.net.pro" +
-      "tob\006proto3"
+      "am.proto\"w\n\027BattlePassBuySuccNotify\022\035\n\ti" +
+      "tem_list\030\013 \003(\0132\n.ItemParam\022\023\n\013schedule_i" +
+      "d\030\005 \001(\r\022\023\n\013LLLJGJDMKJC\030\014 \001(\r\022\023\n\013GFGLGCCE" +
+      "LCI\030\t \001(\rB\033\n\031emu.grasscutter.net.protob\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1062,7 +1058,7 @@ public final class BattlePassBuySuccNotifyOuterClass {
     internal_static_BattlePassBuySuccNotify_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BattlePassBuySuccNotify_descriptor,
-        new java.lang.String[] { "ScheduleId", "ProductPlayType", "AddPoint", "ItemList", });
+        new java.lang.String[] { "ItemList", "ScheduleId", "LLLJGJDMKJC", "GFGLGCCELCI", });
     emu.grasscutter.net.proto.ItemParamOuterClass.getDescriptor();
   }
 

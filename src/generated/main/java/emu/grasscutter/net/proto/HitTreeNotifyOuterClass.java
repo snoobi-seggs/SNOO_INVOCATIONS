@@ -19,10 +19,19 @@ public final class HitTreeNotifyOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 tree_type = 11;</code>
-     * @return The treeType.
+     * <code>.Vector drop_pos = 6;</code>
+     * @return Whether the dropPos field is set.
      */
-    int getTreeType();
+    boolean hasDropPos();
+    /**
+     * <code>.Vector drop_pos = 6;</code>
+     * @return The dropPos.
+     */
+    emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos();
+    /**
+     * <code>.Vector drop_pos = 6;</code>
+     */
+    emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder();
 
     /**
      * <code>.Vector tree_pos = 2;</code>
@@ -40,26 +49,15 @@ public final class HitTreeNotifyOuterClass {
     emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getTreePosOrBuilder();
 
     /**
-     * <code>.Vector drop_pos = 8;</code>
-     * @return Whether the dropPos field is set.
+     * <code>uint32 tree_type = 11;</code>
+     * @return The treeType.
      */
-    boolean hasDropPos();
-    /**
-     * <code>.Vector drop_pos = 8;</code>
-     * @return The dropPos.
-     */
-    emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos();
-    /**
-     * <code>.Vector drop_pos = 8;</code>
-     */
-    emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder();
+    int getTreeType();
   }
   /**
    * <pre>
-   * CmdId: 3019
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: FCOELCNJHFD
+   * CmdId: 3299
    * </pre>
    *
    * Protobuf type {@code HitTreeNotify}
@@ -119,7 +117,7 @@ public final class HitTreeNotifyOuterClass {
 
               break;
             }
-            case 66: {
+            case 50: {
               emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder subBuilder = null;
               if (dropPos_ != null) {
                 subBuilder = dropPos_.toBuilder();
@@ -169,15 +167,30 @@ public final class HitTreeNotifyOuterClass {
               emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify.class, emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify.Builder.class);
     }
 
-    public static final int TREE_TYPE_FIELD_NUMBER = 11;
-    private int treeType_;
+    public static final int DROP_POS_FIELD_NUMBER = 6;
+    private emu.grasscutter.net.proto.VectorOuterClass.Vector dropPos_;
     /**
-     * <code>uint32 tree_type = 11;</code>
-     * @return The treeType.
+     * <code>.Vector drop_pos = 6;</code>
+     * @return Whether the dropPos field is set.
      */
     @java.lang.Override
-    public int getTreeType() {
-      return treeType_;
+    public boolean hasDropPos() {
+      return dropPos_ != null;
+    }
+    /**
+     * <code>.Vector drop_pos = 6;</code>
+     * @return The dropPos.
+     */
+    @java.lang.Override
+    public emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos() {
+      return dropPos_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
+    }
+    /**
+     * <code>.Vector drop_pos = 6;</code>
+     */
+    @java.lang.Override
+    public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder() {
+      return getDropPos();
     }
 
     public static final int TREE_POS_FIELD_NUMBER = 2;
@@ -206,30 +219,15 @@ public final class HitTreeNotifyOuterClass {
       return getTreePos();
     }
 
-    public static final int DROP_POS_FIELD_NUMBER = 8;
-    private emu.grasscutter.net.proto.VectorOuterClass.Vector dropPos_;
+    public static final int TREE_TYPE_FIELD_NUMBER = 11;
+    private int treeType_;
     /**
-     * <code>.Vector drop_pos = 8;</code>
-     * @return Whether the dropPos field is set.
+     * <code>uint32 tree_type = 11;</code>
+     * @return The treeType.
      */
     @java.lang.Override
-    public boolean hasDropPos() {
-      return dropPos_ != null;
-    }
-    /**
-     * <code>.Vector drop_pos = 8;</code>
-     * @return The dropPos.
-     */
-    @java.lang.Override
-    public emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos() {
-      return dropPos_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
-    }
-    /**
-     * <code>.Vector drop_pos = 8;</code>
-     */
-    @java.lang.Override
-    public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder() {
-      return getDropPos();
+    public int getTreeType() {
+      return treeType_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -250,7 +248,7 @@ public final class HitTreeNotifyOuterClass {
         output.writeMessage(2, getTreePos());
       }
       if (dropPos_ != null) {
-        output.writeMessage(8, getDropPos());
+        output.writeMessage(6, getDropPos());
       }
       if (treeType_ != 0) {
         output.writeUInt32(11, treeType_);
@@ -270,7 +268,7 @@ public final class HitTreeNotifyOuterClass {
       }
       if (dropPos_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getDropPos());
+          .computeMessageSize(6, getDropPos());
       }
       if (treeType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -291,18 +289,18 @@ public final class HitTreeNotifyOuterClass {
       }
       emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify other = (emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify) obj;
 
-      if (getTreeType()
-          != other.getTreeType()) return false;
-      if (hasTreePos() != other.hasTreePos()) return false;
-      if (hasTreePos()) {
-        if (!getTreePos()
-            .equals(other.getTreePos())) return false;
-      }
       if (hasDropPos() != other.hasDropPos()) return false;
       if (hasDropPos()) {
         if (!getDropPos()
             .equals(other.getDropPos())) return false;
       }
+      if (hasTreePos() != other.hasTreePos()) return false;
+      if (hasTreePos()) {
+        if (!getTreePos()
+            .equals(other.getTreePos())) return false;
+      }
+      if (getTreeType()
+          != other.getTreeType()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -314,16 +312,16 @@ public final class HitTreeNotifyOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TREE_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getTreeType();
-      if (hasTreePos()) {
-        hash = (37 * hash) + TREE_POS_FIELD_NUMBER;
-        hash = (53 * hash) + getTreePos().hashCode();
-      }
       if (hasDropPos()) {
         hash = (37 * hash) + DROP_POS_FIELD_NUMBER;
         hash = (53 * hash) + getDropPos().hashCode();
       }
+      if (hasTreePos()) {
+        hash = (37 * hash) + TREE_POS_FIELD_NUMBER;
+        hash = (53 * hash) + getTreePos().hashCode();
+      }
+      hash = (37 * hash) + TREE_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getTreeType();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -421,10 +419,8 @@ public final class HitTreeNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 3019
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: FCOELCNJHFD
+     * CmdId: 3299
      * </pre>
      *
      * Protobuf type {@code HitTreeNotify}
@@ -464,20 +460,20 @@ public final class HitTreeNotifyOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        treeType_ = 0;
-
-        if (treePosBuilder_ == null) {
-          treePos_ = null;
-        } else {
-          treePos_ = null;
-          treePosBuilder_ = null;
-        }
         if (dropPosBuilder_ == null) {
           dropPos_ = null;
         } else {
           dropPos_ = null;
           dropPosBuilder_ = null;
         }
+        if (treePosBuilder_ == null) {
+          treePos_ = null;
+        } else {
+          treePos_ = null;
+          treePosBuilder_ = null;
+        }
+        treeType_ = 0;
+
         return this;
       }
 
@@ -504,17 +500,17 @@ public final class HitTreeNotifyOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify buildPartial() {
         emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify result = new emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify(this);
-        result.treeType_ = treeType_;
-        if (treePosBuilder_ == null) {
-          result.treePos_ = treePos_;
-        } else {
-          result.treePos_ = treePosBuilder_.build();
-        }
         if (dropPosBuilder_ == null) {
           result.dropPos_ = dropPos_;
         } else {
           result.dropPos_ = dropPosBuilder_.build();
         }
+        if (treePosBuilder_ == null) {
+          result.treePos_ = treePos_;
+        } else {
+          result.treePos_ = treePosBuilder_.build();
+        }
+        result.treeType_ = treeType_;
         onBuilt();
         return result;
       }
@@ -563,14 +559,14 @@ public final class HitTreeNotifyOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify other) {
         if (other == emu.grasscutter.net.proto.HitTreeNotifyOuterClass.HitTreeNotify.getDefaultInstance()) return this;
-        if (other.getTreeType() != 0) {
-          setTreeType(other.getTreeType());
+        if (other.hasDropPos()) {
+          mergeDropPos(other.getDropPos());
         }
         if (other.hasTreePos()) {
           mergeTreePos(other.getTreePos());
         }
-        if (other.hasDropPos()) {
-          mergeDropPos(other.getDropPos());
+        if (other.getTreeType() != 0) {
+          setTreeType(other.getTreeType());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -601,35 +597,123 @@ public final class HitTreeNotifyOuterClass {
         return this;
       }
 
-      private int treeType_ ;
+      private emu.grasscutter.net.proto.VectorOuterClass.Vector dropPos_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> dropPosBuilder_;
       /**
-       * <code>uint32 tree_type = 11;</code>
-       * @return The treeType.
+       * <code>.Vector drop_pos = 6;</code>
+       * @return Whether the dropPos field is set.
        */
-      @java.lang.Override
-      public int getTreeType() {
-        return treeType_;
+      public boolean hasDropPos() {
+        return dropPosBuilder_ != null || dropPos_ != null;
       }
       /**
-       * <code>uint32 tree_type = 11;</code>
-       * @param value The treeType to set.
-       * @return This builder for chaining.
+       * <code>.Vector drop_pos = 6;</code>
+       * @return The dropPos.
        */
-      public Builder setTreeType(int value) {
-        
-        treeType_ = value;
-        onChanged();
+      public emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos() {
+        if (dropPosBuilder_ == null) {
+          return dropPos_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
+        } else {
+          return dropPosBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      public Builder setDropPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
+        if (dropPosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          dropPos_ = value;
+          onChanged();
+        } else {
+          dropPosBuilder_.setMessage(value);
+        }
+
         return this;
       }
       /**
-       * <code>uint32 tree_type = 11;</code>
-       * @return This builder for chaining.
+       * <code>.Vector drop_pos = 6;</code>
        */
-      public Builder clearTreeType() {
-        
-        treeType_ = 0;
-        onChanged();
+      public Builder setDropPos(
+          emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder builderForValue) {
+        if (dropPosBuilder_ == null) {
+          dropPos_ = builderForValue.build();
+          onChanged();
+        } else {
+          dropPosBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      public Builder mergeDropPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
+        if (dropPosBuilder_ == null) {
+          if (dropPos_ != null) {
+            dropPos_ =
+              emu.grasscutter.net.proto.VectorOuterClass.Vector.newBuilder(dropPos_).mergeFrom(value).buildPartial();
+          } else {
+            dropPos_ = value;
+          }
+          onChanged();
+        } else {
+          dropPosBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      public Builder clearDropPos() {
+        if (dropPosBuilder_ == null) {
+          dropPos_ = null;
+          onChanged();
+        } else {
+          dropPos_ = null;
+          dropPosBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      public emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder getDropPosBuilder() {
+        
+        onChanged();
+        return getDropPosFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder() {
+        if (dropPosBuilder_ != null) {
+          return dropPosBuilder_.getMessageOrBuilder();
+        } else {
+          return dropPos_ == null ?
+              emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
+        }
+      }
+      /**
+       * <code>.Vector drop_pos = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> 
+          getDropPosFieldBuilder() {
+        if (dropPosBuilder_ == null) {
+          dropPosBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder>(
+                  getDropPos(),
+                  getParentForChildren(),
+                  isClean());
+          dropPos_ = null;
+        }
+        return dropPosBuilder_;
       }
 
       private emu.grasscutter.net.proto.VectorOuterClass.Vector treePos_;
@@ -751,123 +835,35 @@ public final class HitTreeNotifyOuterClass {
         return treePosBuilder_;
       }
 
-      private emu.grasscutter.net.proto.VectorOuterClass.Vector dropPos_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> dropPosBuilder_;
+      private int treeType_ ;
       /**
-       * <code>.Vector drop_pos = 8;</code>
-       * @return Whether the dropPos field is set.
+       * <code>uint32 tree_type = 11;</code>
+       * @return The treeType.
        */
-      public boolean hasDropPos() {
-        return dropPosBuilder_ != null || dropPos_ != null;
+      @java.lang.Override
+      public int getTreeType() {
+        return treeType_;
       }
       /**
-       * <code>.Vector drop_pos = 8;</code>
-       * @return The dropPos.
+       * <code>uint32 tree_type = 11;</code>
+       * @param value The treeType to set.
+       * @return This builder for chaining.
        */
-      public emu.grasscutter.net.proto.VectorOuterClass.Vector getDropPos() {
-        if (dropPosBuilder_ == null) {
-          return dropPos_ == null ? emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
-        } else {
-          return dropPosBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      public Builder setDropPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
-        if (dropPosBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          dropPos_ = value;
-          onChanged();
-        } else {
-          dropPosBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      public Builder setDropPos(
-          emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder builderForValue) {
-        if (dropPosBuilder_ == null) {
-          dropPos_ = builderForValue.build();
-          onChanged();
-        } else {
-          dropPosBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      public Builder mergeDropPos(emu.grasscutter.net.proto.VectorOuterClass.Vector value) {
-        if (dropPosBuilder_ == null) {
-          if (dropPos_ != null) {
-            dropPos_ =
-              emu.grasscutter.net.proto.VectorOuterClass.Vector.newBuilder(dropPos_).mergeFrom(value).buildPartial();
-          } else {
-            dropPos_ = value;
-          }
-          onChanged();
-        } else {
-          dropPosBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      public Builder clearDropPos() {
-        if (dropPosBuilder_ == null) {
-          dropPos_ = null;
-          onChanged();
-        } else {
-          dropPos_ = null;
-          dropPosBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      public emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder getDropPosBuilder() {
+      public Builder setTreeType(int value) {
         
+        treeType_ = value;
         onChanged();
-        return getDropPosFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>.Vector drop_pos = 8;</code>
+       * <code>uint32 tree_type = 11;</code>
+       * @return This builder for chaining.
        */
-      public emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder getDropPosOrBuilder() {
-        if (dropPosBuilder_ != null) {
-          return dropPosBuilder_.getMessageOrBuilder();
-        } else {
-          return dropPos_ == null ?
-              emu.grasscutter.net.proto.VectorOuterClass.Vector.getDefaultInstance() : dropPos_;
-        }
-      }
-      /**
-       * <code>.Vector drop_pos = 8;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder> 
-          getDropPosFieldBuilder() {
-        if (dropPosBuilder_ == null) {
-          dropPosBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              emu.grasscutter.net.proto.VectorOuterClass.Vector, emu.grasscutter.net.proto.VectorOuterClass.Vector.Builder, emu.grasscutter.net.proto.VectorOuterClass.VectorOrBuilder>(
-                  getDropPos(),
-                  getParentForChildren(),
-                  isClean());
-          dropPos_ = null;
-        }
-        return dropPosBuilder_;
+      public Builder clearTreeType() {
+        
+        treeType_ = 0;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -937,9 +933,9 @@ public final class HitTreeNotifyOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\023HitTreeNotify.proto\032\014Vector.proto\"X\n\rH" +
-      "itTreeNotify\022\021\n\ttree_type\030\013 \001(\r\022\031\n\010tree_" +
-      "pos\030\002 \001(\0132\007.Vector\022\031\n\010drop_pos\030\010 \001(\0132\007.V" +
-      "ectorB\033\n\031emu.grasscutter.net.protob\006prot" +
+      "itTreeNotify\022\031\n\010drop_pos\030\006 \001(\0132\007.Vector\022" +
+      "\031\n\010tree_pos\030\002 \001(\0132\007.Vector\022\021\n\ttree_type\030" +
+      "\013 \001(\rB\033\n\031emu.grasscutter.net.protob\006prot" +
       "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
@@ -952,7 +948,7 @@ public final class HitTreeNotifyOuterClass {
     internal_static_HitTreeNotify_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_HitTreeNotify_descriptor,
-        new java.lang.String[] { "TreeType", "TreePos", "DropPos", });
+        new java.lang.String[] { "DropPos", "TreePos", "TreeType", });
     emu.grasscutter.net.proto.VectorOuterClass.getDescriptor();
   }
 

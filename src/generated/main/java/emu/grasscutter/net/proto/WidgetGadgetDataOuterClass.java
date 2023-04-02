@@ -36,12 +36,16 @@ public final class WidgetGadgetDataOuterClass {
     int getGadgetEntityIdList(int index);
 
     /**
-     * <code>uint32 gadget_id = 8;</code>
+     * <code>uint32 gadget_id = 15;</code>
      * @return The gadgetId.
      */
     int getGadgetId();
   }
   /**
+   * <pre>
+   * Name: KOJOFGNALFB
+   * </pre>
+   *
    * Protobuf type {@code WidgetGadgetData}
    */
   public static final class WidgetGadgetData extends
@@ -109,7 +113,7 @@ public final class WidgetGadgetDataOuterClass {
               input.popLimit(limit);
               break;
             }
-            case 64: {
+            case 120: {
 
               gadgetId_ = input.readUInt32();
               break;
@@ -177,10 +181,10 @@ public final class WidgetGadgetDataOuterClass {
     }
     private int gadgetEntityIdListMemoizedSerializedSize = -1;
 
-    public static final int GADGET_ID_FIELD_NUMBER = 8;
+    public static final int GADGET_ID_FIELD_NUMBER = 15;
     private int gadgetId_;
     /**
-     * <code>uint32 gadget_id = 8;</code>
+     * <code>uint32 gadget_id = 15;</code>
      * @return The gadgetId.
      */
     @java.lang.Override
@@ -211,7 +215,7 @@ public final class WidgetGadgetDataOuterClass {
         output.writeUInt32NoTag(gadgetEntityIdList_.getInt(i));
       }
       if (gadgetId_ != 0) {
-        output.writeUInt32(8, gadgetId_);
+        output.writeUInt32(15, gadgetId_);
       }
       unknownFields.writeTo(output);
     }
@@ -238,7 +242,7 @@ public final class WidgetGadgetDataOuterClass {
       }
       if (gadgetId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, gadgetId_);
+          .computeUInt32Size(15, gadgetId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -372,6 +376,10 @@ public final class WidgetGadgetDataOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: KOJOFGNALFB
+     * </pre>
+     *
      * Protobuf type {@code WidgetGadgetData}
      */
     public static final class Builder extends
@@ -618,7 +626,7 @@ public final class WidgetGadgetDataOuterClass {
 
       private int gadgetId_ ;
       /**
-       * <code>uint32 gadget_id = 8;</code>
+       * <code>uint32 gadget_id = 15;</code>
        * @return The gadgetId.
        */
       @java.lang.Override
@@ -626,7 +634,7 @@ public final class WidgetGadgetDataOuterClass {
         return gadgetId_;
       }
       /**
-       * <code>uint32 gadget_id = 8;</code>
+       * <code>uint32 gadget_id = 15;</code>
        * @param value The gadgetId to set.
        * @return This builder for chaining.
        */
@@ -637,7 +645,7 @@ public final class WidgetGadgetDataOuterClass {
         return this;
       }
       /**
-       * <code>uint32 gadget_id = 8;</code>
+       * <code>uint32 gadget_id = 15;</code>
        * @return This builder for chaining.
        */
       public Builder clearGadgetId() {
@@ -715,7 +723,7 @@ public final class WidgetGadgetDataOuterClass {
     java.lang.String[] descriptorData = {
       "\n\026WidgetGadgetData.proto\"D\n\020WidgetGadget" +
       "Data\022\035\n\025gadget_entity_id_list\030\001 \003(\r\022\021\n\tg" +
-      "adget_id\030\010 \001(\rB\033\n\031emu.grasscutter.net.pr" +
+      "adget_id\030\017 \001(\rB\033\n\031emu.grasscutter.net.pr" +
       "otob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

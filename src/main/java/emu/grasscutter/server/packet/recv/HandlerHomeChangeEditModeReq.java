@@ -14,7 +14,8 @@ public class HandlerHomeChangeEditModeReq extends PacketHandler {
 	public void handle(GameSession session, byte[] header, byte[] payload) throws Exception {
 		var req = HomeChangeEditModeReqOuterClass.HomeChangeEditModeReq.parseFrom(payload);
 
-		session.send(new PacketHomeUnknown1Notify(req.getIsEnterEditMode()));
+		//session.send(new PacketHomeUnknown1Notify(req.getIsEnterEditMode()));
+		session.send(new PacketHomePreChangeEditModeNotify(req.getIsEnterEditMode()));
 		session.send(new PacketHomeBasicInfoNotify(session.getPlayer(), req.getIsEnterEditMode()));
 		session.send(new PacketHomeComfortInfoNotify(session.getPlayer()));
 

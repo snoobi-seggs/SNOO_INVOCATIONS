@@ -19,7 +19,7 @@ public final class TowerTeamOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 tower_team_id = 3;</code>
+     * <code>uint32 tower_team_id = 10;</code>
      * @return The towerTeamId.
      */
     int getTowerTeamId();
@@ -42,6 +42,10 @@ public final class TowerTeamOuterClass {
     long getAvatarGuidList(int index);
   }
   /**
+   * <pre>
+   * Name: COFIOGPCLNN
+   * </pre>
+   *
    * Protobuf type {@code TowerTeam}
    */
   public static final class TowerTeam extends
@@ -88,7 +92,7 @@ public final class TowerTeamOuterClass {
             case 0:
               done = true;
               break;
-            case 24: {
+            case 80: {
 
               towerTeamId_ = input.readUInt32();
               break;
@@ -149,10 +153,10 @@ public final class TowerTeamOuterClass {
               emu.grasscutter.net.proto.TowerTeamOuterClass.TowerTeam.class, emu.grasscutter.net.proto.TowerTeamOuterClass.TowerTeam.Builder.class);
     }
 
-    public static final int TOWER_TEAM_ID_FIELD_NUMBER = 3;
+    public static final int TOWER_TEAM_ID_FIELD_NUMBER = 10;
     private int towerTeamId_;
     /**
-     * <code>uint32 tower_team_id = 3;</code>
+     * <code>uint32 tower_team_id = 10;</code>
      * @return The towerTeamId.
      */
     @java.lang.Override
@@ -204,7 +208,7 @@ public final class TowerTeamOuterClass {
                         throws java.io.IOException {
       getSerializedSize();
       if (towerTeamId_ != 0) {
-        output.writeUInt32(3, towerTeamId_);
+        output.writeUInt32(10, towerTeamId_);
       }
       if (getAvatarGuidListList().size() > 0) {
         output.writeUInt32NoTag(114);
@@ -224,7 +228,7 @@ public final class TowerTeamOuterClass {
       size = 0;
       if (towerTeamId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, towerTeamId_);
+          .computeUInt32Size(10, towerTeamId_);
       }
       {
         int dataSize = 0;
@@ -372,6 +376,10 @@ public final class TowerTeamOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: COFIOGPCLNN
+     * </pre>
+     *
      * Protobuf type {@code TowerTeam}
      */
     public static final class Builder extends
@@ -539,7 +547,7 @@ public final class TowerTeamOuterClass {
 
       private int towerTeamId_ ;
       /**
-       * <code>uint32 tower_team_id = 3;</code>
+       * <code>uint32 tower_team_id = 10;</code>
        * @return The towerTeamId.
        */
       @java.lang.Override
@@ -547,7 +555,7 @@ public final class TowerTeamOuterClass {
         return towerTeamId_;
       }
       /**
-       * <code>uint32 tower_team_id = 3;</code>
+       * <code>uint32 tower_team_id = 10;</code>
        * @param value The towerTeamId to set.
        * @return This builder for chaining.
        */
@@ -558,7 +566,7 @@ public final class TowerTeamOuterClass {
         return this;
       }
       /**
-       * <code>uint32 tower_team_id = 3;</code>
+       * <code>uint32 tower_team_id = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearTowerTeamId() {
@@ -714,7 +722,7 @@ public final class TowerTeamOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\017TowerTeam.proto\"<\n\tTowerTeam\022\025\n\rtower_" +
-      "team_id\030\003 \001(\r\022\030\n\020avatar_guid_list\030\016 \003(\004B" +
+      "team_id\030\n \001(\r\022\030\n\020avatar_guid_list\030\016 \003(\004B" +
       "\033\n\031emu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

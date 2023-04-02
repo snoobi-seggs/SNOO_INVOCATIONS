@@ -20,10 +20,8 @@ public final class GetOnlinePlayerListReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 90
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: MPOCFLCPFGO
+   * CmdId: 82
    * </pre>
    *
    * Protobuf type {@code GetOnlinePlayerListReq}
@@ -248,10 +246,8 @@ public final class GetOnlinePlayerListReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 90
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: MPOCFLCPFGO
+     * CmdId: 82
      * </pre>
      *
      * Protobuf type {@code GetOnlinePlayerListReq}

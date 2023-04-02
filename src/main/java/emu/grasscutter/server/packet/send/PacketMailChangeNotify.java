@@ -54,8 +54,9 @@ public class PacketMailChangeNotify extends BasePacket {
                 mailData.setImportance(message.importance);
                 mailData.setIsRead(message.isRead);
                 mailData.setIsAttachmentGot(message.isAttachmentGot);
-                mailData.setUnk2700NDPPGJKJOMHValue(message.stateValue);
-
+                //mailData.setUnk2700NDPPGJKJOMHValue(message.stateValue);
+                mailData.setCollectState(MailCollectStateOuterClass.MailCollectState.forNumber(message.stateValue));
+				
                 proto.addMailList(mailData.build());
             }
         }

@@ -25,17 +25,15 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
     int getApplyUid();
 
     /**
-     * <code>bool is_agreed = 12;</code>
+     * <code>bool is_agreed = 4;</code>
      * @return The isAgreed.
      */
     boolean getIsAgreed();
   }
   /**
    * <pre>
-   * CmdId: 1802
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: JHOENGLMPEF
+   * CmdId: 1836
    * </pre>
    *
    * Protobuf type {@code PlayerApplyEnterMpResultReq}
@@ -87,7 +85,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
               applyUid_ = input.readUInt32();
               break;
             }
-            case 96: {
+            case 32: {
 
               isAgreed_ = input.readBool();
               break;
@@ -135,10 +133,10 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
       return applyUid_;
     }
 
-    public static final int IS_AGREED_FIELD_NUMBER = 12;
+    public static final int IS_AGREED_FIELD_NUMBER = 4;
     private boolean isAgreed_;
     /**
-     * <code>bool is_agreed = 12;</code>
+     * <code>bool is_agreed = 4;</code>
      * @return The isAgreed.
      */
     @java.lang.Override
@@ -164,7 +162,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
         output.writeUInt32(2, applyUid_);
       }
       if (isAgreed_ != false) {
-        output.writeBool(12, isAgreed_);
+        output.writeBool(4, isAgreed_);
       }
       unknownFields.writeTo(output);
     }
@@ -181,7 +179,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
       }
       if (isAgreed_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(12, isAgreed_);
+          .computeBoolSize(4, isAgreed_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -315,10 +313,8 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 1802
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: JHOENGLMPEF
+     * CmdId: 1836
      * </pre>
      *
      * Protobuf type {@code PlayerApplyEnterMpResultReq}
@@ -506,7 +502,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
 
       private boolean isAgreed_ ;
       /**
-       * <code>bool is_agreed = 12;</code>
+       * <code>bool is_agreed = 4;</code>
        * @return The isAgreed.
        */
       @java.lang.Override
@@ -514,7 +510,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
         return isAgreed_;
       }
       /**
-       * <code>bool is_agreed = 12;</code>
+       * <code>bool is_agreed = 4;</code>
        * @param value The isAgreed to set.
        * @return This builder for chaining.
        */
@@ -525,7 +521,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
         return this;
       }
       /**
-       * <code>bool is_agreed = 12;</code>
+       * <code>bool is_agreed = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsAgreed() {
@@ -603,7 +599,7 @@ public final class PlayerApplyEnterMpResultReqOuterClass {
     java.lang.String[] descriptorData = {
       "\n!PlayerApplyEnterMpResultReq.proto\"C\n\033P" +
       "layerApplyEnterMpResultReq\022\021\n\tapply_uid\030" +
-      "\002 \001(\r\022\021\n\tis_agreed\030\014 \001(\010B\033\n\031emu.grasscut" +
+      "\002 \001(\r\022\021\n\tis_agreed\030\004 \001(\010B\033\n\031emu.grasscut" +
       "ter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

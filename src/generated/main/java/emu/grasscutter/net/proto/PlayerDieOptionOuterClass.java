@@ -15,45 +15,49 @@ public final class PlayerDieOptionOuterClass {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
+   * <pre>
+   * Name: KHINCMAFNBJ
+   * </pre>
+   *
    * Protobuf enum {@code PlayerDieOption}
    */
   public enum PlayerDieOption
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_NONE = 0;</code>
+     * <code>DIE_OPT_NONE = 0;</code>
      */
-    PLAYER_DIE_OPTION_OPT_NONE(0),
+    DIE_OPT_NONE(0),
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_REPLAY = 1;</code>
+     * <code>DIE_OPT_REPLAY = 1;</code>
      */
-    PLAYER_DIE_OPTION_OPT_REPLAY(1),
+    DIE_OPT_REPLAY(1),
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_CANCEL = 2;</code>
+     * <code>DIE_OPT_CANCEL = 2;</code>
      */
-    PLAYER_DIE_OPTION_OPT_CANCEL(2),
+    DIE_OPT_CANCEL(2),
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_REVIVE = 3;</code>
+     * <code>DIE_OPT_REVIVE = 3;</code>
      */
-    PLAYER_DIE_OPTION_OPT_REVIVE(3),
+    DIE_OPT_REVIVE(3),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_NONE = 0;</code>
+     * <code>DIE_OPT_NONE = 0;</code>
      */
-    public static final int PLAYER_DIE_OPTION_OPT_NONE_VALUE = 0;
+    public static final int DIE_OPT_NONE_VALUE = 0;
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_REPLAY = 1;</code>
+     * <code>DIE_OPT_REPLAY = 1;</code>
      */
-    public static final int PLAYER_DIE_OPTION_OPT_REPLAY_VALUE = 1;
+    public static final int DIE_OPT_REPLAY_VALUE = 1;
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_CANCEL = 2;</code>
+     * <code>DIE_OPT_CANCEL = 2;</code>
      */
-    public static final int PLAYER_DIE_OPTION_OPT_CANCEL_VALUE = 2;
+    public static final int DIE_OPT_CANCEL_VALUE = 2;
     /**
-     * <code>PLAYER_DIE_OPTION_OPT_REVIVE = 3;</code>
+     * <code>DIE_OPT_REVIVE = 3;</code>
      */
-    public static final int PLAYER_DIE_OPTION_OPT_REVIVE_VALUE = 3;
+    public static final int DIE_OPT_REVIVE_VALUE = 3;
 
 
     public final int getNumber() {
@@ -80,10 +84,10 @@ public final class PlayerDieOptionOuterClass {
      */
     public static PlayerDieOption forNumber(int value) {
       switch (value) {
-        case 0: return PLAYER_DIE_OPTION_OPT_NONE;
-        case 1: return PLAYER_DIE_OPTION_OPT_REPLAY;
-        case 2: return PLAYER_DIE_OPTION_OPT_CANCEL;
-        case 3: return PLAYER_DIE_OPTION_OPT_REVIVE;
+        case 0: return DIE_OPT_NONE;
+        case 1: return DIE_OPT_REPLAY;
+        case 2: return DIE_OPT_CANCEL;
+        case 3: return DIE_OPT_REVIVE;
         default: return null;
       }
     }
@@ -149,12 +153,10 @@ public final class PlayerDieOptionOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025PlayerDieOption.proto*\227\001\n\017PlayerDieOpt" +
-      "ion\022\036\n\032PLAYER_DIE_OPTION_OPT_NONE\020\000\022 \n\034P" +
-      "LAYER_DIE_OPTION_OPT_REPLAY\020\001\022 \n\034PLAYER_" +
-      "DIE_OPTION_OPT_CANCEL\020\002\022 \n\034PLAYER_DIE_OP" +
-      "TION_OPT_REVIVE\020\003B\033\n\031emu.grasscutter.net" +
-      ".protob\006proto3"
+      "\n\025PlayerDieOption.proto*_\n\017PlayerDieOpti" +
+      "on\022\020\n\014DIE_OPT_NONE\020\000\022\022\n\016DIE_OPT_REPLAY\020\001" +
+      "\022\022\n\016DIE_OPT_CANCEL\020\002\022\022\n\016DIE_OPT_REVIVE\020\003" +
+      "B\033\n\031emu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

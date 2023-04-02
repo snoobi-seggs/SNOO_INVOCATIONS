@@ -91,6 +91,10 @@ public final class ResVersionConfigOuterClass {
         getNextScriptVersionBytes();
   }
   /**
+   * <pre>
+   * Name: KJGMEKEGPNF
+   * </pre>
+   *
    * Protobuf type {@code ResVersionConfig}
    */
   public static final class ResVersionConfig extends
@@ -642,6 +646,10 @@ public final class ResVersionConfigOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: KJGMEKEGPNF
+     * </pre>
+     *
      * Protobuf type {@code ResVersionConfig}
      */
     public static final class Builder extends

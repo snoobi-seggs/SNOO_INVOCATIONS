@@ -20,10 +20,8 @@ public final class WorldPlayerReviveReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 225
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: JAAJFLKEAMP
+   * CmdId: 262
    * </pre>
    *
    * Protobuf type {@code WorldPlayerReviveReq}
@@ -248,10 +246,8 @@ public final class WorldPlayerReviveReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 225
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: JAAJFLKEAMP
+     * CmdId: 262
      * </pre>
      *
      * Protobuf type {@code WorldPlayerReviveReq}

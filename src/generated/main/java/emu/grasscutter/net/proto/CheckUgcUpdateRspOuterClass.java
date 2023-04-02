@@ -19,44 +19,43 @@ public final class CheckUgcUpdateRspOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>.UgcType ugc_type = 1;</code>
+     * @return The enum numeric value on the wire for ugcType.
+     */
+    int getUgcTypeValue();
+    /**
+     * <code>.UgcType ugc_type = 1;</code>
+     * @return The ugcType.
+     */
+    emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType();
+
+    /**
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @return A list containing the updateUgcGuidList.
      */
     java.util.List<java.lang.Long> getUpdateUgcGuidListList();
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @return The count of updateUgcGuidList.
      */
     int getUpdateUgcGuidListCount();
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @param index The index of the element to return.
      * @return The updateUgcGuidList at the given index.
      */
     long getUpdateUgcGuidList(int index);
 
     /**
-     * <code>int32 retcode = 10;</code>
+     * <code>int32 retcode = 8;</code>
      * @return The retcode.
      */
     int getRetcode();
-
-    /**
-     * <code>.UgcType ugc_type = 12;</code>
-     * @return The enum numeric value on the wire for ugcType.
-     */
-    int getUgcTypeValue();
-    /**
-     * <code>.UgcType ugc_type = 12;</code>
-     * @return The ugcType.
-     */
-    emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType();
   }
   /**
    * <pre>
-   * CmdId: 6345
-   * EnetChannelId: 0
-   * EnetIsReliable: true
+   * Name: CPCDDAMLFFF
+   * CmdId: 6321
    * </pre>
    *
    * Protobuf type {@code CheckUgcUpdateRsp}
@@ -71,8 +70,8 @@ public final class CheckUgcUpdateRspOuterClass {
       super(builder);
     }
     private CheckUgcUpdateRsp() {
-      updateUgcGuidList_ = emptyLongList();
       ugcType_ = 0;
+      updateUgcGuidList_ = emptyLongList();
     }
 
     @java.lang.Override
@@ -106,18 +105,13 @@ public final class CheckUgcUpdateRspOuterClass {
             case 0:
               done = true;
               break;
-            case 80: {
-
-              retcode_ = input.readInt32();
-              break;
-            }
-            case 96: {
+            case 8: {
               int rawValue = input.readEnum();
 
               ugcType_ = rawValue;
               break;
             }
-            case 120: {
+            case 24: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 updateUgcGuidList_ = newLongList();
                 mutable_bitField0_ |= 0x00000001;
@@ -125,7 +119,7 @@ public final class CheckUgcUpdateRspOuterClass {
               updateUgcGuidList_.addLong(input.readUInt64());
               break;
             }
-            case 122: {
+            case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
@@ -136,6 +130,11 @@ public final class CheckUgcUpdateRspOuterClass {
                 updateUgcGuidList_.addLong(input.readUInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 64: {
+
+              retcode_ = input.readInt32();
               break;
             }
             default: {
@@ -173,10 +172,29 @@ public final class CheckUgcUpdateRspOuterClass {
               emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp.class, emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp.Builder.class);
     }
 
-    public static final int UPDATE_UGC_GUID_LIST_FIELD_NUMBER = 15;
+    public static final int UGC_TYPE_FIELD_NUMBER = 1;
+    private int ugcType_;
+    /**
+     * <code>.UgcType ugc_type = 1;</code>
+     * @return The enum numeric value on the wire for ugcType.
+     */
+    @java.lang.Override public int getUgcTypeValue() {
+      return ugcType_;
+    }
+    /**
+     * <code>.UgcType ugc_type = 1;</code>
+     * @return The ugcType.
+     */
+    @java.lang.Override public emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType() {
+      @SuppressWarnings("deprecation")
+      emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType result = emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.valueOf(ugcType_);
+      return result == null ? emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UNRECOGNIZED : result;
+    }
+
+    public static final int UPDATE_UGC_GUID_LIST_FIELD_NUMBER = 3;
     private com.google.protobuf.Internal.LongList updateUgcGuidList_;
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @return A list containing the updateUgcGuidList.
      */
     @java.lang.Override
@@ -185,14 +203,14 @@ public final class CheckUgcUpdateRspOuterClass {
       return updateUgcGuidList_;
     }
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @return The count of updateUgcGuidList.
      */
     public int getUpdateUgcGuidListCount() {
       return updateUgcGuidList_.size();
     }
     /**
-     * <code>repeated uint64 update_ugc_guid_list = 15;</code>
+     * <code>repeated uint64 update_ugc_guid_list = 3;</code>
      * @param index The index of the element to return.
      * @return The updateUgcGuidList at the given index.
      */
@@ -201,34 +219,15 @@ public final class CheckUgcUpdateRspOuterClass {
     }
     private int updateUgcGuidListMemoizedSerializedSize = -1;
 
-    public static final int RETCODE_FIELD_NUMBER = 10;
+    public static final int RETCODE_FIELD_NUMBER = 8;
     private int retcode_;
     /**
-     * <code>int32 retcode = 10;</code>
+     * <code>int32 retcode = 8;</code>
      * @return The retcode.
      */
     @java.lang.Override
     public int getRetcode() {
       return retcode_;
-    }
-
-    public static final int UGC_TYPE_FIELD_NUMBER = 12;
-    private int ugcType_;
-    /**
-     * <code>.UgcType ugc_type = 12;</code>
-     * @return The enum numeric value on the wire for ugcType.
-     */
-    @java.lang.Override public int getUgcTypeValue() {
-      return ugcType_;
-    }
-    /**
-     * <code>.UgcType ugc_type = 12;</code>
-     * @return The ugcType.
-     */
-    @java.lang.Override public emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType() {
-      @SuppressWarnings("deprecation")
-      emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType result = emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.valueOf(ugcType_);
-      return result == null ? emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -246,18 +245,18 @@ public final class CheckUgcUpdateRspOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (retcode_ != 0) {
-        output.writeInt32(10, retcode_);
-      }
       if (ugcType_ != emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UGC_TYPE_NONE.getNumber()) {
-        output.writeEnum(12, ugcType_);
+        output.writeEnum(1, ugcType_);
       }
       if (getUpdateUgcGuidListList().size() > 0) {
-        output.writeUInt32NoTag(122);
+        output.writeUInt32NoTag(26);
         output.writeUInt32NoTag(updateUgcGuidListMemoizedSerializedSize);
       }
       for (int i = 0; i < updateUgcGuidList_.size(); i++) {
         output.writeUInt64NoTag(updateUgcGuidList_.getLong(i));
+      }
+      if (retcode_ != 0) {
+        output.writeInt32(8, retcode_);
       }
       unknownFields.writeTo(output);
     }
@@ -268,13 +267,9 @@ public final class CheckUgcUpdateRspOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (retcode_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, retcode_);
-      }
       if (ugcType_ != emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UGC_TYPE_NONE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(12, ugcType_);
+          .computeEnumSize(1, ugcType_);
       }
       {
         int dataSize = 0;
@@ -289,6 +284,10 @@ public final class CheckUgcUpdateRspOuterClass {
               .computeInt32SizeNoTag(dataSize);
         }
         updateUgcGuidListMemoizedSerializedSize = dataSize;
+      }
+      if (retcode_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, retcode_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -305,11 +304,11 @@ public final class CheckUgcUpdateRspOuterClass {
       }
       emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp other = (emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp) obj;
 
+      if (ugcType_ != other.ugcType_) return false;
       if (!getUpdateUgcGuidListList()
           .equals(other.getUpdateUgcGuidListList())) return false;
       if (getRetcode()
           != other.getRetcode()) return false;
-      if (ugcType_ != other.ugcType_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -321,14 +320,14 @@ public final class CheckUgcUpdateRspOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + UGC_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + ugcType_;
       if (getUpdateUgcGuidListCount() > 0) {
         hash = (37 * hash) + UPDATE_UGC_GUID_LIST_FIELD_NUMBER;
         hash = (53 * hash) + getUpdateUgcGuidListList().hashCode();
       }
       hash = (37 * hash) + RETCODE_FIELD_NUMBER;
       hash = (53 * hash) + getRetcode();
-      hash = (37 * hash) + UGC_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + ugcType_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -426,9 +425,8 @@ public final class CheckUgcUpdateRspOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 6345
-     * EnetChannelId: 0
-     * EnetIsReliable: true
+     * Name: CPCDDAMLFFF
+     * CmdId: 6321
      * </pre>
      *
      * Protobuf type {@code CheckUgcUpdateRsp}
@@ -468,11 +466,11 @@ public final class CheckUgcUpdateRspOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        ugcType_ = 0;
+
         updateUgcGuidList_ = emptyLongList();
         bitField0_ = (bitField0_ & ~0x00000001);
         retcode_ = 0;
-
-        ugcType_ = 0;
 
         return this;
       }
@@ -501,13 +499,13 @@ public final class CheckUgcUpdateRspOuterClass {
       public emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp buildPartial() {
         emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp result = new emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp(this);
         int from_bitField0_ = bitField0_;
+        result.ugcType_ = ugcType_;
         if (((bitField0_ & 0x00000001) != 0)) {
           updateUgcGuidList_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.updateUgcGuidList_ = updateUgcGuidList_;
         result.retcode_ = retcode_;
-        result.ugcType_ = ugcType_;
         onBuilt();
         return result;
       }
@@ -556,6 +554,9 @@ public final class CheckUgcUpdateRspOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp other) {
         if (other == emu.grasscutter.net.proto.CheckUgcUpdateRspOuterClass.CheckUgcUpdateRsp.getDefaultInstance()) return this;
+        if (other.ugcType_ != 0) {
+          setUgcTypeValue(other.getUgcTypeValue());
+        }
         if (!other.updateUgcGuidList_.isEmpty()) {
           if (updateUgcGuidList_.isEmpty()) {
             updateUgcGuidList_ = other.updateUgcGuidList_;
@@ -568,9 +569,6 @@ public final class CheckUgcUpdateRspOuterClass {
         }
         if (other.getRetcode() != 0) {
           setRetcode(other.getRetcode());
-        }
-        if (other.ugcType_ != 0) {
-          setUgcTypeValue(other.getUgcTypeValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -602,126 +600,16 @@ public final class CheckUgcUpdateRspOuterClass {
       }
       private int bitField0_;
 
-      private com.google.protobuf.Internal.LongList updateUgcGuidList_ = emptyLongList();
-      private void ensureUpdateUgcGuidListIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          updateUgcGuidList_ = mutableCopy(updateUgcGuidList_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @return A list containing the updateUgcGuidList.
-       */
-      public java.util.List<java.lang.Long>
-          getUpdateUgcGuidListList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
-                 java.util.Collections.unmodifiableList(updateUgcGuidList_) : updateUgcGuidList_;
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @return The count of updateUgcGuidList.
-       */
-      public int getUpdateUgcGuidListCount() {
-        return updateUgcGuidList_.size();
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @param index The index of the element to return.
-       * @return The updateUgcGuidList at the given index.
-       */
-      public long getUpdateUgcGuidList(int index) {
-        return updateUgcGuidList_.getLong(index);
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @param index The index to set the value at.
-       * @param value The updateUgcGuidList to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUpdateUgcGuidList(
-          int index, long value) {
-        ensureUpdateUgcGuidListIsMutable();
-        updateUgcGuidList_.setLong(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @param value The updateUgcGuidList to add.
-       * @return This builder for chaining.
-       */
-      public Builder addUpdateUgcGuidList(long value) {
-        ensureUpdateUgcGuidListIsMutable();
-        updateUgcGuidList_.addLong(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @param values The updateUgcGuidList to add.
-       * @return This builder for chaining.
-       */
-      public Builder addAllUpdateUgcGuidList(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUpdateUgcGuidListIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, updateUgcGuidList_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint64 update_ugc_guid_list = 15;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearUpdateUgcGuidList() {
-        updateUgcGuidList_ = emptyLongList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-
-      private int retcode_ ;
-      /**
-       * <code>int32 retcode = 10;</code>
-       * @return The retcode.
-       */
-      @java.lang.Override
-      public int getRetcode() {
-        return retcode_;
-      }
-      /**
-       * <code>int32 retcode = 10;</code>
-       * @param value The retcode to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRetcode(int value) {
-        
-        retcode_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 retcode = 10;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearRetcode() {
-        
-        retcode_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int ugcType_ = 0;
       /**
-       * <code>.UgcType ugc_type = 12;</code>
+       * <code>.UgcType ugc_type = 1;</code>
        * @return The enum numeric value on the wire for ugcType.
        */
       @java.lang.Override public int getUgcTypeValue() {
         return ugcType_;
       }
       /**
-       * <code>.UgcType ugc_type = 12;</code>
+       * <code>.UgcType ugc_type = 1;</code>
        * @param value The enum numeric value on the wire for ugcType to set.
        * @return This builder for chaining.
        */
@@ -732,7 +620,7 @@ public final class CheckUgcUpdateRspOuterClass {
         return this;
       }
       /**
-       * <code>.UgcType ugc_type = 12;</code>
+       * <code>.UgcType ugc_type = 1;</code>
        * @return The ugcType.
        */
       @java.lang.Override
@@ -742,7 +630,7 @@ public final class CheckUgcUpdateRspOuterClass {
         return result == null ? emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.UgcType ugc_type = 12;</code>
+       * <code>.UgcType ugc_type = 1;</code>
        * @param value The ugcType to set.
        * @return This builder for chaining.
        */
@@ -756,12 +644,122 @@ public final class CheckUgcUpdateRspOuterClass {
         return this;
       }
       /**
-       * <code>.UgcType ugc_type = 12;</code>
+       * <code>.UgcType ugc_type = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearUgcType() {
         
         ugcType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Internal.LongList updateUgcGuidList_ = emptyLongList();
+      private void ensureUpdateUgcGuidListIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          updateUgcGuidList_ = mutableCopy(updateUgcGuidList_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @return A list containing the updateUgcGuidList.
+       */
+      public java.util.List<java.lang.Long>
+          getUpdateUgcGuidListList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(updateUgcGuidList_) : updateUgcGuidList_;
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @return The count of updateUgcGuidList.
+       */
+      public int getUpdateUgcGuidListCount() {
+        return updateUgcGuidList_.size();
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @param index The index of the element to return.
+       * @return The updateUgcGuidList at the given index.
+       */
+      public long getUpdateUgcGuidList(int index) {
+        return updateUgcGuidList_.getLong(index);
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @param index The index to set the value at.
+       * @param value The updateUgcGuidList to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUpdateUgcGuidList(
+          int index, long value) {
+        ensureUpdateUgcGuidListIsMutable();
+        updateUgcGuidList_.setLong(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @param value The updateUgcGuidList to add.
+       * @return This builder for chaining.
+       */
+      public Builder addUpdateUgcGuidList(long value) {
+        ensureUpdateUgcGuidListIsMutable();
+        updateUgcGuidList_.addLong(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @param values The updateUgcGuidList to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllUpdateUgcGuidList(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureUpdateUgcGuidListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, updateUgcGuidList_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 update_ugc_guid_list = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUpdateUgcGuidList() {
+        updateUgcGuidList_ = emptyLongList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private int retcode_ ;
+      /**
+       * <code>int32 retcode = 8;</code>
+       * @return The retcode.
+       */
+      @java.lang.Override
+      public int getRetcode() {
+        return retcode_;
+      }
+      /**
+       * <code>int32 retcode = 8;</code>
+       * @param value The retcode to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRetcode(int value) {
+        
+        retcode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 retcode = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRetcode() {
+        
+        retcode_ = 0;
         onChanged();
         return this;
       }
@@ -833,9 +831,9 @@ public final class CheckUgcUpdateRspOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\027CheckUgcUpdateRsp.proto\032\rUgcType.proto" +
-      "\"^\n\021CheckUgcUpdateRsp\022\034\n\024update_ugc_guid" +
-      "_list\030\017 \003(\004\022\017\n\007retcode\030\n \001(\005\022\032\n\010ugc_type" +
-      "\030\014 \001(\0162\010.UgcTypeB\033\n\031emu.grasscutter.net." +
+      "\"^\n\021CheckUgcUpdateRsp\022\032\n\010ugc_type\030\001 \001(\0162" +
+      "\010.UgcType\022\034\n\024update_ugc_guid_list\030\003 \003(\004\022" +
+      "\017\n\007retcode\030\010 \001(\005B\033\n\031emu.grasscutter.net." +
       "protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
@@ -848,7 +846,7 @@ public final class CheckUgcUpdateRspOuterClass {
     internal_static_CheckUgcUpdateRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CheckUgcUpdateRsp_descriptor,
-        new java.lang.String[] { "UpdateUgcGuidList", "Retcode", "UgcType", });
+        new java.lang.String[] { "UgcType", "UpdateUgcGuidList", "Retcode", });
     emu.grasscutter.net.proto.UgcTypeOuterClass.getDescriptor();
   }
 

@@ -73,6 +73,10 @@ public final class ShopConcertProductOuterClass {
     int getBuyTimes();
   }
   /**
+   * <pre>
+   * Name: FIMJMLPLPAC
+   * </pre>
+   *
    * Protobuf type {@code ShopConcertProduct}
    */
   public static final class ShopConcertProduct extends
@@ -539,6 +543,10 @@ public final class ShopConcertProductOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: FIMJMLPLPAC
+     * </pre>
+     *
      * Protobuf type {@code ShopConcertProduct}
      */
     public static final class Builder extends

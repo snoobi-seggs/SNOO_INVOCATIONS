@@ -19,78 +19,82 @@ public final class AdjustTrackingInfoOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string event_token = 9;</code>
-     * @return The eventToken.
+     * <code>string GMKLCKAOJJC = 9;</code>
+     * @return The gMKLCKAOJJC.
      */
-    java.lang.String getEventToken();
+    java.lang.String getGMKLCKAOJJC();
     /**
-     * <code>string event_token = 9;</code>
-     * @return The bytes for eventToken.
+     * <code>string GMKLCKAOJJC = 9;</code>
+     * @return The bytes for gMKLCKAOJJC.
      */
     com.google.protobuf.ByteString
-        getEventTokenBytes();
+        getGMKLCKAOJJCBytes();
 
     /**
-     * <code>string adid = 4;</code>
-     * @return The adid.
+     * <code>string ELELKMAKMJD = 15;</code>
+     * @return The eLELKMAKMJD.
      */
-    java.lang.String getAdid();
+    java.lang.String getELELKMAKMJD();
     /**
-     * <code>string adid = 4;</code>
-     * @return The bytes for adid.
+     * <code>string ELELKMAKMJD = 15;</code>
+     * @return The bytes for eLELKMAKMJD.
      */
     com.google.protobuf.ByteString
-        getAdidBytes();
+        getELELKMAKMJDBytes();
 
     /**
-     * <code>string idfa = 2;</code>
-     * @return The idfa.
+     * <code>string IJCFFLHIJJJ = 14;</code>
+     * @return The iJCFFLHIJJJ.
      */
-    java.lang.String getIdfa();
+    java.lang.String getIJCFFLHIJJJ();
     /**
-     * <code>string idfa = 2;</code>
-     * @return The bytes for idfa.
+     * <code>string IJCFFLHIJJJ = 14;</code>
+     * @return The bytes for iJCFFLHIJJJ.
      */
     com.google.protobuf.ByteString
-        getIdfaBytes();
+        getIJCFFLHIJJJBytes();
 
     /**
-     * <code>string app_token = 14;</code>
-     * @return The appToken.
+     * <code>string KOIMKKBONHE = 12;</code>
+     * @return The kOIMKKBONHE.
      */
-    java.lang.String getAppToken();
+    java.lang.String getKOIMKKBONHE();
     /**
-     * <code>string app_token = 14;</code>
-     * @return The bytes for appToken.
+     * <code>string KOIMKKBONHE = 12;</code>
+     * @return The bytes for kOIMKKBONHE.
      */
     com.google.protobuf.ByteString
-        getAppTokenBytes();
+        getKOIMKKBONHEBytes();
 
     /**
-     * <code>string gps_adid = 3;</code>
-     * @return The gpsAdid.
+     * <code>string GMBLGKOACIH = 8;</code>
+     * @return The gMBLGKOACIH.
      */
-    java.lang.String getGpsAdid();
+    java.lang.String getGMBLGKOACIH();
     /**
-     * <code>string gps_adid = 3;</code>
-     * @return The bytes for gpsAdid.
+     * <code>string GMBLGKOACIH = 8;</code>
+     * @return The bytes for gMBLGKOACIH.
      */
     com.google.protobuf.ByteString
-        getGpsAdidBytes();
+        getGMBLGKOACIHBytes();
 
     /**
-     * <code>string fire_adid = 13;</code>
-     * @return The fireAdid.
+     * <code>string DODFICFOMAB = 1;</code>
+     * @return The dODFICFOMAB.
      */
-    java.lang.String getFireAdid();
+    java.lang.String getDODFICFOMAB();
     /**
-     * <code>string fire_adid = 13;</code>
-     * @return The bytes for fireAdid.
+     * <code>string DODFICFOMAB = 1;</code>
+     * @return The bytes for dODFICFOMAB.
      */
     com.google.protobuf.ByteString
-        getFireAdidBytes();
+        getDODFICFOMABBytes();
   }
   /**
+   * <pre>
+   * Name: IPEDEGMBLIH
+   * </pre>
+   *
    * Protobuf type {@code AdjustTrackingInfo}
    */
   public static final class AdjustTrackingInfo extends
@@ -103,12 +107,12 @@ public final class AdjustTrackingInfoOuterClass {
       super(builder);
     }
     private AdjustTrackingInfo() {
-      eventToken_ = "";
-      adid_ = "";
-      idfa_ = "";
-      appToken_ = "";
-      gpsAdid_ = "";
-      fireAdid_ = "";
+      gMKLCKAOJJC_ = "";
+      eLELKMAKMJD_ = "";
+      iJCFFLHIJJJ_ = "";
+      kOIMKKBONHE_ = "";
+      gMBLGKOACIH_ = "";
+      dODFICFOMAB_ = "";
     }
 
     @java.lang.Override
@@ -141,40 +145,40 @@ public final class AdjustTrackingInfoOuterClass {
             case 0:
               done = true;
               break;
-            case 18: {
+            case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              idfa_ = s;
+              dODFICFOMAB_ = s;
               break;
             }
-            case 26: {
+            case 66: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              gpsAdid_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              adid_ = s;
+              gMBLGKOACIH_ = s;
               break;
             }
             case 74: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              eventToken_ = s;
+              gMKLCKAOJJC_ = s;
               break;
             }
-            case 106: {
+            case 98: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              fireAdid_ = s;
+              kOIMKKBONHE_ = s;
               break;
             }
             case 114: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              appToken_ = s;
+              iJCFFLHIJJJ_ = s;
+              break;
+            }
+            case 122: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              eLELKMAKMJD_ = s;
               break;
             }
             default: {
@@ -209,228 +213,228 @@ public final class AdjustTrackingInfoOuterClass {
               emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo.class, emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo.Builder.class);
     }
 
-    public static final int EVENT_TOKEN_FIELD_NUMBER = 9;
-    private volatile java.lang.Object eventToken_;
+    public static final int GMKLCKAOJJC_FIELD_NUMBER = 9;
+    private volatile java.lang.Object gMKLCKAOJJC_;
     /**
-     * <code>string event_token = 9;</code>
-     * @return The eventToken.
+     * <code>string GMKLCKAOJJC = 9;</code>
+     * @return The gMKLCKAOJJC.
      */
     @java.lang.Override
-    public java.lang.String getEventToken() {
-      java.lang.Object ref = eventToken_;
+    public java.lang.String getGMKLCKAOJJC() {
+      java.lang.Object ref = gMKLCKAOJJC_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        eventToken_ = s;
+        gMKLCKAOJJC_ = s;
         return s;
       }
     }
     /**
-     * <code>string event_token = 9;</code>
-     * @return The bytes for eventToken.
+     * <code>string GMKLCKAOJJC = 9;</code>
+     * @return The bytes for gMKLCKAOJJC.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getEventTokenBytes() {
-      java.lang.Object ref = eventToken_;
+        getGMKLCKAOJJCBytes() {
+      java.lang.Object ref = gMKLCKAOJJC_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        eventToken_ = b;
+        gMKLCKAOJJC_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int ADID_FIELD_NUMBER = 4;
-    private volatile java.lang.Object adid_;
+    public static final int ELELKMAKMJD_FIELD_NUMBER = 15;
+    private volatile java.lang.Object eLELKMAKMJD_;
     /**
-     * <code>string adid = 4;</code>
-     * @return The adid.
+     * <code>string ELELKMAKMJD = 15;</code>
+     * @return The eLELKMAKMJD.
      */
     @java.lang.Override
-    public java.lang.String getAdid() {
-      java.lang.Object ref = adid_;
+    public java.lang.String getELELKMAKMJD() {
+      java.lang.Object ref = eLELKMAKMJD_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        adid_ = s;
+        eLELKMAKMJD_ = s;
         return s;
       }
     }
     /**
-     * <code>string adid = 4;</code>
-     * @return The bytes for adid.
+     * <code>string ELELKMAKMJD = 15;</code>
+     * @return The bytes for eLELKMAKMJD.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getAdidBytes() {
-      java.lang.Object ref = adid_;
+        getELELKMAKMJDBytes() {
+      java.lang.Object ref = eLELKMAKMJD_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        adid_ = b;
+        eLELKMAKMJD_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int IDFA_FIELD_NUMBER = 2;
-    private volatile java.lang.Object idfa_;
+    public static final int IJCFFLHIJJJ_FIELD_NUMBER = 14;
+    private volatile java.lang.Object iJCFFLHIJJJ_;
     /**
-     * <code>string idfa = 2;</code>
-     * @return The idfa.
+     * <code>string IJCFFLHIJJJ = 14;</code>
+     * @return The iJCFFLHIJJJ.
      */
     @java.lang.Override
-    public java.lang.String getIdfa() {
-      java.lang.Object ref = idfa_;
+    public java.lang.String getIJCFFLHIJJJ() {
+      java.lang.Object ref = iJCFFLHIJJJ_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        idfa_ = s;
+        iJCFFLHIJJJ_ = s;
         return s;
       }
     }
     /**
-     * <code>string idfa = 2;</code>
-     * @return The bytes for idfa.
+     * <code>string IJCFFLHIJJJ = 14;</code>
+     * @return The bytes for iJCFFLHIJJJ.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getIdfaBytes() {
-      java.lang.Object ref = idfa_;
+        getIJCFFLHIJJJBytes() {
+      java.lang.Object ref = iJCFFLHIJJJ_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        idfa_ = b;
+        iJCFFLHIJJJ_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int APP_TOKEN_FIELD_NUMBER = 14;
-    private volatile java.lang.Object appToken_;
+    public static final int KOIMKKBONHE_FIELD_NUMBER = 12;
+    private volatile java.lang.Object kOIMKKBONHE_;
     /**
-     * <code>string app_token = 14;</code>
-     * @return The appToken.
+     * <code>string KOIMKKBONHE = 12;</code>
+     * @return The kOIMKKBONHE.
      */
     @java.lang.Override
-    public java.lang.String getAppToken() {
-      java.lang.Object ref = appToken_;
+    public java.lang.String getKOIMKKBONHE() {
+      java.lang.Object ref = kOIMKKBONHE_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        appToken_ = s;
+        kOIMKKBONHE_ = s;
         return s;
       }
     }
     /**
-     * <code>string app_token = 14;</code>
-     * @return The bytes for appToken.
+     * <code>string KOIMKKBONHE = 12;</code>
+     * @return The bytes for kOIMKKBONHE.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getAppTokenBytes() {
-      java.lang.Object ref = appToken_;
+        getKOIMKKBONHEBytes() {
+      java.lang.Object ref = kOIMKKBONHE_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        appToken_ = b;
+        kOIMKKBONHE_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int GPS_ADID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object gpsAdid_;
+    public static final int GMBLGKOACIH_FIELD_NUMBER = 8;
+    private volatile java.lang.Object gMBLGKOACIH_;
     /**
-     * <code>string gps_adid = 3;</code>
-     * @return The gpsAdid.
+     * <code>string GMBLGKOACIH = 8;</code>
+     * @return The gMBLGKOACIH.
      */
     @java.lang.Override
-    public java.lang.String getGpsAdid() {
-      java.lang.Object ref = gpsAdid_;
+    public java.lang.String getGMBLGKOACIH() {
+      java.lang.Object ref = gMBLGKOACIH_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        gpsAdid_ = s;
+        gMBLGKOACIH_ = s;
         return s;
       }
     }
     /**
-     * <code>string gps_adid = 3;</code>
-     * @return The bytes for gpsAdid.
+     * <code>string GMBLGKOACIH = 8;</code>
+     * @return The bytes for gMBLGKOACIH.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getGpsAdidBytes() {
-      java.lang.Object ref = gpsAdid_;
+        getGMBLGKOACIHBytes() {
+      java.lang.Object ref = gMBLGKOACIH_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        gpsAdid_ = b;
+        gMBLGKOACIH_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int FIRE_ADID_FIELD_NUMBER = 13;
-    private volatile java.lang.Object fireAdid_;
+    public static final int DODFICFOMAB_FIELD_NUMBER = 1;
+    private volatile java.lang.Object dODFICFOMAB_;
     /**
-     * <code>string fire_adid = 13;</code>
-     * @return The fireAdid.
+     * <code>string DODFICFOMAB = 1;</code>
+     * @return The dODFICFOMAB.
      */
     @java.lang.Override
-    public java.lang.String getFireAdid() {
-      java.lang.Object ref = fireAdid_;
+    public java.lang.String getDODFICFOMAB() {
+      java.lang.Object ref = dODFICFOMAB_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        fireAdid_ = s;
+        dODFICFOMAB_ = s;
         return s;
       }
     }
     /**
-     * <code>string fire_adid = 13;</code>
-     * @return The bytes for fireAdid.
+     * <code>string DODFICFOMAB = 1;</code>
+     * @return The bytes for dODFICFOMAB.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getFireAdidBytes() {
-      java.lang.Object ref = fireAdid_;
+        getDODFICFOMABBytes() {
+      java.lang.Object ref = dODFICFOMAB_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        fireAdid_ = b;
+        dODFICFOMAB_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -451,23 +455,23 @@ public final class AdjustTrackingInfoOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idfa_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, idfa_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dODFICFOMAB_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, dODFICFOMAB_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gpsAdid_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, gpsAdid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gMBLGKOACIH_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, gMBLGKOACIH_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(adid_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, adid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gMKLCKAOJJC_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, gMKLCKAOJJC_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(eventToken_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, eventToken_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(kOIMKKBONHE_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, kOIMKKBONHE_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fireAdid_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, fireAdid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(iJCFFLHIJJJ_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, iJCFFLHIJJJ_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appToken_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, appToken_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(eLELKMAKMJD_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, eLELKMAKMJD_);
       }
       unknownFields.writeTo(output);
     }
@@ -478,23 +482,23 @@ public final class AdjustTrackingInfoOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idfa_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, idfa_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dODFICFOMAB_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, dODFICFOMAB_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gpsAdid_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, gpsAdid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gMBLGKOACIH_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, gMBLGKOACIH_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(adid_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, adid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gMKLCKAOJJC_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, gMKLCKAOJJC_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(eventToken_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, eventToken_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(kOIMKKBONHE_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, kOIMKKBONHE_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fireAdid_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, fireAdid_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(iJCFFLHIJJJ_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, iJCFFLHIJJJ_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appToken_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, appToken_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(eLELKMAKMJD_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, eLELKMAKMJD_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -511,18 +515,18 @@ public final class AdjustTrackingInfoOuterClass {
       }
       emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo other = (emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo) obj;
 
-      if (!getEventToken()
-          .equals(other.getEventToken())) return false;
-      if (!getAdid()
-          .equals(other.getAdid())) return false;
-      if (!getIdfa()
-          .equals(other.getIdfa())) return false;
-      if (!getAppToken()
-          .equals(other.getAppToken())) return false;
-      if (!getGpsAdid()
-          .equals(other.getGpsAdid())) return false;
-      if (!getFireAdid()
-          .equals(other.getFireAdid())) return false;
+      if (!getGMKLCKAOJJC()
+          .equals(other.getGMKLCKAOJJC())) return false;
+      if (!getELELKMAKMJD()
+          .equals(other.getELELKMAKMJD())) return false;
+      if (!getIJCFFLHIJJJ()
+          .equals(other.getIJCFFLHIJJJ())) return false;
+      if (!getKOIMKKBONHE()
+          .equals(other.getKOIMKKBONHE())) return false;
+      if (!getGMBLGKOACIH()
+          .equals(other.getGMBLGKOACIH())) return false;
+      if (!getDODFICFOMAB()
+          .equals(other.getDODFICFOMAB())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -534,18 +538,18 @@ public final class AdjustTrackingInfoOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + EVENT_TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getEventToken().hashCode();
-      hash = (37 * hash) + ADID_FIELD_NUMBER;
-      hash = (53 * hash) + getAdid().hashCode();
-      hash = (37 * hash) + IDFA_FIELD_NUMBER;
-      hash = (53 * hash) + getIdfa().hashCode();
-      hash = (37 * hash) + APP_TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getAppToken().hashCode();
-      hash = (37 * hash) + GPS_ADID_FIELD_NUMBER;
-      hash = (53 * hash) + getGpsAdid().hashCode();
-      hash = (37 * hash) + FIRE_ADID_FIELD_NUMBER;
-      hash = (53 * hash) + getFireAdid().hashCode();
+      hash = (37 * hash) + GMKLCKAOJJC_FIELD_NUMBER;
+      hash = (53 * hash) + getGMKLCKAOJJC().hashCode();
+      hash = (37 * hash) + ELELKMAKMJD_FIELD_NUMBER;
+      hash = (53 * hash) + getELELKMAKMJD().hashCode();
+      hash = (37 * hash) + IJCFFLHIJJJ_FIELD_NUMBER;
+      hash = (53 * hash) + getIJCFFLHIJJJ().hashCode();
+      hash = (37 * hash) + KOIMKKBONHE_FIELD_NUMBER;
+      hash = (53 * hash) + getKOIMKKBONHE().hashCode();
+      hash = (37 * hash) + GMBLGKOACIH_FIELD_NUMBER;
+      hash = (53 * hash) + getGMBLGKOACIH().hashCode();
+      hash = (37 * hash) + DODFICFOMAB_FIELD_NUMBER;
+      hash = (53 * hash) + getDODFICFOMAB().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -642,6 +646,10 @@ public final class AdjustTrackingInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: IPEDEGMBLIH
+     * </pre>
+     *
      * Protobuf type {@code AdjustTrackingInfo}
      */
     public static final class Builder extends
@@ -679,17 +687,17 @@ public final class AdjustTrackingInfoOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        eventToken_ = "";
+        gMKLCKAOJJC_ = "";
 
-        adid_ = "";
+        eLELKMAKMJD_ = "";
 
-        idfa_ = "";
+        iJCFFLHIJJJ_ = "";
 
-        appToken_ = "";
+        kOIMKKBONHE_ = "";
 
-        gpsAdid_ = "";
+        gMBLGKOACIH_ = "";
 
-        fireAdid_ = "";
+        dODFICFOMAB_ = "";
 
         return this;
       }
@@ -717,12 +725,12 @@ public final class AdjustTrackingInfoOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo buildPartial() {
         emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo result = new emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo(this);
-        result.eventToken_ = eventToken_;
-        result.adid_ = adid_;
-        result.idfa_ = idfa_;
-        result.appToken_ = appToken_;
-        result.gpsAdid_ = gpsAdid_;
-        result.fireAdid_ = fireAdid_;
+        result.gMKLCKAOJJC_ = gMKLCKAOJJC_;
+        result.eLELKMAKMJD_ = eLELKMAKMJD_;
+        result.iJCFFLHIJJJ_ = iJCFFLHIJJJ_;
+        result.kOIMKKBONHE_ = kOIMKKBONHE_;
+        result.gMBLGKOACIH_ = gMBLGKOACIH_;
+        result.dODFICFOMAB_ = dODFICFOMAB_;
         onBuilt();
         return result;
       }
@@ -771,28 +779,28 @@ public final class AdjustTrackingInfoOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo other) {
         if (other == emu.grasscutter.net.proto.AdjustTrackingInfoOuterClass.AdjustTrackingInfo.getDefaultInstance()) return this;
-        if (!other.getEventToken().isEmpty()) {
-          eventToken_ = other.eventToken_;
+        if (!other.getGMKLCKAOJJC().isEmpty()) {
+          gMKLCKAOJJC_ = other.gMKLCKAOJJC_;
           onChanged();
         }
-        if (!other.getAdid().isEmpty()) {
-          adid_ = other.adid_;
+        if (!other.getELELKMAKMJD().isEmpty()) {
+          eLELKMAKMJD_ = other.eLELKMAKMJD_;
           onChanged();
         }
-        if (!other.getIdfa().isEmpty()) {
-          idfa_ = other.idfa_;
+        if (!other.getIJCFFLHIJJJ().isEmpty()) {
+          iJCFFLHIJJJ_ = other.iJCFFLHIJJJ_;
           onChanged();
         }
-        if (!other.getAppToken().isEmpty()) {
-          appToken_ = other.appToken_;
+        if (!other.getKOIMKKBONHE().isEmpty()) {
+          kOIMKKBONHE_ = other.kOIMKKBONHE_;
           onChanged();
         }
-        if (!other.getGpsAdid().isEmpty()) {
-          gpsAdid_ = other.gpsAdid_;
+        if (!other.getGMBLGKOACIH().isEmpty()) {
+          gMBLGKOACIH_ = other.gMBLGKOACIH_;
           onChanged();
         }
-        if (!other.getFireAdid().isEmpty()) {
-          fireAdid_ = other.fireAdid_;
+        if (!other.getDODFICFOMAB().isEmpty()) {
+          dODFICFOMAB_ = other.dODFICFOMAB_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -824,458 +832,458 @@ public final class AdjustTrackingInfoOuterClass {
         return this;
       }
 
-      private java.lang.Object eventToken_ = "";
+      private java.lang.Object gMKLCKAOJJC_ = "";
       /**
-       * <code>string event_token = 9;</code>
-       * @return The eventToken.
+       * <code>string GMKLCKAOJJC = 9;</code>
+       * @return The gMKLCKAOJJC.
        */
-      public java.lang.String getEventToken() {
-        java.lang.Object ref = eventToken_;
+      public java.lang.String getGMKLCKAOJJC() {
+        java.lang.Object ref = gMKLCKAOJJC_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          eventToken_ = s;
+          gMKLCKAOJJC_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string event_token = 9;</code>
-       * @return The bytes for eventToken.
+       * <code>string GMKLCKAOJJC = 9;</code>
+       * @return The bytes for gMKLCKAOJJC.
        */
       public com.google.protobuf.ByteString
-          getEventTokenBytes() {
-        java.lang.Object ref = eventToken_;
+          getGMKLCKAOJJCBytes() {
+        java.lang.Object ref = gMKLCKAOJJC_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          eventToken_ = b;
+          gMKLCKAOJJC_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string event_token = 9;</code>
-       * @param value The eventToken to set.
+       * <code>string GMKLCKAOJJC = 9;</code>
+       * @param value The gMKLCKAOJJC to set.
        * @return This builder for chaining.
        */
-      public Builder setEventToken(
+      public Builder setGMKLCKAOJJC(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        eventToken_ = value;
+        gMKLCKAOJJC_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string event_token = 9;</code>
+       * <code>string GMKLCKAOJJC = 9;</code>
        * @return This builder for chaining.
        */
-      public Builder clearEventToken() {
+      public Builder clearGMKLCKAOJJC() {
         
-        eventToken_ = getDefaultInstance().getEventToken();
+        gMKLCKAOJJC_ = getDefaultInstance().getGMKLCKAOJJC();
         onChanged();
         return this;
       }
       /**
-       * <code>string event_token = 9;</code>
-       * @param value The bytes for eventToken to set.
+       * <code>string GMKLCKAOJJC = 9;</code>
+       * @param value The bytes for gMKLCKAOJJC to set.
        * @return This builder for chaining.
        */
-      public Builder setEventTokenBytes(
+      public Builder setGMKLCKAOJJCBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        eventToken_ = value;
+        gMKLCKAOJJC_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object adid_ = "";
+      private java.lang.Object eLELKMAKMJD_ = "";
       /**
-       * <code>string adid = 4;</code>
-       * @return The adid.
+       * <code>string ELELKMAKMJD = 15;</code>
+       * @return The eLELKMAKMJD.
        */
-      public java.lang.String getAdid() {
-        java.lang.Object ref = adid_;
+      public java.lang.String getELELKMAKMJD() {
+        java.lang.Object ref = eLELKMAKMJD_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          adid_ = s;
+          eLELKMAKMJD_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string adid = 4;</code>
-       * @return The bytes for adid.
+       * <code>string ELELKMAKMJD = 15;</code>
+       * @return The bytes for eLELKMAKMJD.
        */
       public com.google.protobuf.ByteString
-          getAdidBytes() {
-        java.lang.Object ref = adid_;
+          getELELKMAKMJDBytes() {
+        java.lang.Object ref = eLELKMAKMJD_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          adid_ = b;
+          eLELKMAKMJD_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string adid = 4;</code>
-       * @param value The adid to set.
+       * <code>string ELELKMAKMJD = 15;</code>
+       * @param value The eLELKMAKMJD to set.
        * @return This builder for chaining.
        */
-      public Builder setAdid(
+      public Builder setELELKMAKMJD(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        adid_ = value;
+        eLELKMAKMJD_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string adid = 4;</code>
+       * <code>string ELELKMAKMJD = 15;</code>
        * @return This builder for chaining.
        */
-      public Builder clearAdid() {
+      public Builder clearELELKMAKMJD() {
         
-        adid_ = getDefaultInstance().getAdid();
+        eLELKMAKMJD_ = getDefaultInstance().getELELKMAKMJD();
         onChanged();
         return this;
       }
       /**
-       * <code>string adid = 4;</code>
-       * @param value The bytes for adid to set.
+       * <code>string ELELKMAKMJD = 15;</code>
+       * @param value The bytes for eLELKMAKMJD to set.
        * @return This builder for chaining.
        */
-      public Builder setAdidBytes(
+      public Builder setELELKMAKMJDBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        adid_ = value;
+        eLELKMAKMJD_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object idfa_ = "";
+      private java.lang.Object iJCFFLHIJJJ_ = "";
       /**
-       * <code>string idfa = 2;</code>
-       * @return The idfa.
+       * <code>string IJCFFLHIJJJ = 14;</code>
+       * @return The iJCFFLHIJJJ.
        */
-      public java.lang.String getIdfa() {
-        java.lang.Object ref = idfa_;
+      public java.lang.String getIJCFFLHIJJJ() {
+        java.lang.Object ref = iJCFFLHIJJJ_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          idfa_ = s;
+          iJCFFLHIJJJ_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string idfa = 2;</code>
-       * @return The bytes for idfa.
+       * <code>string IJCFFLHIJJJ = 14;</code>
+       * @return The bytes for iJCFFLHIJJJ.
        */
       public com.google.protobuf.ByteString
-          getIdfaBytes() {
-        java.lang.Object ref = idfa_;
+          getIJCFFLHIJJJBytes() {
+        java.lang.Object ref = iJCFFLHIJJJ_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          idfa_ = b;
+          iJCFFLHIJJJ_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string idfa = 2;</code>
-       * @param value The idfa to set.
+       * <code>string IJCFFLHIJJJ = 14;</code>
+       * @param value The iJCFFLHIJJJ to set.
        * @return This builder for chaining.
        */
-      public Builder setIdfa(
+      public Builder setIJCFFLHIJJJ(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        idfa_ = value;
+        iJCFFLHIJJJ_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string idfa = 2;</code>
+       * <code>string IJCFFLHIJJJ = 14;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIdfa() {
+      public Builder clearIJCFFLHIJJJ() {
         
-        idfa_ = getDefaultInstance().getIdfa();
+        iJCFFLHIJJJ_ = getDefaultInstance().getIJCFFLHIJJJ();
         onChanged();
         return this;
       }
       /**
-       * <code>string idfa = 2;</code>
-       * @param value The bytes for idfa to set.
+       * <code>string IJCFFLHIJJJ = 14;</code>
+       * @param value The bytes for iJCFFLHIJJJ to set.
        * @return This builder for chaining.
        */
-      public Builder setIdfaBytes(
+      public Builder setIJCFFLHIJJJBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        idfa_ = value;
+        iJCFFLHIJJJ_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object appToken_ = "";
+      private java.lang.Object kOIMKKBONHE_ = "";
       /**
-       * <code>string app_token = 14;</code>
-       * @return The appToken.
+       * <code>string KOIMKKBONHE = 12;</code>
+       * @return The kOIMKKBONHE.
        */
-      public java.lang.String getAppToken() {
-        java.lang.Object ref = appToken_;
+      public java.lang.String getKOIMKKBONHE() {
+        java.lang.Object ref = kOIMKKBONHE_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          appToken_ = s;
+          kOIMKKBONHE_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string app_token = 14;</code>
-       * @return The bytes for appToken.
+       * <code>string KOIMKKBONHE = 12;</code>
+       * @return The bytes for kOIMKKBONHE.
        */
       public com.google.protobuf.ByteString
-          getAppTokenBytes() {
-        java.lang.Object ref = appToken_;
+          getKOIMKKBONHEBytes() {
+        java.lang.Object ref = kOIMKKBONHE_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          appToken_ = b;
+          kOIMKKBONHE_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string app_token = 14;</code>
-       * @param value The appToken to set.
+       * <code>string KOIMKKBONHE = 12;</code>
+       * @param value The kOIMKKBONHE to set.
        * @return This builder for chaining.
        */
-      public Builder setAppToken(
+      public Builder setKOIMKKBONHE(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        appToken_ = value;
+        kOIMKKBONHE_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string app_token = 14;</code>
+       * <code>string KOIMKKBONHE = 12;</code>
        * @return This builder for chaining.
        */
-      public Builder clearAppToken() {
+      public Builder clearKOIMKKBONHE() {
         
-        appToken_ = getDefaultInstance().getAppToken();
+        kOIMKKBONHE_ = getDefaultInstance().getKOIMKKBONHE();
         onChanged();
         return this;
       }
       /**
-       * <code>string app_token = 14;</code>
-       * @param value The bytes for appToken to set.
+       * <code>string KOIMKKBONHE = 12;</code>
+       * @param value The bytes for kOIMKKBONHE to set.
        * @return This builder for chaining.
        */
-      public Builder setAppTokenBytes(
+      public Builder setKOIMKKBONHEBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        appToken_ = value;
+        kOIMKKBONHE_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object gpsAdid_ = "";
+      private java.lang.Object gMBLGKOACIH_ = "";
       /**
-       * <code>string gps_adid = 3;</code>
-       * @return The gpsAdid.
+       * <code>string GMBLGKOACIH = 8;</code>
+       * @return The gMBLGKOACIH.
        */
-      public java.lang.String getGpsAdid() {
-        java.lang.Object ref = gpsAdid_;
+      public java.lang.String getGMBLGKOACIH() {
+        java.lang.Object ref = gMBLGKOACIH_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          gpsAdid_ = s;
+          gMBLGKOACIH_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string gps_adid = 3;</code>
-       * @return The bytes for gpsAdid.
+       * <code>string GMBLGKOACIH = 8;</code>
+       * @return The bytes for gMBLGKOACIH.
        */
       public com.google.protobuf.ByteString
-          getGpsAdidBytes() {
-        java.lang.Object ref = gpsAdid_;
+          getGMBLGKOACIHBytes() {
+        java.lang.Object ref = gMBLGKOACIH_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          gpsAdid_ = b;
+          gMBLGKOACIH_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string gps_adid = 3;</code>
-       * @param value The gpsAdid to set.
+       * <code>string GMBLGKOACIH = 8;</code>
+       * @param value The gMBLGKOACIH to set.
        * @return This builder for chaining.
        */
-      public Builder setGpsAdid(
+      public Builder setGMBLGKOACIH(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        gpsAdid_ = value;
+        gMBLGKOACIH_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string gps_adid = 3;</code>
+       * <code>string GMBLGKOACIH = 8;</code>
        * @return This builder for chaining.
        */
-      public Builder clearGpsAdid() {
+      public Builder clearGMBLGKOACIH() {
         
-        gpsAdid_ = getDefaultInstance().getGpsAdid();
+        gMBLGKOACIH_ = getDefaultInstance().getGMBLGKOACIH();
         onChanged();
         return this;
       }
       /**
-       * <code>string gps_adid = 3;</code>
-       * @param value The bytes for gpsAdid to set.
+       * <code>string GMBLGKOACIH = 8;</code>
+       * @param value The bytes for gMBLGKOACIH to set.
        * @return This builder for chaining.
        */
-      public Builder setGpsAdidBytes(
+      public Builder setGMBLGKOACIHBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        gpsAdid_ = value;
+        gMBLGKOACIH_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object fireAdid_ = "";
+      private java.lang.Object dODFICFOMAB_ = "";
       /**
-       * <code>string fire_adid = 13;</code>
-       * @return The fireAdid.
+       * <code>string DODFICFOMAB = 1;</code>
+       * @return The dODFICFOMAB.
        */
-      public java.lang.String getFireAdid() {
-        java.lang.Object ref = fireAdid_;
+      public java.lang.String getDODFICFOMAB() {
+        java.lang.Object ref = dODFICFOMAB_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          fireAdid_ = s;
+          dODFICFOMAB_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string fire_adid = 13;</code>
-       * @return The bytes for fireAdid.
+       * <code>string DODFICFOMAB = 1;</code>
+       * @return The bytes for dODFICFOMAB.
        */
       public com.google.protobuf.ByteString
-          getFireAdidBytes() {
-        java.lang.Object ref = fireAdid_;
+          getDODFICFOMABBytes() {
+        java.lang.Object ref = dODFICFOMAB_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          fireAdid_ = b;
+          dODFICFOMAB_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string fire_adid = 13;</code>
-       * @param value The fireAdid to set.
+       * <code>string DODFICFOMAB = 1;</code>
+       * @param value The dODFICFOMAB to set.
        * @return This builder for chaining.
        */
-      public Builder setFireAdid(
+      public Builder setDODFICFOMAB(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        fireAdid_ = value;
+        dODFICFOMAB_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string fire_adid = 13;</code>
+       * <code>string DODFICFOMAB = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearFireAdid() {
+      public Builder clearDODFICFOMAB() {
         
-        fireAdid_ = getDefaultInstance().getFireAdid();
+        dODFICFOMAB_ = getDefaultInstance().getDODFICFOMAB();
         onChanged();
         return this;
       }
       /**
-       * <code>string fire_adid = 13;</code>
-       * @param value The bytes for fireAdid to set.
+       * <code>string DODFICFOMAB = 1;</code>
+       * @param value The bytes for dODFICFOMAB to set.
        * @return This builder for chaining.
        */
-      public Builder setFireAdidBytes(
+      public Builder setDODFICFOMABBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        fireAdid_ = value;
+        dODFICFOMAB_ = value;
         onChanged();
         return this;
       }
@@ -1346,11 +1354,12 @@ public final class AdjustTrackingInfoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\030AdjustTrackingInfo.proto\"}\n\022AdjustTrac" +
-      "kingInfo\022\023\n\013event_token\030\t \001(\t\022\014\n\004adid\030\004 " +
-      "\001(\t\022\014\n\004idfa\030\002 \001(\t\022\021\n\tapp_token\030\016 \001(\t\022\020\n\010" +
-      "gps_adid\030\003 \001(\t\022\021\n\tfire_adid\030\r \001(\tB\033\n\031emu" +
-      ".grasscutter.net.protob\006proto3"
+      "\n\030AdjustTrackingInfo.proto\"\222\001\n\022AdjustTra" +
+      "ckingInfo\022\023\n\013GMKLCKAOJJC\030\t \001(\t\022\023\n\013ELELKM" +
+      "AKMJD\030\017 \001(\t\022\023\n\013IJCFFLHIJJJ\030\016 \001(\t\022\023\n\013KOIM" +
+      "KKBONHE\030\014 \001(\t\022\023\n\013GMBLGKOACIH\030\010 \001(\t\022\023\n\013DO" +
+      "DFICFOMAB\030\001 \001(\tB\033\n\031emu.grasscutter.net.p" +
+      "rotob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1361,7 +1370,7 @@ public final class AdjustTrackingInfoOuterClass {
     internal_static_AdjustTrackingInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AdjustTrackingInfo_descriptor,
-        new java.lang.String[] { "EventToken", "Adid", "Idfa", "AppToken", "GpsAdid", "FireAdid", });
+        new java.lang.String[] { "GMKLCKAOJJC", "ELELKMAKMJD", "IJCFFLHIJJJ", "KOIMKKBONHE", "GMBLGKOACIH", "DODFICFOMAB", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

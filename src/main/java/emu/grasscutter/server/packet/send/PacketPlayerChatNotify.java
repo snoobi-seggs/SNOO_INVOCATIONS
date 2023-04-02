@@ -5,7 +5,7 @@ import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.net.proto.ChatInfoOuterClass.ChatInfo;
 import emu.grasscutter.net.proto.PlayerChatNotifyOuterClass.PlayerChatNotify;
-import emu.grasscutter.net.proto.SystemHintOuterClass.SystemHint;
+//import emu.grasscutter.net.proto.SystemHintOuterClass.SystemHint;
 
 public class PacketPlayerChatNotify extends BasePacket {
 	

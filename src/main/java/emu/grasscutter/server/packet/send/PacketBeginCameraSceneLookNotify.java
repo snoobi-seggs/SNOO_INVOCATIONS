@@ -1,5 +1,6 @@
 package emu.grasscutter.server.packet.send;
 
+import emu.grasscutter.Grasscutter;
 import emu.grasscutter.net.packet.BasePacket;
 import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.net.proto.BeginCameraSceneLookNotifyOuterClass.BeginCameraSceneLookNotify;
@@ -15,7 +16,8 @@ public class PacketBeginCameraSceneLookNotify extends BasePacket {
 
 	public PacketBeginCameraSceneLookNotify(CameraSceneLookNotify parameters) {
 		super(PacketOpcodes.BeginCameraSceneLookNotify);
-        val builder = BeginCameraSceneLookNotify.newBuilder()
+		Grasscutter.getLogger().warn("COMMENTED CODE DUE TO SHIT PROTOS");
+        /*val builder = BeginCameraSceneLookNotify.newBuilder()
             .setLookPos(parameters.lookPos.toProto())
             .setFollowPos(parameters.followPos.toProto())
             .setDuration(parameters.duration)
@@ -30,7 +32,7 @@ public class PacketBeginCameraSceneLookNotify extends BasePacket {
             .setIsForce(parameters.isForceWalk)
             .setEntityId(parameters.entityId)
             .addAllOtherParams(parameters.otherParams);
-		this.setData(builder);
+		this.setData(builder);*/
 	}
 
     // TODO check default values

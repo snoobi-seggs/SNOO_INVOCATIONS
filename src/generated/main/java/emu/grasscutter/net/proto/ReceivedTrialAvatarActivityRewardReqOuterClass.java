@@ -19,17 +19,15 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 trial_avatar_index_id = 4;</code>
+     * <code>uint32 trial_avatar_index_id = 3;</code>
      * @return The trialAvatarIndexId.
      */
     int getTrialAvatarIndexId();
   }
   /**
    * <pre>
-   * CmdId: 2130
-   * EnetChannelId: 0
-   * EnetIsReliable: true
-   * IsAllowClient: true
+   * Name: KHHINOIPNPA
+   * CmdId: 2005
    * </pre>
    *
    * Protobuf type {@code ReceivedTrialAvatarActivityRewardReq}
@@ -76,7 +74,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
             case 0:
               done = true;
               break;
-            case 32: {
+            case 24: {
 
               trialAvatarIndexId_ = input.readUInt32();
               break;
@@ -92,8 +90,6 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -115,10 +111,10 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
               emu.grasscutter.net.proto.ReceivedTrialAvatarActivityRewardReqOuterClass.ReceivedTrialAvatarActivityRewardReq.class, emu.grasscutter.net.proto.ReceivedTrialAvatarActivityRewardReqOuterClass.ReceivedTrialAvatarActivityRewardReq.Builder.class);
     }
 
-    public static final int TRIAL_AVATAR_INDEX_ID_FIELD_NUMBER = 4;
+    public static final int TRIAL_AVATAR_INDEX_ID_FIELD_NUMBER = 3;
     private int trialAvatarIndexId_;
     /**
-     * <code>uint32 trial_avatar_index_id = 4;</code>
+     * <code>uint32 trial_avatar_index_id = 3;</code>
      * @return The trialAvatarIndexId.
      */
     @java.lang.Override
@@ -141,7 +137,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (trialAvatarIndexId_ != 0) {
-        output.writeUInt32(4, trialAvatarIndexId_);
+        output.writeUInt32(3, trialAvatarIndexId_);
       }
       unknownFields.writeTo(output);
     }
@@ -154,7 +150,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
       size = 0;
       if (trialAvatarIndexId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, trialAvatarIndexId_);
+          .computeUInt32Size(3, trialAvatarIndexId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -283,10 +279,8 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 2130
-     * EnetChannelId: 0
-     * EnetIsReliable: true
-     * IsAllowClient: true
+     * Name: KHHINOIPNPA
+     * CmdId: 2005
      * </pre>
      *
      * Protobuf type {@code ReceivedTrialAvatarActivityRewardReq}
@@ -437,7 +431,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
 
       private int trialAvatarIndexId_ ;
       /**
-       * <code>uint32 trial_avatar_index_id = 4;</code>
+       * <code>uint32 trial_avatar_index_id = 3;</code>
        * @return The trialAvatarIndexId.
        */
       @java.lang.Override
@@ -445,7 +439,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
         return trialAvatarIndexId_;
       }
       /**
-       * <code>uint32 trial_avatar_index_id = 4;</code>
+       * <code>uint32 trial_avatar_index_id = 3;</code>
        * @param value The trialAvatarIndexId to set.
        * @return This builder for chaining.
        */
@@ -456,7 +450,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
         return this;
       }
       /**
-       * <code>uint32 trial_avatar_index_id = 4;</code>
+       * <code>uint32 trial_avatar_index_id = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearTrialAvatarIndexId() {
@@ -534,7 +528,7 @@ public final class ReceivedTrialAvatarActivityRewardReqOuterClass {
     java.lang.String[] descriptorData = {
       "\n*ReceivedTrialAvatarActivityRewardReq.p" +
       "roto\"E\n$ReceivedTrialAvatarActivityRewar" +
-      "dReq\022\035\n\025trial_avatar_index_id\030\004 \001(\rB\033\n\031e" +
+      "dReq\022\035\n\025trial_avatar_index_id\030\003 \001(\rB\033\n\031e" +
       "mu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

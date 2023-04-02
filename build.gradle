@@ -38,7 +38,14 @@ plugins {
     id 'signing'
 }
 
-compileJava.options.encoding = "UTF-8"
+compileJava {
+	options.encoding = "UTF-8"
+	options.fork = 'true'
+	options.forkOptions.with {
+		memoryMaximumSize = "5000m"
+	}
+}
+
 compileTestJava.options.encoding = "UTF-8"
 
 sourceCompatibility = JavaVersion.VERSION_17

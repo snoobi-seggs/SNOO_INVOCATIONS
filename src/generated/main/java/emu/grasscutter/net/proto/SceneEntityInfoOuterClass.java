@@ -318,6 +318,10 @@ public final class SceneEntityInfoOuterClass {
     public emu.grasscutter.net.proto.SceneEntityInfoOuterClass.SceneEntityInfo.EntityCase getEntityCase();
   }
   /**
+   * <pre>
+   * Name: HGJKEMEBOKC
+   * </pre>
+   *
    * Protobuf type {@code SceneEntityInfo}
    */
   public static final class SceneEntityInfo extends
@@ -1593,6 +1597,10 @@ public final class SceneEntityInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: HGJKEMEBOKC
+     * </pre>
+     *
      * Protobuf type {@code SceneEntityInfo}
      */
     public static final class Builder extends

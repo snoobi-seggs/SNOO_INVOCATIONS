@@ -97,6 +97,10 @@ public final class AbilityScalarValueEntryOuterClass {
     public emu.grasscutter.net.proto.AbilityScalarValueEntryOuterClass.AbilityScalarValueEntry.ValueCase getValueCase();
   }
   /**
+   * <pre>
+   * Name: JHJPOIJGPEB
+   * </pre>
+   *
    * Protobuf type {@code AbilityScalarValueEntry}
    */
   public static final class AbilityScalarValueEntry extends
@@ -666,6 +670,10 @@ public final class AbilityScalarValueEntryOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: JHJPOIJGPEB
+     * </pre>
+     *
      * Protobuf type {@code AbilityScalarValueEntry}
      */
     public static final class Builder extends

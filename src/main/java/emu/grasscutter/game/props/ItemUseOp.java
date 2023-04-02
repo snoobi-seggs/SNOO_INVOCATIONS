@@ -47,7 +47,9 @@ public enum ItemUseOp {
     ITEM_USE_COMBINE_ITEM (43),
     ITEM_USE_UNLOCK_HOME_MODULE (44),
     ITEM_USE_UNLOCK_HOME_BGM (45),
-    ITEM_USE_ADD_REGIONAL_PLAY_VAR (46);
+    ITEM_USE_ADD_REGIONAL_PLAY_VAR (46),
+	ITEM_USE_GAIN_GCG_CARD (47),      //idk if is rly 47 or is this a random number
+	ITEM_USE_GAIN_GCG_CARD_FACE (48); //idk if is rly 48 or is this a random number
 
     private final int value;
     private static final Int2ObjectMap<ItemUseOp> map = new Int2ObjectOpenHashMap<>();

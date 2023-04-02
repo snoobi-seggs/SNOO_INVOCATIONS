@@ -20,10 +20,8 @@ public final class GetFurnitureCurModuleArrangeCountReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 4711
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: MMFHNMIAGAC
+   * CmdId: 4899
    * </pre>
    *
    * Protobuf type {@code GetFurnitureCurModuleArrangeCountReq}
@@ -248,10 +246,8 @@ public final class GetFurnitureCurModuleArrangeCountReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4711
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: MMFHNMIAGAC
+     * CmdId: 4899
      * </pre>
      *
      * Protobuf type {@code GetFurnitureCurModuleArrangeCountReq}

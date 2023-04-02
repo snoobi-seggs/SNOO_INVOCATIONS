@@ -60,6 +60,10 @@ public final class AnimatorParameterValueInfoOuterClass {
     public emu.grasscutter.net.proto.AnimatorParameterValueInfoOuterClass.AnimatorParameterValueInfo.ParaValCase getParaValCase();
   }
   /**
+   * <pre>
+   * Name: NNHECDNAAAO
+   * </pre>
+   *
    * Protobuf type {@code AnimatorParameterValueInfo}
    */
   public static final class AnimatorParameterValueInfo extends
@@ -492,6 +496,10 @@ public final class AnimatorParameterValueInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: NNHECDNAAAO
+     * </pre>
+     *
      * Protobuf type {@code AnimatorParameterValueInfo}
      */
     public static final class Builder extends
@@ -902,11 +910,11 @@ public final class AnimatorParameterValueInfoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n AnimatorParameterValueInfo.proto\"w\n\032An" +
+      "\n AnimatorParameterValueInfo.proto\"v\n\032An" +
       "imatorParameterValueInfo\022\021\n\tpara_type\030\001 " +
       "\001(\r\022\021\n\007int_val\030\002 \001(\005H\000\022\023\n\tfloat_val\030\003 \001(" +
-      "\002H\000\022\022\n\010bool_val\030\004 \001(\010H\000B\n\n\010para_valB\033\n\031e" +
-      "mu.grasscutter.net.protob\006proto3"
+      "\002H\000\022\022\n\010bool_val\030\004 \001(\010H\000B\t\n\007paraValB\033\n\031em" +
+      "u.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

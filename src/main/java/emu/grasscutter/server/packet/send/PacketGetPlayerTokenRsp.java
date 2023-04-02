@@ -70,8 +70,10 @@ public class PacketGetPlayerTokenRsp extends BasePacket {
             .setClientVersionRandomKey("c25-314dd05b0b5f")
             .setRegPlatform(3)
             .setClientIpStr(session.getAddress().getAddress().getHostAddress())
-            .setEncryptedSeed(encryptedSeed)
-            .setSeedSignature(encryptedSeedSign)
+            //.setEncryptedSeed(encryptedSeed)
+            .setServerRandKey(encryptedSeed)
+            //.setSeedSignature(encryptedSeedSign)
+            .setSign(encryptedSeedSign)
             .build();
 
         this.setData(p.toByteArray());

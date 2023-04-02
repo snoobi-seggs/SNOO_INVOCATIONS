@@ -86,6 +86,10 @@ public final class MapMarkPointOuterClass {
     int getQuestId();
   }
   /**
+   * <pre>
+   * Name: CKNMIHFPLAI
+   * </pre>
+   *
    * Protobuf type {@code MapMarkPoint}
    */
   public static final class MapMarkPoint extends
@@ -570,6 +574,10 @@ public final class MapMarkPointOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: CKNMIHFPLAI
+     * </pre>
+     *
      * Protobuf type {@code MapMarkPoint}
      */
     public static final class Builder extends

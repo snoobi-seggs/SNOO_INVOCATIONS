@@ -55,6 +55,10 @@ public final class StopServerInfoOuterClass {
         getContentMsgBytes();
   }
   /**
+   * <pre>
+   * Name: HJLECMBBPOF
+   * </pre>
+   *
    * Protobuf type {@code StopServerInfo}
    */
   public static final class StopServerInfo extends
@@ -440,6 +444,10 @@ public final class StopServerInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: HJLECMBBPOF
+     * </pre>
+     *
      * Protobuf type {@code StopServerInfo}
      */
     public static final class Builder extends

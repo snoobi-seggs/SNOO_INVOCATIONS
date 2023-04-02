@@ -47,6 +47,10 @@ public final class MapMarkTipsInfoOuterClass {
     int getPointIdList(int index);
   }
   /**
+   * <pre>
+   * Name: ACOGHICAGEN
+   * </pre>
+   *
    * Protobuf type {@code MapMarkTipsInfo}
    */
   public static final class MapMarkTipsInfo extends
@@ -386,6 +390,10 @@ public final class MapMarkTipsInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: ACOGHICAGEN
+     * </pre>
+     *
      * Protobuf type {@code MapMarkTipsInfo}
      */
     public static final class Builder extends

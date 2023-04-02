@@ -15,6 +15,10 @@ public final class MapMarkTipsTypeOuterClass {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
+   * <pre>
+   * Name: DILMJFDGLNH
+   * </pre>
+   *
    * Protobuf enum {@code MapMarkTipsType}
    */
   public enum MapMarkTipsType

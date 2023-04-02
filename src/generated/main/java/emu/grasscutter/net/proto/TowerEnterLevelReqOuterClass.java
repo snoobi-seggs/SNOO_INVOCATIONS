@@ -26,10 +26,8 @@ public final class TowerEnterLevelReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 2431
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: DFMIGMBANII
+   * CmdId: 2459
    * </pre>
    *
    * Protobuf type {@code TowerEnterLevelReq}
@@ -281,10 +279,8 @@ public final class TowerEnterLevelReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 2431
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: DFMIGMBANII
+     * CmdId: 2459
      * </pre>
      *
      * Protobuf type {@code TowerEnterLevelReq}

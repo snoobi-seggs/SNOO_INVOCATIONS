@@ -19,23 +19,21 @@ public final class AddQuestContentProgressRspOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 retcode = 13;</code>
+     * <code>int32 retcode = 5;</code>
      * @return The retcode.
      */
     int getRetcode();
 
     /**
-     * <code>uint32 content_type = 4;</code>
+     * <code>uint32 content_type = 12;</code>
      * @return The contentType.
      */
     int getContentType();
   }
   /**
    * <pre>
-   * CmdId: 403
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: LNEHHKPDPHL
+   * CmdId: 472
    * </pre>
    *
    * Protobuf type {@code AddQuestContentProgressRsp}
@@ -82,14 +80,14 @@ public final class AddQuestContentProgressRspOuterClass {
             case 0:
               done = true;
               break;
-            case 32: {
-
-              contentType_ = input.readUInt32();
-              break;
-            }
-            case 104: {
+            case 40: {
 
               retcode_ = input.readInt32();
+              break;
+            }
+            case 96: {
+
+              contentType_ = input.readUInt32();
               break;
             }
             default: {
@@ -124,10 +122,10 @@ public final class AddQuestContentProgressRspOuterClass {
               emu.grasscutter.net.proto.AddQuestContentProgressRspOuterClass.AddQuestContentProgressRsp.class, emu.grasscutter.net.proto.AddQuestContentProgressRspOuterClass.AddQuestContentProgressRsp.Builder.class);
     }
 
-    public static final int RETCODE_FIELD_NUMBER = 13;
+    public static final int RETCODE_FIELD_NUMBER = 5;
     private int retcode_;
     /**
-     * <code>int32 retcode = 13;</code>
+     * <code>int32 retcode = 5;</code>
      * @return The retcode.
      */
     @java.lang.Override
@@ -135,10 +133,10 @@ public final class AddQuestContentProgressRspOuterClass {
       return retcode_;
     }
 
-    public static final int CONTENT_TYPE_FIELD_NUMBER = 4;
+    public static final int CONTENT_TYPE_FIELD_NUMBER = 12;
     private int contentType_;
     /**
-     * <code>uint32 content_type = 4;</code>
+     * <code>uint32 content_type = 12;</code>
      * @return The contentType.
      */
     @java.lang.Override
@@ -160,11 +158,11 @@ public final class AddQuestContentProgressRspOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (contentType_ != 0) {
-        output.writeUInt32(4, contentType_);
-      }
       if (retcode_ != 0) {
-        output.writeInt32(13, retcode_);
+        output.writeInt32(5, retcode_);
+      }
+      if (contentType_ != 0) {
+        output.writeUInt32(12, contentType_);
       }
       unknownFields.writeTo(output);
     }
@@ -175,13 +173,13 @@ public final class AddQuestContentProgressRspOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (contentType_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, contentType_);
-      }
       if (retcode_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, retcode_);
+          .computeInt32Size(5, retcode_);
+      }
+      if (contentType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(12, contentType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -314,10 +312,8 @@ public final class AddQuestContentProgressRspOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 403
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: LNEHHKPDPHL
+     * CmdId: 472
      * </pre>
      *
      * Protobuf type {@code AddQuestContentProgressRsp}
@@ -474,7 +470,7 @@ public final class AddQuestContentProgressRspOuterClass {
 
       private int retcode_ ;
       /**
-       * <code>int32 retcode = 13;</code>
+       * <code>int32 retcode = 5;</code>
        * @return The retcode.
        */
       @java.lang.Override
@@ -482,7 +478,7 @@ public final class AddQuestContentProgressRspOuterClass {
         return retcode_;
       }
       /**
-       * <code>int32 retcode = 13;</code>
+       * <code>int32 retcode = 5;</code>
        * @param value The retcode to set.
        * @return This builder for chaining.
        */
@@ -493,7 +489,7 @@ public final class AddQuestContentProgressRspOuterClass {
         return this;
       }
       /**
-       * <code>int32 retcode = 13;</code>
+       * <code>int32 retcode = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearRetcode() {
@@ -505,7 +501,7 @@ public final class AddQuestContentProgressRspOuterClass {
 
       private int contentType_ ;
       /**
-       * <code>uint32 content_type = 4;</code>
+       * <code>uint32 content_type = 12;</code>
        * @return The contentType.
        */
       @java.lang.Override
@@ -513,7 +509,7 @@ public final class AddQuestContentProgressRspOuterClass {
         return contentType_;
       }
       /**
-       * <code>uint32 content_type = 4;</code>
+       * <code>uint32 content_type = 12;</code>
        * @param value The contentType to set.
        * @return This builder for chaining.
        */
@@ -524,7 +520,7 @@ public final class AddQuestContentProgressRspOuterClass {
         return this;
       }
       /**
-       * <code>uint32 content_type = 4;</code>
+       * <code>uint32 content_type = 12;</code>
        * @return This builder for chaining.
        */
       public Builder clearContentType() {
@@ -601,8 +597,8 @@ public final class AddQuestContentProgressRspOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n AddQuestContentProgressRsp.proto\"C\n\032Ad" +
-      "dQuestContentProgressRsp\022\017\n\007retcode\030\r \001(" +
-      "\005\022\024\n\014content_type\030\004 \001(\rB\033\n\031emu.grasscutt" +
+      "dQuestContentProgressRsp\022\017\n\007retcode\030\005 \001(" +
+      "\005\022\024\n\014content_type\030\014 \001(\rB\033\n\031emu.grasscutt" +
       "er.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

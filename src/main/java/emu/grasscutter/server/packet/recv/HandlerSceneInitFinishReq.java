@@ -30,6 +30,12 @@ public class HandlerSceneInitFinishReq extends PacketHandler {
 
 		session.send(new PacketSyncTeamEntityNotify(session.getPlayer()));
 		session.send(new PacketSyncScenePlayTeamEntityNotify(session.getPlayer()));
+		
+		//GCGonly
+		if (session.getPlayer().getSceneId() == 1076) {
+			session.send(new PacketGCGTCTavernInfoNotify(session.getPlayer()));   //manager
+			session.send(new PacketGCGTavernNpcInfoNotify(session.getPlayer()));  //manager
+		} 
 
 		// Done Packet
 		session.send(new PacketSceneInitFinishRsp(session.getPlayer()));

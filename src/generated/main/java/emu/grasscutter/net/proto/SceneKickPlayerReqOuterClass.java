@@ -19,17 +19,15 @@ public final class SceneKickPlayerReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 target_uid = 6;</code>
+     * <code>uint32 target_uid = 15;</code>
      * @return The targetUid.
      */
     int getTargetUid();
   }
   /**
    * <pre>
-   * CmdId: 264
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: FEOJAMDKCKH
+   * CmdId: 232
    * </pre>
    *
    * Protobuf type {@code SceneKickPlayerReq}
@@ -76,7 +74,7 @@ public final class SceneKickPlayerReqOuterClass {
             case 0:
               done = true;
               break;
-            case 48: {
+            case 120: {
 
               targetUid_ = input.readUInt32();
               break;
@@ -113,10 +111,10 @@ public final class SceneKickPlayerReqOuterClass {
               emu.grasscutter.net.proto.SceneKickPlayerReqOuterClass.SceneKickPlayerReq.class, emu.grasscutter.net.proto.SceneKickPlayerReqOuterClass.SceneKickPlayerReq.Builder.class);
     }
 
-    public static final int TARGET_UID_FIELD_NUMBER = 6;
+    public static final int TARGET_UID_FIELD_NUMBER = 15;
     private int targetUid_;
     /**
-     * <code>uint32 target_uid = 6;</code>
+     * <code>uint32 target_uid = 15;</code>
      * @return The targetUid.
      */
     @java.lang.Override
@@ -139,7 +137,7 @@ public final class SceneKickPlayerReqOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (targetUid_ != 0) {
-        output.writeUInt32(6, targetUid_);
+        output.writeUInt32(15, targetUid_);
       }
       unknownFields.writeTo(output);
     }
@@ -152,7 +150,7 @@ public final class SceneKickPlayerReqOuterClass {
       size = 0;
       if (targetUid_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, targetUid_);
+          .computeUInt32Size(15, targetUid_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -281,10 +279,8 @@ public final class SceneKickPlayerReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 264
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: FEOJAMDKCKH
+     * CmdId: 232
      * </pre>
      *
      * Protobuf type {@code SceneKickPlayerReq}
@@ -435,7 +431,7 @@ public final class SceneKickPlayerReqOuterClass {
 
       private int targetUid_ ;
       /**
-       * <code>uint32 target_uid = 6;</code>
+       * <code>uint32 target_uid = 15;</code>
        * @return The targetUid.
        */
       @java.lang.Override
@@ -443,7 +439,7 @@ public final class SceneKickPlayerReqOuterClass {
         return targetUid_;
       }
       /**
-       * <code>uint32 target_uid = 6;</code>
+       * <code>uint32 target_uid = 15;</code>
        * @param value The targetUid to set.
        * @return This builder for chaining.
        */
@@ -454,7 +450,7 @@ public final class SceneKickPlayerReqOuterClass {
         return this;
       }
       /**
-       * <code>uint32 target_uid = 6;</code>
+       * <code>uint32 target_uid = 15;</code>
        * @return This builder for chaining.
        */
       public Builder clearTargetUid() {
@@ -531,7 +527,7 @@ public final class SceneKickPlayerReqOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\030SceneKickPlayerReq.proto\"(\n\022SceneKickP" +
-      "layerReq\022\022\n\ntarget_uid\030\006 \001(\rB\033\n\031emu.gras" +
+      "layerReq\022\022\n\ntarget_uid\030\017 \001(\rB\033\n\031emu.gras" +
       "scutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

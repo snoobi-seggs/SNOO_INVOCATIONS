@@ -19,28 +19,26 @@ public final class PublishUgcReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.UgcType ugc_type = 7;</code>
+     * <code>.UgcType ugc_type = 4;</code>
      * @return The enum numeric value on the wire for ugcType.
      */
     int getUgcTypeValue();
     /**
-     * <code>.UgcType ugc_type = 7;</code>
+     * <code>.UgcType ugc_type = 4;</code>
      * @return The ugcType.
      */
     emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType();
 
     /**
-     * <code>uint64 ugc_guid = 12;</code>
+     * <code>uint64 ugc_guid = 8;</code>
      * @return The ugcGuid.
      */
     long getUgcGuid();
   }
   /**
    * <pre>
-   * CmdId: 6344
-   * EnetChannelId: 0
-   * EnetIsReliable: true
-   * IsAllowClient: true
+   * Name: PMAPPANGOHF
+   * CmdId: 6339
    * </pre>
    *
    * Protobuf type {@code PublishUgcReq}
@@ -88,13 +86,13 @@ public final class PublishUgcReqOuterClass {
             case 0:
               done = true;
               break;
-            case 56: {
+            case 32: {
               int rawValue = input.readEnum();
 
               ugcType_ = rawValue;
               break;
             }
-            case 96: {
+            case 64: {
 
               ugcGuid_ = input.readUInt64();
               break;
@@ -131,17 +129,17 @@ public final class PublishUgcReqOuterClass {
               emu.grasscutter.net.proto.PublishUgcReqOuterClass.PublishUgcReq.class, emu.grasscutter.net.proto.PublishUgcReqOuterClass.PublishUgcReq.Builder.class);
     }
 
-    public static final int UGC_TYPE_FIELD_NUMBER = 7;
+    public static final int UGC_TYPE_FIELD_NUMBER = 4;
     private int ugcType_;
     /**
-     * <code>.UgcType ugc_type = 7;</code>
+     * <code>.UgcType ugc_type = 4;</code>
      * @return The enum numeric value on the wire for ugcType.
      */
     @java.lang.Override public int getUgcTypeValue() {
       return ugcType_;
     }
     /**
-     * <code>.UgcType ugc_type = 7;</code>
+     * <code>.UgcType ugc_type = 4;</code>
      * @return The ugcType.
      */
     @java.lang.Override public emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType getUgcType() {
@@ -150,10 +148,10 @@ public final class PublishUgcReqOuterClass {
       return result == null ? emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UNRECOGNIZED : result;
     }
 
-    public static final int UGC_GUID_FIELD_NUMBER = 12;
+    public static final int UGC_GUID_FIELD_NUMBER = 8;
     private long ugcGuid_;
     /**
-     * <code>uint64 ugc_guid = 12;</code>
+     * <code>uint64 ugc_guid = 8;</code>
      * @return The ugcGuid.
      */
     @java.lang.Override
@@ -176,10 +174,10 @@ public final class PublishUgcReqOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (ugcType_ != emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UGC_TYPE_NONE.getNumber()) {
-        output.writeEnum(7, ugcType_);
+        output.writeEnum(4, ugcType_);
       }
       if (ugcGuid_ != 0L) {
-        output.writeUInt64(12, ugcGuid_);
+        output.writeUInt64(8, ugcGuid_);
       }
       unknownFields.writeTo(output);
     }
@@ -192,11 +190,11 @@ public final class PublishUgcReqOuterClass {
       size = 0;
       if (ugcType_ != emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UGC_TYPE_NONE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, ugcType_);
+          .computeEnumSize(4, ugcType_);
       }
       if (ugcGuid_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(12, ugcGuid_);
+          .computeUInt64Size(8, ugcGuid_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -329,10 +327,8 @@ public final class PublishUgcReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 6344
-     * EnetChannelId: 0
-     * EnetIsReliable: true
-     * IsAllowClient: true
+     * Name: PMAPPANGOHF
+     * CmdId: 6339
      * </pre>
      *
      * Protobuf type {@code PublishUgcReq}
@@ -489,14 +485,14 @@ public final class PublishUgcReqOuterClass {
 
       private int ugcType_ = 0;
       /**
-       * <code>.UgcType ugc_type = 7;</code>
+       * <code>.UgcType ugc_type = 4;</code>
        * @return The enum numeric value on the wire for ugcType.
        */
       @java.lang.Override public int getUgcTypeValue() {
         return ugcType_;
       }
       /**
-       * <code>.UgcType ugc_type = 7;</code>
+       * <code>.UgcType ugc_type = 4;</code>
        * @param value The enum numeric value on the wire for ugcType to set.
        * @return This builder for chaining.
        */
@@ -507,7 +503,7 @@ public final class PublishUgcReqOuterClass {
         return this;
       }
       /**
-       * <code>.UgcType ugc_type = 7;</code>
+       * <code>.UgcType ugc_type = 4;</code>
        * @return The ugcType.
        */
       @java.lang.Override
@@ -517,7 +513,7 @@ public final class PublishUgcReqOuterClass {
         return result == null ? emu.grasscutter.net.proto.UgcTypeOuterClass.UgcType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.UgcType ugc_type = 7;</code>
+       * <code>.UgcType ugc_type = 4;</code>
        * @param value The ugcType to set.
        * @return This builder for chaining.
        */
@@ -531,7 +527,7 @@ public final class PublishUgcReqOuterClass {
         return this;
       }
       /**
-       * <code>.UgcType ugc_type = 7;</code>
+       * <code>.UgcType ugc_type = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearUgcType() {
@@ -543,7 +539,7 @@ public final class PublishUgcReqOuterClass {
 
       private long ugcGuid_ ;
       /**
-       * <code>uint64 ugc_guid = 12;</code>
+       * <code>uint64 ugc_guid = 8;</code>
        * @return The ugcGuid.
        */
       @java.lang.Override
@@ -551,7 +547,7 @@ public final class PublishUgcReqOuterClass {
         return ugcGuid_;
       }
       /**
-       * <code>uint64 ugc_guid = 12;</code>
+       * <code>uint64 ugc_guid = 8;</code>
        * @param value The ugcGuid to set.
        * @return This builder for chaining.
        */
@@ -562,7 +558,7 @@ public final class PublishUgcReqOuterClass {
         return this;
       }
       /**
-       * <code>uint64 ugc_guid = 12;</code>
+       * <code>uint64 ugc_guid = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearUgcGuid() {
@@ -639,8 +635,8 @@ public final class PublishUgcReqOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\023PublishUgcReq.proto\032\rUgcType.proto\"=\n\r" +
-      "PublishUgcReq\022\032\n\010ugc_type\030\007 \001(\0162\010.UgcTyp" +
-      "e\022\020\n\010ugc_guid\030\014 \001(\004B\033\n\031emu.grasscutter.n" +
+      "PublishUgcReq\022\032\n\010ugc_type\030\004 \001(\0162\010.UgcTyp" +
+      "e\022\020\n\010ugc_guid\030\010 \001(\004B\033\n\031emu.grasscutter.n" +
       "et.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

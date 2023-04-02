@@ -19,17 +19,15 @@ public final class GetBattlePassProductReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 battle_pass_product_play_type = 10;</code>
+     * <code>uint32 battle_pass_product_play_type = 4;</code>
      * @return The battlePassProductPlayType.
      */
     int getBattlePassProductPlayType();
   }
   /**
    * <pre>
-   * CmdId: 2644
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: JPBCPEIFDOM
+   * CmdId: 2639
    * </pre>
    *
    * Protobuf type {@code GetBattlePassProductReq}
@@ -76,7 +74,7 @@ public final class GetBattlePassProductReqOuterClass {
             case 0:
               done = true;
               break;
-            case 80: {
+            case 32: {
 
               battlePassProductPlayType_ = input.readUInt32();
               break;
@@ -113,10 +111,10 @@ public final class GetBattlePassProductReqOuterClass {
               emu.grasscutter.net.proto.GetBattlePassProductReqOuterClass.GetBattlePassProductReq.class, emu.grasscutter.net.proto.GetBattlePassProductReqOuterClass.GetBattlePassProductReq.Builder.class);
     }
 
-    public static final int BATTLE_PASS_PRODUCT_PLAY_TYPE_FIELD_NUMBER = 10;
+    public static final int BATTLE_PASS_PRODUCT_PLAY_TYPE_FIELD_NUMBER = 4;
     private int battlePassProductPlayType_;
     /**
-     * <code>uint32 battle_pass_product_play_type = 10;</code>
+     * <code>uint32 battle_pass_product_play_type = 4;</code>
      * @return The battlePassProductPlayType.
      */
     @java.lang.Override
@@ -139,7 +137,7 @@ public final class GetBattlePassProductReqOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (battlePassProductPlayType_ != 0) {
-        output.writeUInt32(10, battlePassProductPlayType_);
+        output.writeUInt32(4, battlePassProductPlayType_);
       }
       unknownFields.writeTo(output);
     }
@@ -152,7 +150,7 @@ public final class GetBattlePassProductReqOuterClass {
       size = 0;
       if (battlePassProductPlayType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, battlePassProductPlayType_);
+          .computeUInt32Size(4, battlePassProductPlayType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -281,10 +279,8 @@ public final class GetBattlePassProductReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 2644
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: JPBCPEIFDOM
+     * CmdId: 2639
      * </pre>
      *
      * Protobuf type {@code GetBattlePassProductReq}
@@ -435,7 +431,7 @@ public final class GetBattlePassProductReqOuterClass {
 
       private int battlePassProductPlayType_ ;
       /**
-       * <code>uint32 battle_pass_product_play_type = 10;</code>
+       * <code>uint32 battle_pass_product_play_type = 4;</code>
        * @return The battlePassProductPlayType.
        */
       @java.lang.Override
@@ -443,7 +439,7 @@ public final class GetBattlePassProductReqOuterClass {
         return battlePassProductPlayType_;
       }
       /**
-       * <code>uint32 battle_pass_product_play_type = 10;</code>
+       * <code>uint32 battle_pass_product_play_type = 4;</code>
        * @param value The battlePassProductPlayType to set.
        * @return This builder for chaining.
        */
@@ -454,7 +450,7 @@ public final class GetBattlePassProductReqOuterClass {
         return this;
       }
       /**
-       * <code>uint32 battle_pass_product_play_type = 10;</code>
+       * <code>uint32 battle_pass_product_play_type = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearBattlePassProductPlayType() {
@@ -532,7 +528,7 @@ public final class GetBattlePassProductReqOuterClass {
     java.lang.String[] descriptorData = {
       "\n\035GetBattlePassProductReq.proto\"@\n\027GetBa" +
       "ttlePassProductReq\022%\n\035battle_pass_produc" +
-      "t_play_type\030\n \001(\rB\033\n\031emu.grasscutter.net" +
+      "t_play_type\030\004 \001(\rB\033\n\031emu.grasscutter.net" +
       ".protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

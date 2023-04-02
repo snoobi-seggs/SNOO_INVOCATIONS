@@ -19,27 +19,31 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-     * @return Whether the unk2700COIELIGEACL field is set.
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+     * @return Whether the skyCrystalDetectorData field is set.
      */
-    boolean hasUnk2700COIELIGEACL();
+    boolean hasSkyCrystalDetectorData();
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-     * @return The unk2700COIELIGEACL.
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+     * @return The skyCrystalDetectorData.
      */
-    emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK getUnk2700COIELIGEACL();
+    emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData getSkyCrystalDetectorData();
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
      */
-    emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder getUnk2700COIELIGEACLOrBuilder();
+    emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder getSkyCrystalDetectorDataOrBuilder();
 
     /**
-     * <code>int32 retcode = 8;</code>
+     * <code>int32 retcode = 11;</code>
      * @return The retcode.
      */
     int getRetcode();
   }
   /**
+   * <pre>
+   * Name: JFMBHEPEIKA
+   * </pre>
+   *
    * Protobuf type {@code SkyCrystalDetectorQuickUseResult}
    */
   public static final class SkyCrystalDetectorQuickUseResult extends
@@ -84,20 +88,20 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
             case 0:
               done = true;
               break;
-            case 64: {
+            case 88: {
 
               retcode_ = input.readInt32();
               break;
             }
-            case 74: {
-              emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder subBuilder = null;
-              if (unk2700COIELIGEACL_ != null) {
-                subBuilder = unk2700COIELIGEACL_.toBuilder();
+            case 114: {
+              emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder subBuilder = null;
+              if (skyCrystalDetectorData_ != null) {
+                subBuilder = skyCrystalDetectorData_.toBuilder();
               }
-              unk2700COIELIGEACL_ = input.readMessage(emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.parser(), extensionRegistry);
+              skyCrystalDetectorData_ = input.readMessage(emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(unk2700COIELIGEACL_);
-                unk2700COIELIGEACL_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(skyCrystalDetectorData_);
+                skyCrystalDetectorData_ = subBuilder.buildPartial();
               }
 
               break;
@@ -134,36 +138,36 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
               emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult.class, emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult.Builder.class);
     }
 
-    public static final int UNK2700_COIELIGEACL_FIELD_NUMBER = 9;
-    private emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK unk2700COIELIGEACL_;
+    public static final int SKY_CRYSTAL_DETECTOR_DATA_FIELD_NUMBER = 14;
+    private emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData skyCrystalDetectorData_;
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-     * @return Whether the unk2700COIELIGEACL field is set.
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+     * @return Whether the skyCrystalDetectorData field is set.
      */
     @java.lang.Override
-    public boolean hasUnk2700COIELIGEACL() {
-      return unk2700COIELIGEACL_ != null;
+    public boolean hasSkyCrystalDetectorData() {
+      return skyCrystalDetectorData_ != null;
     }
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-     * @return The unk2700COIELIGEACL.
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+     * @return The skyCrystalDetectorData.
      */
     @java.lang.Override
-    public emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK getUnk2700COIELIGEACL() {
-      return unk2700COIELIGEACL_ == null ? emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.getDefaultInstance() : unk2700COIELIGEACL_;
+    public emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData getSkyCrystalDetectorData() {
+      return skyCrystalDetectorData_ == null ? emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.getDefaultInstance() : skyCrystalDetectorData_;
     }
     /**
-     * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+     * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
      */
     @java.lang.Override
-    public emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder getUnk2700COIELIGEACLOrBuilder() {
-      return getUnk2700COIELIGEACL();
+    public emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder getSkyCrystalDetectorDataOrBuilder() {
+      return getSkyCrystalDetectorData();
     }
 
-    public static final int RETCODE_FIELD_NUMBER = 8;
+    public static final int RETCODE_FIELD_NUMBER = 11;
     private int retcode_;
     /**
-     * <code>int32 retcode = 8;</code>
+     * <code>int32 retcode = 11;</code>
      * @return The retcode.
      */
     @java.lang.Override
@@ -186,10 +190,10 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (retcode_ != 0) {
-        output.writeInt32(8, retcode_);
+        output.writeInt32(11, retcode_);
       }
-      if (unk2700COIELIGEACL_ != null) {
-        output.writeMessage(9, getUnk2700COIELIGEACL());
+      if (skyCrystalDetectorData_ != null) {
+        output.writeMessage(14, getSkyCrystalDetectorData());
       }
       unknownFields.writeTo(output);
     }
@@ -202,11 +206,11 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       size = 0;
       if (retcode_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, retcode_);
+          .computeInt32Size(11, retcode_);
       }
-      if (unk2700COIELIGEACL_ != null) {
+      if (skyCrystalDetectorData_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, getUnk2700COIELIGEACL());
+          .computeMessageSize(14, getSkyCrystalDetectorData());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -223,10 +227,10 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       }
       emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult other = (emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult) obj;
 
-      if (hasUnk2700COIELIGEACL() != other.hasUnk2700COIELIGEACL()) return false;
-      if (hasUnk2700COIELIGEACL()) {
-        if (!getUnk2700COIELIGEACL()
-            .equals(other.getUnk2700COIELIGEACL())) return false;
+      if (hasSkyCrystalDetectorData() != other.hasSkyCrystalDetectorData()) return false;
+      if (hasSkyCrystalDetectorData()) {
+        if (!getSkyCrystalDetectorData()
+            .equals(other.getSkyCrystalDetectorData())) return false;
       }
       if (getRetcode()
           != other.getRetcode()) return false;
@@ -241,9 +245,9 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasUnk2700COIELIGEACL()) {
-        hash = (37 * hash) + UNK2700_COIELIGEACL_FIELD_NUMBER;
-        hash = (53 * hash) + getUnk2700COIELIGEACL().hashCode();
+      if (hasSkyCrystalDetectorData()) {
+        hash = (37 * hash) + SKY_CRYSTAL_DETECTOR_DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getSkyCrystalDetectorData().hashCode();
       }
       hash = (37 * hash) + RETCODE_FIELD_NUMBER;
       hash = (53 * hash) + getRetcode();
@@ -343,6 +347,10 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: JFMBHEPEIKA
+     * </pre>
+     *
      * Protobuf type {@code SkyCrystalDetectorQuickUseResult}
      */
     public static final class Builder extends
@@ -380,11 +388,11 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          unk2700COIELIGEACL_ = null;
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          skyCrystalDetectorData_ = null;
         } else {
-          unk2700COIELIGEACL_ = null;
-          unk2700COIELIGEACLBuilder_ = null;
+          skyCrystalDetectorData_ = null;
+          skyCrystalDetectorDataBuilder_ = null;
         }
         retcode_ = 0;
 
@@ -414,10 +422,10 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult buildPartial() {
         emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult result = new emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult(this);
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          result.unk2700COIELIGEACL_ = unk2700COIELIGEACL_;
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          result.skyCrystalDetectorData_ = skyCrystalDetectorData_;
         } else {
-          result.unk2700COIELIGEACL_ = unk2700COIELIGEACLBuilder_.build();
+          result.skyCrystalDetectorData_ = skyCrystalDetectorDataBuilder_.build();
         }
         result.retcode_ = retcode_;
         onBuilt();
@@ -468,8 +476,8 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult other) {
         if (other == emu.grasscutter.net.proto.SkyCrystalDetectorQuickUseResultOuterClass.SkyCrystalDetectorQuickUseResult.getDefaultInstance()) return this;
-        if (other.hasUnk2700COIELIGEACL()) {
-          mergeUnk2700COIELIGEACL(other.getUnk2700COIELIGEACL());
+        if (other.hasSkyCrystalDetectorData()) {
+          mergeSkyCrystalDetectorData(other.getSkyCrystalDetectorData());
         }
         if (other.getRetcode() != 0) {
           setRetcode(other.getRetcode());
@@ -503,128 +511,128 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
         return this;
       }
 
-      private emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK unk2700COIELIGEACL_;
+      private emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData skyCrystalDetectorData_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder> unk2700COIELIGEACLBuilder_;
+          emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder> skyCrystalDetectorDataBuilder_;
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-       * @return Whether the unk2700COIELIGEACL field is set.
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+       * @return Whether the skyCrystalDetectorData field is set.
        */
-      public boolean hasUnk2700COIELIGEACL() {
-        return unk2700COIELIGEACLBuilder_ != null || unk2700COIELIGEACL_ != null;
+      public boolean hasSkyCrystalDetectorData() {
+        return skyCrystalDetectorDataBuilder_ != null || skyCrystalDetectorData_ != null;
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
-       * @return The unk2700COIELIGEACL.
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
+       * @return The skyCrystalDetectorData.
        */
-      public emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK getUnk2700COIELIGEACL() {
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          return unk2700COIELIGEACL_ == null ? emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.getDefaultInstance() : unk2700COIELIGEACL_;
+      public emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData getSkyCrystalDetectorData() {
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          return skyCrystalDetectorData_ == null ? emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.getDefaultInstance() : skyCrystalDetectorData_;
         } else {
-          return unk2700COIELIGEACLBuilder_.getMessage();
+          return skyCrystalDetectorDataBuilder_.getMessage();
         }
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public Builder setUnk2700COIELIGEACL(emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK value) {
-        if (unk2700COIELIGEACLBuilder_ == null) {
+      public Builder setSkyCrystalDetectorData(emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData value) {
+        if (skyCrystalDetectorDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          unk2700COIELIGEACL_ = value;
+          skyCrystalDetectorData_ = value;
           onChanged();
         } else {
-          unk2700COIELIGEACLBuilder_.setMessage(value);
+          skyCrystalDetectorDataBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public Builder setUnk2700COIELIGEACL(
-          emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder builderForValue) {
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          unk2700COIELIGEACL_ = builderForValue.build();
+      public Builder setSkyCrystalDetectorData(
+          emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder builderForValue) {
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          skyCrystalDetectorData_ = builderForValue.build();
           onChanged();
         } else {
-          unk2700COIELIGEACLBuilder_.setMessage(builderForValue.build());
+          skyCrystalDetectorDataBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public Builder mergeUnk2700COIELIGEACL(emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK value) {
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          if (unk2700COIELIGEACL_ != null) {
-            unk2700COIELIGEACL_ =
-              emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.newBuilder(unk2700COIELIGEACL_).mergeFrom(value).buildPartial();
+      public Builder mergeSkyCrystalDetectorData(emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData value) {
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          if (skyCrystalDetectorData_ != null) {
+            skyCrystalDetectorData_ =
+              emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.newBuilder(skyCrystalDetectorData_).mergeFrom(value).buildPartial();
           } else {
-            unk2700COIELIGEACL_ = value;
+            skyCrystalDetectorData_ = value;
           }
           onChanged();
         } else {
-          unk2700COIELIGEACLBuilder_.mergeFrom(value);
+          skyCrystalDetectorDataBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public Builder clearUnk2700COIELIGEACL() {
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          unk2700COIELIGEACL_ = null;
+      public Builder clearSkyCrystalDetectorData() {
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          skyCrystalDetectorData_ = null;
           onChanged();
         } else {
-          unk2700COIELIGEACL_ = null;
-          unk2700COIELIGEACLBuilder_ = null;
+          skyCrystalDetectorData_ = null;
+          skyCrystalDetectorDataBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder getUnk2700COIELIGEACLBuilder() {
+      public emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder getSkyCrystalDetectorDataBuilder() {
         
         onChanged();
-        return getUnk2700COIELIGEACLFieldBuilder().getBuilder();
+        return getSkyCrystalDetectorDataFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
-      public emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder getUnk2700COIELIGEACLOrBuilder() {
-        if (unk2700COIELIGEACLBuilder_ != null) {
-          return unk2700COIELIGEACLBuilder_.getMessageOrBuilder();
+      public emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder getSkyCrystalDetectorDataOrBuilder() {
+        if (skyCrystalDetectorDataBuilder_ != null) {
+          return skyCrystalDetectorDataBuilder_.getMessageOrBuilder();
         } else {
-          return unk2700COIELIGEACL_ == null ?
-              emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.getDefaultInstance() : unk2700COIELIGEACL_;
+          return skyCrystalDetectorData_ == null ?
+              emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.getDefaultInstance() : skyCrystalDetectorData_;
         }
       }
       /**
-       * <code>.Unk2700_CCEOEOHLAPK Unk2700_COIELIGEACL = 9;</code>
+       * <code>.SkyCrystalDetectorData sky_crystal_detector_data = 14;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder> 
-          getUnk2700COIELIGEACLFieldBuilder() {
-        if (unk2700COIELIGEACLBuilder_ == null) {
-          unk2700COIELIGEACLBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPK.Builder, emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.Unk2700_CCEOEOHLAPKOrBuilder>(
-                  getUnk2700COIELIGEACL(),
+          emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder> 
+          getSkyCrystalDetectorDataFieldBuilder() {
+        if (skyCrystalDetectorDataBuilder_ == null) {
+          skyCrystalDetectorDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorData.Builder, emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.SkyCrystalDetectorDataOrBuilder>(
+                  getSkyCrystalDetectorData(),
                   getParentForChildren(),
                   isClean());
-          unk2700COIELIGEACL_ = null;
+          skyCrystalDetectorData_ = null;
         }
-        return unk2700COIELIGEACLBuilder_;
+        return skyCrystalDetectorDataBuilder_;
       }
 
       private int retcode_ ;
       /**
-       * <code>int32 retcode = 8;</code>
+       * <code>int32 retcode = 11;</code>
        * @return The retcode.
        */
       @java.lang.Override
@@ -632,7 +640,7 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
         return retcode_;
       }
       /**
-       * <code>int32 retcode = 8;</code>
+       * <code>int32 retcode = 11;</code>
        * @param value The retcode to set.
        * @return This builder for chaining.
        */
@@ -643,7 +651,7 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
         return this;
       }
       /**
-       * <code>int32 retcode = 8;</code>
+       * <code>int32 retcode = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearRetcode() {
@@ -720,24 +728,24 @@ public final class SkyCrystalDetectorQuickUseResultOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n&SkyCrystalDetectorQuickUseResult.proto" +
-      "\032\031Unk2700_CCEOEOHLAPK.proto\"f\n SkyCrysta" +
-      "lDetectorQuickUseResult\0221\n\023Unk2700_COIEL" +
-      "IGEACL\030\t \001(\0132\024.Unk2700_CCEOEOHLAPK\022\017\n\007re" +
-      "tcode\030\010 \001(\005B\033\n\031emu.grasscutter.net.proto" +
-      "b\006proto3"
+      "\032\034SkyCrystalDetectorData.proto\"o\n SkyCry" +
+      "stalDetectorQuickUseResult\022:\n\031sky_crysta" +
+      "l_detector_data\030\016 \001(\0132\027.SkyCrystalDetect" +
+      "orData\022\017\n\007retcode\030\013 \001(\005B\033\n\031emu.grasscutt" +
+      "er.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.getDescriptor(),
+          emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.getDescriptor(),
         });
     internal_static_SkyCrystalDetectorQuickUseResult_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_SkyCrystalDetectorQuickUseResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SkyCrystalDetectorQuickUseResult_descriptor,
-        new java.lang.String[] { "Unk2700COIELIGEACL", "Retcode", });
-    emu.grasscutter.net.proto.Unk2700CCEOEOHLAPK.getDescriptor();
+        new java.lang.String[] { "SkyCrystalDetectorData", "Retcode", });
+    emu.grasscutter.net.proto.SkyCrystalDetectorDataOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -19,23 +19,21 @@ public final class AnchorPointOpReqOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 anchor_point_id = 9;</code>
-     * @return The anchorPointId.
-     */
-    int getAnchorPointId();
-
-    /**
-     * <code>uint32 anchor_point_op_type = 12;</code>
+     * <code>uint32 anchor_point_op_type = 1;</code>
      * @return The anchorPointOpType.
      */
     int getAnchorPointOpType();
+
+    /**
+     * <code>uint32 anchor_point_id = 11;</code>
+     * @return The anchorPointId.
+     */
+    int getAnchorPointId();
   }
   /**
    * <pre>
-   * CmdId: 4257
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: EJJFDKEPDBP
+   * CmdId: 4296
    * </pre>
    *
    * Protobuf type {@code AnchorPointOpReq}
@@ -82,14 +80,14 @@ public final class AnchorPointOpReqOuterClass {
             case 0:
               done = true;
               break;
-            case 72: {
-
-              anchorPointId_ = input.readUInt32();
-              break;
-            }
-            case 96: {
+            case 8: {
 
               anchorPointOpType_ = input.readUInt32();
+              break;
+            }
+            case 88: {
+
+              anchorPointId_ = input.readUInt32();
               break;
             }
             default: {
@@ -125,6 +123,10 @@ public final class AnchorPointOpReqOuterClass {
     }
 
     /**
+     * <pre>
+     * Name: KFMHCPAPAEI
+     * </pre>
+     *
      * Protobuf enum {@code AnchorPointOpReq.AnchorPointOpType}
      */
     public enum AnchorPointOpType
@@ -241,26 +243,26 @@ public final class AnchorPointOpReqOuterClass {
       // @@protoc_insertion_point(enum_scope:AnchorPointOpReq.AnchorPointOpType)
     }
 
-    public static final int ANCHOR_POINT_ID_FIELD_NUMBER = 9;
-    private int anchorPointId_;
-    /**
-     * <code>uint32 anchor_point_id = 9;</code>
-     * @return The anchorPointId.
-     */
-    @java.lang.Override
-    public int getAnchorPointId() {
-      return anchorPointId_;
-    }
-
-    public static final int ANCHOR_POINT_OP_TYPE_FIELD_NUMBER = 12;
+    public static final int ANCHOR_POINT_OP_TYPE_FIELD_NUMBER = 1;
     private int anchorPointOpType_;
     /**
-     * <code>uint32 anchor_point_op_type = 12;</code>
+     * <code>uint32 anchor_point_op_type = 1;</code>
      * @return The anchorPointOpType.
      */
     @java.lang.Override
     public int getAnchorPointOpType() {
       return anchorPointOpType_;
+    }
+
+    public static final int ANCHOR_POINT_ID_FIELD_NUMBER = 11;
+    private int anchorPointId_;
+    /**
+     * <code>uint32 anchor_point_id = 11;</code>
+     * @return The anchorPointId.
+     */
+    @java.lang.Override
+    public int getAnchorPointId() {
+      return anchorPointId_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -277,11 +279,11 @@ public final class AnchorPointOpReqOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (anchorPointId_ != 0) {
-        output.writeUInt32(9, anchorPointId_);
-      }
       if (anchorPointOpType_ != 0) {
-        output.writeUInt32(12, anchorPointOpType_);
+        output.writeUInt32(1, anchorPointOpType_);
+      }
+      if (anchorPointId_ != 0) {
+        output.writeUInt32(11, anchorPointId_);
       }
       unknownFields.writeTo(output);
     }
@@ -292,13 +294,13 @@ public final class AnchorPointOpReqOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (anchorPointId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(9, anchorPointId_);
-      }
       if (anchorPointOpType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(12, anchorPointOpType_);
+          .computeUInt32Size(1, anchorPointOpType_);
+      }
+      if (anchorPointId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(11, anchorPointId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -315,10 +317,10 @@ public final class AnchorPointOpReqOuterClass {
       }
       emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq other = (emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq) obj;
 
-      if (getAnchorPointId()
-          != other.getAnchorPointId()) return false;
       if (getAnchorPointOpType()
           != other.getAnchorPointOpType()) return false;
+      if (getAnchorPointId()
+          != other.getAnchorPointId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -330,10 +332,10 @@ public final class AnchorPointOpReqOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ANCHOR_POINT_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getAnchorPointId();
       hash = (37 * hash) + ANCHOR_POINT_OP_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getAnchorPointOpType();
+      hash = (37 * hash) + ANCHOR_POINT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAnchorPointId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -431,10 +433,8 @@ public final class AnchorPointOpReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4257
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: EJJFDKEPDBP
+     * CmdId: 4296
      * </pre>
      *
      * Protobuf type {@code AnchorPointOpReq}
@@ -474,9 +474,9 @@ public final class AnchorPointOpReqOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        anchorPointId_ = 0;
-
         anchorPointOpType_ = 0;
+
+        anchorPointId_ = 0;
 
         return this;
       }
@@ -504,8 +504,8 @@ public final class AnchorPointOpReqOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq buildPartial() {
         emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq result = new emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq(this);
-        result.anchorPointId_ = anchorPointId_;
         result.anchorPointOpType_ = anchorPointOpType_;
+        result.anchorPointId_ = anchorPointId_;
         onBuilt();
         return result;
       }
@@ -554,11 +554,11 @@ public final class AnchorPointOpReqOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq other) {
         if (other == emu.grasscutter.net.proto.AnchorPointOpReqOuterClass.AnchorPointOpReq.getDefaultInstance()) return this;
-        if (other.getAnchorPointId() != 0) {
-          setAnchorPointId(other.getAnchorPointId());
-        }
         if (other.getAnchorPointOpType() != 0) {
           setAnchorPointOpType(other.getAnchorPointOpType());
+        }
+        if (other.getAnchorPointId() != 0) {
+          setAnchorPointId(other.getAnchorPointId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -589,40 +589,9 @@ public final class AnchorPointOpReqOuterClass {
         return this;
       }
 
-      private int anchorPointId_ ;
-      /**
-       * <code>uint32 anchor_point_id = 9;</code>
-       * @return The anchorPointId.
-       */
-      @java.lang.Override
-      public int getAnchorPointId() {
-        return anchorPointId_;
-      }
-      /**
-       * <code>uint32 anchor_point_id = 9;</code>
-       * @param value The anchorPointId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setAnchorPointId(int value) {
-        
-        anchorPointId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 anchor_point_id = 9;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearAnchorPointId() {
-        
-        anchorPointId_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int anchorPointOpType_ ;
       /**
-       * <code>uint32 anchor_point_op_type = 12;</code>
+       * <code>uint32 anchor_point_op_type = 1;</code>
        * @return The anchorPointOpType.
        */
       @java.lang.Override
@@ -630,7 +599,7 @@ public final class AnchorPointOpReqOuterClass {
         return anchorPointOpType_;
       }
       /**
-       * <code>uint32 anchor_point_op_type = 12;</code>
+       * <code>uint32 anchor_point_op_type = 1;</code>
        * @param value The anchorPointOpType to set.
        * @return This builder for chaining.
        */
@@ -641,12 +610,43 @@ public final class AnchorPointOpReqOuterClass {
         return this;
       }
       /**
-       * <code>uint32 anchor_point_op_type = 12;</code>
+       * <code>uint32 anchor_point_op_type = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorPointOpType() {
         
         anchorPointOpType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int anchorPointId_ ;
+      /**
+       * <code>uint32 anchor_point_id = 11;</code>
+       * @return The anchorPointId.
+       */
+      @java.lang.Override
+      public int getAnchorPointId() {
+        return anchorPointId_;
+      }
+      /**
+       * <code>uint32 anchor_point_id = 11;</code>
+       * @param value The anchorPointId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAnchorPointId(int value) {
+        
+        anchorPointId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 anchor_point_id = 11;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAnchorPointId() {
+        
+        anchorPointId_ = 0;
         onChanged();
         return this;
       }
@@ -718,8 +718,8 @@ public final class AnchorPointOpReqOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\026AnchorPointOpReq.proto\"\301\001\n\020AnchorPoint" +
-      "OpReq\022\027\n\017anchor_point_id\030\t \001(\r\022\034\n\024anchor" +
-      "_point_op_type\030\014 \001(\r\"v\n\021AnchorPointOpTyp" +
+      "OpReq\022\034\n\024anchor_point_op_type\030\001 \001(\r\022\027\n\017a" +
+      "nchor_point_id\030\013 \001(\r\"v\n\021AnchorPointOpTyp" +
       "e\022\035\n\031ANCHOR_POINT_OP_TYPE_NONE\020\000\022!\n\035ANCH" +
       "OR_POINT_OP_TYPE_TELEPORT\020\001\022\037\n\033ANCHOR_PO" +
       "INT_OP_TYPE_REMOVE\020\002B\033\n\031emu.grasscutter." +
@@ -734,7 +734,7 @@ public final class AnchorPointOpReqOuterClass {
     internal_static_AnchorPointOpReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AnchorPointOpReq_descriptor,
-        new java.lang.String[] { "AnchorPointId", "AnchorPointOpType", });
+        new java.lang.String[] { "AnchorPointOpType", "AnchorPointId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

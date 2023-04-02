@@ -22,7 +22,8 @@ public class PacketAvatarDataNotify extends BasePacket {
         player.getTeamManager().getTeams().forEach((id, teamInfo) -> {
             proto.putAvatarTeamMap(id, teamInfo.toProto(player));
             if (id > 4) {  // Add the id list for custom teams.
-                proto.addCustomTeamIds(id);
+                //proto.addCustomTeamIds(id);
+                proto.addBackupAvatarTeamOrderList(id);
             }
         });
 

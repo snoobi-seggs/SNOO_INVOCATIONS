@@ -17,6 +17,7 @@ import emu.grasscutter.game.avatar.Avatar;
 import emu.grasscutter.game.battlepass.BattlePassManager;
 import emu.grasscutter.game.friends.Friendship;
 import emu.grasscutter.game.gacha.GachaRecord;
+import emu.grasscutter.game.gcg.GcgPlayer;
 import emu.grasscutter.game.home.GameHome;
 import emu.grasscutter.game.inventory.GameItem;
 import emu.grasscutter.game.mail.Mail;
@@ -324,6 +325,14 @@ public final class DatabaseHelper {
 
     public static void saveHome(GameHome gameHome) {
         DatabaseManager.getGameDatastore().save(gameHome);
+    }
+	
+	public static GcgPlayer getGcgPlayerDataByUid(int id) {
+        return DatabaseManager.getGameDatastore().find(GcgPlayer.class).filter(Filters.eq("playerUid", id)).first();
+    }
+	
+	public static void saveGcgPlayer(GcgPlayer gcgPlayer) {
+        DatabaseManager.getGameDatastore().save(gcgPlayer);
     }
 
     public static BattlePassManager loadBattlePass(Player player) {

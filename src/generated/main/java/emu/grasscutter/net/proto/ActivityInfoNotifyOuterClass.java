@@ -35,10 +35,8 @@ public final class ActivityInfoNotifyOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 2060
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: BKCOKLBOIIF
+   * CmdId: 2134
    * </pre>
    *
    * Protobuf type {@code ActivityInfoNotify}
@@ -318,10 +316,8 @@ public final class ActivityInfoNotifyOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 2060
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: BKCOKLBOIIF
+     * CmdId: 2134
      * </pre>
      *
      * Protobuf type {@code ActivityInfoNotify}

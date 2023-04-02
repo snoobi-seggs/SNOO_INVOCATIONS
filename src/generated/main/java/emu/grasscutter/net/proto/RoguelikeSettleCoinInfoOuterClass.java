@@ -19,24 +19,28 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 coin_c = 8;</code>
-     * @return The coinC.
+     * <code>uint32 OKNIPDIDCPP = 11;</code>
+     * @return The oKNIPDIDCPP.
      */
-    int getCoinC();
+    int getOKNIPDIDCPP();
 
     /**
-     * <code>uint32 coin_b = 10;</code>
-     * @return The coinB.
+     * <code>uint32 ENDHNCGMOEK = 13;</code>
+     * @return The eNDHNCGMOEK.
      */
-    int getCoinB();
+    int getENDHNCGMOEK();
 
     /**
-     * <code>uint32 cell_num = 1;</code>
-     * @return The cellNum.
+     * <code>uint32 KFJAHGGMCKI = 2;</code>
+     * @return The kFJAHGGMCKI.
      */
-    int getCellNum();
+    int getKFJAHGGMCKI();
   }
   /**
+   * <pre>
+   * Name: GBHMJFABANH
+   * </pre>
+   *
    * Protobuf type {@code RoguelikeSettleCoinInfo}
    */
   public static final class RoguelikeSettleCoinInfo extends
@@ -81,19 +85,19 @@ public final class RoguelikeSettleCoinInfoOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 16: {
 
-              cellNum_ = input.readUInt32();
+              kFJAHGGMCKI_ = input.readUInt32();
               break;
             }
-            case 64: {
+            case 88: {
 
-              coinC_ = input.readUInt32();
+              oKNIPDIDCPP_ = input.readUInt32();
               break;
             }
-            case 80: {
+            case 104: {
 
-              coinB_ = input.readUInt32();
+              eNDHNCGMOEK_ = input.readUInt32();
               break;
             }
             default: {
@@ -128,37 +132,37 @@ public final class RoguelikeSettleCoinInfoOuterClass {
               emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo.class, emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo.Builder.class);
     }
 
-    public static final int COIN_C_FIELD_NUMBER = 8;
-    private int coinC_;
+    public static final int OKNIPDIDCPP_FIELD_NUMBER = 11;
+    private int oKNIPDIDCPP_;
     /**
-     * <code>uint32 coin_c = 8;</code>
-     * @return The coinC.
+     * <code>uint32 OKNIPDIDCPP = 11;</code>
+     * @return The oKNIPDIDCPP.
      */
     @java.lang.Override
-    public int getCoinC() {
-      return coinC_;
+    public int getOKNIPDIDCPP() {
+      return oKNIPDIDCPP_;
     }
 
-    public static final int COIN_B_FIELD_NUMBER = 10;
-    private int coinB_;
+    public static final int ENDHNCGMOEK_FIELD_NUMBER = 13;
+    private int eNDHNCGMOEK_;
     /**
-     * <code>uint32 coin_b = 10;</code>
-     * @return The coinB.
+     * <code>uint32 ENDHNCGMOEK = 13;</code>
+     * @return The eNDHNCGMOEK.
      */
     @java.lang.Override
-    public int getCoinB() {
-      return coinB_;
+    public int getENDHNCGMOEK() {
+      return eNDHNCGMOEK_;
     }
 
-    public static final int CELL_NUM_FIELD_NUMBER = 1;
-    private int cellNum_;
+    public static final int KFJAHGGMCKI_FIELD_NUMBER = 2;
+    private int kFJAHGGMCKI_;
     /**
-     * <code>uint32 cell_num = 1;</code>
-     * @return The cellNum.
+     * <code>uint32 KFJAHGGMCKI = 2;</code>
+     * @return The kFJAHGGMCKI.
      */
     @java.lang.Override
-    public int getCellNum() {
-      return cellNum_;
+    public int getKFJAHGGMCKI() {
+      return kFJAHGGMCKI_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -175,14 +179,14 @@ public final class RoguelikeSettleCoinInfoOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (cellNum_ != 0) {
-        output.writeUInt32(1, cellNum_);
+      if (kFJAHGGMCKI_ != 0) {
+        output.writeUInt32(2, kFJAHGGMCKI_);
       }
-      if (coinC_ != 0) {
-        output.writeUInt32(8, coinC_);
+      if (oKNIPDIDCPP_ != 0) {
+        output.writeUInt32(11, oKNIPDIDCPP_);
       }
-      if (coinB_ != 0) {
-        output.writeUInt32(10, coinB_);
+      if (eNDHNCGMOEK_ != 0) {
+        output.writeUInt32(13, eNDHNCGMOEK_);
       }
       unknownFields.writeTo(output);
     }
@@ -193,17 +197,17 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (cellNum_ != 0) {
+      if (kFJAHGGMCKI_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, cellNum_);
+          .computeUInt32Size(2, kFJAHGGMCKI_);
       }
-      if (coinC_ != 0) {
+      if (oKNIPDIDCPP_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, coinC_);
+          .computeUInt32Size(11, oKNIPDIDCPP_);
       }
-      if (coinB_ != 0) {
+      if (eNDHNCGMOEK_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, coinB_);
+          .computeUInt32Size(13, eNDHNCGMOEK_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -220,12 +224,12 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       }
       emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo other = (emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo) obj;
 
-      if (getCoinC()
-          != other.getCoinC()) return false;
-      if (getCoinB()
-          != other.getCoinB()) return false;
-      if (getCellNum()
-          != other.getCellNum()) return false;
+      if (getOKNIPDIDCPP()
+          != other.getOKNIPDIDCPP()) return false;
+      if (getENDHNCGMOEK()
+          != other.getENDHNCGMOEK()) return false;
+      if (getKFJAHGGMCKI()
+          != other.getKFJAHGGMCKI()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -237,12 +241,12 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + COIN_C_FIELD_NUMBER;
-      hash = (53 * hash) + getCoinC();
-      hash = (37 * hash) + COIN_B_FIELD_NUMBER;
-      hash = (53 * hash) + getCoinB();
-      hash = (37 * hash) + CELL_NUM_FIELD_NUMBER;
-      hash = (53 * hash) + getCellNum();
+      hash = (37 * hash) + OKNIPDIDCPP_FIELD_NUMBER;
+      hash = (53 * hash) + getOKNIPDIDCPP();
+      hash = (37 * hash) + ENDHNCGMOEK_FIELD_NUMBER;
+      hash = (53 * hash) + getENDHNCGMOEK();
+      hash = (37 * hash) + KFJAHGGMCKI_FIELD_NUMBER;
+      hash = (53 * hash) + getKFJAHGGMCKI();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -339,6 +343,10 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: GBHMJFABANH
+     * </pre>
+     *
      * Protobuf type {@code RoguelikeSettleCoinInfo}
      */
     public static final class Builder extends
@@ -376,11 +384,11 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        coinC_ = 0;
+        oKNIPDIDCPP_ = 0;
 
-        coinB_ = 0;
+        eNDHNCGMOEK_ = 0;
 
-        cellNum_ = 0;
+        kFJAHGGMCKI_ = 0;
 
         return this;
       }
@@ -408,9 +416,9 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       @java.lang.Override
       public emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo buildPartial() {
         emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo result = new emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo(this);
-        result.coinC_ = coinC_;
-        result.coinB_ = coinB_;
-        result.cellNum_ = cellNum_;
+        result.oKNIPDIDCPP_ = oKNIPDIDCPP_;
+        result.eNDHNCGMOEK_ = eNDHNCGMOEK_;
+        result.kFJAHGGMCKI_ = kFJAHGGMCKI_;
         onBuilt();
         return result;
       }
@@ -459,14 +467,14 @@ public final class RoguelikeSettleCoinInfoOuterClass {
 
       public Builder mergeFrom(emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo other) {
         if (other == emu.grasscutter.net.proto.RoguelikeSettleCoinInfoOuterClass.RoguelikeSettleCoinInfo.getDefaultInstance()) return this;
-        if (other.getCoinC() != 0) {
-          setCoinC(other.getCoinC());
+        if (other.getOKNIPDIDCPP() != 0) {
+          setOKNIPDIDCPP(other.getOKNIPDIDCPP());
         }
-        if (other.getCoinB() != 0) {
-          setCoinB(other.getCoinB());
+        if (other.getENDHNCGMOEK() != 0) {
+          setENDHNCGMOEK(other.getENDHNCGMOEK());
         }
-        if (other.getCellNum() != 0) {
-          setCellNum(other.getCellNum());
+        if (other.getKFJAHGGMCKI() != 0) {
+          setKFJAHGGMCKI(other.getKFJAHGGMCKI());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -497,95 +505,95 @@ public final class RoguelikeSettleCoinInfoOuterClass {
         return this;
       }
 
-      private int coinC_ ;
+      private int oKNIPDIDCPP_ ;
       /**
-       * <code>uint32 coin_c = 8;</code>
-       * @return The coinC.
+       * <code>uint32 OKNIPDIDCPP = 11;</code>
+       * @return The oKNIPDIDCPP.
        */
       @java.lang.Override
-      public int getCoinC() {
-        return coinC_;
+      public int getOKNIPDIDCPP() {
+        return oKNIPDIDCPP_;
       }
       /**
-       * <code>uint32 coin_c = 8;</code>
-       * @param value The coinC to set.
+       * <code>uint32 OKNIPDIDCPP = 11;</code>
+       * @param value The oKNIPDIDCPP to set.
        * @return This builder for chaining.
        */
-      public Builder setCoinC(int value) {
+      public Builder setOKNIPDIDCPP(int value) {
         
-        coinC_ = value;
+        oKNIPDIDCPP_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 coin_c = 8;</code>
+       * <code>uint32 OKNIPDIDCPP = 11;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCoinC() {
+      public Builder clearOKNIPDIDCPP() {
         
-        coinC_ = 0;
+        oKNIPDIDCPP_ = 0;
         onChanged();
         return this;
       }
 
-      private int coinB_ ;
+      private int eNDHNCGMOEK_ ;
       /**
-       * <code>uint32 coin_b = 10;</code>
-       * @return The coinB.
+       * <code>uint32 ENDHNCGMOEK = 13;</code>
+       * @return The eNDHNCGMOEK.
        */
       @java.lang.Override
-      public int getCoinB() {
-        return coinB_;
+      public int getENDHNCGMOEK() {
+        return eNDHNCGMOEK_;
       }
       /**
-       * <code>uint32 coin_b = 10;</code>
-       * @param value The coinB to set.
+       * <code>uint32 ENDHNCGMOEK = 13;</code>
+       * @param value The eNDHNCGMOEK to set.
        * @return This builder for chaining.
        */
-      public Builder setCoinB(int value) {
+      public Builder setENDHNCGMOEK(int value) {
         
-        coinB_ = value;
+        eNDHNCGMOEK_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 coin_b = 10;</code>
+       * <code>uint32 ENDHNCGMOEK = 13;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCoinB() {
+      public Builder clearENDHNCGMOEK() {
         
-        coinB_ = 0;
+        eNDHNCGMOEK_ = 0;
         onChanged();
         return this;
       }
 
-      private int cellNum_ ;
+      private int kFJAHGGMCKI_ ;
       /**
-       * <code>uint32 cell_num = 1;</code>
-       * @return The cellNum.
+       * <code>uint32 KFJAHGGMCKI = 2;</code>
+       * @return The kFJAHGGMCKI.
        */
       @java.lang.Override
-      public int getCellNum() {
-        return cellNum_;
+      public int getKFJAHGGMCKI() {
+        return kFJAHGGMCKI_;
       }
       /**
-       * <code>uint32 cell_num = 1;</code>
-       * @param value The cellNum to set.
+       * <code>uint32 KFJAHGGMCKI = 2;</code>
+       * @param value The kFJAHGGMCKI to set.
        * @return This builder for chaining.
        */
-      public Builder setCellNum(int value) {
+      public Builder setKFJAHGGMCKI(int value) {
         
-        cellNum_ = value;
+        kFJAHGGMCKI_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 cell_num = 1;</code>
+       * <code>uint32 KFJAHGGMCKI = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCellNum() {
+      public Builder clearKFJAHGGMCKI() {
         
-        cellNum_ = 0;
+        kFJAHGGMCKI_ = 0;
         onChanged();
         return this;
       }
@@ -656,10 +664,10 @@ public final class RoguelikeSettleCoinInfoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\035RoguelikeSettleCoinInfo.proto\"K\n\027Rogue" +
-      "likeSettleCoinInfo\022\016\n\006coin_c\030\010 \001(\r\022\016\n\006co" +
-      "in_b\030\n \001(\r\022\020\n\010cell_num\030\001 \001(\rB\033\n\031emu.gras" +
-      "scutter.net.protob\006proto3"
+      "\n\035RoguelikeSettleCoinInfo.proto\"X\n\027Rogue" +
+      "likeSettleCoinInfo\022\023\n\013OKNIPDIDCPP\030\013 \001(\r\022" +
+      "\023\n\013ENDHNCGMOEK\030\r \001(\r\022\023\n\013KFJAHGGMCKI\030\002 \001(" +
+      "\rB\033\n\031emu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -670,7 +678,7 @@ public final class RoguelikeSettleCoinInfoOuterClass {
     internal_static_RoguelikeSettleCoinInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RoguelikeSettleCoinInfo_descriptor,
-        new java.lang.String[] { "CoinC", "CoinB", "CellNum", });
+        new java.lang.String[] { "OKNIPDIDCPP", "ENDHNCGMOEK", "KFJAHGGMCKI", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -71,30 +71,33 @@ public class MusicGamePlayerData {
 
             val player = DatabaseHelper.getPlayerByUid(musicGameBeatmap.getAuthorUid());
             val nickname = player!=null ? player.getNickname() : "UNKNOWN";
-            return UgcMusicBriefInfo.newBuilder()
-                .setIsPublished(true)
-                .setSaveTime(musicGameBeatmap.getCreateTime())
-                .setMusicId(musicGameBeatmap.getMusicId())
-                .setMaxScore(musicGameBeatmap.getMaxScore())
-                .setSaveIdx(musicGameBeatmap.getSavePosition())
-                .setSavePageType(musicGameBeatmap.getSavePageType())
-                .setVersion(musicGameBeatmap.getVersion())
-                .addAllAfterNoteList(musicGameBeatmap.getAfterNoteList())
-                .addAllBeforeNoteList(musicGameBeatmap.getBeforeNoteList())
-                .setTimeLineEditTime(musicGameBeatmap.getTimeLineEditTime())
-                .setPublishTime(musicGameBeatmap.getPublishTime())
-                .setRealTimeEditTime(musicGameBeatmap.getRealTimeEditTime())
-                .setNoteCount(musicGameBeatmap.getMusicNoteCount())
-                .setUgcGuid(musicGameBeatmap.getMusicShareId())
-                .setCreatorNickname(nickname);
+            return UgcMusicBriefInfo.newBuilder();
+                //.setIsPublished(true)
+                //.setSaveTime(musicGameBeatmap.getCreateTime())	//change setCreateTime
+                //.setCreateTime(musicGameBeatmap.getCreateTime())
+                //.setMusicId(musicGameBeatmap.getMusicId())
+                //.setMaxScore(musicGameBeatmap.getMaxScore())
+                ////.setSaveIdx(musicGameBeatmap.getSavePosition())	//change setPosition
+                //.setPosition(musicGameBeatmap.getSavePosition())
+                //.setSavePageType(musicGameBeatmap.getSavePageType())
+                //.setVersion(musicGameBeatmap.getVersion())
+                //.addAllAfterNoteList(musicGameBeatmap.getAfterNoteList())
+                //.addAllBeforeNoteList(musicGameBeatmap.getBeforeNoteList())
+                //.setTimeLineEditTime(musicGameBeatmap.getTimeLineEditTime())
+                //.setPublishTime(musicGameBeatmap.getPublishTime())
+                //.setRealTimeEditTime(musicGameBeatmap.getRealTimeEditTime())
+                ////.setNoteCount(musicGameBeatmap.getMusicNoteCount()) //change setMusicNoteCount
+                //.setMusicNoteCount(musicGameBeatmap.getMusicNoteCount())
+                //.setUgcGuid(musicGameBeatmap.getMusicShareId())
+                //.setCreatorNickname(nickname);
         }
 
         public UgcMusicBriefInfo.Builder toOthersBriefProto() {
             var musicGameBeatmap = MusicGameBeatmap.getByShareId(musicShareId);
 
-            return musicGameBeatmap.toBriefProto()
-                .setSelfMaxScore(score)
-                .setIsPlayed(settle);
+            return musicGameBeatmap.toBriefProto();
+                //.setSelfMaxScore(score)
+                //.setIsPlayed(settle);
         }
 
     }

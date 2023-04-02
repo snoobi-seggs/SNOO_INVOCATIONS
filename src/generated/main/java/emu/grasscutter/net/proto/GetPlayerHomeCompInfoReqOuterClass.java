@@ -20,10 +20,8 @@ public final class GetPlayerHomeCompInfoReqOuterClass {
   }
   /**
    * <pre>
-   * CmdId: 4597
-   * EnetChannelId: 0
-   * EnetIsReliable: false
-   * IsAllowClient: true
+   * Name: DFLOHDCCBBO
+   * CmdId: 4511
    * </pre>
    *
    * Protobuf type {@code GetPlayerHomeCompInfoReq}
@@ -248,10 +246,8 @@ public final class GetPlayerHomeCompInfoReqOuterClass {
     }
     /**
      * <pre>
-     * CmdId: 4597
-     * EnetChannelId: 0
-     * EnetIsReliable: false
-     * IsAllowClient: true
+     * Name: DFLOHDCCBBO
+     * CmdId: 4511
      * </pre>
      *
      * Protobuf type {@code GetPlayerHomeCompInfoReq}

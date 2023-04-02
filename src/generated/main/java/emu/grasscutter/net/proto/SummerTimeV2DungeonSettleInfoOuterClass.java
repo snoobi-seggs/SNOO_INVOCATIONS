@@ -25,18 +25,22 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
     boolean getIsSuccess();
 
     /**
-     * <code>uint32 Unk2800_ELHBCNPKOJG = 2;</code>
-     * @return The unk2800ELHBCNPKOJG.
+     * <code>uint32 IMHBJJAIBFJ = 12;</code>
+     * @return The iMHBJJAIBFJ.
      */
-    int getUnk2800ELHBCNPKOJG();
+    int getIMHBJJAIBFJ();
 
     /**
-     * <code>uint32 Unk2800_HDEFJKGDNEH = 11;</code>
-     * @return The unk2800HDEFJKGDNEH.
+     * <code>uint32 JHEBGEDHMLB = 3;</code>
+     * @return The jHEBGEDHMLB.
      */
-    int getUnk2800HDEFJKGDNEH();
+    int getJHEBGEDHMLB();
   }
   /**
+   * <pre>
+   * Name: IJIFIANJEKJ
+   * </pre>
+   *
    * Protobuf type {@code SummerTimeV2DungeonSettleInfo}
    */
   public static final class SummerTimeV2DungeonSettleInfo extends
@@ -81,9 +85,9 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
             case 0:
               done = true;
               break;
-            case 16: {
+            case 24: {
 
-              unk2800ELHBCNPKOJG_ = input.readUInt32();
+              jHEBGEDHMLB_ = input.readUInt32();
               break;
             }
             case 40: {
@@ -91,9 +95,9 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
               isSuccess_ = input.readBool();
               break;
             }
-            case 88: {
+            case 96: {
 
-              unk2800HDEFJKGDNEH_ = input.readUInt32();
+              iMHBJJAIBFJ_ = input.readUInt32();
               break;
             }
             default: {
@@ -139,26 +143,26 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       return isSuccess_;
     }
 
-    public static final int UNK2800_ELHBCNPKOJG_FIELD_NUMBER = 2;
-    private int unk2800ELHBCNPKOJG_;
+    public static final int IMHBJJAIBFJ_FIELD_NUMBER = 12;
+    private int iMHBJJAIBFJ_;
     /**
-     * <code>uint32 Unk2800_ELHBCNPKOJG = 2;</code>
-     * @return The unk2800ELHBCNPKOJG.
+     * <code>uint32 IMHBJJAIBFJ = 12;</code>
+     * @return The iMHBJJAIBFJ.
      */
     @java.lang.Override
-    public int getUnk2800ELHBCNPKOJG() {
-      return unk2800ELHBCNPKOJG_;
+    public int getIMHBJJAIBFJ() {
+      return iMHBJJAIBFJ_;
     }
 
-    public static final int UNK2800_HDEFJKGDNEH_FIELD_NUMBER = 11;
-    private int unk2800HDEFJKGDNEH_;
+    public static final int JHEBGEDHMLB_FIELD_NUMBER = 3;
+    private int jHEBGEDHMLB_;
     /**
-     * <code>uint32 Unk2800_HDEFJKGDNEH = 11;</code>
-     * @return The unk2800HDEFJKGDNEH.
+     * <code>uint32 JHEBGEDHMLB = 3;</code>
+     * @return The jHEBGEDHMLB.
      */
     @java.lang.Override
-    public int getUnk2800HDEFJKGDNEH() {
-      return unk2800HDEFJKGDNEH_;
+    public int getJHEBGEDHMLB() {
+      return jHEBGEDHMLB_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -175,14 +179,14 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (unk2800ELHBCNPKOJG_ != 0) {
-        output.writeUInt32(2, unk2800ELHBCNPKOJG_);
+      if (jHEBGEDHMLB_ != 0) {
+        output.writeUInt32(3, jHEBGEDHMLB_);
       }
       if (isSuccess_ != false) {
         output.writeBool(5, isSuccess_);
       }
-      if (unk2800HDEFJKGDNEH_ != 0) {
-        output.writeUInt32(11, unk2800HDEFJKGDNEH_);
+      if (iMHBJJAIBFJ_ != 0) {
+        output.writeUInt32(12, iMHBJJAIBFJ_);
       }
       unknownFields.writeTo(output);
     }
@@ -193,17 +197,17 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (unk2800ELHBCNPKOJG_ != 0) {
+      if (jHEBGEDHMLB_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, unk2800ELHBCNPKOJG_);
+          .computeUInt32Size(3, jHEBGEDHMLB_);
       }
       if (isSuccess_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, isSuccess_);
       }
-      if (unk2800HDEFJKGDNEH_ != 0) {
+      if (iMHBJJAIBFJ_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, unk2800HDEFJKGDNEH_);
+          .computeUInt32Size(12, iMHBJJAIBFJ_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -222,10 +226,10 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
 
       if (getIsSuccess()
           != other.getIsSuccess()) return false;
-      if (getUnk2800ELHBCNPKOJG()
-          != other.getUnk2800ELHBCNPKOJG()) return false;
-      if (getUnk2800HDEFJKGDNEH()
-          != other.getUnk2800HDEFJKGDNEH()) return false;
+      if (getIMHBJJAIBFJ()
+          != other.getIMHBJJAIBFJ()) return false;
+      if (getJHEBGEDHMLB()
+          != other.getJHEBGEDHMLB()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -240,10 +244,10 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       hash = (37 * hash) + IS_SUCCESS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsSuccess());
-      hash = (37 * hash) + UNK2800_ELHBCNPKOJG_FIELD_NUMBER;
-      hash = (53 * hash) + getUnk2800ELHBCNPKOJG();
-      hash = (37 * hash) + UNK2800_HDEFJKGDNEH_FIELD_NUMBER;
-      hash = (53 * hash) + getUnk2800HDEFJKGDNEH();
+      hash = (37 * hash) + IMHBJJAIBFJ_FIELD_NUMBER;
+      hash = (53 * hash) + getIMHBJJAIBFJ();
+      hash = (37 * hash) + JHEBGEDHMLB_FIELD_NUMBER;
+      hash = (53 * hash) + getJHEBGEDHMLB();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -340,6 +344,10 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * Name: IJIFIANJEKJ
+     * </pre>
+     *
      * Protobuf type {@code SummerTimeV2DungeonSettleInfo}
      */
     public static final class Builder extends
@@ -379,9 +387,9 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
         super.clear();
         isSuccess_ = false;
 
-        unk2800ELHBCNPKOJG_ = 0;
+        iMHBJJAIBFJ_ = 0;
 
-        unk2800HDEFJKGDNEH_ = 0;
+        jHEBGEDHMLB_ = 0;
 
         return this;
       }
@@ -410,8 +418,8 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       public emu.grasscutter.net.proto.SummerTimeV2DungeonSettleInfoOuterClass.SummerTimeV2DungeonSettleInfo buildPartial() {
         emu.grasscutter.net.proto.SummerTimeV2DungeonSettleInfoOuterClass.SummerTimeV2DungeonSettleInfo result = new emu.grasscutter.net.proto.SummerTimeV2DungeonSettleInfoOuterClass.SummerTimeV2DungeonSettleInfo(this);
         result.isSuccess_ = isSuccess_;
-        result.unk2800ELHBCNPKOJG_ = unk2800ELHBCNPKOJG_;
-        result.unk2800HDEFJKGDNEH_ = unk2800HDEFJKGDNEH_;
+        result.iMHBJJAIBFJ_ = iMHBJJAIBFJ_;
+        result.jHEBGEDHMLB_ = jHEBGEDHMLB_;
         onBuilt();
         return result;
       }
@@ -463,11 +471,11 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
         if (other.getIsSuccess() != false) {
           setIsSuccess(other.getIsSuccess());
         }
-        if (other.getUnk2800ELHBCNPKOJG() != 0) {
-          setUnk2800ELHBCNPKOJG(other.getUnk2800ELHBCNPKOJG());
+        if (other.getIMHBJJAIBFJ() != 0) {
+          setIMHBJJAIBFJ(other.getIMHBJJAIBFJ());
         }
-        if (other.getUnk2800HDEFJKGDNEH() != 0) {
-          setUnk2800HDEFJKGDNEH(other.getUnk2800HDEFJKGDNEH());
+        if (other.getJHEBGEDHMLB() != 0) {
+          setJHEBGEDHMLB(other.getJHEBGEDHMLB());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -529,64 +537,64 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
         return this;
       }
 
-      private int unk2800ELHBCNPKOJG_ ;
+      private int iMHBJJAIBFJ_ ;
       /**
-       * <code>uint32 Unk2800_ELHBCNPKOJG = 2;</code>
-       * @return The unk2800ELHBCNPKOJG.
+       * <code>uint32 IMHBJJAIBFJ = 12;</code>
+       * @return The iMHBJJAIBFJ.
        */
       @java.lang.Override
-      public int getUnk2800ELHBCNPKOJG() {
-        return unk2800ELHBCNPKOJG_;
+      public int getIMHBJJAIBFJ() {
+        return iMHBJJAIBFJ_;
       }
       /**
-       * <code>uint32 Unk2800_ELHBCNPKOJG = 2;</code>
-       * @param value The unk2800ELHBCNPKOJG to set.
+       * <code>uint32 IMHBJJAIBFJ = 12;</code>
+       * @param value The iMHBJJAIBFJ to set.
        * @return This builder for chaining.
        */
-      public Builder setUnk2800ELHBCNPKOJG(int value) {
+      public Builder setIMHBJJAIBFJ(int value) {
         
-        unk2800ELHBCNPKOJG_ = value;
+        iMHBJJAIBFJ_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 Unk2800_ELHBCNPKOJG = 2;</code>
+       * <code>uint32 IMHBJJAIBFJ = 12;</code>
        * @return This builder for chaining.
        */
-      public Builder clearUnk2800ELHBCNPKOJG() {
+      public Builder clearIMHBJJAIBFJ() {
         
-        unk2800ELHBCNPKOJG_ = 0;
+        iMHBJJAIBFJ_ = 0;
         onChanged();
         return this;
       }
 
-      private int unk2800HDEFJKGDNEH_ ;
+      private int jHEBGEDHMLB_ ;
       /**
-       * <code>uint32 Unk2800_HDEFJKGDNEH = 11;</code>
-       * @return The unk2800HDEFJKGDNEH.
+       * <code>uint32 JHEBGEDHMLB = 3;</code>
+       * @return The jHEBGEDHMLB.
        */
       @java.lang.Override
-      public int getUnk2800HDEFJKGDNEH() {
-        return unk2800HDEFJKGDNEH_;
+      public int getJHEBGEDHMLB() {
+        return jHEBGEDHMLB_;
       }
       /**
-       * <code>uint32 Unk2800_HDEFJKGDNEH = 11;</code>
-       * @param value The unk2800HDEFJKGDNEH to set.
+       * <code>uint32 JHEBGEDHMLB = 3;</code>
+       * @param value The jHEBGEDHMLB to set.
        * @return This builder for chaining.
        */
-      public Builder setUnk2800HDEFJKGDNEH(int value) {
+      public Builder setJHEBGEDHMLB(int value) {
         
-        unk2800HDEFJKGDNEH_ = value;
+        jHEBGEDHMLB_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 Unk2800_HDEFJKGDNEH = 11;</code>
+       * <code>uint32 JHEBGEDHMLB = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearUnk2800HDEFJKGDNEH() {
+      public Builder clearJHEBGEDHMLB() {
         
-        unk2800HDEFJKGDNEH_ = 0;
+        jHEBGEDHMLB_ = 0;
         onChanged();
         return this;
       }
@@ -657,11 +665,11 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n#SummerTimeV2DungeonSettleInfo.proto\"m\n" +
+      "\n#SummerTimeV2DungeonSettleInfo.proto\"]\n" +
       "\035SummerTimeV2DungeonSettleInfo\022\022\n\nis_suc" +
-      "cess\030\005 \001(\010\022\033\n\023Unk2800_ELHBCNPKOJG\030\002 \001(\r\022" +
-      "\033\n\023Unk2800_HDEFJKGDNEH\030\013 \001(\rB\033\n\031emu.gras" +
-      "scutter.net.protob\006proto3"
+      "cess\030\005 \001(\010\022\023\n\013IMHBJJAIBFJ\030\014 \001(\r\022\023\n\013JHEBG" +
+      "EDHMLB\030\003 \001(\rB\033\n\031emu.grasscutter.net.prot" +
+      "ob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -672,7 +680,7 @@ public final class SummerTimeV2DungeonSettleInfoOuterClass {
     internal_static_SummerTimeV2DungeonSettleInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SummerTimeV2DungeonSettleInfo_descriptor,
-        new java.lang.String[] { "IsSuccess", "Unk2800ELHBCNPKOJG", "Unk2800HDEFJKGDNEH", });
+        new java.lang.String[] { "IsSuccess", "IMHBJJAIBFJ", "JHEBGEDHMLB", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
